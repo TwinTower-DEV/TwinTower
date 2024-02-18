@@ -68,7 +68,11 @@ TwinTower/.idea
 .DS_Store
 TwinTower/.editorconfig
 crashlytics-build.properties
+TwinTower/UserSettings
 
+TwinTower/.idea
+.DS_Store
+TwinTower/.editorconfig
 # Packed Addressables
 /[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/*/*.bin*
 
