@@ -11,7 +11,7 @@ namespace TwinTower
         where T : MonoBehaviour, ISingleton
     {
         public static T s_instance;
-
+        
         public static T Instance
         {
             get
@@ -31,6 +31,7 @@ namespace TwinTower
         private static void Create()
         {
             Find();
+            
             if (s_instance == null)
             {
                 var className = typeof(T).ToString(); // 클래스 이름 가져오기
