@@ -4,16 +4,15 @@ using UnityEngine;
 
 /// <summary>
 /// 플레이어의 컨트롤에 관한 것입니다.
+/// 플레이어 이동 시 moveToward를 사용할거면 코루틴 사용해야 할듯.
 /// </summary>
 public class PlayerController : MonoBehaviour {
-    private Rigidbody2D rigidbody2d;
     private Vector2 targetPosition;
 
     // Update is called once per frame
 
     void Awake() {
-        rigidbody2d = GetComponent<Rigidbody2D>();
-        targetPosition = rigidbody2d.position;
+        targetPosition = transform.position;
     }
     void FixedUpdate()
     {   // 대각선 막는거 미구현
@@ -22,8 +21,8 @@ public class PlayerController : MonoBehaviour {
 
         Vector2 lookdirection = new Vector2(horizontal, vertical);
         
-        if (targetPosition == rigidbody2d.position) {                   // 멈춰있을 경우에만 이동 가능하게
-            RaycastHit2D hit = Physics2D.Raycast(rigidbody2d.position, lookdirection, 0.8f, LayerMask.GetMask("Wall"));
+        if (targetPosition == (Vector2)transform.position) {                   // 멈춰있을 경우에만 이동 가능하게
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, lookdirection, 0.8f, LayerMask.GetMask("Wall"));
             if (hit.collider == null) {
                 targetPosition = (Vector2)transform.position + lookdirection;
             }
