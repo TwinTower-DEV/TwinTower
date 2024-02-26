@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour {
         Vector2 lookdirection = new Vector2(horizontal, vertical);
         
         if (targetPosition == (Vector2)transform.position) {                   // 멈춰있을 경우에만 이동 가능하게
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, lookdirection, 0.8f, LayerMask.GetMask("Wall"));
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, lookdirection, 1.0f, LayerMask.GetMask("Wall"));
             if (hit.collider == null) {
                 targetPosition = (Vector2)transform.position + lookdirection;
             }
