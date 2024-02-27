@@ -3,23 +3,21 @@ using System.Numerics;
 using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
 
+/// <summary>
+/// 플레이어 이동과 플레이어의 각종 이벤트 처리를 담당할 클래스입니다.
+/// </summary>
+
 namespace TwinTower
 {
     public class Player: MonoBehaviour
     {
         [SerializeField] private int _moveSpeed;
         [SerializeField] private Grid maps;
-        private Rigidbody2D rigid;
-        [SerializeField]private int currx = 0, curry = 0;
         public Vector3 pos;
         public Define.MoveDir moveDir = Define.MoveDir.None;
         private bool isMove = false;
-        private Vector3Int cellPos = Vector3Int.zero;
+        [SerializeField]private Vector3Int cellPos = Vector3Int.zero;
         
-        public void MoveToTarget()
-        {
-            transform.position = Vector3.MoveTowards(transform.position, pos, _moveSpeed * Time.deltaTime);
-        }
         // 키 입력을 통해 위, 아래, 왼쪽, 오른쪽 State를 정의함 
         private void GroundedHorizontalMovement()
         {
@@ -44,7 +42,7 @@ namespace TwinTower
                 moveDir = Define.MoveDir.None;
             }
         }
-
+        // 다음 이동할 셀을 지정해줌
         private void Move()
         {
             if (!isMove)
@@ -55,7 +53,7 @@ namespace TwinTower
                 {
                     case Define.MoveDir.Up:
                         dest += Vector3Int.up;
-                        check = Vector3.forward;
+                        check = Vector3.up;
                         break;
                     case Define.MoveDir.Left:
                         dest += Vector3Int.left;
@@ -73,7 +71,7 @@ namespace TwinTower
 
                 if (moveDir != Define.MoveDir.None)
                 {
-                    RaycastHit2D hit = Physics2D.Raycast(transform.position, check, 1.0f, LayerMask.GetMask("Wall"));
+                    RaycastHit2D hit = Physics2D.Raycast(transform.position, check, 0.8f, LayerMask.GetMask("Wall"));
                     if (hit.collider == null)
                     {
                         cellPos = dest;
@@ -82,7 +80,7 @@ namespace TwinTower
                 }
             }
         }
-
+        // 그 이동할 셀로 자연스럽게 이동하게 구현
         private void UpdateIsMoveing()
         {
             if (!isMove) return;
@@ -104,8 +102,8 @@ namespace TwinTower
         }
         private void Awake()
         {
-            Vector3 pos = maps.CellToWorld(cellPos) + new Vector3(0.5f, 0.5f);
-            transform.position = pos;
+            //Vector3 pos = maps.CellToWorld(cellPos) + new Vector3(0.5f, 0.5f);
+            //transform.position = pos;
         }
 
         private void Start()
@@ -115,7 +113,6 @@ namespace TwinTower
 
         private void FixedUpdate()
         {
-            Debug.Log(isMove);
             UpdateIsMoveing();
             Move();
             GroundedHorizontalMovement();

@@ -13,9 +13,6 @@ namespace TwinTower
         protected override void Awake()
         {
             _tileFindManager = TileFindManager.Instance;
-            _player.transform.position =
-                new Vector2(_tileFindManager.player1Map[0, 0].x + 0.5f, _tileFindManager.player1Map[0, 0].y + 0.5f);
-            _player.pos = new Vector2(_tileFindManager.player1Map[0, 0].x + 0.5f, _tileFindManager.player1Map[0, 0].y + 0.5f);
         }
 
         public void Start()
