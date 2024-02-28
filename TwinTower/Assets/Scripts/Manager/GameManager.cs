@@ -9,10 +9,11 @@ namespace TwinTower
     public class GameManager : Manager<GameManager>
     {
         private TileFindManager _tileFindManager;
-        [SerializeField] private Player _player;
+        public Player _playerControl;
         protected override void Awake()
         {
             _tileFindManager = TileFindManager.Instance;
+            _playerControl = GameObject.Find("PlayerControl").GetComponent<Player>();
         }
 
         public void Start()
