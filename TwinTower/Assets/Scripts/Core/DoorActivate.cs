@@ -9,7 +9,6 @@ public class DoorActivate : ActivateObject
 {
     public override void Launch()
     {
-        
         transform.localRotation = Quaternion.Euler(0 ,0, transform.rotation.eulerAngles.z - 90);
         gameObject.layer = LayerMask.NameToLayer("Default");       // default로 변환
         GetComponent<BoxCollider2D>().isTrigger = true;

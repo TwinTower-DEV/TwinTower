@@ -7,7 +7,7 @@ using UnityEngine;
 /// 플레이어 이동 시 moveToward를 사용할거면 코루틴 사용해야 할듯.
 /// </summary>
 public class PlayerController : MonoBehaviour {
-    private Vector2 targetPosition;
+    private Vector3 targetPosition;
     private bool isMoving;
     
     void Awake() {
@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour {
 
         Vector2 lookdirection = new Vector2(horizontal, vertical);
         
-        if (!isMoving) {                   // 멈춰있을 경우에만 이동 가능하게
+        if (targetPosition == transform.position) {                   // 멈춰있을 경우에만 이동 가능하게
             RaycastHit2D hit = Physics2D.Raycast(transform.position, lookdirection, 0.8f, LayerMask.GetMask("Wall"));
             if (hit.collider == null) {
                 targetPosition = (Vector2)transform.position + lookdirection;

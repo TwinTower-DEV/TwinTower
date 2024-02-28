@@ -17,7 +17,7 @@ public class MovingWalk : MonoBehaviour {
     private void OnTriggerStay2D(Collider2D other) {
         if (other.gameObject.layer == LayerMask.NameToLayer("Box")) {
             Box box = other.GetComponent<Box>();
-            // if (!box.getMoving()) box.MoveBox(transform.up);
+            if (!box.getMoving()) box.MoveBox(transform.up);
         }
     }
 }

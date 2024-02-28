@@ -306,7 +306,7 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 2097135049
+  m_SortingLayerID: -1321196263
   m_SortingLayer: -1
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
@@ -2323,6 +2323,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wooden Box
       objectReference: {fileID: 0}
+    - target: {fileID: 39665730180211718, guid: 0e41238783e54f74eb92d22de2d2d033, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 39665730180211723, guid: 0e41238783e54f74eb92d22de2d2d033, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -2505,6 +2509,10 @@ PrefabInstance:
     - target: {fileID: 8091124972534882162, guid: c13c1f2b6a5ae0840be210c820bd3155, type: 3}
       propertyPath: m_Name
       value: Iron Box
+      objectReference: {fileID: 0}
+    - target: {fileID: 8091124972534882162, guid: c13c1f2b6a5ae0840be210c820bd3155, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8091124972534882169, guid: c13c1f2b6a5ae0840be210c820bd3155, type: 3}
       propertyPath: speed
