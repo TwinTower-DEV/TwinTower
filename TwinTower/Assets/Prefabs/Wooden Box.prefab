@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 39665730180211721}
   - component: {fileID: 39665730180211722}
   - component: {fileID: 39665730180211725}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wooden Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -147,6 +147,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5.2
-  Player1: {fileID: 0}
-  Player2: {fileID: 0}
   Health: 1
