@@ -74,8 +74,9 @@ public class Box : MonoBehaviour {
     }
 
     // Collistion 이용 방법
-    private void OnCollisionEnter2D(Collision2D other) {
+    private void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player")) {
+            Debug.Log("Adad");
             MoveBox(transform.position - other.transform.position);
         }
     }
