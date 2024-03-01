@@ -34,7 +34,6 @@ namespace TwinTower
                 GameManager.Instance._player2.SetMoveDir(moveDir);
                 return;
             }
-            Debug.Log("Player111");
 
             if (GameManager.Instance._player1.MoveCheck(moveDir) && GameManager.Instance._player2.MoveCheck(moveDir))
             {

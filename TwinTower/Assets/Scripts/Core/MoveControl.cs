@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Numerics;
 using Unity.VisualScripting;
 using UnityEngine;
+using Vector3 = UnityEngine.Vector3;
 
 namespace TwinTower
 {
@@ -44,8 +46,8 @@ namespace TwinTower
                     check = Vector3.down;
                     break;
             }
-            
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, check, 0.8f, _layerMask);
+
+            RaycastHit2D hit = Physics2D.Raycast(transform.position + check * 0.5f , check, 0.5f, _layerMask);
             if (hit.collider == null)
             {
                 return true;
@@ -54,21 +56,20 @@ namespace TwinTower
             {
                 if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Box"))
                 {
-                    Debug.Log("ASDASD");
                     
-                    if(hit.transform.gameObject.GetComponent<MoveControl>() == null) Debug.Log("ASDAD");
                     if (hit.transform.gameObject.GetComponent<MoveControl>().MoveCheck(movedir))
                     {
                         return true;
                     }
                     else
                     {
+                        moveDir = Define.MoveDir.None;
                         return false;
                     }
                 }
             }
             
-            
+            moveDir = Define.MoveDir.None;
             return false;
             
         }
@@ -94,6 +95,7 @@ namespace TwinTower
 
             }
 
+            moveDir = Define.MoveDir.None;
             isMove = true;
         }
         // 그 이동할 셀로 자연스럽게 이동하게 구현
@@ -130,6 +132,8 @@ namespace TwinTower
 
         protected void FixedUpdate()
         {
+        
+            
             if (InputManager.Instance.isSyncMove)
             {
                 UpdateIsMoveing();
