@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
 /// 맵 회전 기믹을 정의한 클래스입니다.
@@ -14,6 +15,9 @@ namespace TwinTower
         [SerializeField] public GameObject player2maprotatecenter; 
         [SerializeField] public GameObject player1maprotateObj; // 돌릴 맵 오브젝트 설정
         [SerializeField] public GameObject player2maprotateObj;
+        
+        public List<MoveControl> _player1mapMoveobj;
+        public List<MoveControl> _player2mapMoveobj;
         private void Awake()
         {
             
@@ -21,6 +25,7 @@ namespace TwinTower
 
         private void FixedUpdate()
         {
+            
         }
         // 페이드 인, 아웃 효과와 함께 맵 회전 실행
         IEnumerator RotateStart()
@@ -54,9 +59,14 @@ namespace TwinTower
                     rotatecenter = player2maprotatecenter;
                 }
             }
+
+            InputManager.Instance.islockMove = true;
             yield return StartCoroutine(UI_ScreenFader.FadeScenOut());
+            
             rotateObj.transform.RotateAround(rotatecenter.transform.position, Vector3.forward, -90);
+                        
             yield return StartCoroutine(UI_ScreenFader.FadeSceneIn());
+            InputManager.Instance.islockMove = false;
         }
         // Player가 밟았을 때 실행
         private void OnTriggerEnter2D(Collider2D other) {
