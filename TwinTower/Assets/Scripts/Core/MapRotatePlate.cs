@@ -54,9 +54,12 @@ namespace TwinTower
                     rotatecenter = player2maprotatecenter;
                 }
             }
+
+            GameManager.Instance._player.ismovelock = true;
             yield return StartCoroutine(UI_ScreenFader.FadeScenOut());
             rotateObj.transform.RotateAround(rotatecenter.transform.position, Vector3.forward, -90);
             yield return StartCoroutine(UI_ScreenFader.FadeSceneIn());
+            GameManager.Instance._player.ismovelock = false;
         }
         // Player가 밟았을 때 실행
         private void OnTriggerEnter2D(Collider2D other) {
