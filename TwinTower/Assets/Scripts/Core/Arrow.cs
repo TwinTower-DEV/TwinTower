@@ -1,141 +1,33 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-namespace TwinTower
-{
-    public class MoveControl : MonoBehaviour
-    {
-        [SerializeField] protected int _moveSpeed;
-        [SerializeField] protected Grid maps;
-        [SerializeField] private Vector3Int cellPos = Vector3Int.zero;
-        [SerializeField] private LayerMask _layerMask;
-        public Define.MoveDir moveDir = Define.MoveDir.None;
-        public bool isMove = false;
-        [SerializeField] protected bool isMapcheck;
-        // 다음 이동할 셀을 지정해줌
+/// <summary>
+/// 생성된 화살을 발사시키는 스크립트
+/// 화살 없애는 코드 필요
+/// </summary>
+public class Arrow : MonoBehaviour {
+    private Rigidbody2D rigidbody2d;
 
-        public void SetSpwnPoint(Vector3Int pos)
-        {
-            cellPos = pos;
-        }
+    [SerializeField] private float force;
+    // Start is called before the first frame update
+    void Awake() {
+        rigidbody2d = GetComponent<Rigidbody2D>();
+    }
 
-        public void SetMoveDir(Define.MoveDir dir)
-        {
-            moveDir = dir;
-        }
-        public bool MoveCheck(Define.MoveDir movedir)
-        {
-            if(movedir == Define.MoveDir.None) return false;
-            Vector3 check = Vector3.zero;
-            moveDir = movedir;
-            switch (movedir)
-            {
-                case Define.MoveDir.Up:
-                    check = Vector3.up;
-                    break;
-                case Define.MoveDir.Left:
-                    check = Vector3.left;
-                    break;
-                case Define.MoveDir.Right:
-                    check = Vector3.right;
-                    break;
-                case Define.MoveDir.Down:
-                    check = Vector3.down;
-                    break;
-            }
-            
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, check, 0.8f, _layerMask);
-            if (hit.collider == null)
-            {
-                return true;
-            }
-            else
-            {
-                if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Box"))
-                {
-                    Debug.Log("ASDASD");
-                    
-                    if(hit.transform.gameObject.GetComponent<MoveControl>() == null) Debug.Log("ASDAD");
-                    if (hit.transform.gameObject.GetComponent<MoveControl>().MoveCheck(movedir))
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
-            }
-            
-            
-            return false;
-            
-        }
-        protected void Move()
-        {
-            if (!isMove)
-            {
-                switch (moveDir)
-                {
-                    case Define.MoveDir.Up:
-                        cellPos += Vector3Int.up;
-                        break;
-                    case Define.MoveDir.Left:
-                        cellPos += Vector3Int.left;
-                        break;
-                    case Define.MoveDir.Right:
-                        cellPos += Vector3Int.right;
-                        break;
-                    case Define.MoveDir.Down:
-                        cellPos += Vector3Int.down;
-                        break;
-                }
+    public void Launch(Vector2 direction) {
+        rigidbody2d.AddForce(direction * force * Time.deltaTime);
+    }
 
-            }
-
-            isMove = true;
-        }
-        // 그 이동할 셀로 자연스럽게 이동하게 구현
-        protected void UpdateIsMoveing()
+    // 어차피 무조건 부딪히게 되어있음 따로 피격 안해도 될듯(사용자가 못나가게 벽 만들거니까)
+    private void OnTriggerEnter2D(Collider2D other) {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Box"))
         {
-            if (!isMove) return;
-            
-            
-            Vector3 destPos = maps.CellToWorld(cellPos) + new Vector3(0.5f, 0.5f);
-            Vector3 moveDir = destPos - transform.position;
-            
-            float dist = moveDir.magnitude;
-            if (dist < _moveSpeed * Time.deltaTime)
-            {
-                transform.position = destPos;
-                isMove = false;
-            }
-            else
-            {
-                transform.position += moveDir.normalized * _moveSpeed * Time.deltaTime;
-                isMove = true;
-            }
+            Box box = other.GetComponent<Box>(); 
+            if(box != null) box.ReduceHealth();
         }
-        private void Awake()
-        {
-            //Vector3 pos = maps.CellToWorld(cellPos) + new Vector3(0.5f, 0.5f);
-            //transform.position = pos;
-        }
-
-        private void Start()
-        {
-            
-        }
-
-        protected void FixedUpdate()
-        {
-            if (InputManager.Instance.isSyncMove)
-            {
-                UpdateIsMoveing();
-                Move();
-                
-            }
-        }
+        // if (other.gameObject.layer == LayerMask.NameToLayer("Player"))  플레이어 체력 감소 코드 필요.
+        Destroy(gameObject);        // 
     }
 }
