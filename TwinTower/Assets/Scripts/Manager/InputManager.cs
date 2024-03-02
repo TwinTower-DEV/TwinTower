@@ -30,14 +30,14 @@ namespace TwinTower
             else
             {
                 moveDir = Define.MoveDir.None;
-                GameManager.Instance._player1.SetMoveDir(moveDir);
-                GameManager.Instance._player2.SetMoveDir(moveDir);
                 return;
             }
 
             if (GameManager.Instance._player1.MoveCheck(moveDir) && GameManager.Instance._player2.MoveCheck(moveDir))
             {
                 isSyncMove = true;
+                GameManager.Instance._player1.DirectSetting(moveDir);
+                GameManager.Instance._player2.DirectSetting(moveDir);
             }
             else
             {
