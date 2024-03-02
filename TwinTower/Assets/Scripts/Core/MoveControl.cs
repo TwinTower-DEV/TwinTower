@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Numerics;
 using Unity.VisualScripting;
 using UnityEngine;
+using Vector3 = UnityEngine.Vector3;
 
 namespace TwinTower
 {
@@ -24,71 +26,78 @@ namespace TwinTower
         {
             moveDir = dir;
         }
-        public bool MoveCheck(Define.MoveDir movedir) {
-            if (isMove) return false;
+        public bool MoveCheck(Define.MoveDir movedir)
+        {
             if(movedir == Define.MoveDir.None) return false;
-            Vector3 nextDir = MDRToVec3(movedir);
-            
-            RaycastHit2D hit = Physics2D.Raycast(transform.position + nextDir*0.5f, nextDir, 0.5f, _layerMask);
+            Vector3 check = Vector3.zero;
+            moveDir = movedir;
+            switch (movedir)
+            {
+                case Define.MoveDir.Up:
+                    check = Vector3.up;
+                    break;
+                case Define.MoveDir.Left:
+                    check = Vector3.left;
+                    break;
+                case Define.MoveDir.Right:
+                    check = Vector3.right;
+                    break;
+                case Define.MoveDir.Down:
+                    check = Vector3.down;
+                    break;
+            }
+
+            RaycastHit2D hit = Physics2D.Raycast(transform.position + check * 0.5f , check, 0.5f, _layerMask);
             if (hit.collider == null)
             {
                 return true;
             }
-
-            if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Wall")) return false;
-            if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Box")) {
-                MoveControl MoveableObject = hit.transform.gameObject.GetComponent<MoveControl>();
-                if(MoveableObject == null) Debug.Log("오류입니당");
-                if (MoveableObject.MoveCheck(movedir))
+            else
+            {
+                if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Box"))
                 {
-                    MoveableObject.DstIsMDR(movedir);
-                    return true;
+                    
+                    if (hit.transform.gameObject.GetComponent<MoveControl>().MoveCheck(movedir))
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        moveDir = Define.MoveDir.None;
+                        return false;
+                    }
+                }
+            }
+            
+            moveDir = Define.MoveDir.None;
+            return false;
+            
+        }
+        protected void Move()
+        {
+            if (!isMove)
+            {
+                switch (moveDir)
+                {
+                    case Define.MoveDir.Up:
+                        cellPos += Vector3Int.up;
+                        break;
+                    case Define.MoveDir.Left:
+                        cellPos += Vector3Int.left;
+                        break;
+                    case Define.MoveDir.Right:
+                        cellPos += Vector3Int.right;
+                        break;
+                    case Define.MoveDir.Down:
+                        cellPos += Vector3Int.down;
+                        break;
                 }
 
-                return false;
-            }
-            return false;
-        }
-
-        Vector3 MDRToVec3(Define.MoveDir movedir) {
-            switch (movedir)
-            {
-                case Define.MoveDir.Up:
-                    return Vector3.up;
-                    break;
-                case Define.MoveDir.Left:
-                    return Vector3.left;
-                    break;
-                case Define.MoveDir.Right:
-                    return Vector3.right;
-                    break;
-                case Define.MoveDir.Down:
-                    return Vector3.down;
-                    break;
             }
 
-            return Vector3.zero;
-        }
-
-        public void DstIsMDR(Define.MoveDir movedir) {
+            moveDir = Define.MoveDir.None;
             isMove = true;
-            switch (movedir)
-            {
-                case Define.MoveDir.Up:
-                    cellPos += Vector3Int.up;
-                    break;
-                case Define.MoveDir.Left:
-                    cellPos += Vector3Int.left;
-                    break;
-                case Define.MoveDir.Right:
-                    cellPos += Vector3Int.right;
-                    break;
-                case Define.MoveDir.Down:
-                    cellPos += Vector3Int.down;
-                    break;
-            }
         }
-        
         // 그 이동할 셀로 자연스럽게 이동하게 구현
         protected void UpdateIsMoveing()
         {
@@ -123,7 +132,14 @@ namespace TwinTower
 
         protected void FixedUpdate()
         {
-            UpdateIsMoveing();
+        
+            
+            if (InputManager.Instance.isSyncMove)
+            {
+                UpdateIsMoveing();
+                Move();
+                
+            }
         }
     }
 }
