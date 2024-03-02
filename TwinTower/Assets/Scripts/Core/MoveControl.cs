@@ -28,7 +28,6 @@ namespace TwinTower
         }
         public bool MoveCheck(Define.MoveDir movedir)
         {
-            if(movedir == Define.MoveDir.None) return false;
             Vector3 check = Vector3.zero;
             moveDir = movedir;
             switch (movedir)
@@ -47,6 +46,7 @@ namespace TwinTower
                     break;
             }
 
+            
             RaycastHit2D hit = Physics2D.Raycast(transform.position + check * 0.5f , check, 0.5f, _layerMask);
             if (hit.collider == null)
             {
