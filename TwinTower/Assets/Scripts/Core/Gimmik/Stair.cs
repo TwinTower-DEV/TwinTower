@@ -19,10 +19,11 @@ public class Stair : MonoBehaviour
         OnPlayer = false;
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
+    private void OnTriggerStay2D(Collider2D other) {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player")) {
+            MoveControl playerControl = other.gameObject.GetComponent<MoveControl>();
             OnPlayer = true;
-            if (stair2.getOnPlayer() && OnPlayer) {                         // 다른 계단에 플레이어가 위치해 있는지 확인
+            if (!playerControl.isMove && stair2.getOnPlayer() && OnPlayer) {                         // 다른 계단에 플레이어가 위치해 있는지 확인
                 NextLevelManager.Instance.NextLevel();
             }
         }
