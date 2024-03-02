@@ -24,78 +24,71 @@ namespace TwinTower
         {
             moveDir = dir;
         }
-        public bool MoveCheck(Define.MoveDir movedir)
-        {
+        public bool MoveCheck(Define.MoveDir movedir) {
+            if (isMove) return false;
             if(movedir == Define.MoveDir.None) return false;
-            Vector3 check = Vector3.zero;
-            moveDir = movedir;
-            switch (movedir)
-            {
-                case Define.MoveDir.Up:
-                    check = Vector3.up;
-                    break;
-                case Define.MoveDir.Left:
-                    check = Vector3.left;
-                    break;
-                case Define.MoveDir.Right:
-                    check = Vector3.right;
-                    break;
-                case Define.MoveDir.Down:
-                    check = Vector3.down;
-                    break;
-            }
+            Vector3 nextDir = MDRToVec3(movedir);
             
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, check, 0.8f, _layerMask);
+            RaycastHit2D hit = Physics2D.Raycast(transform.position + nextDir*0.5f, nextDir, 0.5f, _layerMask);
             if (hit.collider == null)
             {
                 return true;
             }
-            else
-            {
-                if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Box"))
+
+            if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Wall")) return false;
+            if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Box")) {
+                MoveControl MoveableObject = hit.transform.gameObject.GetComponent<MoveControl>();
+                if(MoveableObject == null) Debug.Log("오류입니당");
+                if (MoveableObject.MoveCheck(movedir))
                 {
-                    Debug.Log("ASDASD");
-                    
-                    if(hit.transform.gameObject.GetComponent<MoveControl>() == null) Debug.Log("ASDAD");
-                    if (hit.transform.gameObject.GetComponent<MoveControl>().MoveCheck(movedir))
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
+                    MoveableObject.DstIsMDR(movedir);
+                    return true;
                 }
+
+                return false;
             }
-            
-            
             return false;
-            
         }
-        protected void Move()
-        {
-            if (!isMove)
-            {
-                switch (moveDir)
-                {
-                    case Define.MoveDir.Up:
-                        cellPos += Vector3Int.up;
-                        break;
-                    case Define.MoveDir.Left:
-                        cellPos += Vector3Int.left;
-                        break;
-                    case Define.MoveDir.Right:
-                        cellPos += Vector3Int.right;
-                        break;
-                    case Define.MoveDir.Down:
-                        cellPos += Vector3Int.down;
-                        break;
-                }
 
+        Vector3 MDRToVec3(Define.MoveDir movedir) {
+            switch (movedir)
+            {
+                case Define.MoveDir.Up:
+                    return Vector3.up;
+                    break;
+                case Define.MoveDir.Left:
+                    return Vector3.left;
+                    break;
+                case Define.MoveDir.Right:
+                    return Vector3.right;
+                    break;
+                case Define.MoveDir.Down:
+                    return Vector3.down;
+                    break;
             }
 
-            isMove = true;
+            return Vector3.zero;
         }
+
+        public void DstIsMDR(Define.MoveDir movedir) {
+            isMove = true;
+            switch (movedir)
+            {
+                case Define.MoveDir.Up:
+                    cellPos += Vector3Int.up;
+                    break;
+                case Define.MoveDir.Left:
+                    cellPos += Vector3Int.left;
+                    break;
+                case Define.MoveDir.Right:
+                    cellPos += Vector3Int.right;
+                    break;
+                case Define.MoveDir.Down:
+                    cellPos += Vector3Int.down;
+                    break;
+            }
+        }
+        
         // 그 이동할 셀로 자연스럽게 이동하게 구현
         protected void UpdateIsMoveing()
         {
@@ -130,12 +123,7 @@ namespace TwinTower
 
         protected void FixedUpdate()
         {
-            if (InputManager.Instance.isSyncMove)
-            {
-                UpdateIsMoveing();
-                Move();
-                
-            }
+            UpdateIsMoveing();
         }
     }
 }

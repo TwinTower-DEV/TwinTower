@@ -6,8 +6,6 @@ namespace TwinTower
     public class InputManager : Manager<InputManager>
     {
         public Define.MoveDir moveDir = Define.MoveDir.None;
-        
-        public bool isSyncMove = false;
         public bool islockMove = false;
         private void GroundedHorizontalMovement()
         {
@@ -30,24 +28,15 @@ namespace TwinTower
             else
             {
                 moveDir = Define.MoveDir.None;
-                GameManager.Instance._player1.SetMoveDir(moveDir);
-                GameManager.Instance._player2.SetMoveDir(moveDir);
-                return;
             }
-            Debug.Log("Player111");
 
-            if (GameManager.Instance._player1.MoveCheck(moveDir) && GameManager.Instance._player2.MoveCheck(moveDir))
-            {
-                isSyncMove = true;
-            }
-            else
-            {
-                isSyncMove = false;
+            if (GameManager.Instance._player1.MoveCheck(moveDir) && GameManager.Instance._player2.MoveCheck(moveDir)) {
+                GameManager.Instance._player1.DstIsMDR(moveDir);
+                GameManager.Instance._player2.DstIsMDR(moveDir);
             }
         }
 
-        private void FixedUpdate()
-        {
+        private void FixedUpdate() {
             if(!islockMove)
                 GroundedHorizontalMovement();
         }
