@@ -13,7 +13,6 @@ namespace TwinTower
         [SerializeField] private Vector3Int cellPos = Vector3Int.zero;
         [SerializeField] protected LayerMask _layerMask;
         public bool isMove = false;
-        [SerializeField] protected bool isMapcheck;
         // 다음 이동할 셀을 지정해줌
 
         public void SetSpwnPoint(Vector3Int pos)
@@ -21,28 +20,14 @@ namespace TwinTower
             cellPos = pos;
         }
 
-        public void DirectSetting(Define.MoveDir movedir) {
-            switch (movedir)
-            {
-                case Define.MoveDir.Up:
-                    cellPos += Vector3Int.up;
-                    break;
-                case Define.MoveDir.Left:
-                    cellPos += Vector3Int.left;
-                    break;
-                case Define.MoveDir.Right:
-                    cellPos += Vector3Int.right;
-                    break;
-                case Define.MoveDir.Down:
-                    cellPos += Vector3Int.down;
-                    break;
-            }
+        public void DirectSetting(Vector3 movedir) {
+            cellPos += Vector3Int.RoundToInt(movedir);
             isMove = true;
         }
         
-        public virtual bool MoveCheck(Define.MoveDir movedir) {
-            Vector3 directCheck = MDRToVec3(movedir);
-            RaycastHit2D hit = Physics2D.Raycast(transform.position + directCheck * 0.5f , directCheck, 0.5f, _layerMask);
+        public virtual bool MoveCheck(Vector3 movedir) {
+            if (isMove) return false;
+            RaycastHit2D hit = Physics2D.Raycast(transform.position + movedir * 0.5f , movedir, 0.5f, _layerMask);
             if (hit.collider == null) return true;
             if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Box")) {
                 MoveControl boxcontrol = hit.transform.gameObject.GetComponent<MoveControl>();
@@ -52,11 +37,10 @@ namespace TwinTower
                 }
                 return false;
             }
-            
             return false;
         }
 
-        protected Vector3 MDRToVec3(Define.MoveDir movedir) {
+        /*protected Vector3 MDRToVec3(Define.MoveDir movedir) {
             switch (movedir)
             {
                 case Define.MoveDir.Up:
@@ -69,13 +53,11 @@ namespace TwinTower
                     return Vector3.down;
             }
             return Vector3.zero;
-        }
+        }*/
         
         // 그 이동할 셀로 자연스럽게 이동하게 구현
         private void UpdateIsMoveing()
         {
-            if (!isMove) return;
-            
             Vector3 destPos = maps.CellToWorld(cellPos) + new Vector3(0.5f, 0.5f);
             Vector3 moveDir = destPos - transform.position;
             
@@ -94,10 +76,7 @@ namespace TwinTower
 
         protected void FixedUpdate()
         {
-            if (InputManager.Instance.isSyncMove)
-            {
-                UpdateIsMoveing();
-            }
+            if(isMove) UpdateIsMoveing();
         }
     }
 }

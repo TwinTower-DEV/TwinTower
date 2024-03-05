@@ -13,9 +13,8 @@ using UnityEngine;
 public class Box : MoveControl {
     [SerializeField] private int Health;
 
-    public override bool MoveCheck(Define.MoveDir movedir) {
-        Vector3 directCheck = MDRToVec3(movedir);
-        RaycastHit2D hit = Physics2D.Raycast(transform.position + directCheck * 0.5f , directCheck, 0.5f, _layerMask);
+    public override bool MoveCheck(Vector3 movedir) {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position + movedir * 0.5f , movedir, 0.5f, _layerMask);
         if (hit.collider == null) return true;
 
         return false;
