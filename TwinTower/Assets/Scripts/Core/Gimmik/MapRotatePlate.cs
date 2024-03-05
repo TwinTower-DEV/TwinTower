@@ -67,7 +67,6 @@ namespace TwinTower
             foreach (MoveControl now in GameManager.Instance._moveobjlist)
             {
                 if(now == null) continue;
-                now.SetCurrentPoint(now.transform.position);
             }
             yield return StartCoroutine(UI_ScreenFader.FadeSceneIn());
             InputManager.Instance.islockMove = false;

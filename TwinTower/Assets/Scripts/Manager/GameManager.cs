@@ -10,8 +10,8 @@ namespace TwinTower
     public class GameManager : Manager<GameManager>
     {
         private TileFindManager _tileFindManager;
-        public MoveControl _player1;
-        public MoveControl _player2;
+        public Player _player1;
+        public Player _player2;
         public Vector3Int _player1spwnPoint;
         public Vector3Int _player2spwnPoint;
         public bool isMovecheck = true;
@@ -20,8 +20,8 @@ namespace TwinTower
         protected override void Awake()
         {
             _tileFindManager = TileFindManager.Instance;
-            _player1 = GameObject.Find("Dalia").GetComponent<MoveControl>();
-            _player2 = GameObject.Find("Irise").GetComponent<MoveControl>();
+            _player1 = GameObject.Find("Dalia").GetComponent<Player>();
+            _player2 = GameObject.Find("Irise").GetComponent<Player>();
             _player1spwnPoint = new Vector3Int(-8, -1, 0);
             _player2spwnPoint = new Vector3Int(8, 1, 0);
             
