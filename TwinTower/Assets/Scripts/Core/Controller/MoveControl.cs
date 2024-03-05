@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Numerics;
 using Unity.VisualScripting;
 using UnityEngine;
+using Debug = System.Diagnostics.Debug;
 using Vector3 = UnityEngine.Vector3;
 
 namespace TwinTower
@@ -13,6 +15,8 @@ namespace TwinTower
         [SerializeField] private Vector3Int cellPos = Vector3Int.zero;
         [SerializeField] protected LayerMask _layerMask;
         public bool isMove = false;
+
+        private Stopwatch watch = new Stopwatch();
         // 다음 이동할 셀을 지정해줌
 
         public void SetSpwnPoint(Vector3Int pos)
@@ -23,6 +27,7 @@ namespace TwinTower
         public void DirectSetting(Vector3 movedir) {
             cellPos += Vector3Int.RoundToInt(movedir);
             isMove = true;
+            watch.Restart();
         }
         
         public virtual bool MoveCheck(Vector3 movedir) {
@@ -66,6 +71,8 @@ namespace TwinTower
             {
                 transform.position = destPos;
                 isMove = false;
+                watch.Stop();
+                UnityEngine.Debug.Log(gameObject.name + watch.ElapsedMilliseconds);
             }
             else
             {

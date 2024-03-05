@@ -20,8 +20,8 @@ namespace TwinTower
             _tileFindManager = TileFindManager.Instance;
             _player1 = GameObject.Find("Player1").GetComponent<MoveControl>();
             _player2 = GameObject.Find("Player2").GetComponent<MoveControl>();
-            _player1spwnPoint = new Vector3Int(-8, -1, 0);
-            _player2spwnPoint = new Vector3Int(8, -1, 0);
+            _player1spwnPoint = new Vector3Int(-12, -2, 0);
+            _player2spwnPoint = new Vector3Int(6, -2, 0);
             
             _player1.SetSpwnPoint(_player1spwnPoint);
             _player2.SetSpwnPoint(_player2spwnPoint);
