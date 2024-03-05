@@ -60,11 +60,14 @@ namespace TwinTower
                 }
             }
 
-            InputManager.Instance.islockMove = true;
+            InputManager.Instance.islockMove = true;    
             yield return StartCoroutine(UI_ScreenFader.FadeScenOut());
             
             rotateObj.transform.RotateAround(rotatecenter.transform.position, Vector3.forward, -90);
-                        
+            foreach (MoveControl now in GameManager.Instance._moveobjlist)
+            {
+                if(now == null) continue;
+            }
             yield return StartCoroutine(UI_ScreenFader.FadeSceneIn());
             InputManager.Instance.islockMove = false;
         }
