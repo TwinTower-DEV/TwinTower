@@ -42,46 +42,7 @@ public class TileFindManager : Manager<TileFindManager> {
         if (go == null)
             return;
 
-        Tilemap player1map = go.transform.GetChild(0).GetComponent<Tilemap>();
-        Tilemap player2map = go.transform.GetChild(1).GetComponent<Tilemap>();
-
-        int i = 0, j = 0;
-        for (int y = player1map.cellBounds.yMax; y >= player1map.cellBounds.yMin;y--)
-        {
-            for (int x = player1map.cellBounds.xMin; x <= player1map.cellBounds.xMax; x++)
-            {
-                TileBase tile = player1map.GetTile(new Vector3Int(x, y, 0));
-                if (tile != null)
-                {
-                    player1Map[i, j] = new Info(x, y, false);
-                    j++;
-                    if (j > 7)
-                    {
-                        i++;
-                        j = 0;
-                    }
-                }
-            }
-        }
-
-        i = 0; j = 0;
-        for (int y = player2map.cellBounds.yMax; y >= player2map.cellBounds.yMin;y--)
-        {
-            for (int x = player2map.cellBounds.xMin; x <= player2map.cellBounds.xMax; x++)
-            {
-                TileBase tile = player2map.GetTile(new Vector3Int(x, y, 0));
-                if (tile != null)
-                {
-                    player2Map[i, j] = new Info(x, y, false);
-                    j++;
-                    if (j > 7)
-                    {
-                        i++;
-                        j = 0;
-                    }
-                }
-            }
-        }
+        
         
     }
 

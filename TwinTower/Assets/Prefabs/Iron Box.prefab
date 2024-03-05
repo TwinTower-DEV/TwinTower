@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8091124972534882173}
   - component: {fileID: 8091124972534882174}
   - component: {fileID: 8091124972534882169}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Iron Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -147,6 +147,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5.2
-  Player1: {fileID: 0}
-  Player2: {fileID: 0}
   Health: 10

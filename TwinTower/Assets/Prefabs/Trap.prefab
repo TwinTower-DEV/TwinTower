@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e17e6572d8e9e1d42b5428f6332a1fc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dispenser: {fileID: 9096088324280558574}
+  activateObject: {fileID: 9096088324280558574}
 --- !u!50 &2185182553352103808
 Rigidbody2D:
   serializedVersion: 4
@@ -164,7 +164,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
