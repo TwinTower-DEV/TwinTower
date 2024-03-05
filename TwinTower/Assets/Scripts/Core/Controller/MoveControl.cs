@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Numerics;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -15,13 +16,21 @@ namespace TwinTower
         public bool isMove = false;
         [SerializeField] protected bool isMapcheck;
         // 다음 이동할 셀을 지정해줌
-
+        private Animator _animator;
+        
+        
         public void SetSpwnPoint(Vector3Int pos)
         {
             cellPos = pos;
         }
 
-        public void DirectSetting(Define.MoveDir movedir) {
+        public void SetCurrentPoint(Vector3 pos)
+        {
+            cellPos = new Vector3Int((int)(pos.x - 0.5f), (int)(pos.y - 0.5f), 0);
+        }
+        public void DirectSetting(Define.MoveDir movedir)
+        {
+            if (isMove) return;
             switch (movedir)
             {
                 case Define.MoveDir.Up:
@@ -40,13 +49,16 @@ namespace TwinTower
             isMove = true;
         }
         
-        public virtual bool MoveCheck(Define.MoveDir movedir) {
+        public virtual bool MoveCheck(Define.MoveDir movedir)
+        {
             Vector3 directCheck = MDRToVec3(movedir);
             RaycastHit2D hit = Physics2D.Raycast(transform.position + directCheck * 0.5f , directCheck, 0.5f, _layerMask);
             if (hit.collider == null) return true;
+            Debug.Log(hit.transform.gameObject.name + " " + hit.transform.gameObject.layer.ToString());
             if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Box")) {
                 MoveControl boxcontrol = hit.transform.gameObject.GetComponent<MoveControl>();
                 if (boxcontrol.MoveCheck(movedir)) {
+                    Debug.Log("ASDAD");
                     boxcontrol.DirectSetting(movedir);
                     return true;
                 }
@@ -90,6 +102,12 @@ namespace TwinTower
                 transform.position += moveDir.normalized * _moveSpeed * Time.deltaTime;
                 isMove = true;
             }
+        }
+
+        protected virtual void Awake()
+        {
+            GameManager.Instance._moveobjlist.Add(this);
+            _animator = GetComponent<Animator>();
         }
 
         protected void FixedUpdate()
