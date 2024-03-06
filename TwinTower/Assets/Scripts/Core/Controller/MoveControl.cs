@@ -19,7 +19,7 @@ namespace TwinTower
         private Grid maps;
         private Vector3Int cellPos = Vector3Int.zero;
         [SerializeField] protected LayerMask _layerMask;
-        private bool isMove = false;
+        protected bool isMove = false;
 
         // 이동 하고자 하는 방향 설정과 이동 가능함을 표시
         public void DirectSetting(Vector3 movedir) {
