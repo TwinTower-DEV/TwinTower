@@ -9,7 +9,7 @@ namespace TwinTower
         public bool islockMove = false;
         private void GroundedHorizontalMovement()
         {
-            if (GameManager.Instance._player1.isMove || GameManager.Instance._player2.isMove) return;
+            if (GameManager.Instance._player1.getIsMove() || GameManager.Instance._player2.getIsMove()) return;
             
             if (InputController.Instance.LeftMove.Down) {
                 moveDir = Vector3.left;

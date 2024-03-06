@@ -7,8 +7,8 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 /// <summary>
-/// 철제상자, 나무상자를 담당하는 스크립트
-/// 화살 피격, 밀기에 대한 내용이 담겨져 있다.
+/// MoveControl을 상속 - 플레이어에게 밀어지는 경우 존재하기 때문에 상속 받음.
+/// MoveCheck의 경우 상자는 뒤에 상자와 벽이 있으면 밀어지면 안되기 때문(플레이어는 상자가 있으면 가능)
 /// </summary>
 public class Box : MoveControl {
     [SerializeField] private int Health;

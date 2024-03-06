@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 4025500666531594441}
   - component: {fileID: 5706240510765377359}
   - component: {fileID: 6438224510740866093}
-  - component: {fileID: 4067180754764157289}
+  - component: {fileID: 5416105210768974626}
   m_Layer: 0
-  m_Name: Sign
+  m_Name: Tutorial
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -134,7 +134,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.07, y: 0.6}
   m_EdgeRadius: 0
---- !u!114 &4067180754764157289
+--- !u!114 &5416105210768974626
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,6 +143,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3129727419074203480}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6d5e49da0eec5a4db27cb397119039b, type: 3}
+  m_Script: {fileID: 11500000, guid: 28b7348e507b6f244980e8a07b02b1c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tutorialobject: {fileID: 0}
