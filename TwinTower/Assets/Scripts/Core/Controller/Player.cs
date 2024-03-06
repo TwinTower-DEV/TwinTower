@@ -51,8 +51,9 @@ namespace TwinTower
                 dir = value;
             }
         }
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             InputManager.Create();
             _animator = GetComponent<Animator>();
         }

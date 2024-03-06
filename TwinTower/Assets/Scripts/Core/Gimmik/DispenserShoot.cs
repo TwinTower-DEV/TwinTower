@@ -10,16 +10,17 @@ using UnityEngine;
 public class DispenserShoot : ActivateObject {
     public GameObject arrowPrefab;
 
-    private Rigidbody2D rigidbody2d;
-    // Start is called before the first frame update
+    private bool haveArrow;                     // 한번만 발사
     void Start() {
-        rigidbody2d = GetComponent<Rigidbody2D>();
+        haveArrow = true;
     }
 
-    public override void Launch() { 
+    public override void Launch() {
+        if (!haveArrow) return;             // 이미 발사 된 경우 종료
         GameObject arrowObject = Instantiate(arrowPrefab, transform.position + transform.up * 0.3f, Quaternion.identity, transform);
 		
         Arrow arrow = arrowObject.GetComponent<Arrow>();
         arrow.Launch(transform.up);
+        haveArrow = false;
     }
 }
