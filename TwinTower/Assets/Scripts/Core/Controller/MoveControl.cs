@@ -4,7 +4,8 @@ using System.Diagnostics;
 using System.Numerics;
 using Unity.VisualScripting;
 using UnityEngine;
-using Debug = System.Diagnostics.Debug;
+using Debug = UnityEngine.Debug;
+//using Debug = System.Diagnostics.Debug;
 using Vector3 = UnityEngine.Vector3;
 
 /// <summary>
@@ -25,6 +26,12 @@ namespace TwinTower
         public void DirectSetting(Vector3 movedir) {
             cellPos += Vector3Int.RoundToInt(movedir);      // Vector3 to Vector3Int
             isMove = true;
+        }
+        // 맵이 회전 됐을 때 다시 cellPos를 정의하는 매서드
+        public void SetCellPos(Vector3 pos)
+        {
+            cellPos = maps.WorldToCell(transform.position);
+            transform.position = maps.GetCellCenterWorld(cellPos);
         }
         
         // movedir방향으로 이동 가능한지 체크 - 이동 가능하다면 true반환
@@ -50,7 +57,6 @@ namespace TwinTower
         {
             Vector3 destPos = maps.CellToWorld(cellPos) + new Vector3(0.5f, 0.5f);
             Vector3 moveDir = destPos - transform.position;
-            
             float dist = moveDir.magnitude;
             if (dist < _moveSpeed * Time.deltaTime)
             {
@@ -75,6 +81,7 @@ namespace TwinTower
             if (maps == null) throw new Exception("이동 오브젝트가 타일맵 내에 존재하지 않습니다.");
             cellPos = maps.WorldToCell(transform.position);
             transform.position = maps.GetCellCenterWorld(cellPos);
+            GameManager.Instance._moveobjlist.Add(this);
         }
 
         protected void FixedUpdate()

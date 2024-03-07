@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace TwinTower
 {
+    /// <summary>
+    /// InputManager 클래스입니다 사용자의 입력을 관리합니다.
+    /// </summary>
     public class InputManager : Manager<InputManager> {
         public Vector3 moveDir = Vector3.zero;
         
@@ -13,32 +16,31 @@ namespace TwinTower
             
             if (InputController.Instance.LeftMove.Down) {
                 moveDir = Vector3.left;
-                GameManager.Instance._player1.Dir = Define.MoveDir.Left;
-                GameManager.Instance._player2.Dir = Define.MoveDir.Left;
+                PlayerMove(Define.MoveDir.Left);
             }
             else if (InputController.Instance.RightMove.Down)
             {
                 moveDir = Vector3.right;
-                GameManager.Instance._player1.Dir = Define.MoveDir.Right;
-                GameManager.Instance._player2.Dir = Define.MoveDir.Right;
+                PlayerMove(Define.MoveDir.Right);
             }
             else if (InputController.Instance.UpMove.Down)
             {
                 moveDir = Vector3.up;
-                GameManager.Instance._player1.Dir = Define.MoveDir.Up;
-                GameManager.Instance._player2.Dir = Define.MoveDir.Up;
+                PlayerMove(Define.MoveDir.Up);
             }
             else if (InputController.Instance.DownMove.Down)
             {
                 moveDir = Vector3.down;
-                GameManager.Instance._player1.Dir = Define.MoveDir.Down;
-                GameManager.Instance._player2.Dir = Define.MoveDir.Down;
+                PlayerMove(Define.MoveDir.Down);
+            }
+            else if (InputController.Instance.ResetButton.Down)
+            {
+                StartCoroutine(ScreenManager.Instance.CurrentScreenReload());
             }
             else
             {
                 moveDir = Vector3.zero;
-                GameManager.Instance._player1.Dir = Define.MoveDir.None;
-                GameManager.Instance._player2.Dir = Define.MoveDir.None;
+                PlayerMove(Define.MoveDir.None);
                 return;
             }
 
@@ -48,6 +50,11 @@ namespace TwinTower
             }
         }
 
+        private void PlayerMove(Define.MoveDir dir)
+        {
+            GameManager.Instance._player1.Dir = dir;
+            GameManager.Instance._player2.Dir = dir;
+        }
         private void FixedUpdate()
         {
             if(!islockMove)
