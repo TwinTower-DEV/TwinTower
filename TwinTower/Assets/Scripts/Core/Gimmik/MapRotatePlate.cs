@@ -18,6 +18,7 @@ namespace TwinTower
         
         public List<MoveControl> _player1mapMoveobj;
         public List<MoveControl> _player2mapMoveobj;
+        private bool onPlayer = false;
         private void Awake()
         {
             
@@ -59,24 +60,42 @@ namespace TwinTower
                     rotatecenter = player2maprotatecenter;
                 }
             }
+            // 플레이어 Animation Idle로 바꾸기
+            InputManager.Instance.islockMove = true;
+            GameManager.Instance._player1.Dir = Define.MoveDir.None;
+            GameManager.Instance._player2.Dir = Define.MoveDir.None;
 
-            InputManager.Instance.islockMove = true;    
             yield return StartCoroutine(UI_ScreenFader.FadeScenOut());
             
+            // 맵 회전
             rotateObj.transform.RotateAround(rotatecenter.transform.position, Vector3.forward, -90);
+            
+            // MoveControl을 가진 오브젝트들 cellpos 재설정
             foreach (MoveControl now in GameManager.Instance._moveobjlist)
             {
                 if(now == null) continue;
+                
+                now.SetCellPos(now.gameObject.transform.position);
+                now.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
             }
             yield return StartCoroutine(UI_ScreenFader.FadeSceneIn());
             InputManager.Instance.islockMove = false;
         }
         // Player가 밟았을 때 실행
-        private void OnTriggerEnter2D(Collider2D other) {
-            if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        private void OnTriggerStay2D(Collider2D other)
+        {
+            if (onPlayer) return;
+            
+            if (other.gameObject.layer == LayerMask.NameToLayer("Player") && !other.gameObject.GetComponent<Player>().getIsMove())
             {
+                onPlayer = true;
                 StartCoroutine(RotateStart());
             }
+        }
+        
+        private void OnTriggerExit2D(Collider2D other)
+        {
+            onPlayer = false;
         }
 
     }

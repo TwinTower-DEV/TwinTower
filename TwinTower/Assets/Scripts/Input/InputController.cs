@@ -15,6 +15,7 @@ namespace TwinTower
         public InputButton RightMove;
         public InputButton UpMove;
         public InputButton DownMove;
+        public InputButton ResetButton;
         
         public InputAxis Horizontal;
         public InputAxis Vertical;
@@ -28,6 +29,7 @@ namespace TwinTower
             RightMove = new InputButton(KeyCode.RightArrow);
             UpMove = new InputButton(KeyCode.UpArrow);
             DownMove = new InputButton(KeyCode.DownArrow);
+            ResetButton = new InputButton(KeyCode.R);
             
             Horizontal = new InputAxis(KeyCode.D, KeyCode.A);
             Vertical = new InputAxis(KeyCode.W,KeyCode.S);
@@ -45,7 +47,7 @@ namespace TwinTower
             RightMove.Get(fixedUpdateHappened, inputType);
             UpMove.Get(fixedUpdateHappened, inputType);
             DownMove.Get(fixedUpdateHappened, inputType);
-            
+            ResetButton.Get(fixedUpdateHappened, inputType);
             
             Horizontal.Get(inputType);
             Vertical.Get(inputType);
@@ -63,6 +65,7 @@ namespace TwinTower
             GainControl(RightMove);
             GainControl(UpMove);
             GainControl(DownMove);
+            GainControl(ResetButton);
             
             GainControl(Horizontal);
             GainControl(Vertical);
@@ -79,6 +82,6 @@ namespace TwinTower
             
             ReleaseControl(Horizontal,resetValues);
             ReleaseControl(Vertical,resetValues);
-           }
+        }
     }
 }
