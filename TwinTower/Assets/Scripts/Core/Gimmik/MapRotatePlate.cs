@@ -1,7 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Tilemaps;
+
 /// <summary>
 /// 맵 회전 기믹을 정의한 클래스입니다.
 /// </summary>
@@ -9,19 +12,26 @@ namespace TwinTower
 {
     public class MapRotatePlate: MonoBehaviour
     {
-        [SerializeField] private bool isplayermapCheck; // Player1, 2 어떤 맵에 있는지 체크
-        [SerializeField] private bool isOppositionCheck; // 반대편 맵을 돌려야 하는지 체크
-        [SerializeField] public GameObject player1maprotatecenter; // 맵을 돌릴 때 중심점 재설정
-        [SerializeField] public GameObject player2maprotatecenter; 
-        [SerializeField] public GameObject player1maprotateObj; // 돌릴 맵 오브젝트 설정
-        [SerializeField] public GameObject player2maprotateObj;
         
-        public List<MoveControl> _player1mapMoveobj;
-        public List<MoveControl> _player2mapMoveobj;
+        public class TileInfo
+        {
+            public Vector3Int pos;
+            public TileBase _tile;
+
+            public TileInfo(Vector3Int pos, TileBase _tile)
+            {
+                this.pos = pos;
+                this._tile = _tile;
+            }
+        }       
+        
+        [SerializeField] public GameObject maprotatecenter; 
+        [SerializeField] public Tilemap maprotateObj;
+        
         private bool onPlayer = false;
         private void Awake()
         {
-            
+            GameManager.Instance._moveobjlist.Add(gameObject);
         }
 
         private void FixedUpdate()
@@ -31,35 +41,7 @@ namespace TwinTower
         // 페이드 인, 아웃 효과와 함께 맵 회전 실행
         IEnumerator RotateStart()
         {
-            GameObject rotateObj;
-            GameObject rotatecenter;
-            // 기획서에 적힌 대로 이 기믹이 플레이어 1 맵에 있는지, 2 맵에 있는지와, 반대 맵을 회전시키는지를 체크하는 코드
-            if (!isplayermapCheck)
-            {
-                if (isOppositionCheck)
-                {
-                    rotateObj = player2maprotateObj;
-                    rotatecenter = player2maprotatecenter;
-                }
-                else
-                {
-                    rotateObj = player1maprotateObj;
-                    rotatecenter = player1maprotatecenter;
-                }
-            }
-            else
-            {
-                if (isOppositionCheck)
-                {
-                    rotateObj = player1maprotateObj;
-                    rotatecenter = player1maprotatecenter;
-                }
-                else
-                {
-                    rotateObj = player2maprotateObj;
-                    rotatecenter = player2maprotatecenter;
-                }
-            }
+            
             // 플레이어 Animation Idle로 바꾸기
             InputManager.Instance.islockMove = true;
             GameManager.Instance._player1.Dir = Define.MoveDir.None;
@@ -68,16 +50,31 @@ namespace TwinTower
             yield return StartCoroutine(UI_ScreenFader.FadeScenOut());
             
             // 맵 회전
-            rotateObj.transform.RotateAround(rotatecenter.transform.position, Vector3.forward, -90);
+            maprotateObj.gameObject.transform.RotateAround(maprotatecenter.gameObject.transform.position, Vector3.forward, -90);
+            
+            Quaternion rotation = Quaternion.Euler(0, 0, -maprotateObj.transform.rotation.eulerAngles.z); // 90도 회전
+            Matrix4x4 matrix = Matrix4x4.TRS(Vector3.zero, rotation, Vector3.one);
+
+            foreach (Vector3Int pos in maprotateObj.cellBounds.allPositionsWithin) {
+                if (!maprotateObj.HasTile(pos)) continue;
+                maprotateObj.SetTransformMatrix(pos, matrix);
+            }
             
             // MoveControl을 가진 오브젝트들 cellpos 재설정
-            foreach (MoveControl now in GameManager.Instance._moveobjlist)
+            foreach (GameObject now in GameManager.Instance._moveobjlist)
             {
                 if(now == null) continue;
-                
-                now.SetCellPos(now.gameObject.transform.position);
+
+
+                if (now.GetComponent<MoveControl>() != null)
+                {
+                    now.GetComponent<MoveControl>().SetCellPos(now.gameObject.transform.position);
+                }
+
                 now.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
             }
+
+            
             yield return StartCoroutine(UI_ScreenFader.FadeSceneIn());
             InputManager.Instance.islockMove = false;
         }
@@ -92,7 +89,6 @@ namespace TwinTower
                 StartCoroutine(RotateStart());
             }
         }
-        
         private void OnTriggerExit2D(Collider2D other)
         {
             onPlayer = false;
