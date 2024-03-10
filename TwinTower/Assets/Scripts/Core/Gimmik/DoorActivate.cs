@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TwinTower;
 using UnityEngine;
 
 /// <summary>
@@ -7,6 +9,11 @@ using UnityEngine;
 /// </summary>
 public class DoorActivate : ActivateObject
 {
+    public void Awake()
+    {
+        GameManager.Instance._moveobjlist.Add(gameObject);
+    }
+
     public override void Launch()
     {
         transform.localRotation = Quaternion.Euler(0 ,0, transform.rotation.eulerAngles.z - 90);
