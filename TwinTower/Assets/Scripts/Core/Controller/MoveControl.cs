@@ -81,7 +81,7 @@ namespace TwinTower
             if (maps == null) throw new Exception("이동 오브젝트가 타일맵 내에 존재하지 않습니다.");
             cellPos = maps.WorldToCell(transform.position);
             transform.position = maps.GetCellCenterWorld(cellPos);
-            GameManager.Instance._moveobjlist.Add(this);
+            GameManager.Instance._moveobjlist.Add(gameObject);
         }
 
         protected void FixedUpdate()
