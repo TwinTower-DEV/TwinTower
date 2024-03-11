@@ -11,6 +11,10 @@ public class PressurePlate : MonoBehaviour {
     public GameObject activateObject;
 
     // 발판과 연결되어 있는 activateObject를 Launch시킴.(문 열기, 화살 발사.
+
+    private void Start() {
+        if (activateObject == null) throw new Exception("발판에 Activate Object를 안넣었음.");
+    }
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player") || other.gameObject.layer == LayerMask.NameToLayer("Box")) {
             ActivateObject active =  activateObject.GetComponent<ActivateObject>();

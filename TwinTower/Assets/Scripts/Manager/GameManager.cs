@@ -14,8 +14,7 @@ namespace TwinTower
         public Player _player2;
 
         public List<MoveControl> _moveobjlist = new List<MoveControl>();
-        protected override void Awake()
-        {
+        protected override void Awake() {
             _tileFindManager = TileFindManager.Instance;
             FindPlayer();
         }

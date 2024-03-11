@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
+
 /// <summary>
 /// 맵 회전 기믹을 정의한 클래스입니다.
 /// </summary>
@@ -13,8 +15,8 @@ namespace TwinTower
         [SerializeField] private bool isOppositionCheck; // 반대편 맵을 돌려야 하는지 체크
         [SerializeField] public GameObject player1maprotatecenter; // 맵을 돌릴 때 중심점 재설정
         [SerializeField] public GameObject player2maprotatecenter; 
-        [SerializeField] public GameObject player1maprotateObj; // 돌릴 맵 오브젝트 설정
-        [SerializeField] public GameObject player2maprotateObj;
+        [SerializeField] public Tilemap player1maprotateObj; // 돌릴 맵 오브젝트 설정
+        [SerializeField] public Tilemap player2maprotateObj;
         
         public List<MoveControl> _player1mapMoveobj;
         public List<MoveControl> _player2mapMoveobj;
@@ -31,7 +33,7 @@ namespace TwinTower
         // 페이드 인, 아웃 효과와 함께 맵 회전 실행
         IEnumerator RotateStart()
         {
-            GameObject rotateObj;
+            Tilemap rotateObj;
             GameObject rotatecenter;
             // 기획서에 적힌 대로 이 기믹이 플레이어 1 맵에 있는지, 2 맵에 있는지와, 반대 맵을 회전시키는지를 체크하는 코드
             if (!isplayermapCheck)
@@ -70,6 +72,16 @@ namespace TwinTower
             // 맵 회전
             rotateObj.transform.RotateAround(rotatecenter.transform.position, Vector3.forward, -90);
             
+            // 타일맵 회전.
+            Quaternion rotation = Quaternion.Euler(0, 0, -rotateObj.transform.rotation.eulerAngles.z); // 90도 회전
+            Matrix4x4 matrix = Matrix4x4.TRS(Vector3.zero, rotation, Vector3.one);
+
+            foreach (Vector3Int pos in rotateObj.cellBounds.allPositionsWithin) {
+                if (!rotateObj.HasTile(pos)) continue;
+                rotateObj.SetTransformMatrix(pos, matrix);
+            }
+
+
             // MoveControl을 가진 오브젝트들 cellpos 재설정
             foreach (MoveControl now in GameManager.Instance._moveobjlist)
             {
