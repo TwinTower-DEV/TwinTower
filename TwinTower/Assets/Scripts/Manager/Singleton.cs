@@ -28,7 +28,7 @@ namespace TwinTower
                 Create();
         }
 
-        private static void Create()
+        public static void Create()
         {
             Find();
             

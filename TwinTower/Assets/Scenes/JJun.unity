@@ -2135,8 +2135,8 @@ GameObject:
   - component: {fileID: 1440877242}
   - component: {fileID: 1440877241}
   - component: {fileID: 1440877240}
-  - component: {fileID: 1440877239}
   - component: {fileID: 1440877243}
+  - component: {fileID: 1440877244}
   m_Layer: 6
   m_Name: Player1
   m_TagString: Untagged
@@ -2144,18 +2144,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1440877239
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1440877238}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7588fa53a4db7b643b9378277a553b09, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &1440877240
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2270,6 +2258,25 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &1440877244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1440877238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25b182a8160c4f35bcc03202c55e233a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _moveSpeed: 0
+  maps: {fileID: 0}
+  cellPos: {x: 0, y: 0, z: 0}
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  isMove: 0
 --- !u!114 &1804056272 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8776982333902645561, guid: ddc824093b7f5244298c7b06d5545173, type: 3}

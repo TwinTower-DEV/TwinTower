@@ -5,13 +5,11 @@ using UnityEngine;
 
 /// <summary>
 /// 생성된 화살을 발사시키는 스크립트
-/// 화살 없애는 코드 필요
 /// </summary>
 public class Arrow : MonoBehaviour {
     private Rigidbody2D rigidbody2d;
 
     [SerializeField] private float force;
-    // Start is called before the first frame update
     void Awake() {
         rigidbody2d = GetComponent<Rigidbody2D>();
     }

@@ -12,11 +12,11 @@ using UnityEngine;
 /// 상자하고 플레이어 고민 해야할듯.
 /// </summary>
 public class MovingWalk : MonoBehaviour {
-    [SerializeField] private float speed;
-
+    
     private void OnTriggerStay2D(Collider2D other) {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Box")) {
-            Box box = other.GetComponent<Box>();
+        MoveControl moveableObject = other.GetComponent<MoveControl>();
+        if (moveableObject != null && moveableObject.MoveCheck(transform.up)) {     // 이동 가능할때
+            moveableObject.DirectSetting(transform.up);                             // 이동
         }
     }
 }
