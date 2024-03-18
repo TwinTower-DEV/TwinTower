@@ -237,37 +237,6 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!1 &167114827
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 167114829}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &167114829
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 167114827}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.275382, y: 2.3452518, z: 0.042682055}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &224741063 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7378493028496981030, guid: 3cd9d2cf97b5b504cafd2b40f16817b2, type: 3}
@@ -1649,6 +1618,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 4
+  Health: 0
   _layerMask:
     serializedVersion: 2
     m_Bits: 384
@@ -4743,6 +4713,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 6
+  Health: 0
   _layerMask:
     serializedVersion: 2
     m_Bits: 384
@@ -4947,3 +4918,60 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2133146063}
   m_CullTransparentMesh: 1
+--- !u!1001 &236518298074008571
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 236518298188067760, guid: 699ae116f9c016c48bc0255055868cd0, type: 3}
+      propertyPath: m_Name
+      value: GameManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 236518298188067766, guid: 699ae116f9c016c48bc0255055868cd0, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 236518298188067766, guid: 699ae116f9c016c48bc0255055868cd0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.275382
+      objectReference: {fileID: 0}
+    - target: {fileID: 236518298188067766, guid: 699ae116f9c016c48bc0255055868cd0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.3452518
+      objectReference: {fileID: 0}
+    - target: {fileID: 236518298188067766, guid: 699ae116f9c016c48bc0255055868cd0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.042682055
+      objectReference: {fileID: 0}
+    - target: {fileID: 236518298188067766, guid: 699ae116f9c016c48bc0255055868cd0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 236518298188067766, guid: 699ae116f9c016c48bc0255055868cd0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 236518298188067766, guid: 699ae116f9c016c48bc0255055868cd0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 236518298188067766, guid: 699ae116f9c016c48bc0255055868cd0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 236518298188067766, guid: 699ae116f9c016c48bc0255055868cd0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 236518298188067766, guid: 699ae116f9c016c48bc0255055868cd0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 236518298188067766, guid: 699ae116f9c016c48bc0255055868cd0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 699ae116f9c016c48bc0255055868cd0, type: 3}

@@ -147,7 +147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 8
+  Health: 10
   _layerMask:
     serializedVersion: 2
-    m_Bits: 0
-  Health: 10
+    m_Bits: 384

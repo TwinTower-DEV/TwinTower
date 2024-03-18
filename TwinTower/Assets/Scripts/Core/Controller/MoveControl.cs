@@ -17,6 +17,7 @@ namespace TwinTower
     public class MoveControl : MonoBehaviour
     {
         [SerializeField] private int _moveSpeed;
+        [SerializeField] protected int Health;
         private Grid maps;
         private Vector3Int cellPos = Vector3Int.zero;
         [SerializeField] protected LayerMask _layerMask;
@@ -27,13 +28,18 @@ namespace TwinTower
             cellPos += Vector3Int.RoundToInt(movedir);      // Vector3 to Vector3Int
             isMove = true;
         }
+        
         // 맵이 회전 됐을 때 다시 cellPos를 정의하는 매서드
         public void SetCellPos(Vector3 pos)
         {
             cellPos = maps.WorldToCell(transform.position);
             transform.position = maps.GetCellCenterWorld(cellPos);
         }
-        
+
+        public virtual void ReduceHealth()
+        {
+            StartCoroutine(ScreenManager.Instance.CurrentScreenReload());
+        } 
         // movedir방향으로 이동 가능한지 체크 - 이동 가능하다면 true반환
         // layermask를 통해 다음 칸에 있는 오브젝트에 따라 확인됨.
         public virtual bool MoveCheck(Vector3 movedir) {

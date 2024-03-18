@@ -43,7 +43,6 @@ namespace TwinTower
         {
             
             // 플레이어 Animation Idle로 바꾸기
-            InputManager.Instance.islockMove = true;
             GameManager.Instance._player1.Dir = Define.MoveDir.None;
             GameManager.Instance._player2.Dir = Define.MoveDir.None;
 
@@ -76,7 +75,6 @@ namespace TwinTower
 
             
             yield return StartCoroutine(UI_ScreenFader.FadeSceneIn());
-            InputManager.Instance.islockMove = false;
         }
         // Player가 밟았을 때 실행
         private void OnTriggerStay2D(Collider2D other)
