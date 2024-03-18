@@ -35,7 +35,9 @@ namespace TwinTower
             }
             else if (InputController.Instance.ResetButton.Down)
             {
+                
                 StartCoroutine(ScreenManager.Instance.CurrentScreenReload());
+                
             }
             else
             {

@@ -19,7 +19,6 @@ namespace TwinTower
             _tileFindManager = TileFindManager.Instance;
             FindPlayer();
         }
-
         public void FindPlayer() {
             _player1 = GameObject.Find("Dalia").GetComponent<Player>();
             _player2 = GameObject.Find("Irise").GetComponent<Player>();
