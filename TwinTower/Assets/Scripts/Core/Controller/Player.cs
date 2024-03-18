@@ -44,17 +44,19 @@ namespace TwinTower
                         }
                         else
                         {
-                            _animator.Play("Up_Idle");
+                                _animator.Play("Up_Idle");
                         }
                         break;
                 }
                 dir = value;
             }
         }
+        
         protected override void Awake()
         {
             base.Awake();
             InputManager.Create();
+            Debug.Log("adadasd");
             _animator = GetComponent<Animator>();
         }
     }
