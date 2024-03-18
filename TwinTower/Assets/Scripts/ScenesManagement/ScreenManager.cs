@@ -13,6 +13,7 @@ namespace TwinTower
             yield return StartCoroutine(UI_ScreenFader.FadeScenOut());
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             yield return StartCoroutine(UI_ScreenFader.FadeSceneIn());
+            GameManager.Instance.FindPlayer();
         }
     }
 }
