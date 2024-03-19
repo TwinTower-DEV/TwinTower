@@ -13,12 +13,10 @@ using UnityEngine.Tilemaps;
 /// 상자하고 플레이어 고민 해야할듯.
 /// </summary>
 public class MovingWalk : MonoBehaviour {
-    private Tilemap tilemap;
     private void OnTriggerStay2D(Collider2D other) {
         MoveControl moveableObject = other.GetComponent<MoveControl>();
         if (moveableObject != null && moveableObject.MoveCheck(transform.up)) {     // 이동 가능할때
             moveableObject.DirectSetting(transform.up);                             // 이동
         }
     }
-    
 }

@@ -25,6 +25,12 @@ namespace TwinTower
 
         // 이동 하고자 하는 방향 설정과 이동 가능함을 표시
         public void DirectSetting(Vector3 movedir) {
+            RaycastHit2D hit = Physics2D.Raycast(transform.position + movedir * 0.5f , movedir, 0.5f, _layerMask);
+            if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Box")) {
+                MoveControl boxcontrol = hit.transform.gameObject.GetComponent<MoveControl>();
+                boxcontrol.DirectSetting(movedir);
+            }
+
             cellPos += Vector3Int.RoundToInt(movedir);      // Vector3 to Vector3Int
             isMove = true;
         }
@@ -48,11 +54,7 @@ namespace TwinTower
             if (hit.collider == null) return true;
             if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Box")) {
                 MoveControl boxcontrol = hit.transform.gameObject.GetComponent<MoveControl>();
-                if (boxcontrol.MoveCheck(movedir)) {
-                    boxcontrol.DirectSetting(movedir);
-                    return true;
-                }
-                return false;
+                if (boxcontrol.MoveCheck(movedir)) return true;
             }
             return false;
         }
@@ -83,8 +85,13 @@ namespace TwinTower
         
         // 오브젝트의 현재 tilemap기준 Cell 위치 확인을 위함.
         protected virtual void Awake() {
-            maps = transform.parent.parent.GetComponent<Grid>();
-            if (maps == null) throw new Exception("이동 오브젝트가 타일맵 내에 존재하지 않습니다.");
+            try {
+                maps = transform.parent.parent.GetComponent<Grid>();
+            }
+            catch (Exception e) {
+                Console.WriteLine(e + "타일맵의 자식으로 존재하지 않습니다.");
+                throw;
+            }
             cellPos = maps.WorldToCell(transform.position);
             transform.position = maps.GetCellCenterWorld(cellPos);
             GameManager.Instance._moveobjlist.Add(gameObject);

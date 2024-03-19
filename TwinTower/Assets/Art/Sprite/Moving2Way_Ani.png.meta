@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4ccf0f3aa94263343824553d3995ca5b
+guid: cbaba9f292464564084d8db9209b1936
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -104,169 +104,85 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: M_upANDdown_0
+      name: Moving2Way_Ani_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 55
-        width: 22
-        height: 30
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 1
+        y: 7
+        width: 23
+        height: 23
+      alignment: 9
+      pivot: {x: 0.3478261, y: 0.3478261}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 501dc6d2112b18641aa21eca3ea49d9a
-      internalID: 1576912670
+      spriteID: 4664d88255bc13b4f93bff4186f17367
+      internalID: 782276418
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: M_upANDdown_1
+      name: Moving2Way_Ani_1
       rect:
         serializedVersion: 2
-        x: 22
-        y: 55
-        width: 22
-        height: 30
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 33
+        y: 7
+        width: 23
+        height: 23
+      alignment: 9
+      pivot: {x: 0.3478261, y: 0.3478261}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6a0ecc958218ab24795e5b06681fe4b7
-      internalID: 1186024003
+      spriteID: 4c015139de2c7fc4daebb06a5869db14
+      internalID: -1487685427
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: M_upANDdown_2
+      name: Moving2Way_Ani_2
       rect:
         serializedVersion: 2
-        x: 44
-        y: 55
-        width: 22
-        height: 30
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 65
+        y: 7
+        width: 23
+        height: 23
+      alignment: 9
+      pivot: {x: 0.3478261, y: 0.3478261}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ef36bc127f10c384fa7b21a5d668325c
-      internalID: 1571729703
+      spriteID: 58c67a58926f12c43b657d401e8baa03
+      internalID: 1363147998
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: M_upANDdown_3
+      name: Moving2Way_Ani_3
       rect:
         serializedVersion: 2
-        x: 66
-        y: 55
-        width: 22
-        height: 30
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 97
+        y: 7
+        width: 23
+        height: 23
+      alignment: 9
+      pivot: {x: 0.3478261, y: 0.3478261}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8875f4867cd3c0548a24b340889840c6
-      internalID: 431882183
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: M_upANDdown_4
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 22
-        height: 44
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9d9fbd2742a87f04bb5c3d125b18eaf4
-      internalID: 101889707
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: M_upANDdown_5
-      rect:
-        serializedVersion: 2
-        x: 22
-        y: 0
-        width: 22
-        height: 44
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a81591c91f2002e429a96375add409a5
-      internalID: -280624165
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: M_upANDdown_6
-      rect:
-        serializedVersion: 2
-        x: 44
-        y: 0
-        width: 22
-        height: 44
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 99bdc5b823b1ec9488e98b9a706ee2cc
-      internalID: 1452751776
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: M_upANDdown_7
-      rect:
-        serializedVersion: 2
-        x: 66
-        y: 0
-        width: 22
-        height: 44
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 40060694137f6de4caddc9dda998916f
-      internalID: -144832621
+      spriteID: 518c67cb617d66140b1de67a74bdcd4c
+      internalID: -314456536
       vertices: []
       indices: 
       edges: []
@@ -274,7 +190,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 71cc18c8f84313347b4189ba51b94ad9
+    spriteID: ebd5d403038b85a449a28e1ecdc1012c
     internalID: 0
     vertices: []
     indices: 
@@ -282,14 +198,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      M_upANDdown_7: -144832621
-      M_upANDdown_1: 1186024003
-      M_upANDdown_6: 1452751776
-      M_upANDdown_2: 1571729703
-      M_upANDdown_4: 101889707
-      M_upANDdown_3: 431882183
-      M_upANDdown_0: 1576912670
-      M_upANDdown_5: -280624165
+      Moving2Way_Ani_1: -1487685427
+      Moving2Way_Ani_0: 782276418
+      Moving2Way_Ani_2: 1363147998
+      Moving2Way_Ani_3: -314456536
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
