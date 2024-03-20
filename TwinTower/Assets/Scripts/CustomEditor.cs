@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,7 +17,18 @@ public class CustomEditor : Editor {
     public static void ObjectLocationStereotyping()
     {
         foreach (GameObject obj in Selection.gameObjects) {
-            obj.transform.position = (Vector3)TileFindManager.Instance.gettileCentorLocation(obj.transform.position);
+            Tilemap map;
+            try {
+                map = obj.transform.parent.GetComponent<Tilemap>();
+            }
+            catch (Exception e) {
+                Debug.Log(e);
+                Debug.Log("현재 타일맵의 자식으로 들어가지 않은 오브젝트: " + obj.name);
+                throw;
+            }
+            
+            obj.transform.position = (Vector3)TileFindManager.Instance.gettileCentorLocation(obj.transform.position, map);
+            
         }
     }
 }
