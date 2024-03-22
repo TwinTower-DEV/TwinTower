@@ -20,7 +20,7 @@ public class DispenserShoot : ActivateObject {
         GameObject arrowObject = Instantiate(arrowPrefab, transform.position + transform.up * 0.3f, Quaternion.identity, transform);
 		
         Arrow arrow = arrowObject.GetComponent<Arrow>();
-        arrow.Launch(transform.up);
+        arrow.Launch(-transform.right);
         haveArrow = false;
     }
 }
