@@ -56,7 +56,6 @@ namespace TwinTower
         {
             base.Awake();
             InputManager.Create();
-            Debug.Log("adadasd");
             _animator = GetComponent<Animator>();
         }
     }

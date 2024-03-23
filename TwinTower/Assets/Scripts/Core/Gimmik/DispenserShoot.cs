@@ -9,6 +9,7 @@ using UnityEngine;
 /// </summary>
 public class DispenserShoot : ActivateObject {
     public GameObject arrowPrefab;
+    [SerializeField] private Vector3 shootDirect;
 
     private bool haveArrow;                     // 한번만 발사
     void Start() {
@@ -17,10 +18,12 @@ public class DispenserShoot : ActivateObject {
 
     public override void Launch() {
         if (!haveArrow) return;             // 이미 발사 된 경우 종료
-        GameObject arrowObject = Instantiate(arrowPrefab, transform.position + transform.up * 0.3f, Quaternion.identity, transform);
+        float Angle = Vector3.SignedAngle(Vector3.left, shootDirect, Vector3.forward);
+        GameObject arrowObject = Instantiate(arrowPrefab, transform.position + shootDirect * 0.3f, 
+            Quaternion.Euler(0, 0, Angle), transform);
 		
         Arrow arrow = arrowObject.GetComponent<Arrow>();
-        arrow.Launch(transform.up);
+        arrow.Launch(shootDirect);
         haveArrow = false;
     }
 }
