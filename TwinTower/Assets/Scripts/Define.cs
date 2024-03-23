@@ -21,5 +21,10 @@ namespace TwinTower
             Enter,
             Exit
         }
+        public struct Resolution
+        {
+            public int width;
+            public int height;
+        }
     }
 }
