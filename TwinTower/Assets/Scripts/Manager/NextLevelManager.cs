@@ -23,7 +23,7 @@ namespace TwinTower
 
         IEnumerator nextlevel(string nextScene) {
             isActive = true;
-            SceneManager.LoadScene(nextScene);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             yield return new WaitForSeconds(1f);
             isActive = false;
             GameManager.Instance.FindPlayer();
