@@ -13,16 +13,14 @@ namespace TwinTower
         const int BUTTON_COUNT = (int)Images.Exit + 1;
         private Action[] _actions = new Action[BUTTON_COUNT];
         private int currcoursor;
-
-        private void Update()
-        {
-            KeyInPut();
-        }
-
+        
         public override void Init()
         {
             Bind<Image>(typeof(Images));
-            Debug.Log(BUTTON_COUNT);
+
+            UIManager.Instance.InputHandler -= KeyInPut;
+            UIManager.Instance.InputHandler += KeyInPut;
+            
             Get<Image>((int)Images.newGame).gameObject.BindEvent(NewGame, Define.UIEvent.Click);
             Get<Image>((int)Images.Setting).gameObject.BindEvent(Setting, Define.UIEvent.Click);
             Get<Image>((int)Images.Continue).gameObject.BindEvent(Continue, Define.UIEvent.Click);

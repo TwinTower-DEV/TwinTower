@@ -19,7 +19,7 @@ namespace TwinTower
                 if (go != null)
                     return go as T;
             }*/
-
+            Debug.Log(path);
             return Resources.Load<T>(path);
         }
         
