@@ -18,7 +18,19 @@ namespace TwinTower
         int _deviceWidth = Screen.width;
         int _deviceHeight = Screen.height;
 
-        private Action InputHandler;
+        public Action InputHandler;
+        
+        public int UINum
+        {
+            get
+            {
+                return _uiNum;
+            }
+            private set
+            {
+                _uiNum = value;
+            }
+        }
 
         public void Update()
         {
@@ -94,7 +106,7 @@ namespace TwinTower
                 name = typeof(T).Name;
 
             _uiNum = _uiNum + 1;
-            GameObject go = ResourceManager.Instance.Instantiate($"UI/Normal/{name}");
+            GameObject go = ResourceManager.Instance.Instantiate($"UI/{name}");
             T ui = Util.GetOrAddComponent<T>(go);
             _normalUIs.Add(ui);
 
