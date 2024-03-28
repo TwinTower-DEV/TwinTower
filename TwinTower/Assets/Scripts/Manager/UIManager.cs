@@ -114,7 +114,6 @@ namespace TwinTower
 
             return ui;
         }
-        
         public void CloseNormalUI(UI_Base ui)
         {
             if (_normalUIs.Count == 0)
