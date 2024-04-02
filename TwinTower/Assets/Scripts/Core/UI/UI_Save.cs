@@ -10,7 +10,7 @@ using UnityEngine.UI;
 /// 저장 슬롯 총 3개의 버튼이 있다.
 /// </summary>
 public class UI_Save : UI_Base {
-    private MenuUIManager menuUIManager;
+    //private MenuUIManager menuUIManager;
     private int currCursor;
     private static int SLOT_COUNT = 3;
 
@@ -24,7 +24,7 @@ public class UI_Save : UI_Base {
     }
 
     public override void Init() {
-        menuUIManager = transform.parent.GetComponent<MenuUIManager>();
+        //menuUIManager = transform.parent.GetComponent<MenuUIManager>();
         
         Bind<Image>(typeof(Save));                             // 슬롯 바인드
         Bind<Button>(typeof(DeleteButton));                    // 삭제 버튼 바인드    
@@ -86,7 +86,9 @@ public class UI_Save : UI_Base {
     {
         if (!Input.anyKey)
             return;
-
+        if (_uiNum != UIManager.Instance.UINum)
+            return;
+        
         if (Input.GetKeyDown(KeyCode.Return)) {
             GameObject go = Get<Image>(currCursor).gameObject;
             UI_EventHandler evt = Util.GetOrAddComponent<UI_EventHandler>(go);
@@ -104,7 +106,8 @@ public class UI_Save : UI_Base {
         }
         
         if (Input.GetKeyDown(KeyCode.Escape)) {
-            menuUIManager.PrevPanelChange();
+           // menuUIManager.PrevPanelChange();
+           UIManager.Instance.CloseNormalUI(this);
         }
     }
 
@@ -116,13 +119,13 @@ public class UI_Save : UI_Base {
     }
 
     private void SaveEvent(int idx) {
-        menuUIManager.saveloadController.ChangeCurrSaveSlot(idx);
-        menuUIManager.SwitchPanelPrevSave("SaveCheckPanel");
+       // menuUIManager.saveloadController.ChangeCurrSaveSlot(idx);
+        UIManager.Instance.ShowNormalUI<UI_SaveCheck>();
     }
 
     private void DeleteEvent(int idx) {
-        menuUIManager.saveloadController.ChangeCurrSaveSlot(idx);
-        menuUIManager.SwitchPanelPrevSave("SaveDeleteCheckPanel");
+        //menuUIManager.saveloadController.ChangeCurrSaveSlot(idx);
+        UIManager.Instance.ShowNormalUI<UI_SaveDeleteCheck>();
     }
 
     void EnterCursorEvent(int currIdx) {

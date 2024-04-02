@@ -10,7 +10,7 @@ using UnityEngine.UI;
 /// 저장하기, 불러오기, 세팅, 메인메뉴로 가는 버튼 4개가 있다.
 /// </summary>
 public class UI_Menu : UI_Base {
-    private MenuUIManager menuUIManager;
+    //private MenuUIManager menuUIManager;
     private int currCursor;
     private static int BUTTON_COUNT = 4;
 
@@ -19,7 +19,7 @@ public class UI_Menu : UI_Base {
     }
 
     public override void Init() {
-        menuUIManager = transform.parent.GetComponent<MenuUIManager>();
+        //menuUIManager = transform.parent.GetComponent<MenuUIManager>();
         
         Bind<Image>(typeof(Menu));                  // 각 버튼 Bind
         
@@ -65,7 +65,8 @@ public class UI_Menu : UI_Base {
     {
         if (!Input.anyKey)
             return;
-
+        if (_uiNum != UIManager.Instance.UINum)
+            return;
         if (Input.GetKeyDown(KeyCode.Return)) {
             GameObject go = Get<Image>(currCursor).gameObject;
             UI_EventHandler evt = Util.GetOrAddComponent<UI_EventHandler>(go);
@@ -83,19 +84,25 @@ public class UI_Menu : UI_Base {
         }
         
         if (Input.GetKeyDown(KeyCode.Escape)) {
-            menuUIManager.PrevPanelChange();
+            InputManager.Instance.UnPause();
+            UIManager.Instance.CloseNormalUI(this);
+            //menuUIManager.PrevPanelChange();
         }
     }
 
     private void SaveEvent() {
-        menuUIManager.SwitchPanelPrevSave("SavePanel");
+        //menuUIManager.SwitchPanelPrevSave("SavePanel");
+        UIManager.Instance.ShowNormalUI<UI_Save>();
     }
     
     private void LoadEvent() {
-        menuUIManager.SwitchPanelPrevSave("LoadPanel");
+        //menuUIManager.SwitchPanelPrevSave("LoadPanel");
+        UIManager.Instance.ShowNormalUI<UI_Load>();
     }
     
-    private void SettingEvent() {
+    private void SettingEvent()
+    {
+        UIManager.Instance.ShowNormalUI<UI_SettingScene>();
         Debug.Log("Enter Setting");
     }
 

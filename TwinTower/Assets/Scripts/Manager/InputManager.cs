@@ -66,7 +66,8 @@ namespace TwinTower
                     InputController.Instance.EnterButton.GainControl();
                     isESC = true;
                     Time.timeScale = 0;
-                    UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("UIMenus", UnityEngine.SceneManagement.LoadSceneMode.Additive);
+                    UIManager.Instance.ShowNormalUI<UI_Menu>();
+                    //UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("UIMenus", UnityEngine.SceneManagement.LoadSceneMode.Additive);
                 }
             }
         }
@@ -80,7 +81,7 @@ namespace TwinTower
 
         private IEnumerator UnPauseCoroutine() {
                 Time.timeScale = 1;
-                UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync("UIMenus");
+                //UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync("UIMenus");
                 InputController.Instance.GainControl();
                 yield return new WaitForFixedUpdate();
                 yield return new WaitForEndOfFrame();

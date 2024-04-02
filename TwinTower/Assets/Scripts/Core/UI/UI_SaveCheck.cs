@@ -11,14 +11,14 @@ using UnityEngine.UI;
 /// 저장할 슬롯 정보를 확인하기 위한 Text 1개 있다.
 /// </summary>
 public class UI_SaveCheck : UI_Base {
-    private MenuUIManager menuUIManager;
+    //private MenuUIManager menuUIManager;
     private int currCursor;
     private static int BUTTON_COUNT = 2;
 
     // 활성화마다 정보 불러오기
     private void OnEnable() {
         Get<TextMeshProUGUI>((int)Save.SaveInfo).text =
-            SaveLoadController.GetSaveInfo(menuUIManager.saveloadController.GetCurrSaveSlot());
+            SaveLoadController.GetSaveInfo(UIManager.Instance.saveloadController.GetCurrSaveSlot());
     }
 
     private void Update() {
@@ -26,7 +26,7 @@ public class UI_SaveCheck : UI_Base {
     }
 
     public override void Init() {
-        menuUIManager = transform.parent.GetComponent<MenuUIManager>();
+        //menuUIManager = transform.parent.GetComponent<MenuUIManager>();
         
         Bind<Image>(typeof(Check));                     // 버튼 Bind
         Bind<TextMeshProUGUI>(typeof(Save));            // Text바인드
@@ -65,9 +65,11 @@ public class UI_SaveCheck : UI_Base {
     {
         if (!Input.anyKey)
             return;
-
+        if (_uiNum != UIManager.Instance.UINum)
+            return;
         if (Input.GetKeyDown(KeyCode.Return)) {
             GameObject go = Get<Image>(currCursor).gameObject;
+            Debug.Log(go.name);
             UI_EventHandler evt = Util.GetOrAddComponent<UI_EventHandler>(go);
             evt.OnClickHandler.Invoke();
             return;
@@ -83,17 +85,18 @@ public class UI_SaveCheck : UI_Base {
         }
         
         if (Input.GetKeyDown(KeyCode.Escape)) {
-            menuUIManager.PrevPanelChange();
+            UIManager.Instance.CloseNormalUI(this);
         }
     }
 
     private void YesEvent() {
-        menuUIManager.saveloadController.Save();
-        menuUIManager.PrevPanelChange();
+        Debug.Log("aSDASD");
+        UIManager.Instance.saveloadController.Save();
+        UIManager.Instance.CloseNormalUI(this);
     }
 
     private void NoEvent() {
-        menuUIManager.PrevPanelChange();
+        UIManager.Instance.CloseNormalUI(this);
     }
 
     void EnterCursorEvent(int currIdx) {

@@ -10,7 +10,7 @@ using UnityEngine.UI;
 /// 불러오기 슬롯 3개가 저장되어있다.
 /// </summary>
 public class UI_Load : UI_Base {
-    private MenuUIManager menuUIManager;
+    //private MenuUIManager menuUIManager;
     private int currCursor;
     private static int SLOT_COUNT = 3;
 
@@ -23,7 +23,7 @@ public class UI_Load : UI_Base {
     }
 
     public override void Init() {
-        menuUIManager = transform.parent.GetComponent<MenuUIManager>();
+        //menuUIManager = transform.parent.GetComponent<MenuUIManager>();
         
         Bind<Image>(typeof(Load));                                  // 슬롯 바인드
         Bind<Button>(typeof(DeleteButton));                         // 삭제 버튼 바인드
@@ -86,7 +86,8 @@ public class UI_Load : UI_Base {
     {
         if (!Input.anyKey)
             return;
-
+        if (_uiNum != UIManager.Instance.UINum)
+            return;
         if (Input.GetKeyDown(KeyCode.Return)) {                         // 엔터 - 현재 선택된 슬롯 클릭 이벤트 발동
             GameObject go = Get<Image>(currCursor).gameObject;
             UI_EventHandler evt = Util.GetOrAddComponent<UI_EventHandler>(go);
@@ -104,7 +105,8 @@ public class UI_Load : UI_Base {
         }
         
         if (Input.GetKeyDown(KeyCode.Escape)) {                         // ESC - 뒤로가기
-            menuUIManager.PrevPanelChange();
+            //menuUIManager.PrevPanelChange();
+            UIManager.Instance.CloseNormalUI(this);
         }
     }
     
@@ -117,13 +119,14 @@ public class UI_Load : UI_Base {
     }
 
     private void LoadEvent(int idx) {
-        menuUIManager.saveloadController.ChangeCurrSaveSlot(idx);
-        menuUIManager.saveloadController.Load();
+        UIManager.Instance.saveloadController.ChangeCurrSaveSlot(idx);
+        UIManager.Instance.saveloadController.Load();
     }
 
     private void DeleteEvent(int idx) {
-        menuUIManager.saveloadController.ChangeCurrSaveSlot(idx);
-        menuUIManager.SwitchPanelPrevSave("SaveDeleteCheckPanel");
+        UIManager.Instance.saveloadController.ChangeCurrSaveSlot(idx);
+        //menuUIManager.SwitchPanelPrevSave("SaveDeleteCheckPanel");
+        UIManager.Instance.ShowNormalUI<UI_SaveDeleteCheck>();
     }
 
     // 마우스 진입시 실행되는 이벤트(포커스 변경)
