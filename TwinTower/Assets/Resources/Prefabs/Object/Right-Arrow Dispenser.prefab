@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7617812915865560289}
   - component: {fileID: 7242184810787630527}
   - component: {fileID: 6389958226385126817}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Right-Arrow Dispenser
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -19,7 +19,6 @@ public class Stair : MonoBehaviour
     private void Awake()
     {
         OnPlayer = false;
-        GameManager.Instance._moveobjlist.Add(gameObject);
     }
 
     // 동시에 진입했는지 알아야 하며 동시 진입시 다음 단계 진입 - NextLevelManager이용

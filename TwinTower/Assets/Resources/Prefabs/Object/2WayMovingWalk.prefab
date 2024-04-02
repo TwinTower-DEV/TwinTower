@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1554783314122959693}
   - component: {fileID: 3565648703197311907}
   - component: {fileID: 1288668150137640353}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: 2WayMovingWalk
   m_TagString: Untagged
   m_Icon: {fileID: 0}

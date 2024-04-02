@@ -14,11 +14,6 @@ namespace TwinTower
     {
         public GameObject activateObject;
 
-        public void Awake()
-        {
-            GameManager.Instance._moveobjlist.Add(gameObject);
-        }
-
         // 발판과 연결되어 있는 activateObject를 Launch시킴.(문 열기, 화살 발사.
         private void OnTriggerEnter2D(Collider2D other)
         {

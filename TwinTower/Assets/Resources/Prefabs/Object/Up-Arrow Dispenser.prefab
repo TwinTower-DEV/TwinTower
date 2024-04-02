@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7101412862775719512}
   - component: {fileID: 8051250401348402950}
   - component: {fileID: 6023300640760600344}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Up-Arrow Dispenser
   m_TagString: Untagged
   m_Icon: {fileID: 0}

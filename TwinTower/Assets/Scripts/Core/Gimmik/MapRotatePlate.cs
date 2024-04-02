@@ -4,93 +4,117 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UIElements;
 
 /// <summary>
 /// 맵 회전 기믹을 정의한 클래스입니다.
 /// </summary>
 namespace TwinTower
 {
-    public class MapRotatePlate: MonoBehaviour
-    {
+    public class MapRotatePlate: MonoBehaviour {
+        [SerializeField] private Tilemap rotateTileMap;
         
-        public class TileInfo
-        {
-            public Vector3Int pos;
-            public TileBase _tile;
+        [SerializeField] private bool isLeft;
+        [SerializeField] private bool isOpp;
+        [SerializeField] private float rotateSpeed = 40;
+        [SerializeField] private float transperencySpeed = 500f;
+        
+        private Vector2 boxSize = new Vector2(7.5f, 7.5f);
+        private float distDegree;
 
-            public TileInfo(Vector3Int pos, TileBase _tile)
-            {
-                this.pos = pos;
-                this._tile = _tile;
+        private bool isDegree45 = false;
+        
+        public void Launch() {
+            if (!isOpp) distDegree = rotateTileMap.transform.rotation.eulerAngles.z - 90;
+            else distDegree = rotateTileMap.transform.rotation.eulerAngles.z + 90;
+            StartCoroutine(RotateStart());
+        }
+
+        IEnumerator RotateStart() {
+            InputController.Instance.ReleaseControl();                  // 키 입력 막기
+
+            // 여기는 Wall 희미하게 변화해주는곳
+            Tilemap wallRenderer = rotateTileMap.transform.GetChild(0).GetComponent<Tilemap>();
+            while (wallRenderer.color.a > 0) {
+                Color color = wallRenderer.color;
+                color.a -= transperencySpeed * 0.1f * Time.deltaTime;
+                wallRenderer.color = color;
+                yield return new WaitForFixedUpdate();
             }
-        }       
-        
-        [SerializeField] public GameObject maprotatecenter; 
-        [SerializeField] public Tilemap maprotateObj;
-        
-        private bool onPlayer = false;
-        private void Awake()
-        {
-            GameManager.Instance._moveobjlist.Add(gameObject);
+
+            Vector2 rotationCenter = rotateTileMap.transform.position;
+            Collider2D[] collidersInArea = Physics2D.OverlapBoxAll(rotationCenter, boxSize, 0f);
+            
+            Vector3 rotationDir;
+            if (isOpp) rotationDir = Vector3.forward;
+            else rotationDir = Vector3.back;
+
+            float prevDegree = rotateTileMap.transform.rotation.eulerAngles.z;
+            
+            while (true) {
+                rotateTileMap.transform.RotateAround(rotationCenter, rotationDir, rotateSpeed * Time.deltaTime);
+                foreach (var collider in collidersInArea) {
+                    collider.transform.RotateAround(rotationCenter, rotationDir, rotateSpeed * Time.deltaTime);
+                }
+                float currDegree = rotateTileMap.transform.rotation.eulerAngles.z;
+
+                float diffDegree = Mathf.Abs(currDegree - prevDegree);
+                if (diffDegree >= 180f) diffDegree = 360 - diffDegree;
+
+                if (!isDegree45 && diffDegree >= 45) FitRotateObject(collidersInArea);
+                if (diffDegree >= 90) {
+                    rotateTileMap.transform.rotation = Quaternion.Euler(0, 0, distDegree);
+                    foreach (var collider in collidersInArea) {
+                        if (collider.gameObject.layer == LayerMask.NameToLayer("Rotatable")
+                            || collider.gameObject.layer == LayerMask.NameToLayer("Wall")) {
+                            collider.transform.rotation = Quaternion.Euler(0, 0, distDegree);
+                        }
+                        else collider.transform.rotation = Quaternion.Euler(0, 0, 0);
+                    }
+                    break;
+                }
+                yield return new WaitForFixedUpdate();
+            }
+            
+            Color _color = wallRenderer.color;
+            _color.a = 1;
+            wallRenderer.color = _color;
+
+            isDegree45 = false;
+            
+            InputController.Instance.GainControl();             // 키 입력 풀기
         }
 
-        private void FixedUpdate()
-        {
-            
-        }
-        // 페이드 인, 아웃 효과와 함께 맵 회전 실행
-        IEnumerator RotateStart()
-        {
-            
-            // 플레이어 Animation Idle로 바꾸기
-            GameManager.Instance._player1.Dir = Define.MoveDir.None;
-            GameManager.Instance._player2.Dir = Define.MoveDir.None;
-
-            yield return StartCoroutine(UI_ScreenFader.FadeScenOut());
-            
-            // 맵 회전
-            maprotateObj.gameObject.transform.RotateAround(maprotatecenter.gameObject.transform.position, Vector3.forward, -90);
-            
-            Quaternion rotation = Quaternion.Euler(0, 0, -maprotateObj.transform.rotation.eulerAngles.z); // 90도 회전
+        public void FitRotateObject(Collider2D[] collidersInArea) {
+            isDegree45 = true;
+            Debug.Log("들어옴?");
+            foreach (var collider in collidersInArea) {
+                if (collider.gameObject.layer == LayerMask.NameToLayer("Rotatable")
+                    || collider.gameObject.layer == LayerMask.NameToLayer("Wall")) {
+                    if (collider.GetComponent<DispenserShoot>()) {
+                        
+                    }
+                }
+                else {
+                    Vector3 currDegree = collider.transform.rotation.eulerAngles;
+                    if (isOpp) currDegree.z -= 90; 
+                    else currDegree.z += 90; 
+                    collider.transform.rotation = Quaternion.Euler(currDegree);
+                }
+            }
+            Quaternion rotation = Quaternion.Euler(0, 0, -distDegree); // 90도 회전
             Matrix4x4 matrix = Matrix4x4.TRS(Vector3.zero, rotation, Vector3.one);
 
-            foreach (Vector3Int pos in maprotateObj.cellBounds.allPositionsWithin) {
-                if (!maprotateObj.HasTile(pos)) continue;
-                maprotateObj.SetTransformMatrix(pos, matrix);
+            foreach (Vector3Int pos in rotateTileMap.cellBounds.allPositionsWithin) {
+                if (!rotateTileMap.HasTile(pos)) continue;
+                rotateTileMap.SetTransformMatrix(pos, matrix);
             }
-            
-            // MoveControl을 가진 오브젝트들 cellpos 재설정
-            foreach (GameObject now in GameManager.Instance._moveobjlist)
-            {
-                if(now == null) continue;
-
-
-                if (now.GetComponent<MoveControl>() != null)
-                {
-                    now.GetComponent<MoveControl>().SetCellPos(now.gameObject.transform.position);
-                }
-
-                now.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
-            }
-
-            
-            yield return StartCoroutine(UI_ScreenFader.FadeSceneIn());
         }
-        // Player가 밟았을 때 실행
-        private void OnTriggerStay2D(Collider2D other)
+        
+        private void OnTriggerEnter2D(Collider2D other)
         {
-            if (onPlayer) return;
-            
-            if (other.gameObject.layer == LayerMask.NameToLayer("Player") && !other.gameObject.GetComponent<Player>().getIsMove())
-            {
-                onPlayer = true;
-                StartCoroutine(RotateStart());
-            }
+            MoveControl moveableController = other.GetComponent<MoveControl>();
+            if (moveableController != null) Launch();
         }
-        private void OnTriggerExit2D(Collider2D other)
-        {
-            onPlayer = false;
-        }
-
     }
 }

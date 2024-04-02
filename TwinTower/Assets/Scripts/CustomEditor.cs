@@ -14,21 +14,16 @@ public class CustomEditor : Editor {
     /// 주로 맵을 변경하거나 설정할 때 유용하게 사용됨.
     /// </summary>
     [MenuItem("Tools/Object Location Stereotyping")]
-    public static void ObjectLocationStereotyping()
-    {
+    public static void ObjectLocationStereotyping() {
+        Tilemap[] tileMaps = GameObject.FindObjectsOfType<Tilemap>();
+        
         foreach (GameObject obj in Selection.gameObjects) {
-            Tilemap map;
-            try {
-                map = obj.transform.parent.GetComponent<Tilemap>();
+            for (int i = 0; i < tileMaps.Length; i++) {
+                if (obj.GetComponent<Grid>() != null) throw new Exception("타일맵도 포함되었음 조심");
+                Vector3Int tilePosition = tileMaps[i].WorldToCell(obj.transform.position);
+                Vector3 cellCenter = tileMaps[i].GetCellCenterWorld(tilePosition);
+                if (tileMaps[i].GetTile(tilePosition) != null) obj.transform.position = cellCenter;
             }
-            catch (Exception e) {
-                Debug.Log(e);
-                Debug.Log("현재 타일맵의 자식으로 들어가지 않은 오브젝트: " + obj.name);
-                throw;
-            }
-            
-            obj.transform.position = (Vector3)TileFindManager.Instance.gettileCentorLocation(obj.transform.position, map);
-            
         }
     }
 }
