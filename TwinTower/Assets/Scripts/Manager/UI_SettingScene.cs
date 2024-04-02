@@ -92,7 +92,9 @@ namespace TwinTower
         private void KeyInput()
         {
             if (!Input.anyKey) return;
-
+            
+            if (_uiNum != UIManager.Instance.UINum)
+                return;
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 UIManager.Instance.InputHandler -= KeyInput;
@@ -280,8 +282,6 @@ namespace TwinTower
                         displaymodecursor = (displaymodecursor + 1) % 2;
                     else
                         displaymodecursor = (displaymodecursor - 1 + 2) % 2;
-                    //Get<Image>((int)selectMain).gameObject.GetComponentInChildren<Image>()
-                        //.GetComponentInChildren<Image>().GetComponentInChildren<TextMeshProUGUI>().text = displayModes[displaymodecursor];
                     Util.FindChild<Image>(Get<Image>((int)selectMain).gameObject).GetComponentInChildren<TextMeshProUGUI>().text = displayModes[displaymodecursor];
                 }
                 else if (selectMain == Images.Language_Button)

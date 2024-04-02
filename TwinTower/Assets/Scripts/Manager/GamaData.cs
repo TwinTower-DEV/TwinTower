@@ -3,7 +3,7 @@ using System.IO;
 
 namespace TwinTower
 {
-    public abstract class GamaData
+    public abstract class GameData
     {
         public string[] names;
         public string[] value;
@@ -14,7 +14,7 @@ namespace TwinTower
         }
     }
     
-    public class UIGameData : GamaData
+    public class UIGameData : GameData
     {
         public int bgmcoursor;
         public int secursor;
@@ -40,11 +40,35 @@ namespace TwinTower
 
         public override void Set()
         {
-            bgmcoursor = Int32.Parse(names[0]);
-            secursor = Int32.Parse(names[1]);
-            displaymodecursor = Int32.Parse(names[2]);
-            displaycursor = Int32.Parse(names[3]);
-            langaugecursor = Int32.Parse(names[4]);
+            bgmcoursor = Int32.Parse(value[0]);
+            secursor = Int32.Parse(value[1]);
+            displaymodecursor = Int32.Parse(value[2]);
+            displaycursor = Int32.Parse(value[3]);
+            langaugecursor = Int32.Parse(value[4]);
+        }
+    }
+
+    public class StageInfo : GameData
+    {
+        public int nextStage;
+        public int cutsceneflug;
+
+        public StageInfo(int nextStage, int cutsceneflug)
+        {
+            this.nextStage = nextStage;
+            this.cutsceneflug = cutsceneflug;
+            names = new string[2]
+                { "NextStage", "CutSceneFlug"};
+            value = new string[2]
+            {
+                this.nextStage.ToString(), this.cutsceneflug.ToString()
+            };
+        }
+        
+        public override void Set()
+        {
+            nextStage = Int32.Parse(value[0]);
+            cutsceneflug = Int32.Parse(value[1]);
         }
     }
 }

@@ -9,23 +9,29 @@ namespace TwinTower
         
 
         private UIGameData _uiGameData;
-
+        private StageInfo _stageInfo;
         public UIGameData UIGameDatavalue
         {
             get
             {
-                if(_uiGameData != null)
-                    return _uiGameData;
-                else
-                {
-                    _uiGameData = new UIGameData(2, 2, 0, 2, 0);
-                    return _uiGameData;
-                }
+                return _uiGameData;
             }
             set
             {
                 _uiGameData = value;
                 SaveData(_uiGameData);
+            }
+        }
+
+        public StageInfo StageInfovalue
+        {
+            get
+            {
+                return _stageInfo;
+            }
+            set
+            {
+                _stageInfo = value;
             }
         }
         protected override void Awake()
@@ -36,42 +42,45 @@ namespace TwinTower
 
         private void InitDataSetting()
         {
-            _uiGameData = new UIGameData(2, 2, 0, 2, 0);  
+            _uiGameData = new UIGameData(2, 2, 0, 2, 0);
+            _stageInfo = new StageInfo(0, -1);
             LoadData(_uiGameData);
+            LoadData(_stageInfo);
         }
 
-        private void SaveData<T>(T data) where T : GamaData
+        private void SaveData<T>(T data) where T : GameData
         {
             var fields = typeof(T).GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-            
-            for (int i = 0; i < fields.Length; i++)
+            for (int i = 0, k = 0; i < fields.Length - 2; i++,k++)
             {
                 if (fields[i].FieldType == typeof(int))
                 {
-                    PlayerPrefs.SetInt(data.names[i], Int32.Parse(data.value[i]));
+                    PlayerPrefs.SetInt(data.names[k], Int32.Parse(data.value[k]));
                 }
                 else if (fields[i].FieldType == typeof(string))
                 {
-                    PlayerPrefs.SetString(data.names[i], data.value[i]);
+                    PlayerPrefs.SetString(data.names[k], data.value[k]);
                 }
             }
         }
 
-        private void LoadData<T>(T data) where T : GamaData
+        private void LoadData<T>(T data) where T : GameData
         {
             var fields = typeof(T).GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-            
-            for (int i = 0; i < fields.Length; i++)
+            Debug.Log(fields.Length);
+
+            for (int i = 0, k = 0; i < fields.Length - 2; i++,k++)
             {
-                if (!PlayerPrefs.HasKey(data.names[i])) continue;
-                
+
+                if (!PlayerPrefs.HasKey(data.names[k])) continue;
+
                 if (fields[i].FieldType == typeof(int))
                 {
-                    data.names[i] = PlayerPrefs.GetInt(data.names[i]).ToString();
+                    data.value[k] = PlayerPrefs.GetInt(data.names[k]).ToString();
                 }
                 else if (fields[i].FieldType == typeof(string))
                 {
-                    data.names[i] = PlayerPrefs.GetString(data.names[i]);
+                    data.value[k] = PlayerPrefs.GetString(data.names[k]);
                 }
             }
             data.Set();
