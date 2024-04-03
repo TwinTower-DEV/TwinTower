@@ -9,6 +9,7 @@ namespace TwinTower
 {
 	public abstract class UI_Base : MonoBehaviour
 	{
+		protected int _uiNum;
 		protected Dictionary<Type, UnityEngine.Object[]> _objects = new Dictionary<Type, UnityEngine.Object[]>();
 		public abstract void Init();
 
@@ -19,7 +20,7 @@ namespace TwinTower
 
 		protected virtual void Awake()
 		{
-			int _uiNum = UIManager.Instance.UINum;
+			_uiNum = UIManager.Instance.UINum;
 			Canvas canvas = GetComponent<Canvas>();
 			if (canvas != null)
 				canvas.sortingOrder = _uiNum;

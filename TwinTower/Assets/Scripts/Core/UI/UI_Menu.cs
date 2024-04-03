@@ -10,19 +10,20 @@ using UnityEngine.UI;
 /// 저장하기, 불러오기, 세팅, 메인메뉴로 가는 버튼 4개가 있다.
 /// </summary>
 public class UI_Menu : UI_Base {
-    private MenuUIManager menuUIManager;
+    //private MenuUIManager menuUIManager;
     private int currCursor;
     private static int BUTTON_COUNT = 4;
 
     private void Update() {
-        KeyInPut();
+       // KeyInPut();
     }
 
     public override void Init() {
-        menuUIManager = transform.parent.GetComponent<MenuUIManager>();
+        //menuUIManager = transform.parent.GetComponent<MenuUIManager>();
         
         Bind<Image>(typeof(Menu));                  // 각 버튼 Bind
-        
+
+        UIManager.Instance.InputHandler += KeyInPut;
         // 클릭 이벤트
         Get<Image>((int)Menu.UnSelectSave).gameObject.BindEvent(SaveEvent, Define.UIEvent.Click);
         Get<Image>((int)Menu.UnSelectLoad).gameObject.BindEvent(LoadEvent, Define.UIEvent.Click);
@@ -65,7 +66,8 @@ public class UI_Menu : UI_Base {
     {
         if (!Input.anyKey)
             return;
-
+        if (_uiNum != UIManager.Instance.UINum)
+            return;
         if (Input.GetKeyDown(KeyCode.Return)) {
             GameObject go = Get<Image>(currCursor).gameObject;
             UI_EventHandler evt = Util.GetOrAddComponent<UI_EventHandler>(go);
@@ -82,25 +84,35 @@ public class UI_Menu : UI_Base {
             EnterCursorEvent((currCursor - 1 + BUTTON_COUNT) % BUTTON_COUNT);
         }
         
-        if (Input.GetKeyDown(KeyCode.Escape)) {
-            menuUIManager.PrevPanelChange();
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            UIManager.Instance.InputHandler -= KeyInPut;
+            InputManager.Instance.UnPause();
+            UIManager.Instance.CloseNormalUI(this);
+            //menuUIManager.PrevPanelChange();
         }
     }
 
     private void SaveEvent() {
-        menuUIManager.SwitchPanelPrevSave("SavePanel");
+        //menuUIManager.SwitchPanelPrevSave("SavePanel");
+        UIManager.Instance.ShowNormalUI<UI_Save>();
     }
     
     private void LoadEvent() {
-        menuUIManager.SwitchPanelPrevSave("LoadPanel");
+        //menuUIManager.SwitchPanelPrevSave("LoadPanel");
+        UIManager.Instance.ShowNormalUI<UI_Load>();
     }
     
-    private void SettingEvent() {
+    private void SettingEvent()
+    {
+        UIManager.Instance.ShowNormalUI<UI_SettingScene>();
         Debug.Log("Enter Setting");
     }
 
     private void MainMenuEvent() {
         Debug.Log("Enter MainMenu");
+        InputManager.Destroys();
+        StartCoroutine(ScreenManager.Instance.NextSceneload(3));
     }
 
     void EnterCursorEvent(int currIdx) {

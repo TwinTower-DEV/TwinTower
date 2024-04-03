@@ -36,7 +36,9 @@ namespace TwinTower
 
         public virtual void ReduceHealth()
         {
+            InputController.Instance.ReleaseControl();
             StartCoroutine(ScreenManager.Instance.CurrentScreenReload());
+            InputController.Instance.GainControl();
         } 
         // movedir방향으로 이동 가능한지 체크 - 이동 가능하다면 true반환
         // layermask를 통해 다음 칸에 있는 오브젝트에 따라 확인됨.

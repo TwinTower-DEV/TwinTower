@@ -11,25 +11,24 @@ using UnityEngine.UI;
 /// </summary>
 public class UI_SaveDeleteCheck : UI_Base
 {
-    private MenuUIManager menuUIManager;
+    //private MenuUIManager menuUIManager;
     private int currCursor;
     private static int BUTTON_COUNT = 2;
     
     // 활성화마다 정보 불러오기
     private void OnEnable() {
         Get<TextMeshProUGUI>((int)Save.SaveInfo).text =
-            SaveLoadController.GetSaveInfo(menuUIManager.saveloadController.GetCurrSaveSlot());
+            SaveLoadController.GetSaveInfo(UIManager.Instance.saveloadController.GetCurrSaveSlot());
     }
 
-    private void Update() {
-        KeyInPut();
-    }
 
     public override void Init() {
-        menuUIManager = transform.parent.GetComponent<MenuUIManager>();
+        //menuUIManager = transform.parent.GetComponent<MenuUIManager>();
         
         Bind<Image>(typeof(Check));
         Bind<TextMeshProUGUI>(typeof(Save));
+        
+        UIManager.Instance.InputHandler += KeyInPut;
         
         Get<Image>((int)Check.SelectYes).gameObject.BindEvent(YesEvent, Define.UIEvent.Click);
         Get<Image>((int)Check.SelectNo).gameObject.BindEvent(NoEvent, Define.UIEvent.Click);
@@ -44,7 +43,7 @@ public class UI_SaveDeleteCheck : UI_Base
         Get<Image>((int)Check.SelectNo).gameObject.SetActive(false);
 
         Get<TextMeshProUGUI>((int)Save.SaveInfo).text =
-            SaveLoadController.GetSaveInfo(menuUIManager.saveloadController.GetCurrSaveSlot());
+            SaveLoadController.GetSaveInfo(UIManager.Instance.saveloadController.GetCurrSaveSlot());
         
         Get<Image>((int)Check.SelectYes).gameObject.SetActive(false);
         Get<Image>((int)Check.SelectNo).gameObject.SetActive(false);
@@ -68,7 +67,8 @@ public class UI_SaveDeleteCheck : UI_Base
     {
         if (!Input.anyKey)
             return;
-
+        if (_uiNum != UIManager.Instance.UINum)
+            return;
         if (Input.GetKeyDown(KeyCode.Return)) {
             GameObject go = Get<Image>(currCursor).gameObject;
             UI_EventHandler evt = Util.GetOrAddComponent<UI_EventHandler>(go);
@@ -86,18 +86,18 @@ public class UI_SaveDeleteCheck : UI_Base
         }
         
         if (Input.GetKeyDown(KeyCode.Escape)) {
-            menuUIManager.PrevPanelChange();
+            UIManager.Instance.InputHandler -= KeyInPut;
+            UIManager.Instance.CloseNormalUI(this);
         }
     }
 
     private void YesEvent() {
-        menuUIManager.saveloadController.Delete();
-        menuUIManager.PrevPanelChange();
+        UIManager.Instance.saveloadController.Delete();
+        UIManager.Instance.CloseNormalUI(this);
     }
 
     private void NoEvent() {
-        menuUIManager.PrevPanelChange();
-    }
+        UIManager.Instance.CloseNormalUI(this);    }
 
     void EnterCursorEvent(int currIdx) {
         Get<Image>(currCursor + BUTTON_COUNT).gameObject.SetActive(false);  // 기존것 하이라이트 종료

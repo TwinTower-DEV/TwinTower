@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace TwinTower
@@ -13,6 +14,18 @@ namespace TwinTower
             yield return StartCoroutine(UI_ScreenFader.FadeScenOut());
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             yield return StartCoroutine(UI_ScreenFader.FadeSceneIn());
+            GameManager.Instance.FindPlayer();
+            InputController.Instance.GainControl();
+        }
+
+        public IEnumerator NextSceneload(int nextidx)
+        {
+            Debug.Log("Asda");
+            yield return StartCoroutine(UI_ScreenFader.FadeScenOut());
+            Debug.Log("asddda");
+            SceneManager.LoadScene(nextidx);
+            yield return StartCoroutine(UI_ScreenFader.FadeSceneIn());
+            GameManager.Instance.FindPlayer();
         }
     }
 }

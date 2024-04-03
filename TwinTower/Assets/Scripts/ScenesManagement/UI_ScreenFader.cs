@@ -64,13 +64,13 @@ namespace TwinTower
             canvasGroup = Instance.FaderCanvasGroup;
 
             yield return Instance.StartCoroutine(Instance.Fade(0f, canvasGroup));
-            InputManager.Instance.islockMove = false;
+            
             canvasGroup.gameObject.SetActive(false);
         }
         // FadeOut 코드
         public static IEnumerator FadeScenOut()
         {
-            InputManager.Instance.islockMove = true;
+            
             CanvasGroup canvasGroup = Instance.FaderCanvasGroup;
             canvasGroup.gameObject.SetActive(true);
             yield return Instance.StartCoroutine(Instance.Fade(1f, canvasGroup));
