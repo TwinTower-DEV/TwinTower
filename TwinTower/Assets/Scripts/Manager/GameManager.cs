@@ -22,8 +22,14 @@ namespace TwinTower
             FindPlayer();
         }
         public void FindPlayer() {
-            _player1 = GameObject.Find("Dalia").GetComponent<Player>();
-            _player2 = GameObject.Find("Irise").GetComponent<Player>();
+            if (GameObject.Find("Dalia").GetComponent<Player>() != null)
+            {
+                _player1 = GameObject.Find("Dalia").GetComponent<Player>();
+                InputController.Instance.GainControl();
+            }
+
+            if(GameObject.Find("Irise").GetComponent<Player>() != null)
+                _player2 = GameObject.Find("Irise").GetComponent<Player>();
         }
     }
 }

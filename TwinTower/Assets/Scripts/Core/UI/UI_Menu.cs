@@ -108,6 +108,8 @@ public class UI_Menu : UI_Base {
 
     private void MainMenuEvent() {
         Debug.Log("Enter MainMenu");
+        InputManager.Destroys();
+        StartCoroutine(ScreenManager.Instance.NextSceneload(3));
     }
 
     void EnterCursorEvent(int currIdx) {

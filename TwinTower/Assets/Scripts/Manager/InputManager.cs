@@ -35,6 +35,7 @@ namespace TwinTower
                 PlayerMove(Define.MoveDir.Down);
             }
             else if (InputController.Instance.ResetButton.Down) {
+                InputController.Instance.ReleaseControl();
                 StartCoroutine(ScreenManager.Instance.CurrentScreenReload());
             }
             else {
@@ -65,7 +66,7 @@ namespace TwinTower
                     InputController.Instance.EscapeButton.GainControl();
                     InputController.Instance.EnterButton.GainControl();
                     isESC = true;
-                    Time.timeScale = 0;
+                    //Time.timeScale = 0;
                     UIManager.Instance.ShowNormalUI<UI_Menu>();
                     //UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("UIMenus", UnityEngine.SceneManagement.LoadSceneMode.Additive);
                 }
