@@ -21,15 +21,14 @@ public class UI_SaveCheck : UI_Base {
             SaveLoadController.GetSaveInfo(UIManager.Instance.saveloadController.GetCurrSaveSlot());
     }
 
-    private void Update() {
-        KeyInPut();
-    }
 
     public override void Init() {
         //menuUIManager = transform.parent.GetComponent<MenuUIManager>();
         
         Bind<Image>(typeof(Check));                     // 버튼 Bind
         Bind<TextMeshProUGUI>(typeof(Save));            // Text바인드
+        
+        UIManager.Instance.InputHandler += KeyInPut;
         
         Get<Image>((int)Check.SelectYes).gameObject.BindEvent(YesEvent, Define.UIEvent.Click);
         Get<Image>((int)Check.SelectNo).gameObject.BindEvent(NoEvent, Define.UIEvent.Click);
@@ -85,6 +84,7 @@ public class UI_SaveCheck : UI_Base {
         }
         
         if (Input.GetKeyDown(KeyCode.Escape)) {
+            UIManager.Instance.InputHandler -= KeyInPut;
             UIManager.Instance.CloseNormalUI(this);
         }
     }

@@ -15,14 +15,15 @@ public class UI_Menu : UI_Base {
     private static int BUTTON_COUNT = 4;
 
     private void Update() {
-        KeyInPut();
+       // KeyInPut();
     }
 
     public override void Init() {
         //menuUIManager = transform.parent.GetComponent<MenuUIManager>();
         
         Bind<Image>(typeof(Menu));                  // 각 버튼 Bind
-        
+
+        UIManager.Instance.InputHandler += KeyInPut;
         // 클릭 이벤트
         Get<Image>((int)Menu.UnSelectSave).gameObject.BindEvent(SaveEvent, Define.UIEvent.Click);
         Get<Image>((int)Menu.UnSelectLoad).gameObject.BindEvent(LoadEvent, Define.UIEvent.Click);
@@ -83,7 +84,9 @@ public class UI_Menu : UI_Base {
             EnterCursorEvent((currCursor - 1 + BUTTON_COUNT) % BUTTON_COUNT);
         }
         
-        if (Input.GetKeyDown(KeyCode.Escape)) {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            UIManager.Instance.InputHandler -= KeyInPut;
             InputManager.Instance.UnPause();
             UIManager.Instance.CloseNormalUI(this);
             //menuUIManager.PrevPanelChange();

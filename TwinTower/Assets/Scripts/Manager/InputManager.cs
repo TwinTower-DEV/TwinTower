@@ -74,9 +74,10 @@ namespace TwinTower
         }
         
         public void UnPause() {
-            if (Time.timeScale > 0)
+            /*if (Time.timeScale > 0)
                 return;
-
+                */
+            
             StartCoroutine(UnPauseCoroutine());
         }
 

@@ -19,16 +19,14 @@ public class UI_Save : UI_Base {
         UpdateUI();
     }
 
-    private void Update() {
-        KeyInPut();
-    }
-
     public override void Init() {
         //menuUIManager = transform.parent.GetComponent<MenuUIManager>();
         
         Bind<Image>(typeof(Save));                             // 슬롯 바인드
         Bind<Button>(typeof(DeleteButton));                    // 삭제 버튼 바인드    
         Bind<TextMeshProUGUI>(typeof(SaveText));               // 슬롯 text정보 바인드(단계, 날짜)        
+        
+        UIManager.Instance.InputHandler += KeyInPut;
         
         // 슬롯 마우스 엔터, 클릭 이벤트 BindEvent
         Get<Image>((int)Save.UnSelectSave_1).gameObject.BindEvent(()=>SaveEvent((int)Save.UnSelectSave_1), Define.UIEvent.Click);
@@ -107,6 +105,7 @@ public class UI_Save : UI_Base {
         
         if (Input.GetKeyDown(KeyCode.Escape)) {
            // menuUIManager.PrevPanelChange();
+           UIManager.Instance.InputHandler -= KeyInPut;
            UIManager.Instance.CloseNormalUI(this);
         }
     }
