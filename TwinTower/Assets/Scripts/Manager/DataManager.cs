@@ -10,6 +10,7 @@ namespace TwinTower
 
         private UIGameData _uiGameData;
         private StageInfo _stageInfo;
+        private SaveLoadController _saveloadcontroller;
         public UIGameData UIGameDatavalue
         {
             get
@@ -34,6 +35,15 @@ namespace TwinTower
                 _stageInfo = value;
             }
         }
+
+        public SaveLoadController saveload {
+            get {
+                return _saveloadcontroller;
+            }
+            set {
+                _saveloadcontroller = value;
+            }
+        }
         protected override void Awake()
         {
             base.Awake();
@@ -44,6 +54,7 @@ namespace TwinTower
         {
             _uiGameData = new UIGameData(2, 2, 0, 2, 0);
             _stageInfo = new StageInfo(0, -1);
+            _saveloadcontroller = new SaveLoadController();
             LoadData(_uiGameData);
             LoadData(_stageInfo);
         }

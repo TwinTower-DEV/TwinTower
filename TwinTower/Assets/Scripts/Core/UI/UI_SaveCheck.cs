@@ -14,19 +14,13 @@ public class UI_SaveCheck : UI_Base {
     //private MenuUIManager menuUIManager;
     private int currCursor;
     private static int BUTTON_COUNT = 2;
-
-    // 활성화마다 정보 불러오기
-    private void OnEnable() {
-        Get<TextMeshProUGUI>((int)Save.SaveInfo).text =
-            SaveLoadController.GetSaveInfo(UIManager.Instance.saveloadController.GetCurrSaveSlot());
-    }
-
-
+    
     public override void Init() {
-        //menuUIManager = transform.parent.GetComponent<MenuUIManager>();
-        
         Bind<Image>(typeof(Check));                     // 버튼 Bind
         Bind<TextMeshProUGUI>(typeof(Save));            // Text바인드
+        
+        Get<TextMeshProUGUI>((int)Save.SaveInfo).text =
+            SaveLoadController.GetSaveInfo(DataManager.Instance.saveload.GetCurrSaveSlot());
         
         UIManager.Instance.InputHandler += KeyInPut;
         
@@ -90,8 +84,7 @@ public class UI_SaveCheck : UI_Base {
     }
 
     private void YesEvent() {
-        Debug.Log("aSDASD");
-        UIManager.Instance.saveloadController.Save();
+        DataManager.Instance.saveload.Save();
         UIManager.Instance.CloseNormalUI(this);
     }
 

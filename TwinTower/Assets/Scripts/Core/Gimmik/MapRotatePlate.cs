@@ -12,12 +12,12 @@ using UnityEngine.UIElements;
 namespace TwinTower
 {
     public class MapRotatePlate: MonoBehaviour {
-        [SerializeField] private Tilemap rotateTileMap;
+        [SerializeField] private Tilemap rotateTileMap;                         // 회전할 Tilemap
         private Tilemap wallRenderer;
         
         [SerializeField] private bool isOpp;
-        [SerializeField] private float rotateSpeed = 40;
-        [SerializeField] private float transperencySpeed = 500f;
+        [SerializeField] private float rotateSpeed = 40;                        // 회전 속도
+        [SerializeField] private float transperencySpeed = 500f;                // 벽 투명해지는 속도
         
         private Vector2 boxSize = new Vector2(8f, 8f);
         private float distDegree;
@@ -25,12 +25,25 @@ namespace TwinTower
         private bool isDegree45 = false;
         private Vector3 rotationDir;
         private Vector2 rotationCenter;
-        private List<Collider2D> rotatableObject = new List<Collider2D>();
-        private List<Collider2D> unRotatableObject = new List<Collider2D>();
-
+        private List<Collider2D> rotatableObject;      // 같이 회전되는 오브젝트들(무빙워크, 발사대)
+        private List<Collider2D> unRotatableObject;    // 회전되지 않는 오브젝트들
+        
         private void Awake() {
             rotationCenter = rotateTileMap.transform.position;
             wallRenderer = rotateTileMap.transform.GetChild(0).GetComponent<Tilemap>();
+            
+            if (isOpp) rotationDir = Vector3.forward;
+            else rotationDir = Vector3.back;
+        }
+
+        // 발사
+        public void Launch() {
+            if (!isOpp) distDegree = rotateTileMap.transform.rotation.eulerAngles.z - 90;
+            else distDegree = rotateTileMap.transform.rotation.eulerAngles.z + 90;
+
+            // 상자와 같은 없어지는 오브젝트가 있을 경우 때문에 여기에서 판별
+            rotatableObject = new List<Collider2D>();
+            unRotatableObject = new List<Collider2D>();
             Collider2D[] collidersInArea = Physics2D.OverlapBoxAll(rotationCenter, boxSize, 0f);
             
             foreach(Collider2D collider in collidersInArea) {
@@ -40,16 +53,10 @@ namespace TwinTower
                 else unRotatableObject.Add(collider);
             }
             
-            if (isOpp) rotationDir = Vector3.forward;
-            else rotationDir = Vector3.back;
-        }
-
-        public void Launch() {
-            if (!isOpp) distDegree = rotateTileMap.transform.rotation.eulerAngles.z - 90;
-            else distDegree = rotateTileMap.transform.rotation.eulerAngles.z + 90;
             StartCoroutine(RotateStart());
         }
 
+        // 회전
         IEnumerator RotateStart() {
             InputController.Instance.ReleaseControl();                  // 키 입력 막기
 
@@ -61,9 +68,12 @@ namespace TwinTower
                 yield return new WaitForFixedUpdate();
             }
             
-            float prevDegree = rotateTileMap.transform.rotation.eulerAngles.z;
+            // 45도에 회전률 변경을 위한 변수 설정
+            float rotateAngle = 0;
             
+            // 여기에서부터 회전 시작.
             while (true) {
+                rotateAngle += rotateSpeed * Time.deltaTime;
                 rotateTileMap.transform.RotateAround(rotationCenter, rotationDir, rotateSpeed * Time.deltaTime);
                 foreach (var collider in rotatableObject) {
                     collider.transform.RotateAround(rotationCenter, rotationDir, rotateSpeed * Time.deltaTime);
@@ -71,15 +81,12 @@ namespace TwinTower
                 foreach (var collider in unRotatableObject) {
                     collider.transform.RotateAround(rotationCenter, rotationDir, rotateSpeed * Time.deltaTime);
                 }
-                float currDegree = rotateTileMap.transform.rotation.eulerAngles.z;
 
-                float diffDegree = Mathf.Abs(currDegree - prevDegree);
-                if (diffDegree >= 180f) diffDegree = 360 - diffDegree;
-
-                if (!isDegree45 && diffDegree >= 45) {
-                    FitRotateObject();
-                }
-                if (diffDegree >= 90) {
+                // 45도 정도 회전했을 때 FitRotateObject발동
+                if (!isDegree45 && rotateAngle >= 45) FitRotateObject(); 
+                
+                // 90도 이상 되었을때 종료 및 정각(0, 90, 180, 270)을 유지
+                if (rotateAngle >= 90) {
                     rotateTileMap.transform.rotation = Quaternion.Euler(0, 0, distDegree);
                     foreach (var collider in rotatableObject) {
                         collider.transform.rotation = Quaternion.Euler(0, 0, FindClosestDegree(collider.transform.rotation.eulerAngles.z));
@@ -92,11 +99,13 @@ namespace TwinTower
                 yield return new WaitForFixedUpdate();
             }
             
+            // 벽 투명화 풀기
             Color _color = wallRenderer.color;
             _color.a = 1;
             wallRenderer.color = _color;
             wallRenderer.transform.rotation = Quaternion.Euler(0, 0, 0);
 
+            // 타일의 정 중앙에 배치
             foreach (var collider in rotatableObject) {
                 collider.transform.position = TileFindManager.Instance.gettileCentorLocation(collider.transform.position);
             }
@@ -105,12 +114,15 @@ namespace TwinTower
             }
 
             isDegree45 = false;
-            
             InputController.Instance.GainControl();             // 키 입력 풀기
         }
 
+        // 45도가 되었을때 회전되면 안되는 오브젝트들은 원래의 회전률로 돌리기
+        // 타일맵도 원상복구
+        // 발사대의 경우 sprite의 변경 요청까지
         public void FitRotateObject() {
             isDegree45 = true;
+            // 회전 되면 안되는 오브젝트들 회전(player, box, 버튼들)
             foreach (var collider in unRotatableObject) {
                 Vector3 currDegree = collider.transform.rotation.eulerAngles;
                 if (isOpp) currDegree.z -= 90; 
@@ -118,6 +130,7 @@ namespace TwinTower
                 collider.transform.rotation = Quaternion.Euler(currDegree);
             }
 
+            // 발사대 회전
             foreach (var collider in rotatableObject) {
                 DispenserShoot arrowdisepenser = collider.GetComponent<DispenserShoot>();
                 if (arrowdisepenser != null) {
@@ -126,6 +139,7 @@ namespace TwinTower
                 }
             }
             
+            // 타일맵 회전
             Quaternion rotation = Quaternion.Euler(0, 0, -distDegree); // 90도 회전
             Matrix4x4 matrix = Matrix4x4.TRS(Vector3.zero, rotation, Vector3.one);
 
@@ -135,6 +149,7 @@ namespace TwinTower
             }
         }
         
+        // 0, 360, 180, 270 과 가까운 각도로 변환
         public float FindClosestDegree(float target) {
             float[] numbers = { 90, 180, 270, 360, 0 };
             float closestNumber = numbers[0];

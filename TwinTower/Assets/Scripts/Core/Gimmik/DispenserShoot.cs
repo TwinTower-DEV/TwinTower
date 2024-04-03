@@ -39,6 +39,7 @@ public class DispenserShoot : ActivateObject {
         haveArrow = false;
     }
 
+    // 회전 45도가 되었을때 스프라이트 변경을 위한 public 함수
     public void NextDirection() {
         currDirIndex = (currDirIndex + 1) % 4;
         spriterenderer.sprite = directInfos[currDirIndex].dispenserSprite;

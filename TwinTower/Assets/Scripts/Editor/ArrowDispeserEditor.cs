@@ -5,6 +5,10 @@ using UnityEditor;
 using UnityEngine;
 
 [UnityEditor.CustomEditor(typeof(DispenserShoot))]
+
+/// <summary>
+/// 발사대 회전 시키면 자동으로 Sprite변경하게 하는 스크립트
+/// </summary>
 public class ArrowDispeserEditor : Editor {
     public override void OnInspectorGUI() {
         base.OnInspectorGUI();

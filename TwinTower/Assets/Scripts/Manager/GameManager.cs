@@ -11,14 +11,11 @@ namespace TwinTower
     /// </summary>
     public class GameManager : Manager<GameManager>
     {
-        private TileFindManager _tileFindManager;
         public Player _player1;
         public Player _player2;
 
-        public List<GameObject> _moveobjlist = new List<GameObject>();
         protected override void Awake()
         {
-            _tileFindManager = TileFindManager.Instance;
             FindPlayer();
         }
         public void FindPlayer() {

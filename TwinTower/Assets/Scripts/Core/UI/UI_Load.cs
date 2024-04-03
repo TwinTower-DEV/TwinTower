@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using TwinTower;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 /// <summary>
@@ -13,10 +14,8 @@ public class UI_Load : UI_Base {
     //private MenuUIManager menuUIManager;
     private int currCursor;
     private static int SLOT_COUNT = 3;
+    private bool isActivate;
 
-    private void OnEnable() {               // 활성화 될때마다 슬롯 정보 업데이트
-        UpdateUI();
-    }
 
     public override void Init() {
         //menuUIManager = transform.parent.GetComponent<MenuUIManager>();
@@ -26,7 +25,7 @@ public class UI_Load : UI_Base {
         Bind<TextMeshProUGUI>(typeof(LoadText));                    // 슬롯 text정보 바인드(단계, 날짜)
 
         UIManager.Instance.InputHandler += KeyInPut;
-        
+        UpdateUI();
         // 슬롯 마우스 엔터, 클릭 이벤트 BindEvent
         Get<Image>((int)Load.UnSelectLoad_1).gameObject.BindEvent(()=>LoadEvent((int)Load.UnSelectLoad_1), Define.UIEvent.Click);
         Get<Image>((int)Load.UnSelectLoad_2).gameObject.BindEvent(()=>LoadEvent((int)Load.UnSelectLoad_2), Define.UIEvent.Click);
@@ -86,6 +85,10 @@ public class UI_Load : UI_Base {
             return;
         if (_uiNum != UIManager.Instance.UINum)
             return;
+        if (!isActivate) {
+            isActivate = true;
+            UpdateUI();
+        }
         if (Input.GetKeyDown(KeyCode.Return)) {                         // 엔터 - 현재 선택된 슬롯 클릭 이벤트 발동
             GameObject go = Get<Image>(currCursor).gameObject;
             UI_EventHandler evt = Util.GetOrAddComponent<UI_EventHandler>(go);
@@ -104,6 +107,7 @@ public class UI_Load : UI_Base {
         
         if (Input.GetKeyDown(KeyCode.Escape)) {                         // ESC - 뒤로가기
             //menuUIManager.PrevPanelChange();
+            isActivate = false;
             UIManager.Instance.InputHandler -= KeyInPut;
             UIManager.Instance.CloseNormalUI(this);
         }
@@ -118,12 +122,13 @@ public class UI_Load : UI_Base {
     }
 
     private void LoadEvent(int idx) {
-        UIManager.Instance.saveloadController.ChangeCurrSaveSlot(idx);
-        UIManager.Instance.saveloadController.Load();
+        DataManager.Instance.saveload.ChangeCurrSaveSlot(idx);
+        DataManager.Instance.saveload.Load();
     }
 
     private void DeleteEvent(int idx) {
-        UIManager.Instance.saveloadController.ChangeCurrSaveSlot(idx);
+        DataManager.Instance.saveload.ChangeCurrSaveSlot(idx);
+        isActivate = false;
         //menuUIManager.SwitchPanelPrevSave("SaveDeleteCheckPanel");
         UIManager.Instance.ShowNormalUI<UI_SaveDeleteCheck>();
     }
