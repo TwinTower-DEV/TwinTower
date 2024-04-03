@@ -56,7 +56,10 @@ namespace TwinTower
         {
             if (!Input.anyKey)
                 return;
-
+            
+            if (_uiNum != UIManager.Instance.UINum)
+                return;
+            
             if (Input.GetKeyDown(KeyCode.Return))
             {
                 _actions[currcoursor].Invoke();
@@ -76,6 +79,9 @@ namespace TwinTower
         }
         void NewGame()
         {
+            UIManager.Instance.InputHandler -= KeyInPut;
+            StartCoroutine(ScreenManager.Instance.NextSceneload(DataManager.Instance.StageInfovalue.nextStage));
+            
             Debug.Log("New Game Start");
         }
         void Setting()

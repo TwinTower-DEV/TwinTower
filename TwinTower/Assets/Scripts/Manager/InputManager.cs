@@ -35,6 +35,7 @@ namespace TwinTower
                 PlayerMove(Define.MoveDir.Down);
             }
             else if (InputController.Instance.ResetButton.Down) {
+                InputController.Instance.ReleaseControl();
                 StartCoroutine(ScreenManager.Instance.CurrentScreenReload());
             }
             else {
@@ -65,22 +66,24 @@ namespace TwinTower
                     InputController.Instance.EscapeButton.GainControl();
                     InputController.Instance.EnterButton.GainControl();
                     isESC = true;
-                    Time.timeScale = 0;
-                    UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("UIMenus", UnityEngine.SceneManagement.LoadSceneMode.Additive);
+                    //Time.timeScale = 0;
+                    UIManager.Instance.ShowNormalUI<UI_Menu>();
+                    //UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("UIMenus", UnityEngine.SceneManagement.LoadSceneMode.Additive);
                 }
             }
         }
         
         public void UnPause() {
-            if (Time.timeScale > 0)
+            /*if (Time.timeScale > 0)
                 return;
-
+                */
+            
             StartCoroutine(UnPauseCoroutine());
         }
 
         private IEnumerator UnPauseCoroutine() {
                 Time.timeScale = 1;
-                UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync("UIMenus");
+                //UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync("UIMenus");
                 InputController.Instance.GainControl();
                 yield return new WaitForFixedUpdate();
                 yield return new WaitForEndOfFrame();

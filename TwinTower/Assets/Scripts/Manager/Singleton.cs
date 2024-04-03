@@ -58,6 +58,11 @@ namespace TwinTower
                 return true;
             }
         }
+
+        public static void Destroys()
+        {
+            Destroy(s_instance.gameObject);
+        }
         
     }
 }
