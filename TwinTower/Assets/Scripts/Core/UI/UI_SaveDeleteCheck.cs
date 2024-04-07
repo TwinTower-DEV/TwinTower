@@ -8,19 +8,13 @@ using UnityEngine.UI;
 /// UI_Base를 상속받은 저장 삭제 확인 창이다.
 /// 예/아니오 버튼 2개가 있다.
 /// 저장할 슬롯 정보를 확인하기 위한 Text 1개 있다.
+/// 맨앞에 있을때 부르는 함수 있어야 할듯
 /// </summary>
 public class UI_SaveDeleteCheck : UI_Base
 {
     //private MenuUIManager menuUIManager;
     private int currCursor;
     private static int BUTTON_COUNT = 2;
-    
-    // 활성화마다 정보 불러오기
-    private void OnEnable() {
-        Get<TextMeshProUGUI>((int)Save.SaveInfo).text =
-            SaveLoadController.GetSaveInfo(UIManager.Instance.saveloadController.GetCurrSaveSlot());
-    }
-
 
     public override void Init() {
         //menuUIManager = transform.parent.GetComponent<MenuUIManager>();
@@ -43,7 +37,7 @@ public class UI_SaveDeleteCheck : UI_Base
         Get<Image>((int)Check.SelectNo).gameObject.SetActive(false);
 
         Get<TextMeshProUGUI>((int)Save.SaveInfo).text =
-            SaveLoadController.GetSaveInfo(UIManager.Instance.saveloadController.GetCurrSaveSlot());
+            SaveLoadController.GetSaveInfo(DataManager.Instance.saveload.GetCurrSaveSlot());
         
         Get<Image>((int)Check.SelectYes).gameObject.SetActive(false);
         Get<Image>((int)Check.SelectNo).gameObject.SetActive(false);
@@ -92,7 +86,7 @@ public class UI_SaveDeleteCheck : UI_Base
     }
 
     private void YesEvent() {
-        UIManager.Instance.saveloadController.Delete();
+        DataManager.Instance.saveload.Delete();
         UIManager.Instance.CloseNormalUI(this);
     }
 

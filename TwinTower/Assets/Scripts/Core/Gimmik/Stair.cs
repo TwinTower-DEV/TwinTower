@@ -19,7 +19,6 @@ public class Stair : MonoBehaviour
     private void Awake()
     {
         OnPlayer = false;
-        GameManager.Instance._moveobjlist.Add(gameObject);
     }
 
     // 동시에 진입했는지 알아야 하며 동시 진입시 다음 단계 진입 - NextLevelManager이용
@@ -29,7 +28,8 @@ public class Stair : MonoBehaviour
             MoveControl playerControl = other.gameObject.GetComponent<MoveControl>();
             OnPlayer = true;
             if (!playerControl.getIsMove() && stair2.getOnPlayer() && OnPlayer) {       // 계단 동시 진입 - 다음 단계 진입                     // 다른 계단에 플레이어가 위치해 있는지 확인
-                NextLevelManager.Instance.NextLevel(stair.NextSceneString);
+                //NextLevelManager.Instance.NextLevel(stair.NextSceneString);
+                Debug.Log("다음 단계 진입");
             }
         }
     }
@@ -42,4 +42,3 @@ public class Stair : MonoBehaviour
         return OnPlayer;
     }
 }
-
