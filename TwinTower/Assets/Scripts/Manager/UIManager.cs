@@ -11,7 +11,6 @@ namespace TwinTower
         // Normal UI들을 관리하는 HashSet
         HashSet<UI_Base> _normalUIs = new HashSet<UI_Base>();
         private int _uiNum = 0;
-        public SaveLoadController saveloadController = new SaveLoadController();
         Define.Resolution _resolution = new Define.Resolution() { width = 1080, height = 1920 };
         bool _isWindowMode;
 

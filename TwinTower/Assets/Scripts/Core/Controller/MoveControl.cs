@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Numerics;
@@ -18,8 +19,7 @@ namespace TwinTower
     {
         [SerializeField] private int _moveSpeed;
         [SerializeField] protected int Health;
-        private Grid maps;
-        private Vector3Int cellPos = Vector3Int.zero;
+        
         [SerializeField] protected LayerMask _layerMask;
         protected bool isMove = false;
 
@@ -31,15 +31,7 @@ namespace TwinTower
                 boxcontrol.DirectSetting(movedir);
             }
 
-            cellPos += Vector3Int.RoundToInt(movedir);      // Vector3 to Vector3Int
-            isMove = true;
-        }
-        
-        // 맵이 회전 됐을 때 다시 cellPos를 정의하는 매서드
-        public void SetCellPos(Vector3 pos)
-        {
-            cellPos = maps.WorldToCell(transform.position);
-            transform.position = maps.GetCellCenterWorld(cellPos);
+            StartCoroutine(UpdateIsMoveing(movedir));
         }
 
         public virtual void ReduceHealth()
@@ -52,7 +44,7 @@ namespace TwinTower
         // layermask를 통해 다음 칸에 있는 오브젝트에 따라 확인됨.
         public virtual bool MoveCheck(Vector3 movedir) {
             if (isMove) return false;
-            RaycastHit2D hit = Physics2D.Raycast(transform.position + movedir * 0.5f , movedir, 0.5f, _layerMask);
+            RaycastHit2D hit = Physics2D.Raycast(transform.position + movedir * 0.4f , movedir, 0.5f, _layerMask);
             if (hit.collider == null) return true;
             if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Box")) {
                 MoveControl boxcontrol = hit.transform.gameObject.GetComponent<MoveControl>();
@@ -63,20 +55,25 @@ namespace TwinTower
         
         
         // 그 이동할 셀로 자연스럽게 이동하게 구현
-        private void UpdateIsMoveing()
+        IEnumerator UpdateIsMoveing(Vector3 movedir)
         {
-            Vector3 destPos = maps.CellToWorld(cellPos) + new Vector3(0.5f, 0.5f);
-            Vector3 moveDir = destPos - transform.position;
-            float dist = moveDir.magnitude;
-            if (dist < _moveSpeed * Time.deltaTime)
-            {
-                transform.position = destPos;
-                isMove = false;
-            }
-            else
-            {
-                transform.position += moveDir.normalized * _moveSpeed * Time.deltaTime;
-                isMove = true;
+            isMove = true;
+            Vector3 destPos = transform.position + movedir;
+            while (isMove) {
+                Vector3 leftLength = destPos - transform.position;
+                float dist = leftLength.magnitude;
+                if (dist < _moveSpeed * Time.deltaTime)
+                {
+                    transform.position = TileFindManager.Instance.gettileCentorLocation(destPos);
+                    isMove = false;
+                }
+                else
+                {
+                    transform.position += leftLength.normalized * _moveSpeed * Time.deltaTime;
+                    isMove = true;
+                }
+
+                yield return new WaitForFixedUpdate();
             }
         }
 
@@ -87,22 +84,7 @@ namespace TwinTower
         
         // 오브젝트의 현재 tilemap기준 Cell 위치 확인을 위함.
         protected virtual void Awake() {
-            try {
-                maps = transform.parent.parent.GetComponent<Grid>();
-            }
-            catch (Exception e) {
-                Console.WriteLine(e + "타일맵의 자식으로 존재하지 않습니다.");
-                throw;
-            }
-            cellPos = maps.WorldToCell(transform.position);
-            transform.position = maps.GetCellCenterWorld(cellPos);
-            GameManager.Instance._moveobjlist.Add(gameObject);
-            
-        }
-
-        protected void FixedUpdate()
-        {
-            if(isMove) UpdateIsMoveing();
+            transform.position = TileFindManager.Instance.gettileCentorLocation(transform.position);
         }
     }
 }

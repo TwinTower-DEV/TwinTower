@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5077209832199525401}
   - component: {fileID: 1757711102644840996}
   - component: {fileID: 756955886486850891}
-  - component: {fileID: 8776982333902645561}
+  - component: {fileID: 1600363841487123451}
   m_Layer: 0
   m_Name: Stair
   m_TagString: Untagged
@@ -134,7 +134,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.2, y: 0.2}
   m_EdgeRadius: 0
---- !u!114 &8776982333902645561
+--- !u!114 &1600363841487123451
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,7 +143,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 6874266087994934715}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5598a009add31f449bd7dd59891bfd2c, type: 3}
+  m_Script: {fileID: 11500000, guid: 8cf5f83c55d7f3a41828c9b9f2af2761, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   stair2: {fileID: 0}
+  stair: {fileID: 0}

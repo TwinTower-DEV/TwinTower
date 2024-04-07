@@ -11,13 +11,12 @@ public class DoorActivate : ActivateObject {
     private Animator animator;
     public void Awake() {
         animator = GetComponent<Animator>();
-        GameManager.Instance._moveobjlist.Add(gameObject);
     }
 
     public override void Launch()
     {
         animator.Play("OpenDoor");
-        gameObject.layer = LayerMask.NameToLayer("Default");       // default로 변환
+        gameObject.layer = LayerMask.NameToLayer("Rotatable");       // default로 변환
         GetComponent<BoxCollider2D>().isTrigger = true;
     }
     

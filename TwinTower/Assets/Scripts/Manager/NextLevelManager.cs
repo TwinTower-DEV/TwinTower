@@ -26,7 +26,6 @@ namespace TwinTower
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             yield return new WaitForSeconds(1f);
             isActive = false;
-            GameManager.Instance.FindPlayer();
         }
     }  
 }
