@@ -14,8 +14,8 @@ public class DirectInfo {
     public float angle;
 }
 public class DispenserShoot : ActivateObject {
-    [SerializeField] private GameObject arrowPrefab;
-    [SerializeField] private DirectInfo[] directInfos;
+    [SerializeField] public GameObject arrowPrefab;
+    [SerializeField] public DirectInfo[] directInfos;
     private SpriteRenderer spriterenderer;
     public int currDirIndex;
 

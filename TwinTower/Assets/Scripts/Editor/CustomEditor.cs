@@ -1,8 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro.EditorUtilities;
+using TwinTower;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEngine.Tilemaps;
 
 /// <summary>
@@ -16,14 +20,38 @@ public class CustomEditor : Editor {
     [MenuItem("Tools/Object Location Stereotyping")]
     public static void ObjectLocationStereotyping() {
         Tilemap[] tileMaps = GameObject.FindObjectsOfType<Tilemap>();
+        SpriteRenderer[] ForCenterObjects = GameObject.FindObjectsOfType<SpriteRenderer>();
         
-        foreach (GameObject obj in Selection.gameObjects) {
+        foreach (SpriteRenderer obj in ForCenterObjects) {
             for (int i = 0; i < tileMaps.Length; i++) {
-                if (obj.GetComponent<Grid>() != null) throw new Exception("타일맵도 포함되었음 조심");
                 Vector3Int tilePosition = tileMaps[i].WorldToCell(obj.transform.position);
                 Vector3 cellCenter = tileMaps[i].GetCellCenterWorld(tilePosition);
                 if (tileMaps[i].GetTile(tilePosition) != null) obj.transform.position = cellCenter;
             }
         }
     }
+    
+    /// <summary>
+    /// 잘못 배치한 것이 없는지 확인하는 용도
+    /// </summary>
+    [MenuItem("Tools/Find Error Object")]
+    public static void ErrorFind() {
+        ClearConsole();
+        StageObjects stageObjects = new StageObjects();
+        stageObjects.Check();
+    }
+
+    // 콘솔 초기화
+    public static void ClearConsole() {
+        var assembly = System.Reflection.Assembly.GetAssembly(typeof(UnityEditor.SceneView));
+        var type = assembly.GetType("UnityEditor.LogEntries");
+        var method = type.GetMethod("Clear");
+        method.Invoke(new object(), null);
+    }
 }
+
+
+
+    // 기본 노드
+
+    

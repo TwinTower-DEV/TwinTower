@@ -12,10 +12,10 @@ using UnityEngine.UIElements;
 namespace TwinTower
 {
     public class MapRotatePlate: MonoBehaviour {
-        [SerializeField] private Tilemap rotateTileMap;                         // 회전할 Tilemap
+        [SerializeField] public Tilemap rotateTileMap;                         // 회전할 Tilemap
         private Tilemap wallRenderer;
         
-        [SerializeField] private bool isOpp;
+        [SerializeField] public bool isOpp;
         [SerializeField] private float rotateSpeed = 40;                        // 회전 속도
         [SerializeField] private float transperencySpeed = 500f;                // 벽 투명해지는 속도
         

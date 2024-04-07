@@ -677,7 +677,7 @@ GameObject:
   - component: {fileID: 4195470369812175055}
   - component: {fileID: 4195470369812175049}
   m_Layer: 7
-  m_Name: Player1_Tilemap
+  m_Name: LeftTile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1515,7 +1515,7 @@ GameObject:
   - component: {fileID: 4195470370027819636}
   - component: {fileID: 4195470370027819638}
   m_Layer: 7
-  m_Name: Player2_Tilemap
+  m_Name: RightTile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

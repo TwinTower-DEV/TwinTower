@@ -152,12 +152,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7658639703121510020, guid: f78a1d8799e2bbc4381261e551c3a3c0, type: 3}
       propertyPath: m_Name
-      value: Arrow Dispenser
+      value: ArrowDispenser
       objectReference: {fileID: 0}
-    - target: {fileID: 7899405824053339979, guid: f78a1d8799e2bbc4381261e551c3a3c0, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 83397fb682e2bb6489f04af7e8ef17af, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f78a1d8799e2bbc4381261e551c3a3c0, type: 3}
 --- !u!1 &5613850185544242937 stripped
