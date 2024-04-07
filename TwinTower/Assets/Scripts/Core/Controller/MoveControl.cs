@@ -97,6 +97,7 @@ namespace TwinTower
             cellPos = maps.WorldToCell(transform.position);
             transform.position = maps.GetCellCenterWorld(cellPos);
             GameManager.Instance._moveobjlist.Add(gameObject);
+            
         }
 
         protected void FixedUpdate()

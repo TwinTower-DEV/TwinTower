@@ -19,7 +19,12 @@ namespace TwinTower
         int _deviceHeight = Screen.height;
 
         public Action InputHandler;
-        
+
+        protected override void Awake()
+        {
+            base.Awake();
+        }
+
         public int UINum
         {
             get

@@ -51,9 +51,9 @@ namespace TwinTower
     public class StageInfo : GameData
     {
         public int nextStage;
-        public int cutsceneflug;
+        public string cutsceneflug;
 
-        public StageInfo(int nextStage, int cutsceneflug)
+        public StageInfo(int nextStage, string cutsceneflug)
         {
             this.nextStage = nextStage;
             this.cutsceneflug = cutsceneflug;
@@ -68,7 +68,7 @@ namespace TwinTower
         public override void Set()
         {
             nextStage = Int32.Parse(value[0]);
-            cutsceneflug = Int32.Parse(value[1]);
+            cutsceneflug = value[1];
         }
     }
 }

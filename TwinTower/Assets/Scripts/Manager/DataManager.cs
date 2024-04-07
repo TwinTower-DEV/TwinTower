@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Reflection;
 using UnityEngine;
 
@@ -10,6 +12,7 @@ namespace TwinTower
 
         private UIGameData _uiGameData;
         private StageInfo _stageInfo;
+        private List<string> scripts;
         public UIGameData UIGameDatavalue
         {
             get
@@ -34,6 +37,19 @@ namespace TwinTower
                 _stageInfo = value;
             }
         }
+
+        public List<string> Scripstvalue
+        {
+            get
+            {
+                return scripts;
+            }
+            set
+            {
+                scripts = value;
+            }
+        }
+        
         protected override void Awake()
         {
             base.Awake();
@@ -43,7 +59,7 @@ namespace TwinTower
         private void InitDataSetting()
         {
             _uiGameData = new UIGameData(2, 2, 0, 2, 0);
-            _stageInfo = new StageInfo(0, -1);
+            _stageInfo = new StageInfo(0, "testtxt");
             LoadData(_uiGameData);
             LoadData(_stageInfo);
         }
@@ -61,14 +77,16 @@ namespace TwinTower
                 {
                     PlayerPrefs.SetString(data.names[k], data.value[k]);
                 }
+                else
+                {
+                    PlayerPrefs.SetFloat(data.names[k], float.Parse(data.value[k]));   
+                }
             }
         }
 
         private void LoadData<T>(T data) where T : GameData
         {
             var fields = typeof(T).GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-            Debug.Log(fields.Length);
-
             for (int i = 0, k = 0; i < fields.Length - 2; i++,k++)
             {
 
@@ -82,8 +100,31 @@ namespace TwinTower
                 {
                     data.value[k] = PlayerPrefs.GetString(data.names[k]);
                 }
+                else
+                {
+                    data.value[k] = PlayerPrefs.GetFloat(data.names[k]).ToString();
+                }
             }
             data.Set();
+        }
+
+        public List<string> ReadText(string s)
+        {
+            List<string> script = new List<string>();
+            
+            TextAsset textfile = Resources.Load("testtxt") as TextAsset;
+            ;
+            StringReader stringReader = new StringReader(textfile.text);
+
+            while (true)
+            {
+                string line = stringReader.ReadLine();
+                if (line == null) break;
+                
+                script.Add(line);
+            }
+
+            return script;
         }
     }
 }
