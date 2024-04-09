@@ -371,7 +371,7 @@ public class MapNode {
 
         if (RightWallTile.GetCellCenterWorld(minPosition) != new Vector3(1.16666667f, -5.3666667f, 0f) ||
             RightWallTile.GetCellCenterWorld(maxPosition) != new Vector3(10.16666667f, 3.6333333f, 0f)) {
-            Print("LeftTile - Wall이 이상한 곳에 배치되어 있음 확인 필요.(LeftTile에 숨어있을수도 있음)");
+            Print("RightTile - Wall이 이상한 곳에 배치되어 있음 확인 필요.(RightTile 숨어있을수도 있음)");
         }
         
         BoundsInt LeftWallTileBounds = LeftWallTile.cellBounds;

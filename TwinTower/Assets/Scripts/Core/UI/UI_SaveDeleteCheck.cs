@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using TwinTower;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 /// <summary>
@@ -15,6 +17,7 @@ public class UI_SaveDeleteCheck : UI_Base
     //private MenuUIManager menuUIManager;
     private int currCursor;
     private static int BUTTON_COUNT = 2;
+    public Action PrevPanelUpdateAction = null;
 
     public override void Init() {
         //menuUIManager = transform.parent.GetComponent<MenuUIManager>();
@@ -87,6 +90,7 @@ public class UI_SaveDeleteCheck : UI_Base
 
     private void YesEvent() {
         DataManager.Instance.saveload.Delete();
+        PrevPanelUpdateAction.Invoke();
         UIManager.Instance.CloseNormalUI(this);
     }
 

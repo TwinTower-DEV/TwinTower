@@ -14,7 +14,6 @@ public class UI_Load : UI_Base {
     //private MenuUIManager menuUIManager;
     private int currCursor;
     private static int SLOT_COUNT = 3;
-    private bool isActivate;
 
 
     public override void Init() {
@@ -85,10 +84,6 @@ public class UI_Load : UI_Base {
             return;
         if (_uiNum != UIManager.Instance.UINum)
             return;
-        if (!isActivate) {
-            isActivate = true;
-            UpdateUI();
-        }
         if (Input.GetKeyDown(KeyCode.Return)) {                         // 엔터 - 현재 선택된 슬롯 클릭 이벤트 발동
             GameObject go = Get<Image>(currCursor).gameObject;
             UI_EventHandler evt = Util.GetOrAddComponent<UI_EventHandler>(go);
@@ -107,7 +102,6 @@ public class UI_Load : UI_Base {
         
         if (Input.GetKeyDown(KeyCode.Escape)) {                         // ESC - 뒤로가기
             //menuUIManager.PrevPanelChange();
-            isActivate = false;
             UIManager.Instance.InputHandler -= KeyInPut;
             UIManager.Instance.CloseNormalUI(this);
         }
@@ -128,9 +122,9 @@ public class UI_Load : UI_Base {
 
     private void DeleteEvent(int idx) {
         DataManager.Instance.saveload.ChangeCurrSaveSlot(idx);
-        isActivate = false;
         //menuUIManager.SwitchPanelPrevSave("SaveDeleteCheckPanel");
-        UIManager.Instance.ShowNormalUI<UI_SaveDeleteCheck>();
+        UI_SaveDeleteCheck saveDeleteCheck = UIManager.Instance.ShowNormalUI<UI_SaveDeleteCheck>();
+        saveDeleteCheck.PrevPanelUpdateAction += UpdateUI;
     }
 
     // 마우스 진입시 실행되는 이벤트(포커스 변경)
