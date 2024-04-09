@@ -28,7 +28,7 @@ namespace TwinTower
                 Create();
         }
 
-        private static void Create()
+        public static void Create()
         {
             Find();
             
@@ -57,6 +57,11 @@ namespace TwinTower
             {
                 return true;
             }
+        }
+
+        public static void Destroys()
+        {
+            Destroy(s_instance.gameObject);
         }
         
     }

@@ -15,6 +15,9 @@ namespace TwinTower
         public InputButton RightMove;
         public InputButton UpMove;
         public InputButton DownMove;
+        public InputButton ResetButton;
+        public InputButton EscapeButton;
+        public InputButton EnterButton;
         
         public InputAxis Horizontal;
         public InputAxis Vertical;
@@ -28,6 +31,9 @@ namespace TwinTower
             RightMove = new InputButton(KeyCode.RightArrow);
             UpMove = new InputButton(KeyCode.UpArrow);
             DownMove = new InputButton(KeyCode.DownArrow);
+            ResetButton = new InputButton(KeyCode.R);
+            EscapeButton = new InputButton(KeyCode.Escape);
+            EnterButton = new InputButton(KeyCode.Return);
             
             Horizontal = new InputAxis(KeyCode.D, KeyCode.A);
             Vertical = new InputAxis(KeyCode.W,KeyCode.S);
@@ -35,6 +41,8 @@ namespace TwinTower
 
         /// <summary>
         /// 입력을 가져오는 함수입니다.
+        /// fixedUpdateHappened는 FixedUpdate와 Update간의 딜레이를 해결하기 위한 매개변수
+        /// 무시해도 되는 매개변수
         /// </summary>
         /// <param name="fixedUpdateHappened"></param>
         protected override void GetInputs(bool fixedUpdateHappened)
@@ -45,7 +53,9 @@ namespace TwinTower
             RightMove.Get(fixedUpdateHappened, inputType);
             UpMove.Get(fixedUpdateHappened, inputType);
             DownMove.Get(fixedUpdateHappened, inputType);
-            
+            ResetButton.Get(fixedUpdateHappened, inputType);
+            EscapeButton.Get(fixedUpdateHappened, inputType);
+            EnterButton.Get(fixedUpdateHappened, inputType);
             
             Horizontal.Get(inputType);
             Vertical.Get(inputType);
@@ -63,6 +73,9 @@ namespace TwinTower
             GainControl(RightMove);
             GainControl(UpMove);
             GainControl(DownMove);
+            GainControl(ResetButton);
+            GainControl(EscapeButton);
+            GainControl(EnterButton);
             
             GainControl(Horizontal);
             GainControl(Vertical);
@@ -77,8 +90,16 @@ namespace TwinTower
         {
             _HaveControl = false;
             
+            ReleaseControl(LeftMove, resetValues);
+            ReleaseControl(RightMove, resetValues);
+            ReleaseControl(UpMove, resetValues);
+            ReleaseControl(DownMove, resetValues);
+            ReleaseControl(ResetButton, resetValues);
+            ReleaseControl(EscapeButton, resetValues);
+            ReleaseControl(EnterButton, resetValues);
+            
             ReleaseControl(Horizontal,resetValues);
             ReleaseControl(Vertical,resetValues);
-           }
+        }
     }
 }

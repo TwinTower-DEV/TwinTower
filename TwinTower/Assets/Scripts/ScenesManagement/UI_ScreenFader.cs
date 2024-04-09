@@ -26,7 +26,7 @@ namespace TwinTower
 
         protected static UI_ScreenFader s_Instance;
 
-        
+
         public CanvasGroup FaderCanvasGroup;
         public float fadeDuration = 1f;
 
@@ -39,7 +39,7 @@ namespace TwinTower
             }
             // 처음 시작할 땐 alpha(투명도) 0으로 시작
             Instance.FaderCanvasGroup.alpha = 0f;
-            
+            DontDestroyOnLoad(FaderCanvasGroup);
             DontDestroyOnLoad(gameObject);
         }
         // 서서히 작동되게 하는 코드
@@ -64,12 +64,13 @@ namespace TwinTower
             canvasGroup = Instance.FaderCanvasGroup;
 
             yield return Instance.StartCoroutine(Instance.Fade(0f, canvasGroup));
-
+            
             canvasGroup.gameObject.SetActive(false);
         }
         // FadeOut 코드
         public static IEnumerator FadeScenOut()
         {
+            
             CanvasGroup canvasGroup = Instance.FaderCanvasGroup;
             canvasGroup.gameObject.SetActive(true);
             yield return Instance.StartCoroutine(Instance.Fade(1f, canvasGroup));

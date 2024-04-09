@@ -13,5 +13,18 @@ namespace TwinTower
             Right,
             None
         }
+        public enum UIEvent
+        {
+            Click,
+            Drag,
+            EndDrag,
+            Enter,
+            Exit
+        }
+        public struct Resolution
+        {
+            public int width;
+            public int height;
+        }
     }
 }
