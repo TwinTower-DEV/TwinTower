@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using TwinTower;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 /// <summary>
@@ -22,7 +23,7 @@ public class UI_Menu : UI_Base {
         //menuUIManager = transform.parent.GetComponent<MenuUIManager>();
         
         Bind<Image>(typeof(Menu));                  // 각 버튼 Bind
-
+        UIManager.Instance.InputHandler -= KeyInPut;
         UIManager.Instance.InputHandler += KeyInPut;
         // 클릭 이벤트
         Get<Image>((int)Menu.UnSelectSave).gameObject.BindEvent(SaveEvent, Define.UIEvent.Click);
@@ -87,7 +88,8 @@ public class UI_Menu : UI_Base {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             UIManager.Instance.InputHandler -= KeyInPut;
-            InputManager.Instance.UnPause();
+            Time.timeScale = 1;
+            InputController.Instance.GainControl();
             UIManager.Instance.CloseNormalUI(this);
             //menuUIManager.PrevPanelChange();
         }

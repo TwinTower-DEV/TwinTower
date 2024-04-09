@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Reflection;
 using UnityEngine;
 
@@ -11,6 +13,7 @@ namespace TwinTower
         private UIGameData _uiGameData;
         private StageInfo _stageInfo;
         private SaveLoadController _saveloadcontroller;
+        private List<string> scripts;
         public UIGameData UIGameDatavalue
         {
             get
@@ -23,7 +26,19 @@ namespace TwinTower
                 SaveData(_uiGameData);
             }
         }
-
+        
+        public List<string> Scripstvalue
+        {
+            get
+            {
+                return scripts;
+            }
+            set
+            {
+                scripts = value;
+            }
+        }
+        
         public StageInfo StageInfovalue
         {
             get
@@ -53,8 +68,7 @@ namespace TwinTower
         private void InitDataSetting()
         {
             _uiGameData = new UIGameData(2, 2, 0, 2, 0);
-            _stageInfo = new StageInfo(0, -1);
-            _saveloadcontroller = new SaveLoadController();
+            _stageInfo = new StageInfo(0, "testtxt");            _saveloadcontroller = new SaveLoadController();
             LoadData(_uiGameData);
             LoadData(_stageInfo);
         }
@@ -95,6 +109,24 @@ namespace TwinTower
                 }
             }
             data.Set();
+        }
+        
+        public List<string> ReadText(string s)
+        {
+            List<string> script = new List<string>();
+                
+            TextAsset textfile = Resources.Load(s) as TextAsset;
+            StringReader stringReader = new StringReader(textfile.text);
+
+            while (true)
+            {
+                string line = stringReader.ReadLine();
+                if (line == null) break;
+                
+                script.Add(line);
+            }
+
+            return script;
         }
     }
 }
