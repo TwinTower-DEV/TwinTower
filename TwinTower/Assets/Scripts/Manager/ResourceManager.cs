@@ -37,8 +37,8 @@ namespace TwinTower
             if (original.GetComponent<Poolable>() != null)
                 return PoolManager.Instance.Pop(original, parent).gameObject;
                 */
-
             GameObject go = Object.Instantiate(original, parent);
+            Debug.Log(go.name);
             go.name = original.name;
             return go;
         }

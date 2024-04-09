@@ -18,7 +18,12 @@ namespace TwinTower
         int _deviceHeight = Screen.height;
 
         public Action InputHandler;
-        
+
+        protected override void Awake()
+        {
+            base.Awake();
+        }
+
         public int UINum
         {
             get
@@ -33,14 +38,18 @@ namespace TwinTower
 
         public void Update()
         {
-            
-            
-            if (InputHandler != null)
-            {
-                InputHandler.Invoke();
-            }
+            Brodcast();
         }
 
+        private void Brodcast()
+        {
+            if (!Input.anyKey) return;
+            if (InputHandler == null) return;
+            
+            
+            InputHandler.Invoke();
+            
+        }
         public Define.Resolution Resolution
         {
             get
@@ -108,13 +117,14 @@ namespace TwinTower
             GameObject go = ResourceManager.Instance.Instantiate($"UI/{name}");
             T ui = Util.GetOrAddComponent<T>(go);
             _normalUIs.Add(ui);
-
+            Debug.Log(go.name);
             go.transform.SetParent(Root.transform);
 
             return ui;
         }
         public void CloseNormalUI(UI_Base ui)
         {
+            Debug.Log("sadadasdad");
             if (_normalUIs.Count == 0)
                 return;
             if (ui == null) return;

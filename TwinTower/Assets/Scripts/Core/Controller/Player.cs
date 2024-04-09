@@ -7,7 +7,7 @@ namespace TwinTower
     {
         private Animator _animator;
         public Define.MoveDir dir;
-
+        
         public Define.MoveDir Dir
         {
             get { return dir; }
@@ -57,6 +57,8 @@ namespace TwinTower
             base.Awake();
             InputManager.Create();
             _animator = GetComponent<Animator>();
+
+            
         }
     }
 }

@@ -55,23 +55,10 @@ namespace TwinTower
             GameManager.Instance._player2.Dir = dir;
         }
 
-        private void FixedUpdate() {
+        private void Update() {
             if (!islockMove) GroundedHorizontalMovement();
         }
 
-        private void Update() {
-            if (InputController.Instance.EscapeButton.Down) { // ESC
-                if (!isESC) {
-                    InputController.Instance.ReleaseControl();
-                    InputController.Instance.EscapeButton.GainControl();
-                    InputController.Instance.EnterButton.GainControl();
-                    isESC = true;
-                    //Time.timeScale = 0;
-                    UIManager.Instance.ShowNormalUI<UI_Menu>();
-                    //UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("UIMenus", UnityEngine.SceneManagement.LoadSceneMode.Additive);
-                }
-            }
-        }
         
         public void UnPause() {
             /*if (Time.timeScale > 0)
