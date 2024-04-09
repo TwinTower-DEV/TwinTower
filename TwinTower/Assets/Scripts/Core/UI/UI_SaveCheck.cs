@@ -14,6 +14,7 @@ public class UI_SaveCheck : UI_Base {
     //private MenuUIManager menuUIManager;
     private int currCursor;
     private static int BUTTON_COUNT = 2;
+    public Action PrevPanelUpdateAction = null;
     
     public override void Init() {
         Bind<Image>(typeof(Check));                     // 버튼 Bind
@@ -85,6 +86,7 @@ public class UI_SaveCheck : UI_Base {
 
     private void YesEvent() {
         DataManager.Instance.saveload.Save();
+        PrevPanelUpdateAction.Invoke();
         UIManager.Instance.CloseNormalUI(this);
     }
 

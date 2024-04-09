@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9051521959211537861}
   - component: {fileID: 5945265660604529751}
   m_Layer: 5
-  m_Name: UI_SaveSdeleteCheck
+  m_Name: UI_SaveDeleteCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
