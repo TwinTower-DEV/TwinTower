@@ -37,6 +37,7 @@ namespace TwinTower
         {
             if (OnEnterHandler != null)
                 OnEnterHandler.Invoke();
+            Debug.Log("ㅇㅇ");
         }
 
         public void OnPointerExit(PointerEventData eventData)
