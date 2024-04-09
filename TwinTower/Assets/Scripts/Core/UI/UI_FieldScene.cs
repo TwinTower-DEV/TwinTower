@@ -24,6 +24,6 @@ namespace TwinTower
                 Time.timeScale = 0;
             }
         }
-
+        
     }
 }

@@ -18,12 +18,14 @@ namespace TwinTower
             InputController.Instance.GainControl();
         }
 
-        public IEnumerator NextSceneload(int nextidx)
+        public IEnumerator NextSceneload(int nextidx, string s)
         {
-            Debug.Log("Asda");
             yield return StartCoroutine(UI_ScreenFader.FadeScenOut());
-            Debug.Log("asddda");
-            SceneManager.LoadScene(nextidx);
+            if (s == null)
+                SceneManager.LoadScene(nextidx);
+            else
+                SceneManager.LoadScene(s);
+            Debug.Log(" GHKRDLS");
             yield return StartCoroutine(UI_ScreenFader.FadeSceneIn());
             GameManager.Instance.FindPlayer();
         }

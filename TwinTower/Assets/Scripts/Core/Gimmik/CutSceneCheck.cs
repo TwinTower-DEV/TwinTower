@@ -7,7 +7,7 @@ namespace TwinTower
     public class CutSceneCheck : MonoBehaviour
     {
         [SerializeField] private string FileName;
-        public void Awake()
+        public void Start()
         {
             if (DataManager.Instance.StageInfovalue.cutsceneflug != null)
             {
