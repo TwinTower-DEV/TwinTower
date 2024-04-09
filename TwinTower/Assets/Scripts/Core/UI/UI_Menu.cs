@@ -114,7 +114,9 @@ public class UI_Menu : UI_Base {
     private void MainMenuEvent() {
         Debug.Log("Enter MainMenu");
         InputManager.Destroys();
-        StartCoroutine(ScreenManager.Instance.NextSceneload(3));
+        Time.timeScale = 1;
+        StartCoroutine(ScreenManager.Instance.NextSceneload(1, "MainScene"));
+        //UIManager.Instance.CloseNormalUI(this);
     }
 
     void EnterCursorEvent(int currIdx) {
