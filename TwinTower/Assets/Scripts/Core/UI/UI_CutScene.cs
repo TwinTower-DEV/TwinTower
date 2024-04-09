@@ -17,7 +17,7 @@ namespace TwinTower
         {
             NameText,
             ChatText
-        }
+        }   
 
         private List<string> scripts;
         private int script_idx;
