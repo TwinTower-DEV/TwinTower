@@ -80,7 +80,7 @@ namespace TwinTower
         void NewGame()
         {
             UIManager.Instance.InputHandler -= KeyInPut;
-            StartCoroutine(ScreenManager.Instance.NextSceneload(DataManager.Instance.StageInfovalue.nextStage));
+            StartCoroutine(ScreenManager.Instance.NextSceneload(DataManager.Instance.StageInfovalue.nextStage, null));
             
             Debug.Log("New Game Start");
         }
