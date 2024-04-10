@@ -12,6 +12,8 @@ namespace TwinTower
             if (DataManager.Instance.StageInfovalue.cutsceneflug != null)
             {
                 DataManager.Instance.Scripstvalue = DataManager.Instance.ReadText(FileName);
+                Time.timeScale = 0;
+                InputController.Instance.ReleaseControl();
                 UIManager.Instance.ShowNormalUI<UI_CutScene>();
             }
         }
