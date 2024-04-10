@@ -230,7 +230,7 @@ public class OppRotatePlateNode : NormalNode {
         if (plate == null) {
             throw new Exception(Object.name + ": map Rotate Plate 컴포넌트가 없음.");
         }
-        if(plate.rotateTileMap == null) Print("Rotate Tile Map이 지정되어 있지 않음 inspector창 확인 필요.");
+        // if(plate.rotateTileMap == null) Print("Rotate Tile Map이 지정되어 있지 않음 inspector창 확인 필요.");
         if(plate.isOpp == false) Print("isOpp가 설정되어 있지 않음 확인 필요");
     }
 }
@@ -246,7 +246,7 @@ public class RotatePlateNode : NormalNode {
         if (plate == null) {
             throw new Exception(Object.name + ": map Rotate Plate 컴포넌트가 없음.");
         }
-        if(plate.rotateTileMap == null) Print("Rotate Tile Map이 지정되어 있지 않음 inspector창 확인 필요.");
+        // if(plate.rotateTileMap == null) Print("Rotate Tile Map이 지정되어 있지 않음 inspector창 확인 필요.");
         if(plate.isOpp == true) Print("isOpp가 설정되어 있음 확인 필요(설정되면 안되는 오브젝트임)");
     }
 }
@@ -297,7 +297,6 @@ public class MapNode {
         if(LeftWallTile.transform.rotation.eulerAngles.x != 0) Print("LeftWallTile x회전값 0으로 해주세요");
         if(LeftWallTile.transform.rotation.eulerAngles.y != 0) Print("LeftWallTile y회전값 0으로 해주세요");
         if(LeftWallTile.transform.rotation.eulerAngles.z != 0) Print("LeftWallTile z회전값 0으로 해주세요");
-
         
         if (Object.transform.childCount != 2) Print("맵 안에 이상한 것이 들어가 있습니다.");
         for (int i = 0; i < Object.transform.childCount; i++) {
