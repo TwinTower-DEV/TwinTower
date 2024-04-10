@@ -49,6 +49,9 @@ namespace TwinTower
                 if (script_idx == scripts.Count)
                 {
                     UIManager.Instance.InputHandler -= KeyInput;
+                    Time.timeScale = 1;
+                    InputController.Instance.GainControl();
+
                     UIManager.Instance.CloseNormalUI(this);
                 }
                 else
