@@ -48,6 +48,17 @@ public class TileFindManager : MonoBehaviour {
 
         throw new Exception("이상한 오브젝트가 들어옴 -> 타일맵 내에 존재하지 않는 오브젝트.");
     }
+    
+    public Tilemap getTileInArea(Vector3 objectLocation, bool isOpp) {
+        if (tileMaps[0] == null) FindTileMap();
+        Vector3Int tilePosition = tileMaps[0].WorldToCell(objectLocation);
+        if (tileMaps[0].GetTile(tilePosition) != null) {
+            if (isOpp) return tileMaps[1];
+            return tileMaps[0];
+        }
+        if (isOpp) return tileMaps[0];
+        return tileMaps[1];
+    }
 
     private void FindTileMap() {
         tileMaps[0] = transform.GetChild(0).GetComponent<Tilemap>();

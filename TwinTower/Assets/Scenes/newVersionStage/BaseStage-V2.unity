@@ -168,7 +168,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 722305103165723637, guid: fcd7f72700d309643b3ea4660eecc4a4, type: 3}
       propertyPath: m_Name
-      value: CutScens
+      value: CutScene
       objectReference: {fileID: 0}
     - target: {fileID: 722305103165723638, guid: fcd7f72700d309643b3ea4660eecc4a4, type: 3}
       propertyPath: FileName
