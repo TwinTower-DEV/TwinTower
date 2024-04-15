@@ -85,12 +85,14 @@ public class UI_SaveCheck : UI_Base {
     }
 
     private void YesEvent() {
+        UIManager.Instance.InputHandler -= KeyInPut;
         DataManager.Instance.saveload.Save();
         PrevPanelUpdateAction.Invoke();
         UIManager.Instance.CloseNormalUI(this);
     }
 
     private void NoEvent() {
+        UIManager.Instance.InputHandler -= KeyInPut;
         UIManager.Instance.CloseNormalUI(this);
     }
 
