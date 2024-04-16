@@ -12,34 +12,31 @@ using UnityEngine.UIElements;
 namespace TwinTower
 {
     public class MapRotatePlate: MonoBehaviour {
-        [SerializeField] public Tilemap rotateTileMap;                         // 회전할 Tilemap
+        private Tilemap rotateTileMap;                         // 회전할 Tilemap
         private Tilemap wallRenderer;
         
         [SerializeField] public bool isOpp;
-        [SerializeField] private float rotateSpeed = 40;                        // 회전 속도
+        [SerializeField] private float rotateSpeed = 100;                        // 회전 속도
         [SerializeField] private float transperencySpeed = 500f;                // 벽 투명해지는 속도
         
         private Vector2 boxSize = new Vector2(8f, 8f);
         private float distDegree;
 
         private bool isDegree45 = false;
-        private Vector3 rotationDir;
+        private Vector3 rotationDir = Vector3.back;
         private Vector2 rotationCenter;
         private List<Collider2D> rotatableObject;      // 같이 회전되는 오브젝트들(무빙워크, 발사대)
         private List<Collider2D> unRotatableObject;    // 회전되지 않는 오브젝트들
         
         private void Awake() {
+            rotateTileMap = TileFindManager.Instance.getTileInArea(transform.position, isOpp);
             rotationCenter = rotateTileMap.transform.position;
             wallRenderer = rotateTileMap.transform.GetChild(0).GetComponent<Tilemap>();
-            
-            if (isOpp) rotationDir = Vector3.forward;
-            else rotationDir = Vector3.back;
         }
 
         // 발사
         public void Launch() {
-            if (!isOpp) distDegree = rotateTileMap.transform.rotation.eulerAngles.z - 90;
-            else distDegree = rotateTileMap.transform.rotation.eulerAngles.z + 90;
+            distDegree = rotateTileMap.transform.rotation.eulerAngles.z - 90;
 
             // 상자와 같은 없어지는 오브젝트가 있을 경우 때문에 여기에서 판별
             rotatableObject = new List<Collider2D>();
@@ -125,8 +122,7 @@ namespace TwinTower
             // 회전 되면 안되는 오브젝트들 회전(player, box, 버튼들)
             foreach (var collider in unRotatableObject) {
                 Vector3 currDegree = collider.transform.rotation.eulerAngles;
-                if (isOpp) currDegree.z -= 90; 
-                else currDegree.z += 90; 
+                currDegree.z += 90; 
                 collider.transform.rotation = Quaternion.Euler(currDegree);
             }
 
@@ -134,8 +130,7 @@ namespace TwinTower
             foreach (var collider in rotatableObject) {
                 DispenserShoot arrowdisepenser = collider.GetComponent<DispenserShoot>();
                 if (arrowdisepenser != null) {
-                    if(!isOpp) arrowdisepenser.prevDirection();
-                    else arrowdisepenser.NextDirection();
+                    arrowdisepenser.prevDirection();
                 }
             }
             
