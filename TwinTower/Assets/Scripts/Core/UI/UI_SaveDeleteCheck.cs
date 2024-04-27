@@ -89,13 +89,16 @@ public class UI_SaveDeleteCheck : UI_Base
     }
 
     private void YesEvent() {
+        UIManager.Instance.InputHandler -= KeyInPut;
         DataManager.Instance.saveload.Delete();
         PrevPanelUpdateAction.Invoke();
         UIManager.Instance.CloseNormalUI(this);
     }
 
     private void NoEvent() {
-        UIManager.Instance.CloseNormalUI(this);    }
+        UIManager.Instance.InputHandler -= KeyInPut;
+        UIManager.Instance.CloseNormalUI(this);    
+    }
 
     void EnterCursorEvent(int currIdx) {
         Get<Image>(currCursor + BUTTON_COUNT).gameObject.SetActive(false);  // 기존것 하이라이트 종료
