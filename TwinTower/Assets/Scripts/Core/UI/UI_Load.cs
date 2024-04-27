@@ -112,6 +112,10 @@ public class UI_Load : UI_Base {
         for (int i = 0; i < SaveLoadController.SLOTCOUNT; i++) {
             Get<TextMeshProUGUI>(i).text = SaveLoadController.GetSaveInfo(i);
             Get<TextMeshProUGUI>(i + SLOT_COUNT).text = SaveLoadController.GetSaveInfo(i);
+            if (SaveLoadController.GetSaveInfo(i) == "NO SAVE DATA") {
+                Get<Button>(i).gameObject.SetActive(false);
+            }
+            else Get<Button>(i).gameObject.SetActive(true);
         }
     }
 

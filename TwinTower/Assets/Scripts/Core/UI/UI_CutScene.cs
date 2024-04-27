@@ -21,8 +21,10 @@ namespace TwinTower
 
         private List<string> scripts;
         private int script_idx;
+        [SerializeField] private AudioClip BGM;
         public override void Init()
         {
+            SoundManager.Instance.SetBGM(BGM, 0.5f);
             Bind<Image>(typeof(Images));
             Bind<TextMeshProUGUI>(typeof(Texts));
 
@@ -52,6 +54,7 @@ namespace TwinTower
                     Time.timeScale = 1;
                     InputController.Instance.GainControl();
 
+                    SoundManager.Instance.SetBGM(BGM);
                     UIManager.Instance.CloseNormalUI(this);
                 }
                 else

@@ -13,9 +13,11 @@ namespace TwinTower
         const int BUTTON_COUNT = (int)Images.Exit + 1;
         private Action[] _actions = new Action[BUTTON_COUNT];
         private int currcoursor;
+        [SerializeField] private AudioClip BGM;
         
         public override void Init()
         {
+            SoundManager.Instance.SetBGM(BGM);
             Bind<Image>(typeof(Images));
 
             UIManager.Instance.InputHandler -= KeyInPut;
