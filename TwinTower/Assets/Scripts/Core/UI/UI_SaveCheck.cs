@@ -63,7 +63,6 @@ public class UI_SaveCheck : UI_Base {
             return;
         if (Input.GetKeyDown(KeyCode.Return)) {
             GameObject go = Get<Image>(currCursor).gameObject;
-            Debug.Log(go.name);
             UI_EventHandler evt = Util.GetOrAddComponent<UI_EventHandler>(go);
             evt.OnClickHandler.Invoke();
             return;

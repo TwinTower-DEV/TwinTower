@@ -19,7 +19,6 @@ namespace TwinTower
                 if (go != null)
                     return go as T;
             }*/
-            Debug.Log(path);
             return Resources.Load<T>(path);
         }
         
@@ -38,7 +37,6 @@ namespace TwinTower
                 return PoolManager.Instance.Pop(original, parent).gameObject;
                 */
             GameObject go = Object.Instantiate(original, parent);
-            Debug.Log(go.name);
             go.name = original.name;
             return go;
         }

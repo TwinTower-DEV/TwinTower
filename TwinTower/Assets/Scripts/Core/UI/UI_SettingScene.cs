@@ -37,6 +37,11 @@ namespace TwinTower
             DisplayMode_Button,
             Display_Button,
             Language_Button,
+            BGM_Select,
+            SE_Select,
+            DisplayMode_Select,
+            Display_Select,
+            Language_Select,
             Audio_Setting,
             Display_Setting,
             Language_Setting,
@@ -234,6 +239,10 @@ namespace TwinTower
             Util.FindChild<Image>(Get<Image>((int)Images.Display_Button).gameObject).GetComponentInChildren<TextMeshProUGUI>().text = displays[displaycoursor];
             Util.FindChild<Image>(Get<Image>((int)Images.DisplayMode_Button).gameObject).GetComponentInChildren<TextMeshProUGUI>().text = displayModes[displaymodecursor];
             Util.FindChild<Image>(Get<Image>((int)Images.Language_Button).gameObject).GetComponentInChildren<TextMeshProUGUI>().text = langauges[langaugecoursor];
+            Get<Image>((int)Images.SE_Select).gameObject.SetActive(false);
+            Get<Image>((int)Images.DisplayMode_Select).gameObject.SetActive(false);
+            Get<Image>((int)Images.Display_Select).gameObject.SetActive(false);
+            Get<Image>((int)Images.Language_Select).gameObject.SetActive(false);
         }
 
         private void PushSoundButton(Images selectsound, Images soundbutton, int nextidx = -1)
@@ -306,6 +315,7 @@ namespace TwinTower
             SetColor(Get<Image>(mainCategory[currentcoursor / 2]).gameObject, "#FFFFFF", true);
             SetColor(Get<Image>(mainCategory[currentcoursor / 2]).gameObject, "#FFFFFF", false);
             SetColor(Get<Image>(currentcoursor).gameObject, "#FFFFFF", false);
+            Get<Image>(currentcoursor + BUTTON_COUNT).gameObject.SetActive(false);
             if(currentcoursor != 0 && currentcoursor != 1)
                 SetColor(Get<Image>(currentcoursor).gameObject, "#FFFFFF", true);
 
@@ -315,7 +325,7 @@ namespace TwinTower
             }
 
             currentcoursor = nextidx;
-            
+            Get<Image>(currentcoursor + BUTTON_COUNT).gameObject.SetActive(true);
             SetColor(Get<Image>(mainCategory[currentcoursor / 2]).gameObject, "#D86ECC", true);
             SetColor(Get<Image>(mainCategory[currentcoursor / 2]).gameObject, "#D86ECC", false);
             SetColor(Get<Image>(currentcoursor).gameObject, "#D86ECC", false);
