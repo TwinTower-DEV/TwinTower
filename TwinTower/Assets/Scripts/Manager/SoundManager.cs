@@ -12,16 +12,19 @@ public class SoundManager : Manager<SoundManager> {
         base.Awake();
 
         bgmSource = GetComponent<AudioSource>();
+        if (bgmSource == null) bgmSource = gameObject.AddComponent<AudioSource>();
         effectSources = GetComponents<AudioSource>().ToList();
         if (effectSources.Count == 0) effectSources.Add(gameObject.AddComponent<AudioSource>());
-
+        
         effectSources.Remove(bgmSource);
         bgmSource.loop = true;
-        bgmSource.Play();
     }
 
-    public void SetBGM(AudioClip bgm) {
+    public void SetBGM(AudioClip bgm, float volume = 1) {
+        bgmSource.volume = volume;
+        if (bgm == bgmSource.clip) return;
         bgmSource.clip = bgm;
+        if(!bgmSource.isPlaying) bgmSource.Play();
     }
 
     public void PlayEffect(AudioClip effect) {
