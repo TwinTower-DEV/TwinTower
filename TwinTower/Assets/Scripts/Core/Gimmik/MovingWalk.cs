@@ -16,7 +16,8 @@ public class MovingWalk : MonoBehaviour {
     private void OnTriggerStay2D(Collider2D other) {
         MoveControl moveableObject = other.GetComponent<MoveControl>();
         if (moveableObject != null && moveableObject.MoveCheck(transform.up)) {     // 이동 가능할때
-            moveableObject.DirectSetting(transform.up);                             // 이동
+            moveableObject.DirectSetting(transform.up);  
+            Debug.Log(transform.up);
         }
     }
 }
