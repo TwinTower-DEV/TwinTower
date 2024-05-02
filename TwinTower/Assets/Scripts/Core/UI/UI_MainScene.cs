@@ -103,6 +103,7 @@ namespace TwinTower
 
         void Exit()
         {
+            UIManager.Instance.ShowNormalUI<UI_ExitCheck>();
         }
 
         void EnterCoursor(int nextidx)
