@@ -25,9 +25,8 @@ namespace TwinTower
                 SceneManager.LoadScene(nextidx);
             else
                 SceneManager.LoadScene(s);
-            Debug.Log(" GHKRDLS");
-            yield return StartCoroutine(UI_ScreenFader.FadeSceneIn());
-            GameManager.Instance.FindPlayer();
+            //yield return StartCoroutine(UI_ScreenFader.FadeSceneIn());
+            //GameManager.Instance.FindPlayer();
         }
     }
 }
