@@ -27,6 +27,11 @@ public class SoundManager : Manager<SoundManager> {
         if(!bgmSource.isPlaying) bgmSource.Play();
     }
 
+    public void SetBGMVolume(float volume)
+    {
+        bgmSource.volume = volume;
+    }
+
     public void PlayEffect(AudioClip effect) {
         foreach (AudioSource source in effectSources) {
             if (!source.isPlaying) {

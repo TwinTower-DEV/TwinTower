@@ -1,5 +1,4 @@
 ﻿using System;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.UI;
@@ -25,10 +24,13 @@ namespace TwinTower
             
             Get<Image>((int)Images.SelectNewGame).gameObject.BindEvent(NewGame, Define.UIEvent.Click);
             Get<Image>((int)Images.SelectNewGame).gameObject.SetActive(false);
+            
             Get<Image>((int)Images.SelectSetting).gameObject.BindEvent(Setting, Define.UIEvent.Click);
             Get<Image>((int)Images.SelectSetting).gameObject.SetActive(false);
+            
             Get<Image>((int)Images.SelectContinue).gameObject.BindEvent(Continue, Define.UIEvent.Click);
             Get<Image>((int)Images.SelectContinue).gameObject.SetActive(false);
+            
             Get<Image>((int)Images.SelectExit).gameObject.BindEvent(Exit, Define.UIEvent.Click);
             Get<Image>((int)Images.SelectExit).gameObject.SetActive(false);
             
@@ -96,6 +98,7 @@ namespace TwinTower
 
         void Continue()
         {
+            UIManager.Instance.ShowNormalUI<UI_Load>();
         }
 
         void Exit()
@@ -122,6 +125,15 @@ namespace TwinTower
         void ExitCursor(int idx)
         {
             
+        }
+
+        public int Test()
+        {
+            EnterCoursor(1);
+            EnterCoursor(2);
+            EnterCoursor(3);
+
+            return currcoursor;
         }
     }
 }
