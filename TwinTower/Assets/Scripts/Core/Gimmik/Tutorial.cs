@@ -13,13 +13,13 @@ namespace TwinTower
 {
     public class Tutorial : MonoBehaviour
     {
-        [SerializeField] private TutorialObject tutorialobject;
+        [SerializeField] private string tutorialstring;
 
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
-                Debug.Log(tutorialobject.TutorialString);
+                Debug.Log(tutorialstring);
             }
         }
 
