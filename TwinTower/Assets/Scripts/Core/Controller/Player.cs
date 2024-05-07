@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace TwinTower
@@ -44,7 +45,7 @@ namespace TwinTower
                         }
                         else
                         {
-                                _animator.Play("Up_Idle");
+                            _animator.Play("Up_Idle");
                         }
                         break;
                 }
@@ -57,8 +58,7 @@ namespace TwinTower
             base.Awake();
             InputManager.Create();
             _animator = GetComponent<Animator>();
-
-            
         }
+        
     }
 }
