@@ -20,14 +20,14 @@ namespace TwinTower
 
         public IEnumerator NextSceneload(int nextidx, string s)
         {
+            UIManager.Instance.iscutSceenCheck = false;
             yield return StartCoroutine(UI_ScreenFader.FadeScenOut());
             if (s == null)
                 SceneManager.LoadScene(nextidx);
             else
                 SceneManager.LoadScene(s);
-            Debug.Log(" GHKRDLS");
-            yield return StartCoroutine(UI_ScreenFader.FadeSceneIn());
-            GameManager.Instance.FindPlayer();
+            //yield return StartCoroutine(UI_ScreenFader.FadeSceneIn());
+            //GameManager.Instance.FindPlayer();
         }
     }
 }

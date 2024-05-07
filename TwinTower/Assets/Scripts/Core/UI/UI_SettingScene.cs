@@ -29,6 +29,8 @@ namespace TwinTower
         private string[] displays = new string[5]
             { "800 X 600", "1280 X 720", "1920 X 1080", "2560 X 1440", "3840 X 2160" };
 
+        private float[] soundvolume = new float[5]
+            { 0.0f, 0.25f, 0.5f, 0.75f, 1.0f };
         private string[] langauges = new string[2] { "한국어", "영어" };
         enum Images
         {
@@ -37,6 +39,11 @@ namespace TwinTower
             DisplayMode_Button,
             Display_Button,
             Language_Button,
+            BGM_Select,
+            SE_Select,
+            DisplayMode_Select,
+            Display_Select,
+            Language_Select,
             Audio_Setting,
             Display_Setting,
             Language_Setting,
@@ -226,14 +233,18 @@ namespace TwinTower
         }
         private void InitSetting()
         {
-            SetColor(Get<Image>((int)Images.Audio_Setting).gameObject, "#D86ECC", false);
-            SetColor(Get<Image>((int)Images.Audio_Setting).gameObject, "#D86ECC", true);
-            SetColor(Get<Image>(currentcoursor).gameObject, "#D86ECC", false);
+            SetColor(Get<Image>((int)Images.Audio_Setting).gameObject, "#846E62", false);
+            SetColor(Get<Image>((int)Images.Audio_Setting).gameObject, "#846E62", true);
+            SetColor(Get<Image>(currentcoursor).gameObject, "#846E62", false);
             SelectSoundButton(0);
             NoSelectSoundButton(1);
             Util.FindChild<Image>(Get<Image>((int)Images.Display_Button).gameObject).GetComponentInChildren<TextMeshProUGUI>().text = displays[displaycoursor];
             Util.FindChild<Image>(Get<Image>((int)Images.DisplayMode_Button).gameObject).GetComponentInChildren<TextMeshProUGUI>().text = displayModes[displaymodecursor];
             Util.FindChild<Image>(Get<Image>((int)Images.Language_Button).gameObject).GetComponentInChildren<TextMeshProUGUI>().text = langauges[langaugecoursor];
+            Get<Image>((int)Images.SE_Select).gameObject.SetActive(false);
+            Get<Image>((int)Images.DisplayMode_Select).gameObject.SetActive(false);
+            Get<Image>((int)Images.Display_Select).gameObject.SetActive(false);
+            Get<Image>((int)Images.Language_Select).gameObject.SetActive(false);
         }
 
         private void PushSoundButton(Images selectsound, Images soundbutton, int nextidx = -1)
@@ -257,9 +268,9 @@ namespace TwinTower
             }
 
             currentcoursor = (int)selectsound;
-            SetColor(Get<Image>(mainCategory[currentcoursor / 2]).gameObject, "#D86ECC", true);
-            SetColor(Get<Image>(mainCategory[currentcoursor / 2]).gameObject, "#D86ECC", false);
-            SetColor(Get<Image>(currentcoursor).gameObject, "#D86ECC", false);
+            SetColor(Get<Image>(mainCategory[currentcoursor / 2]).gameObject, "#846E62", true);
+            SetColor(Get<Image>(mainCategory[currentcoursor / 2]).gameObject, "#846E62", false);
+            SetColor(Get<Image>(currentcoursor).gameObject, "#846E62", false);
 
         }
 
@@ -306,6 +317,7 @@ namespace TwinTower
             SetColor(Get<Image>(mainCategory[currentcoursor / 2]).gameObject, "#FFFFFF", true);
             SetColor(Get<Image>(mainCategory[currentcoursor / 2]).gameObject, "#FFFFFF", false);
             SetColor(Get<Image>(currentcoursor).gameObject, "#FFFFFF", false);
+            Get<Image>(currentcoursor + BUTTON_COUNT).gameObject.SetActive(false);
             if(currentcoursor != 0 && currentcoursor != 1)
                 SetColor(Get<Image>(currentcoursor).gameObject, "#FFFFFF", true);
 
@@ -315,12 +327,12 @@ namespace TwinTower
             }
 
             currentcoursor = nextidx;
-            
-            SetColor(Get<Image>(mainCategory[currentcoursor / 2]).gameObject, "#D86ECC", true);
-            SetColor(Get<Image>(mainCategory[currentcoursor / 2]).gameObject, "#D86ECC", false);
-            SetColor(Get<Image>(currentcoursor).gameObject, "#D86ECC", false);
+            Get<Image>(currentcoursor + BUTTON_COUNT).gameObject.SetActive(true);
+            SetColor(Get<Image>(mainCategory[currentcoursor / 2]).gameObject, "#846E62", true);
+            SetColor(Get<Image>(mainCategory[currentcoursor / 2]).gameObject, "#846E62", false);
+            SetColor(Get<Image>(currentcoursor).gameObject, "#846E62", false);
             if(currentcoursor != 0 && currentcoursor != 1)
-                SetColor(Get<Image>(currentcoursor).gameObject, "#D86ECC", true);
+                SetColor(Get<Image>(currentcoursor).gameObject, "#846E62", true);
             if (currentcoursor == 0 || currentcoursor == 1)
             {
                 SelectSoundButton(currentcoursor);
@@ -329,8 +341,27 @@ namespace TwinTower
 
         private void Apply()
         {
+            UI_Setting_SaveCheck settingSaveCheck = UIManager.Instance.ShowNormalUI<UI_Setting_SaveCheck>();
+            settingSaveCheck.saveAction += SaveData;
+        }
+
+        private void SaveData()
+        {
             DataManager.Instance.UIGameDatavalue = new UIGameData(bgmcursor, seccursor, displaymodecursor,
                 displaycoursor, langaugecoursor);
+            SoundApply();
+            DisplayApply();
+        }
+
+        private void SoundApply()
+        {
+            SoundManager.Instance.SetBGMVolume(soundvolume[bgmcursor]);
+            // sf 는 이번주 회의에서 물어보기
+        }
+
+        private void DisplayApply()
+        {
+            
         }
 
         private void ExitCoursor(int idx)

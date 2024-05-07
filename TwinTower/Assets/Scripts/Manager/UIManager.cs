@@ -16,9 +16,9 @@ namespace TwinTower
 
         int _deviceWidth = Screen.width;
         int _deviceHeight = Screen.height;
-
+        
         public Action InputHandler;
-
+        public bool iscutSceenCheck = false;
         protected override void Awake()
         {
             base.Awake();
@@ -117,14 +117,12 @@ namespace TwinTower
             GameObject go = ResourceManager.Instance.Instantiate($"UI/{name}");
             T ui = Util.GetOrAddComponent<T>(go);
             _normalUIs.Add(ui);
-            Debug.Log(go.name);
             go.transform.SetParent(Root.transform);
 
             return ui;
         }
         public void CloseNormalUI(UI_Base ui)
         {
-            Debug.Log("sadadasdad");
             if (_normalUIs.Count == 0)
                 return;
             if (ui == null) return;

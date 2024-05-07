@@ -1,5 +1,4 @@
 ﻿using System;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.UI;
@@ -10,31 +9,36 @@ namespace TwinTower
 {
     public class UI_MainScene : UI_Base
     {
-        const int BUTTON_COUNT = (int)Images.Exit + 1;
+        const int BUTTON_COUNT = 4;
         private Action[] _actions = new Action[BUTTON_COUNT];
         private int currcoursor;
+        [SerializeField] private AudioClip BGM;
         
         public override void Init()
         {
+            SoundManager.Instance.SetBGM(BGM);
             Bind<Image>(typeof(Images));
 
             UIManager.Instance.InputHandler -= KeyInPut;
             UIManager.Instance.InputHandler += KeyInPut;
             
-            Get<Image>((int)Images.newGame).gameObject.BindEvent(NewGame, Define.UIEvent.Click);
-            Get<Image>((int)Images.Setting).gameObject.BindEvent(Setting, Define.UIEvent.Click);
-            Get<Image>((int)Images.Continue).gameObject.BindEvent(Continue, Define.UIEvent.Click);
-            Get<Image>((int)Images.Exit).gameObject.BindEvent(Exit, Define.UIEvent.Click);
+            Get<Image>((int)Images.SelectNewGame).gameObject.BindEvent(NewGame, Define.UIEvent.Click);
+            Get<Image>((int)Images.SelectNewGame).gameObject.SetActive(false);
             
-            Get<Image>((int)Images.newGame).gameObject.BindEvent(()=>ChangeCursor((int)Images.newGame), Define.UIEvent.Enter);
-            Get<Image>((int)Images.Setting).gameObject.BindEvent(()=>ChangeCursor((int)Images.Setting), Define.UIEvent.Enter);
-            Get<Image>((int)Images.Continue).gameObject.BindEvent(()=>ChangeCursor((int)Images.Continue), Define.UIEvent.Enter);
-            Get<Image>((int)Images.Exit).gameObject.BindEvent(()=>ChangeCursor((int)Images.Exit), Define.UIEvent.Enter);
+            Get<Image>((int)Images.SelectSetting).gameObject.BindEvent(Setting, Define.UIEvent.Click);
+            Get<Image>((int)Images.SelectSetting).gameObject.SetActive(false);
             
-            Get<Image>((int)Images.newGame).gameObject.BindEvent(()=>ExitCursor((int)Images.newGame), Define.UIEvent.Exit);
-            Get<Image>((int)Images.Setting).gameObject.BindEvent(()=>ExitCursor((int)Images.Setting), Define.UIEvent.Exit);
-            Get<Image>((int)Images.Continue).gameObject.BindEvent(()=>ExitCursor((int)Images.Continue), Define.UIEvent.Exit);
-            Get<Image>((int)Images.Exit).gameObject.BindEvent(()=>ExitCursor((int)Images.Exit), Define.UIEvent.Exit);
+            Get<Image>((int)Images.SelectContinue).gameObject.BindEvent(Continue, Define.UIEvent.Click);
+            Get<Image>((int)Images.SelectContinue).gameObject.SetActive(false);
+            
+            Get<Image>((int)Images.SelectExit).gameObject.BindEvent(Exit, Define.UIEvent.Click);
+            Get<Image>((int)Images.SelectExit).gameObject.SetActive(false);
+            
+
+            Get<Image>((int)Images.NoSelectNewGame).gameObject.BindEvent(()=>ChangeCursor((int)Images.SelectNewGame), Define.UIEvent.Click);
+            Get<Image>((int)Images.NoSelectSetting).gameObject.BindEvent(()=>ChangeCursor((int)Images.SelectSetting), Define.UIEvent.Click);
+            Get<Image>((int)Images.NoSelectContinue).gameObject.BindEvent(()=>ChangeCursor((int)Images.SelectContinue), Define.UIEvent.Click);
+            Get<Image>((int)Images.NoSelectExit).gameObject.BindEvent(()=>ChangeCursor((int)Images.SelectExit), Define.UIEvent.Click);
             
             currcoursor = 0;
             ChangeCursor(currcoursor);
@@ -46,10 +50,14 @@ namespace TwinTower
 
         enum Images
         {   
-            newGame,
-            Continue,
-            Setting,
-            Exit
+            SelectNewGame,
+            SelectContinue,
+            SelectSetting,
+            SelectExit,
+            NoSelectNewGame,
+            NoSelectContinue,
+            NoSelectSetting,
+            NoSelectExit
         }
 
         private void KeyInPut()
@@ -82,53 +90,51 @@ namespace TwinTower
             UIManager.Instance.InputHandler -= KeyInPut;
             StartCoroutine(ScreenManager.Instance.NextSceneload(DataManager.Instance.StageInfovalue.nextStage, null));
             
-            Debug.Log("New Game Start");
         }
         void Setting()
         {
             UIManager.Instance.ShowNormalUI<UI_SettingScene>();
-            Debug.Log("Setting Open");
         }
 
         void Continue()
         {
-            Debug.Log("Continue");
+            UIManager.Instance.ShowNormalUI<UI_Load>();
         }
 
         void Exit()
         {
-            Debug.Log("Game End");
+            UIManager.Instance.ShowNormalUI<UI_ExitCheck>();
         }
 
         void EnterCoursor(int nextidx)
         {
-            string curcolor = "#FFFFFF";
-            Color curnewcolor;
-            if (ColorUtility.TryParseHtmlString(curcolor, out curnewcolor))
-            {
-                Get<Image>(currcoursor).gameObject.GetComponentInChildren<TextMeshProUGUI>().color = curnewcolor;
-            }
+            Get<Image>(currcoursor).gameObject.SetActive(false);
+            Get<Image>(currcoursor + BUTTON_COUNT).gameObject.SetActive(true);
+
             currcoursor = nextidx;
-            string color = "#D86ECC";
-            Color newcolor;
-            if (ColorUtility.TryParseHtmlString(color, out newcolor))
-            {
-                Debug.Log(currcoursor + " " + Get<Image>(currcoursor).gameObject.name);
-                Get<Image>(currcoursor).gameObject.GetComponentInChildren<TextMeshProUGUI>().color = newcolor;
-            }
+            
+            Get<Image>(currcoursor).gameObject.SetActive(true);
+            Get<Image>(currcoursor + BUTTON_COUNT).gameObject.SetActive(false);
         }
         
         void ChangeCursor(int nextidx)
         {
             ExitCursor(currcoursor);
             EnterCoursor(nextidx);
-            Debug.Log("ChangeCursor");
         }
 
         void ExitCursor(int idx)
         {
             
-            Debug.Log("ExitCursor");
+        }
+
+        public int Test()
+        {
+            EnterCoursor(1);
+            EnterCoursor(2);
+            EnterCoursor(3);
+
+            return currcoursor;
         }
     }
 }

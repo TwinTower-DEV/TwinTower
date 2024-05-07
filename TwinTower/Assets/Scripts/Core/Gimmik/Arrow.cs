@@ -23,11 +23,13 @@ public class Arrow : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D other)
     {
         MoveControl control = other.GetComponent<MoveControl>();
-        
-        if(control != null) control.ReduceHealth();
+
+        if (control != null) {
+            control.ReduceHealth();
+            Destroy(gameObject);
+        }
         DispenserShoot shooter = other.GetComponent<DispenserShoot>();
-        if(shooter == null) Destroy(gameObject);                // 화살대는 무시
-        // if (other.gameObject.layer == LayerMask.NameToLayer("Player"))  플레이어 체력 감소 코드 필요.
+        if(shooter == null && other.gameObject.layer == LayerMask.NameToLayer("Wall")) Destroy(gameObject);                // 화살대는 무시
         
     }
 }

@@ -396,11 +396,6 @@ public class MapNode {
         if(CountTiles(RightWallTile) != 36) Print("RightWallTile이 설치된 Tile개수가 36개가 아닙니다.");
         if(CountTiles(LeftTile) != 64) Print("LeftTile이 설치된 Tile개수가 64개가 아닙니다.(Wall 포함 100개)");
         if(CountTiles(RightTile) != 64) Print("LeftTile이 설치된 Tile개수가 64개가 아닙니다.(Wall 포함 100개)");
-        
-        GameObject prefab = PrefabUtility.GetCorrespondingObjectFromSource(Object.gameObject);
-        if (prefab == null) {
-            throw new Exception(Object.name + "이 오브젝트가 현재 Prefab이 적용되어 있지 않습니다.");
-        }
     }
 
     private void Print(string s) {

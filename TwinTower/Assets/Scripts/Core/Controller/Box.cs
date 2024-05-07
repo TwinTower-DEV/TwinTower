@@ -14,7 +14,7 @@ public class Box : MoveControl {
 
     public override bool MoveCheck(Vector3 movedir) {
         if (isMove) return false;
-        RaycastHit2D hit = Physics2D.Raycast(transform.position + movedir * 0.5f , movedir, 0.5f, _layerMask);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position + movedir * 0.4f , movedir, 0.5f, _layerMask);
         if (hit.collider == null) return true;
 
         return false;
