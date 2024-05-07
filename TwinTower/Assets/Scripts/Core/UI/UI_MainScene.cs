@@ -35,10 +35,10 @@ namespace TwinTower
             Get<Image>((int)Images.SelectExit).gameObject.SetActive(false);
             
 
-            Get<Image>((int)Images.NoSelectNewGame).gameObject.BindEvent(()=>ChangeCursor((int)Images.SelectNewGame), Define.UIEvent.Enter);
-            Get<Image>((int)Images.NoSelectSetting).gameObject.BindEvent(()=>ChangeCursor((int)Images.SelectSetting), Define.UIEvent.Enter);
-            Get<Image>((int)Images.NoSelectContinue).gameObject.BindEvent(()=>ChangeCursor((int)Images.SelectContinue), Define.UIEvent.Enter);
-            Get<Image>((int)Images.NoSelectExit).gameObject.BindEvent(()=>ChangeCursor((int)Images.SelectExit), Define.UIEvent.Enter);
+            Get<Image>((int)Images.NoSelectNewGame).gameObject.BindEvent(()=>ChangeCursor((int)Images.SelectNewGame), Define.UIEvent.Click);
+            Get<Image>((int)Images.NoSelectSetting).gameObject.BindEvent(()=>ChangeCursor((int)Images.SelectSetting), Define.UIEvent.Click);
+            Get<Image>((int)Images.NoSelectContinue).gameObject.BindEvent(()=>ChangeCursor((int)Images.SelectContinue), Define.UIEvent.Click);
+            Get<Image>((int)Images.NoSelectExit).gameObject.BindEvent(()=>ChangeCursor((int)Images.SelectExit), Define.UIEvent.Click);
             
             currcoursor = 0;
             ChangeCursor(currcoursor);

@@ -16,9 +16,9 @@ namespace TwinTower
 
         int _deviceWidth = Screen.width;
         int _deviceHeight = Screen.height;
-
+        
         public Action InputHandler;
-
+        public bool iscutSceenCheck = false;
         protected override void Awake()
         {
             base.Awake();

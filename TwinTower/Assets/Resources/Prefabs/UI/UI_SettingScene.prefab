@@ -93,8 +93,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2546,8 +2546,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -3711,8 +3711,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -4547,10 +4547,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e08aa22e78c40c68adffec34abf61c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  noSelect_noClick: {fileID: 21300000, guid: a3be1e27b402a5340a7b8f5ee1ba168f, type: 3}
-  noSelect_Click: {fileID: 21300000, guid: e7302713163e62f42bc6d7a3ce6d090d, type: 3}
-  select_noCliCK: {fileID: 21300000, guid: e52659a68127b404abb5533a9cf4a330, type: 3}
-  select_Click: {fileID: 21300000, guid: 774d53da8a45a0a4bb53a7d44fc6542c, type: 3}
+  noSelect_noClick: {fileID: 21300000, guid: 7f9ea4f91b770204694500227d274ecc, type: 3}
+  noSelect_Click: {fileID: 21300000, guid: bf86118aa35ba4c4e9681668faac67b5, type: 3}
+  select_noCliCK: {fileID: 21300000, guid: 4224f79c40eaed04a995f88dcd685b69, type: 3}
+  select_Click: {fileID: 21300000, guid: f99d468b34ac334418415c5db8f741eb, type: 3}
 --- !u!1 &8085591216727660068
 GameObject:
   m_ObjectHideFlags: 0

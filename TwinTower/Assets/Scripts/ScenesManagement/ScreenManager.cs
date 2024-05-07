@@ -20,6 +20,7 @@ namespace TwinTower
 
         public IEnumerator NextSceneload(int nextidx, string s)
         {
+            UIManager.Instance.iscutSceenCheck = false;
             yield return StartCoroutine(UI_ScreenFader.FadeScenOut());
             if (s == null)
                 SceneManager.LoadScene(nextidx);
