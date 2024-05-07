@@ -10,7 +10,8 @@ namespace TwinTower
         enum Images
         {
             Irise_Image,
-            Dalia_Image
+            Dalia_Image,
+            Chat
         }
 
         enum Texts
@@ -22,12 +23,15 @@ namespace TwinTower
         private List<string> scripts;
         private int script_idx;
         [SerializeField] private AudioClip BGM;
+        private Animator _anim;
         public override void Init()
         {
             SoundManager.Instance.SetBGM(BGM, 0.5f);
             Bind<Image>(typeof(Images));
             Bind<TextMeshProUGUI>(typeof(Texts));
 
+            _anim = Get<Image>((int)Images.Chat).gameObject.GetComponent<Animator>();
+            _anim.SetBool("Start", true);
             UIManager.Instance.InputHandler += KeyInput;
             if (DataManager.Instance.StageInfovalue.cutsceneflug != null)
             {
@@ -35,6 +39,9 @@ namespace TwinTower
                 scripts = DataManager.Instance.Scripstvalue;
             }
             
+            Canvas canvas = GetComponent<Canvas>();
+            if (canvas != null)
+                canvas.sortingOrder = 11;
             NextScript();
         }
 
@@ -50,10 +57,11 @@ namespace TwinTower
             {
                 if (script_idx == scripts.Count)
                 {
+                    _anim.SetBool("End", true);
                     UIManager.Instance.InputHandler -= KeyInput;
-                    Time.timeScale = 1;
+                    //Time.timeScale = 1;
                     InputController.Instance.GainControl();
-
+                    StartCoroutine(UI_ScreenFader.FadeSceneIn());
                     SoundManager.Instance.SetBGM(BGM);
                     UIManager.Instance.CloseNormalUI(this);
                 }

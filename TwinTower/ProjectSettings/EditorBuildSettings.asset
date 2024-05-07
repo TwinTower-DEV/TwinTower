@@ -7,7 +7,7 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Scenes/Test/Woong.unity
-    guid: 5fa60a11fdf611c41a38b40b20008ede
+    guid: ed5f08f87d771f744a1aaf6adf38af06
   - enabled: 1
     path: Assets/Scenes/UI/MainScene.unity
     guid: daff58406855210488945345b95bbfb0
