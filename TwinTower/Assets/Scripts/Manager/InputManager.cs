@@ -45,6 +45,7 @@ namespace TwinTower
             }
 
             if (GameManager.Instance._player1.MoveCheck(moveDir) && GameManager.Instance._player2.MoveCheck(moveDir)) {
+                Debug.Log(moveDir);
                 GameManager.Instance._player1.DirectSetting(moveDir);
                 GameManager.Instance._player2.DirectSetting(moveDir);
             }

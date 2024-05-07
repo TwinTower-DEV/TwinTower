@@ -17,7 +17,7 @@ public class MovingWalk : MonoBehaviour {
         MoveControl moveableObject = other.GetComponent<MoveControl>();
         if (moveableObject != null && moveableObject.MoveCheck(transform.up)) {     // 이동 가능할때
             moveableObject.DirectSetting(transform.up);  
-            Debug.Log(transform.up);
+            Debug.Log(moveableObject.MoveCheck(transform.up));
         }
     }
 }
