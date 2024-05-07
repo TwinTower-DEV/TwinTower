@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using PlasticGui;
 using UnityEngine;
 
 namespace TwinTower
@@ -31,9 +32,9 @@ namespace TwinTower
                         _animator.Play("Up_Run");
                         break;
                     case Define.MoveDir.None:
-                        if (dir == Define.MoveDir.Down)
+                        if (dir == Define.MoveDir.Up)
                         {
-                            _animator.Play("Down_Idle");
+                            _animator.Play("Up_Idle");
                         }
                         else if (dir == Define.MoveDir.Left)
                         {
@@ -45,7 +46,7 @@ namespace TwinTower
                         }
                         else
                         {
-                            _animator.Play("Up_Idle");
+                            _animator.Play("Down_Idle");
                         }
                         break;
                 }
@@ -58,6 +59,7 @@ namespace TwinTower
             base.Awake();
             InputManager.Create();
             _animator = GetComponent<Animator>();
+            dir = Define.MoveDir.Down;
         }
         
     }
