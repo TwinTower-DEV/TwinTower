@@ -23,8 +23,11 @@ public class Arrow : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D other)
     {
         MoveControl control = other.GetComponent<MoveControl>();
-        
-        if(control != null) control.ReduceHealth();
+
+        if (control != null) {
+            control.ReduceHealth();
+            Destroy(gameObject);
+        }
         DispenserShoot shooter = other.GetComponent<DispenserShoot>();
         if(shooter == null && other.gameObject.layer == LayerMask.NameToLayer("Wall")) Destroy(gameObject);                // 화살대는 무시
         
