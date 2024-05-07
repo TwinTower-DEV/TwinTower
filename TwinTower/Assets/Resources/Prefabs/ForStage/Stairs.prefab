@@ -179,8 +179,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cf5f83c55d7f3a41828c9b9f2af2761, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stair2: {fileID: 0}
-  stair: {fileID: 0}
+  stair2: {fileID: 1487248498110994476}
+  stair: 
 --- !u!1 &6768956813353709164
 GameObject:
   m_ObjectHideFlags: 0
@@ -327,5 +327,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cf5f83c55d7f3a41828c9b9f2af2761, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stair2: {fileID: 0}
-  stair: {fileID: 0}
+  stair2: {fileID: 1155582480561813445}
+  stair: 
