@@ -14,7 +14,7 @@ public class Stair : MonoBehaviour
 {
     private bool OnPlayer;
     public Stair stair2;
-    [SerializeField] private StairObject stair;             // 다음 씬 저장 오브젝트
+    [SerializeField] private string stair;             // 다음 씬 저장 오브젝트
 
     private void Awake()
     {
