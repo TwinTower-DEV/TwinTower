@@ -18,12 +18,12 @@ namespace TwinTower
             InputController.Instance.GainControl();
         }
 
-        public IEnumerator NextSceneload(int nextidx, string s)
+        public IEnumerator NextSceneload(string s = null)
         {
             UIManager.Instance.iscutSceenCheck = false;
             yield return StartCoroutine(UI_ScreenFader.FadeScenOut());
             if (s == null)
-                SceneManager.LoadScene(nextidx);
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             else
                 SceneManager.LoadScene(s);
             //yield return StartCoroutine(UI_ScreenFader.FadeSceneIn());
