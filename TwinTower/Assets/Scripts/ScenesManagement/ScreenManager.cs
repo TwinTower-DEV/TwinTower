@@ -26,7 +26,7 @@ namespace TwinTower
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             else
                 SceneManager.LoadScene(s);
-            //yield return StartCoroutine(UI_ScreenFader.FadeSceneIn());
+            yield return StartCoroutine(UI_ScreenFader.FadeSceneIn());
             //GameManager.Instance.FindPlayer();
         }
     }
