@@ -23,12 +23,13 @@ public class Stair : MonoBehaviour
 
     // 동시에 진입했는지 알아야 하며 동시 진입시 다음 단계 진입 - NextLevelManager이용
     // 다음 단계 씬 string도 함께 전달.
-    private void OnTriggerStay2D(Collider2D other) {
+    private void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player")) {
             MoveControl playerControl = other.gameObject.GetComponent<MoveControl>();
             OnPlayer = true;
-            if (!playerControl.getIsMove() && stair2.getOnPlayer() && OnPlayer) {       // 계단 동시 진입 - 다음 단계 진입                     // 다른 계단에 플레이어가 위치해 있는지 확인
+            if (stair2.getOnPlayer() && OnPlayer) {       // 계단 동시 진입 - 다음 단계 진입                     // 다른 계단에 플레이어가 위치해 있는지 확인
                 //NextLevelManager.Instance.NextLevel(stair.NextSceneString);
+                StartCoroutine(ScreenManager.Instance.NextSceneload());
                 Debug.Log("다음 단계 진입");
             }
         }
