@@ -1,8 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+#if UNITY_EDITOR
 using UnityEditor;
 using UnityEngine;
+#endif
+
 
 [UnityEditor.CustomEditor(typeof(DispenserShoot))]
 

@@ -4,8 +4,11 @@ using System.Collections.Generic;
 using Codice.Client.BaseCommands;
 using PlasticPipe.PlasticProtocol.Messages.Serialization;
 using TwinTower;
+#if UNITY_EDITOR
 using UnityEditor;
 using UnityEngine;
+#endif
+
 using UnityEngine.Tilemaps;
 
 /// <summary>

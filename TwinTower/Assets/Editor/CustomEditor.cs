@@ -4,8 +4,11 @@ using System.Collections.Generic;
 using TMPro.EditorUtilities;
 using TwinTower;
 using Unity.VisualScripting;
-using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
+using UnityEngine;
+#endif
+
 using UnityEditor.SceneManagement;
 using UnityEngine.Tilemaps;
 
