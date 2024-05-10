@@ -14,12 +14,16 @@ namespace TwinTower
     public class Tutorial : MonoBehaviour
     {
         [SerializeField] private string tutorialstring;
-
+        private UI_Tutorial uiTutorial;
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
                 Debug.Log(tutorialstring);
+                uiTutorial = UIManager.Instance.ShowNormalUI<UI_Tutorial>();
+                uiTutorial.SetText(tutorialstring);
+                uiTutorial.SetPosition(gameObject.transform.position, Vector3.up * 2.3f);
+                uiTutorial.SetActives();
             }
         }
 
@@ -27,6 +31,7 @@ namespace TwinTower
         {
             if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
+                uiTutorial.Close();
                 Debug.Log("튜토리얼 없애기");
             }
         }

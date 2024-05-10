@@ -115,7 +115,7 @@ public class UI_Menu : UI_Base {
         Debug.Log("Enter MainMenu");
         InputManager.Destroys();
         Time.timeScale = 1;
-        StartCoroutine(ScreenManager.Instance.NextSceneload(1, "MainScene"));
+        StartCoroutine(ScreenManager.Instance.NextSceneload("MainScene"));
         //UIManager.Instance.CloseNormalUI(this);
     }
 

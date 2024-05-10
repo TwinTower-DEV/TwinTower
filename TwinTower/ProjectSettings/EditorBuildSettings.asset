@@ -6,9 +6,18 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Test/Woong.unity
-    guid: ed5f08f87d771f744a1aaf6adf38af06
-  - enabled: 1
     path: Assets/Scenes/UI/MainScene.unity
     guid: daff58406855210488945345b95bbfb0
+  - enabled: 1
+    path: Assets/Scenes/Test/Stage1.unity
+    guid: d229663bad1a82548821945248368511
+  - enabled: 1
+    path: Assets/Scenes/Test/Stage2.unity
+    guid: f9e711ecefe09694d823ac8b36a1ba07
+  - enabled: 1
+    path: Assets/Scenes/Test/Stage3.unity
+    guid: 4ab91fc2291cbab4dbe1e5d652545941
+  - enabled: 1
+    path: Assets/Scenes/Test/Stage4.unity
+    guid: 5e58073f4fbb5574bbe072e7030b08d1
   m_configObjects: {}
