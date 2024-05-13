@@ -1,11 +1,33 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace TwinTower
 {
     public class UI_FieldScene : UI_Base
     {
+        private int stage = 1;
+        enum Images
+        {
+            RestartButton,
+            BackButton
+        }
+
+        enum Texts
+        {
+            FloorText
+        }
+        
         public override void Init()
         {
+            Bind<Image>(typeof(Images));
+            Bind<TextMeshProUGUI>(typeof(Texts));
+            
+            Get<Image>((int)Images.RestartButton).gameObject.BindEvent(Restart, Define.UIEvent.Click);
+            Get<Image>((int)Images.BackButton).gameObject.BindEvent(Setting, Define.UIEvent.Click);
+            Get<TextMeshProUGUI>((int)Texts.FloorText).gameObject.GetComponent<TextMeshProUGUI>().text = "Floor " + SceneManager.GetActiveScene().buildIndex.ToString();
+
             UIManager.Instance.InputHandler -= KeyInPut;
             UIManager.Instance.InputHandler += KeyInPut;
         }
@@ -26,6 +48,17 @@ namespace TwinTower
                 Time.timeScale = 0;
             }
         }
-        
+
+        private void Restart()
+        {
+            InputController.Instance.ReleaseControl();
+            StartCoroutine(ScreenManager.Instance.CurrentScreenReload());
+        }
+
+        private void Setting()
+        {
+            UIManager.Instance.ShowNormalUI<UI_SettingScene>();
+        }
+
     }
 }

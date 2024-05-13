@@ -68,7 +68,6 @@ namespace TwinTower
             CanvasGroup canvasGroup;
             canvasGroup = Instance.FaderCanvasGroup;
             yield return Instance.StartCoroutine(Instance.Fade(0f, canvasGroup, false));
-            canvasGroup.gameObject.SetActive(false);
         }
         // FadeOut 코드
         public static IEnumerator FadeScenOut()
