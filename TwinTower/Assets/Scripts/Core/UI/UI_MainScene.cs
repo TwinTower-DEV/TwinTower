@@ -16,7 +16,7 @@ namespace TwinTower
         
         public override void Init()
         {
-            SoundManager.Instance.SetBGM(BGM);
+            SoundManager.Instance.SetBGM(BGM, DataManager.Instance.UIGameDatavalue.bgmcoursor);
             Bind<Image>(typeof(Images));
 
             UIManager.Instance.InputHandler -= KeyInPut;

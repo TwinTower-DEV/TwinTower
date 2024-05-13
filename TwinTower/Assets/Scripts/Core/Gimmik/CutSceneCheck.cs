@@ -14,9 +14,11 @@ namespace TwinTower
                 UIManager.Instance.iscutSceenCheck = true;
                 DataManager.Instance.Scripstvalue = DataManager.Instance.ReadText(FileName);
                 //Time.timeScale = 0;
-                InputController.Instance.ReleaseControl();
+                //InputController.Instance.ReleaseControl();
                 UIManager.Instance.ShowNormalUI<UI_CutScene>();
             }
         }
+        
+
     }
 }

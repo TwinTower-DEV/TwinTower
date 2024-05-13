@@ -54,9 +54,8 @@ namespace TwinTower
 
         public virtual void ReduceHealth()
         {
-            InputController.Instance.ReleaseControl();
+            //InputController.Instance.ReleaseControl();
             StartCoroutine(ScreenManager.Instance.CurrentScreenReload());
-            InputController.Instance.GainControl();
         }
         
         

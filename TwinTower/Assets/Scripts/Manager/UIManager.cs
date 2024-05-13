@@ -19,6 +19,7 @@ namespace TwinTower
         
         public Action InputHandler;
         public bool iscutSceenCheck = false;
+        public bool FadeCheck = false;
         protected override void Awake()
         {
             base.Awake();

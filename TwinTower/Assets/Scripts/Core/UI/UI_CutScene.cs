@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -26,7 +27,7 @@ namespace TwinTower
         private Animator _anim;
         public override void Init()
         {
-            SoundManager.Instance.SetBGM(BGM, 0.5f);
+            SoundManager.Instance.SetReduceVolume();
             Bind<Image>(typeof(Images));
             Bind<TextMeshProUGUI>(typeof(Texts));
 
@@ -57,12 +58,11 @@ namespace TwinTower
             {
                 if (script_idx == scripts.Count)
                 {
-                    _anim.SetBool("End", true);
                     UIManager.Instance.InputHandler -= KeyInput;
                     //Time.timeScale = 1;
-                    InputController.Instance.GainControl();
+                    _anim.SetBool("End", true);
                     StartCoroutine(UI_ScreenFader.FadeSceneIn());
-                    SoundManager.Instance.SetBGM(BGM);
+                    SoundManager.Instance.SetReduceVolume();
                     UIManager.Instance.CloseNormalUI(this);
                 }
                 else
@@ -93,7 +93,6 @@ namespace TwinTower
             Get<Image>((int)Images.Irise_Image).gameObject.GetComponent<Image>().color = c1;
             Get<Image>((int)Images.Dalia_Image).gameObject.GetComponent<Image>().color = c2;
             Get<TextMeshProUGUI>((int)Texts.ChatText).gameObject.GetComponent<TextMeshProUGUI>().text = now[0];
-            Debug.Log(Get<Image>((int)Images.Irise_Image).gameObject.GetComponent<Image>().color.a);
             script_idx++;
         }
     }

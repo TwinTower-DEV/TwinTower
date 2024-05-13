@@ -15,18 +15,23 @@ namespace TwinTower
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             yield return StartCoroutine(UI_ScreenFader.FadeSceneIn());
             GameManager.Instance.FindPlayer();
-            InputController.Instance.GainControl();
         }
 
         public IEnumerator NextSceneload(string s = null)
         {
             UIManager.Instance.iscutSceenCheck = false;
             yield return StartCoroutine(UI_ScreenFader.FadeScenOut());
+            if (SceneManager.GetActiveScene().buildIndex + 1 >= 5)
+            {
+                SceneManager.LoadScene("MainScene");
+            }
             if (s == null)
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             else
                 SceneManager.LoadScene(s);
-            //yield return StartCoroutine(UI_ScreenFader.FadeSceneIn());
+            
+            if(s == "MainScene" || SceneManager.GetActiveScene().buildIndex + 1 >= 5)
+                yield return StartCoroutine(UI_ScreenFader.FadeSceneIn());
             //GameManager.Instance.FindPlayer();
         }
     }
