@@ -86,7 +86,7 @@ namespace TwinTower
                 if (rotateAngle >= 90) {
                     rotateTileMap.transform.rotation = Quaternion.Euler(0, 0, distDegree);
                     foreach (var collider in rotatableObject) {
-                        collider.transform.rotation = Quaternion.Euler(0, 0, FindClosestDegree(collider.transform.rotation.eulerAngles.z));
+                        collider.transform.rotation = Quaternion.Euler(collider.transform.rotation.eulerAngles.x, collider.transform.rotation.eulerAngles.y, FindClosestDegree(collider.transform.rotation.eulerAngles.z));
                     }
                     foreach (var collider in unRotatableObject) {
                         collider.transform.rotation = Quaternion.Euler(0, 0, 0);
