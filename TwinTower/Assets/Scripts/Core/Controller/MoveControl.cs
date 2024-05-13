@@ -22,7 +22,7 @@ namespace TwinTower
         
         [SerializeField] protected LayerMask _layerMask;
         public bool isMove = false;
-        private Vector3 destPos;
+        [SerializeField] private GameObject Destination;
         
         // movedir방향으로 이동 가능한지 체크 - 이동 가능하다면 true반환
         // layermask를 통해 다음 칸에 있는 오브젝트에 따라 확인됨.
@@ -47,7 +47,9 @@ namespace TwinTower
                 boxcontrol.DirectSetting(movedir);
             }
             isMove = true;
-            destPos = transform.position + movedir;
+            if(Destination.transform.parent != null) Destination.transform.SetParent(null);
+            Destination.transform.position = transform.position + movedir;
+            Debug.Log(transform.position + movedir);
         }
 
         public virtual void ReduceHealth()
@@ -95,10 +97,10 @@ namespace TwinTower
 
         private void Update() {
             if(isMove) {
-                Vector3 leftLength = destPos - transform.position;
+                Vector3 leftLength = Destination.transform.position - transform.position;
                 float dist = leftLength.magnitude;
                 if (dist < _moveSpeed * Time.deltaTime) {
-                    transform.position = TileFindManager.Instance.gettileCentorLocation(destPos);
+                    transform.position = TileFindManager.Instance.gettileCentorLocation(Destination.transform.position);
                     isMove = false;
                 }
                 else {
