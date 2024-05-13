@@ -46,7 +46,8 @@ public class TileFindManager : MonoBehaviour {
             if (tileMaps[i].GetTile(tilePosition) != null) return cellCenter;
         }
 
-        throw new Exception("이상한 오브젝트가 들어옴 -> 타일맵 내에 존재하지 않는 오브젝트.");
+        return Vector3.zero;
+        // throw new Exception("이상한 오브젝트가 들어옴 -> 타일맵 내에 존재하지 않는 오브젝트.");
     }
     
     public Tilemap getTileInArea(Vector3 objectLocation, bool isOpp) {
