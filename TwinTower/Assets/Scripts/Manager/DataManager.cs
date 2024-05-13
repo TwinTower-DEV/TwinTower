@@ -92,7 +92,6 @@ namespace TwinTower
         private void LoadData<T>(T data) where T : GameData
         {
             var fields = typeof(T).GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-            Debug.Log(fields.Length);
 
             for (int i = 0, k = 0; i < fields.Length - 2; i++,k++)
             {

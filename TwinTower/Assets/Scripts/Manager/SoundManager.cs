@@ -7,7 +7,9 @@ using UnityEngine;
 public class SoundManager : Manager<SoundManager> {
     private AudioSource bgmSource;
     private List<AudioSource> effectSources;
-
+    private float reducevolume = -1;
+    private float[] soundvolume = new float[5]
+        { 0.0f, 0.25f, 0.5f, 0.75f, 1.0f };
     protected override void Awake() {
         base.Awake();
 
@@ -20,8 +22,8 @@ public class SoundManager : Manager<SoundManager> {
         bgmSource.loop = true;
     }
 
-    public void SetBGM(AudioClip bgm, float volume = 1) {
-        bgmSource.volume = volume;
+    public void SetBGM(AudioClip bgm, int volume = 1) {
+        bgmSource.volume = soundvolume[volume];
         if (bgm == bgmSource.clip) return;
         bgmSource.clip = bgm;
         if(!bgmSource.isPlaying) bgmSource.Play();
@@ -30,6 +32,20 @@ public class SoundManager : Manager<SoundManager> {
     public void SetBGMVolume(float volume)
     {
         bgmSource.volume = volume;
+    }
+
+    public void SetReduceVolume()
+    {
+        if (reducevolume == -1)
+        {
+            reducevolume = bgmSource.volume;
+            bgmSource.volume /= 2;
+        }
+        else
+        {
+            bgmSource.volume = reducevolume;
+            reducevolume = -1;
+        }
     }
 
     public void PlayEffect(AudioClip effect) {
