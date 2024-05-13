@@ -164,7 +164,10 @@ namespace TwinTower
         private void OnTriggerEnter2D(Collider2D other)
         {
             MoveControl moveableController = other.GetComponent<MoveControl>();
-            if (moveableController != null && moveableController.getIsMove()) Launch();
+            if (moveableController != null && moveableController.getIsMove()) {
+                Debug.Log(name);
+                Launch();
+            }
         }
     }
 }
