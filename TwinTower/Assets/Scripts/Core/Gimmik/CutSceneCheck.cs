@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Palmmedia.ReportGenerator.Core.Reporting.Builders;
 using UnityEngine;
 
 namespace TwinTower
@@ -14,9 +15,11 @@ namespace TwinTower
                 UIManager.Instance.iscutSceenCheck = true;
                 DataManager.Instance.Scripstvalue = DataManager.Instance.ReadText(FileName);
                 //Time.timeScale = 0;
-                InputController.Instance.ReleaseControl();
+                //InputController.Instance.ReleaseControl();
                 UIManager.Instance.ShowNormalUI<UI_CutScene>();
             }
         }
+        
+
     }
 }

@@ -23,7 +23,7 @@ namespace TwinTower
             if (GameObject.Find("Dalia").GetComponent<Player>() != null)
             {
                 _player1 = GameObject.Find("Dalia").GetComponent<Player>();
-                InputController.Instance.GainControl();
+                //InputController.Instance.GainControl();
             }
 
             if(GameObject.Find("Irise").GetComponent<Player>() != null)

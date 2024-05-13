@@ -16,7 +16,9 @@ namespace TwinTower
                 return;
             if (_uiNum != UIManager.Instance.UINum)
                 return;
-
+            if (UIManager.Instance.FadeCheck)
+                return;
+            
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 UIManager.Instance.ShowNormalUI<UI_Menu>();
