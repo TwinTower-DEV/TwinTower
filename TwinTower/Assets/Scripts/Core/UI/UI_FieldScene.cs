@@ -8,6 +8,7 @@ namespace TwinTower
     public class UI_FieldScene : UI_Base
     {
         private int stage = 1;
+        [SerializeField] private AudioClip BGM;
         enum Images
         {
             RestartButton,
@@ -21,6 +22,8 @@ namespace TwinTower
         
         public override void Init()
         {
+            SoundManager.Instance.ChangeBGM(BGM);
+
             Bind<Image>(typeof(Images));
             Bind<TextMeshProUGUI>(typeof(Texts));
             

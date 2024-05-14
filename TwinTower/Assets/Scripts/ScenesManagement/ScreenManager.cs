@@ -21,7 +21,7 @@ namespace TwinTower
         {
             UIManager.Instance.iscutSceenCheck = false;
             yield return StartCoroutine(UI_ScreenFader.FadeScenOut());
-            if (SceneManager.GetActiveScene().buildIndex + 1 >= 5)
+            if (SceneManager.GetActiveScene().buildIndex + 1 >= 10)
             {
                 SceneManager.LoadScene("MainScene");
             }
@@ -30,7 +30,7 @@ namespace TwinTower
             else
                 SceneManager.LoadScene(s);
             
-            if(s == "MainScene" || SceneManager.GetActiveScene().buildIndex + 1 >= 5)
+            if(s == "MainScene" || SceneManager.GetActiveScene().buildIndex + 1 >= 10)
                 yield return StartCoroutine(UI_ScreenFader.FadeSceneIn());
             //GameManager.Instance.FindPlayer();
         }
