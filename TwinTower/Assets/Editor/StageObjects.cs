@@ -181,9 +181,9 @@ public class DispenserNode : NormalNode {
         
         DispenserShoot dispenserShoot = Object.GetComponent<DispenserShoot>();
         if(dispenserShoot == null) Print("DispenserShoot 컴포넌트가 들어가 있지 않음 -> 개발자 호출 바람");
-        else {
-            if(dispenserShoot.arrowPrefab == null) Print("arrow prefab이 적용되어 있지 않음");
-            if(dispenserShoot.directInfos.Length != 4) Print("방향 별 Sprite가 적용되어 있지 않음");
+        /*else {
+            /*if(dispenserShoot.arrowPrefab == null) Print("arrow prefab이 적용되어 있지 않음");#1#
+            /*if(dispenserShoot.directInfos.Length != 4) Print("방향 별 Sprite가 적용되어 있지 않음");
             else {
                 foreach (DirectInfo info in dispenserShoot.directInfos) {
                     if (Object.transform.rotation.eulerAngles.z == info.angle) {
@@ -193,8 +193,8 @@ public class DispenserNode : NormalNode {
                         }
                     }
                 }
-            }
-        }
+            }#1#
+        }*/
     }
 }
 
