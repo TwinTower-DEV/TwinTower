@@ -60,8 +60,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5613850185544242937}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -108,8 +108,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 83397fb682e2bb6489f04af7e8ef17af, type: 3}
+  m_SortingOrder: 4
+  m_Sprite: {fileID: 21300000, guid: 8c7466a581e6eb14897c91f2e8ee5d09, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -132,17 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eac782d8b92dadb43b4602410d7e6da8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arrowPrefab: {fileID: 3022506806810388172, guid: 2f329106a316c1a4195f87d8929cb455, type: 3}
-  directInfos:
-  - dispenserSprite: {fileID: 21300000, guid: 83397fb682e2bb6489f04af7e8ef17af, type: 3}
-    angle: 0
-  - dispenserSprite: {fileID: 21300000, guid: 561b86d1ecafd0e48ac39a5689b47b19, type: 3}
-    angle: 90
-  - dispenserSprite: {fileID: 21300000, guid: 24fc7e5f5243db4429169c2453fffa8b, type: 3}
-    angle: 180
-  - dispenserSprite: {fileID: 21300000, guid: 2892284587076c245a7911ee0447be3b, type: 3}
-    angle: 270
-  currDirIndex: 0
+  force: 100000
 --- !u!50 &5195846301408106363
 Rigidbody2D:
   serializedVersion: 4
@@ -171,16 +161,16 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5613850185544242937}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.49338353}
+  m_Offset: {x: 0, y: -0.2}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.53333336}
+    pivot: {x: 0.5, y: 1}
     oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
@@ -188,7 +178,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.013232917}
+  m_Size: {x: 0.6, y: 0.3}
   m_EdgeRadius: 0
 --- !u!1 &5614402957586367618
 GameObject:
@@ -200,9 +190,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2245279957776003646}
   - component: {fileID: 5861479686279236371}
-  - component: {fileID: 3032905513610039209}
   - component: {fileID: 3005581820704877717}
   - component: {fileID: 4601676253472059383}
+  - component: {fileID: 5079702902953637248}
   m_Layer: 0
   m_Name: Pressure Plate-Arrow
   m_TagString: Untagged
@@ -218,7 +208,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5614402957586367618}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalPosition: {x: -1.0460482, y: -1.0099123, z: 0.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -265,7 +255,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 70c2762f66a6a0e48a63f5bcf5054d15, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -277,19 +267,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3032905513610039209
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5614402957586367618}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e17e6572d8e9e1d42b5428f6332a1fc2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  activateObject: {fileID: 5613850185544242937}
 --- !u!50 &3005581820704877717
 Rigidbody2D:
   serializedVersion: 4
@@ -337,3 +314,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.644938, y: 0.35391185}
   m_EdgeRadius: 0
+--- !u!114 &5079702902953637248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5614402957586367618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c2a49aa51cc7e447b273d804c2a2f65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activateObject: {fileID: 5613850185544242937}

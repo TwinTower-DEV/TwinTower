@@ -2850,10 +2850,6 @@ PrefabInstance:
       value: ArrowTrap
       objectReference: {fileID: 0}
     - target: {fileID: 5332473640493207350, guid: 69b44b37c6b82e743ac4858550ba5109, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 83397fb682e2bb6489f04af7e8ef17af, type: 3}
-    - target: {fileID: 5332473640493207350, guid: 69b44b37c6b82e743ac4858550ba5109, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
