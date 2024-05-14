@@ -127,12 +127,12 @@ namespace TwinTower
             }
 
             // 발사대 회전
-            foreach (var collider in rotatableObject) {
+            /*foreach (var collider in rotatableObject) {
                 DispenserShoot arrowdisepenser = collider.GetComponent<DispenserShoot>();
                 if (arrowdisepenser != null) {
                     arrowdisepenser.prevDirection();
                 }
-            }
+            }*/
             
             // 타일맵 회전
             Quaternion rotation = Quaternion.Euler(0, 0, -distDegree); // 90도 회전
