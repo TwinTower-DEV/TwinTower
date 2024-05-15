@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 namespace TwinTower
 {
     public class UIManager : Manager<UIManager>
@@ -142,6 +144,12 @@ namespace TwinTower
             _uiNum = _uiNum - 1;
             ResourceManager.Instance.Destroy(ui.gameObject);
             StartCoroutine(ScreenManager.Instance.NextSceneload());
+        }
+
+        public void Load(string loadscene)
+        {
+            StartCoroutine(ScreenManager.Instance.NextSceneload(loadscene));
+            //InputManager.Instance.UnPause();
         }
     }
 }

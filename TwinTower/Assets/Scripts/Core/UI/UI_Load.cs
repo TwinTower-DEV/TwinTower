@@ -14,7 +14,6 @@ public class UI_Load : UI_Base {
     //private MenuUIManager menuUIManager;
     private int currCursor;
     private static int SLOT_COUNT = 3;
-   [SerializeField]private AudioClip IngameBGM;
 
     public override void Init() {
         //menuUIManager = transform.parent.GetComponent<MenuUIManager>();
@@ -114,6 +113,11 @@ public class UI_Load : UI_Base {
             Get<TextMeshProUGUI>(i + SLOT_COUNT).text = SaveLoadController.GetSaveInfo(i);
             if (SaveLoadController.GetSaveInfo(i) == "NO SAVE DATA") {
                 Get<Button>(i).gameObject.SetActive(false);
+                Color newcolor;
+                if (ColorUtility.TryParseHtmlString("#7F7F7F", out newcolor))
+                {
+                    Util.FindChild<Image>(Get<Image>(i).gameObject).color = newcolor;
+                }
             }
             else Get<Button>(i).gameObject.SetActive(true);
         }
@@ -132,7 +136,11 @@ public class UI_Load : UI_Base {
     }
 
     // 마우스 진입시 실행되는 이벤트(포커스 변경)
-    void EnterCursorEvent(int currIdx) {
+    void EnterCursorEvent(int currIdx)
+    {
+        if (SaveLoadController.GetSaveInfo(currIdx) == "NO SAVE DATA")
+            return;
+        
         Get<Image>(currCursor + SLOT_COUNT).gameObject.SetActive(false);  // 기존것 하이라이트 종료
         Get<Image>(currCursor).gameObject.SetActive(true);
         
