@@ -36,7 +36,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 20, y: 0}
-  m_SizeDelta: {x: 1000, y: 50}
+  m_SizeDelta: {x: 2000, y: 50}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &8157292870747090111
 CanvasRenderer:
@@ -293,7 +293,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -369,7 +369,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -535,6 +535,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BGM: {fileID: 8300000, guid: 71391256e4f22f44bbd67741ffd295dd, type: 3}
+  _irisesprites:
+  - {fileID: 21300000, guid: a2fd20a06e59f3f47a0a25b3fed1f653, type: 3}
+  - {fileID: 21300000, guid: 950cb477566a5f943be21646ef05bd5a, type: 3}
+  - {fileID: 21300000, guid: e4f889e5ff4d6534b965ae00f9d1896c, type: 3}
+  - {fileID: 21300000, guid: 3b46fc604da8d6b4d8bb5756239952b9, type: 3}
+  _daliasprites:
+  - {fileID: 21300000, guid: be9750aaa9aaf8f47a621fb1c11c5f45, type: 3}
+  - {fileID: 21300000, guid: 4c1a32defba0cd440be0fa670b477f99, type: 3}
+  - {fileID: 21300000, guid: ae5985062c649714490ffc0c88b88613, type: 3}
+  - {fileID: 21300000, guid: 0bad850e460bb1d4aadd5e7e3b5b254f, type: 3}
 --- !u!1 &5674974725438547924
 GameObject:
   m_ObjectHideFlags: 0

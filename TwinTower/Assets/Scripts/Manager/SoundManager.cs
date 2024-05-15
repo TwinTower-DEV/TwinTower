@@ -34,6 +34,12 @@ public class SoundManager : Manager<SoundManager> {
         bgmSource.volume = volume;
     }
 
+    public void ChangeBGM(AudioClip bgm)
+    {
+        bgmSource.clip = bgm;
+        bgmSource.Play();
+    }
+
     public void SetReduceVolume()
     {
         if (reducevolume == -1)

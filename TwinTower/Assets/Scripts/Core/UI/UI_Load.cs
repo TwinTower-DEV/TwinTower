@@ -14,7 +14,7 @@ public class UI_Load : UI_Base {
     //private MenuUIManager menuUIManager;
     private int currCursor;
     private static int SLOT_COUNT = 3;
-
+   [SerializeField]private AudioClip IngameBGM;
 
     public override void Init() {
         //menuUIManager = transform.parent.GetComponent<MenuUIManager>();
