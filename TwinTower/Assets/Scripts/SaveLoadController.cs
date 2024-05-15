@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using TwinTower;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 /// <summary>
 /// 저장과 삭제, 불러오기를 담당한다.
@@ -20,8 +21,7 @@ public class SaveLoadController {
     
     public void Load() {
         if (PlayerPrefs.GetString(currSaveSlot.ToString()) == "") return;
-        SceneManager.LoadScene(PlayerPrefs.GetString(currSaveSlot.ToString()));
-        InputManager.Instance.UnPause();
+        UIManager.Instance.Load(PlayerPrefs.GetString(currSaveSlot.ToString()));
     }
 
     public void Save() {
