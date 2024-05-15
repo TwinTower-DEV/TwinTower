@@ -21,7 +21,8 @@ public class DispenserShoot : ActivateObject {
 
     private Rigidbody2D rigidbody2D;
     private Collider2D collider2d;
-    [SerializeField] private float force = 90000; 
+    [SerializeField] private float force = 90000;
+    private bool isLaunch = false;
 
     void Start() {
         // spriterenderer = GetComponent<SpriteRenderer>();
@@ -33,14 +34,14 @@ public class DispenserShoot : ActivateObject {
     }
 
     public override void Launch() {
-        collider2d.enabled = true;
+        isLaunch = true;
         rigidbody2D.AddForce(transform.up * force * Time.deltaTime);
     }
     
-    private void OnTriggerEnter2D(Collider2D other)
-    {
+    private void OnTriggerEnter2D(Collider2D other) {
+        if (!isLaunch) return;
         MoveControl control = other.GetComponent<MoveControl>();
-
+        
         if (control != null) {
             control.ReduceHealth();
             Destroy(gameObject);

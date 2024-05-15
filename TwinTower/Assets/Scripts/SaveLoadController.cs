@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using TwinTower;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -17,7 +18,8 @@ public class SaveLoadController {
         currSaveSlot = idx;
     }
     
-    public void Load(){
+    public void Load() {
+        if (PlayerPrefs.GetString(currSaveSlot.ToString()) == "") return;
         SceneManager.LoadScene(PlayerPrefs.GetString(currSaveSlot.ToString()));
         InputManager.Instance.UnPause();
     }
