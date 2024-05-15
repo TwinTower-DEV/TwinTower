@@ -15,6 +15,13 @@ namespace TwinTower
     {
         [SerializeField] private string tutorialstring;
         private UI_Tutorial uiTutorial;
+
+        private void Start()
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y - 0.1f, 0);
+        }
+        
+        
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.gameObject.layer == LayerMask.NameToLayer("Player"))

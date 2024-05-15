@@ -21,6 +21,7 @@ namespace TwinTower
             Bind<TextMeshProUGUI>(typeof(Texts));
             Get<Image>((int)Images.Button).gameObject.SetActive(false);
             Canvas canvas = Util.GetOrAddComponent<Canvas>(gameObject);
+            canvas.sortingOrder = 8;
             canvas.renderMode = RenderMode.WorldSpace;
             canvas.worldCamera = Camera.main;
         }
