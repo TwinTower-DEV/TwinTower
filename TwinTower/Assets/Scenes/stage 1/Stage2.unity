@@ -3042,6 +3042,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tutorial (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5416105210768974626, guid: b2ab617c8c1818c44ba67dc76362db62, type: 3}
+      propertyPath: tutorialstring
+      value: "\uBE68\uAC04 \uBC84\uD2BC\uC744 \uB204\uB974\uBA74 \uD654\uC0B4\uC774
+        \uC9C0\uC815\uB41C \uBC29\uD5A5\uC73C\uB85C \uBC1C\uC0AC\uB429\uB2C8\uB2E4.
+        \uD654\uC0B4\uC740 \uB2E8 \uD55C \uBC88\uB9CC \uBC1C\uC0AC\uB418\uACE0 \uC774\uD6C4\uC5D0\uB294
+        \uD574\uB2F9 \uBC84\uD2BC\uC744 \uB2E4\uC2DC \uB20C\uB7EC\uB3C4 \uBC1C\uC0AC\uB418\uC9C0
+        \uC54A\uC2B5\uB2C8\uB2E4."
+      objectReference: {fileID: 0}
     - target: {fileID: 8767819110394083812, guid: b2ab617c8c1818c44ba67dc76362db62, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -3438,6 +3446,11 @@ PrefabInstance:
     - target: {fileID: 3129727419074203480, guid: b2ab617c8c1818c44ba67dc76362db62, type: 3}
       propertyPath: m_Name
       value: Tutorial
+      objectReference: {fileID: 0}
+    - target: {fileID: 5416105210768974626, guid: b2ab617c8c1818c44ba67dc76362db62, type: 3}
+      propertyPath: tutorialstring
+      value: "\uCCA0\uC81C \uC0C1\uC790\uB294 \uB098\uBB34 \uC0C1\uC790\uC640 \uB2EC\uB9AC
+        \uD654\uC0B4\uC5D0 \uD53C\uACA9\uB3FC\uB3C4 \uD30C\uAD34\uB418\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4."
       objectReference: {fileID: 0}
     - target: {fileID: 8767819110394083812, guid: b2ab617c8c1818c44ba67dc76362db62, type: 3}
       propertyPath: m_RootOrder

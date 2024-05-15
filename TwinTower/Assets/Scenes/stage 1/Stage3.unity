@@ -2775,6 +2775,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tutorial
       objectReference: {fileID: 0}
+    - target: {fileID: 5416105210768974626, guid: b2ab617c8c1818c44ba67dc76362db62, type: 3}
+      propertyPath: tutorialstring
+      value: "\uBB34\uBE59\uC6CC\uD06C\uB294 \uD2B9\uBCC4\uD55C \uC870\uC791 \uC5C6\uC774\uB3C4
+        \uCE90\uB9AD\uD130\uB97C \uC9C0\uC815\uB41C \uBC29\uD5A5\uC73C\uB85C \uC774\uB3D9\uC2DC\uD0B5\uB2C8\uB2E4."
+      objectReference: {fileID: 0}
     - target: {fileID: 8767819110394083812, guid: b2ab617c8c1818c44ba67dc76362db62, type: 3}
       propertyPath: m_RootOrder
       value: 29
