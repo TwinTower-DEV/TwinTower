@@ -8,12 +8,15 @@ namespace TwinTower
     {
         [SerializeField] private string FileName;
         [SerializeField] private bool startCheck = true;
+        [SerializeField] private AudioClip audioClip;
         public void Start()
         {
             if (startCheck)
             {
                 if (DataManager.Instance.StageInfovalue.cutsceneflug != null && !UIManager.Instance.iscutSceenCheck)
                 {
+                    SoundManager.Instance.ChangeBGM(audioClip);
+                    
                     UIManager.Instance.iscutSceenCheck = true;
                     DataManager.Instance.Scripstvalue = DataManager.Instance.ReadText(FileName);
                     //Time.timeScale = 0;

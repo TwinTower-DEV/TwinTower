@@ -239,6 +239,10 @@ PrefabInstance:
       value: CutScene__
       objectReference: {fileID: 0}
     - target: {fileID: 722305103165723638, guid: fcd7f72700d309643b3ea4660eecc4a4, type: 3}
+      propertyPath: audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: f36db8ecb929dab40aeb2931ec5512de, type: 3}
+    - target: {fileID: 722305103165723638, guid: fcd7f72700d309643b3ea4660eecc4a4, type: 3}
       propertyPath: startCheck
       value: 1
       objectReference: {fileID: 0}

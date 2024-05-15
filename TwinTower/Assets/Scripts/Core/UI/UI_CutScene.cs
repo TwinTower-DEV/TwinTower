@@ -89,6 +89,7 @@ namespace TwinTower
                 _anim.SetBool("End", true);
                 StartCoroutine(UI_ScreenFader.FadeSceneIn());
                 SoundManager.Instance.SetReduceVolume();
+                SoundManager.Instance.ChangeBGM(BGM);
                 UIManager.Instance.CloseNormalUI(this);
             }
         }

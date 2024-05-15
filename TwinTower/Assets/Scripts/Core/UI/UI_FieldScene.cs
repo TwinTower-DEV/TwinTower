@@ -22,7 +22,6 @@ namespace TwinTower
         
         public override void Init()
         {
-            SoundManager.Instance.ChangeBGM(BGM);
 
             Bind<Image>(typeof(Images));
             Bind<TextMeshProUGUI>(typeof(Texts));
