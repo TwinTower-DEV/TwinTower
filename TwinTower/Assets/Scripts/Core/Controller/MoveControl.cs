@@ -49,7 +49,6 @@ namespace TwinTower
             isMove = true;
             if(Destination.transform.parent != null) Destination.transform.SetParent(null);
             Destination.transform.position = transform.position + movedir;
-            Debug.Log(transform.position + movedir);
         }
 
         public virtual void ReduceHealth()

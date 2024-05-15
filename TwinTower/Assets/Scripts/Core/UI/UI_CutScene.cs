@@ -25,6 +25,10 @@ namespace TwinTower
         private int script_idx;
         [SerializeField] private AudioClip BGM;
         private Animator _anim;
+        
+        // 0 : 기본, 1 : 놀람, 2 : 슬픔, 3 : 의문
+        [SerializeField] private List<Sprite> _irisesprites;
+        [SerializeField] private List<Sprite> _daliasprites;
         public override void Init()
         {
             SoundManager.Instance.SetReduceVolume();
@@ -58,12 +62,7 @@ namespace TwinTower
             {
                 if (script_idx == scripts.Count)
                 {
-                    UIManager.Instance.InputHandler -= KeyInput;
-                    //Time.timeScale = 1;
-                    _anim.SetBool("End", true);
-                    StartCoroutine(UI_ScreenFader.FadeSceneIn());
-                    SoundManager.Instance.SetReduceVolume();
-                    UIManager.Instance.CloseNormalUI(this);
+                    EndEvent();
                 }
                 else
                 {
@@ -72,26 +71,102 @@ namespace TwinTower
             }
         }
 
-        private void NextScript()
+        private void EndEvent()
         {
-            string [] now = scripts[script_idx].Split(':');
-            Color c1 = Get<Image>((int)Images.Irise_Image).gameObject.GetComponent<Image>().color;
-            Color c2 = Get<Image>((int)Images.Dalia_Image).gameObject.GetComponent<Image>().color;
-            if (now[1] == "1")
+            UIManager.Instance.iscutSceenCheck = false;
+            if (!UI_ScreenFader.FadeCheck())
             {
-                Get<TextMeshProUGUI>((int)Texts.NameText).gameObject.GetComponent<TextMeshProUGUI>().text = "아이리스";
-                c1.a = 1f;
-                c2.a = 0.5f;
-
+                UIManager.Instance.InputHandler -= KeyInput;
+                //Time.timeScale = 1;
+                _anim.SetBool("End", true);
+                SoundManager.Instance.SetReduceVolume();
+                UIManager.Instance.CloseFieldCutSceneUI(this);
             }
             else
             {
-                Get<TextMeshProUGUI>((int)Texts.NameText).gameObject.GetComponent<TextMeshProUGUI>().text = "달리아";
-                c1.a = 0.5f;
-                c2.a = 1f;
+                UIManager.Instance.InputHandler -= KeyInput;
+                //Time.timeScale = 1;
+                _anim.SetBool("End", true);
+                StartCoroutine(UI_ScreenFader.FadeSceneIn());
+                SoundManager.Instance.SetReduceVolume();
+                SoundManager.Instance.ChangeBGM(BGM);
+                UIManager.Instance.CloseNormalUI(this);
             }
-            Get<Image>((int)Images.Irise_Image).gameObject.GetComponent<Image>().color = c1;
-            Get<Image>((int)Images.Dalia_Image).gameObject.GetComponent<Image>().color = c2;
+        }
+
+        private void ActivateCheck(Image obj, float alpha)
+        {
+            if (obj.gameObject.activeSelf)
+            {
+                Color c = obj.color;
+                c.a = alpha;
+                obj.color = c;
+            }
+            else 
+                obj.gameObject.SetActive(true);
+        }
+        
+        private void NextScript()
+        {
+            string [] now = scripts[script_idx].Split(':');
+            if (now[1].Length >= 2)
+            {
+                ActivateCheck(Get<Image>((int)Images.Irise_Image), 1f);
+                ActivateCheck(Get<Image>((int)Images.Dalia_Image), 1f);
+                Get<Image>((int)Images.Irise_Image).gameObject.GetComponent<Image>().sprite =
+                    _irisesprites[int.Parse(now[2])];
+                Get<Image>((int)Images.Dalia_Image).gameObject.GetComponent<Image>().sprite =
+                    _daliasprites[int.Parse(now[2])];
+            }
+            else
+            {
+                if (now[1] == "1")
+                {
+                    ActivateCheck(Get<Image>((int)Images.Irise_Image), 1f);
+                    Get<TextMeshProUGUI>((int)Texts.NameText).gameObject.GetComponent<TextMeshProUGUI>().text = "아이리스";
+                    Get<Image>((int)Images.Irise_Image).gameObject.GetComponent<Image>().sprite =
+                        _irisesprites[int.Parse(now[2])];
+
+                    if (Get<Image>((int)Images.Dalia_Image).gameObject.GetComponent<Image>().color.a > 0)
+                    {
+                        Get<Image>((int)Images.Dalia_Image).gameObject.GetComponent<Image>().sprite =
+                            _daliasprites[0];
+                        ActivateCheck(Get<Image>((int)Images.Dalia_Image), 0.5f);
+                    }
+                }
+                else if (now[1] == "2")
+                {
+                    ActivateCheck(Get<Image>((int)Images.Dalia_Image), 1f);
+
+                    Get<TextMeshProUGUI>((int)Texts.NameText).gameObject.GetComponent<TextMeshProUGUI>().text = "달리아";
+                    Get<Image>((int)Images.Dalia_Image).gameObject.GetComponent<Image>().sprite =
+                        _daliasprites[int.Parse(now[2])];
+                    if (Get<Image>((int)Images.Irise_Image).gameObject.GetComponent<Image>().color.a > 0)
+                    {
+                        Get<Image>((int)Images.Irise_Image).gameObject.GetComponent<Image>().sprite =
+                            _irisesprites[0];
+                        ActivateCheck(Get<Image>((int)Images.Irise_Image), 0.5f);
+                    }
+                }
+                else
+                {
+                    Get<TextMeshProUGUI>((int)Texts.NameText).gameObject.GetComponent<TextMeshProUGUI>().text = "???";
+                    if (Get<Image>((int)Images.Irise_Image).gameObject.GetComponent<Image>().color.a > 0)
+                    {
+                        Get<Image>((int)Images.Irise_Image).gameObject.GetComponent<Image>().sprite =
+                            _irisesprites[0];
+                        ActivateCheck(Get<Image>((int)Images.Irise_Image), 0.5f);
+                    }
+
+                    if (Get<Image>((int)Images.Dalia_Image).gameObject.GetComponent<Image>().color.a > 0)
+                    {
+                        Get<Image>((int)Images.Dalia_Image).gameObject.GetComponent<Image>().sprite =
+                            _daliasprites[0];
+                        ActivateCheck(Get<Image>((int)Images.Dalia_Image), 0.5f);
+                    }
+                }
+            }
+
             Get<TextMeshProUGUI>((int)Texts.ChatText).gameObject.GetComponent<TextMeshProUGUI>().text = now[0];
             script_idx++;
         }

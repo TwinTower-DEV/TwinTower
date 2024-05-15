@@ -78,5 +78,13 @@ namespace TwinTower
             yield return Instance.StartCoroutine(Instance.Fade(1f, canvasGroup, true));
             Debug.Log("Fade Out ");
         }
+
+        public static bool FadeCheck()
+        {
+            CanvasGroup canvasGroup;
+            canvasGroup = Instance.FaderCanvasGroup;
+            
+            return canvasGroup.alpha > 0 ? true : false;
+        }
     }
 }

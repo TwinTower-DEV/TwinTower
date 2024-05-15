@@ -12,11 +12,11 @@ namespace TwinTower
         const int BUTTON_COUNT = 4;
         private Action[] _actions = new Action[BUTTON_COUNT];
         private int currcoursor;
-        [SerializeField] private AudioClip BGM;
-        
+        [SerializeField] private AudioClip MainSceneBGM;
+        [SerializeField] private AudioClip IngameBGM;
         public override void Init()
         {
-            SoundManager.Instance.SetBGM(BGM, DataManager.Instance.UIGameDatavalue.bgmcoursor);
+            SoundManager.Instance.SetBGM(MainSceneBGM, DataManager.Instance.UIGameDatavalue.bgmcoursor);
             Bind<Image>(typeof(Images));
 
             UIManager.Instance.InputHandler -= KeyInPut;

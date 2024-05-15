@@ -10,6 +10,7 @@ namespace TwinTower
         int _order = 10;
         // Normal UI들을 관리하는 HashSet
         HashSet<UI_Base> _normalUIs = new HashSet<UI_Base>();
+        private Stack<UI_Base> _uistack = new Stack<UI_Base>();
         private int _uiNum = 0;
         Define.Resolution _resolution = new Define.Resolution() { width = 1080, height = 1920 };
         bool _isWindowMode;
@@ -130,6 +131,17 @@ namespace TwinTower
             _normalUIs.Remove(ui);
             _uiNum = _uiNum - 1;
             ResourceManager.Instance.Destroy(ui.gameObject);
+        }
+
+        public void CloseFieldCutSceneUI(UI_Base ui)
+        {
+            if (_normalUIs.Count == 0)
+                return;
+            if (ui == null) return;
+            _normalUIs.Remove(ui);
+            _uiNum = _uiNum - 1;
+            ResourceManager.Instance.Destroy(ui.gameObject);
+            StartCoroutine(ScreenManager.Instance.NextSceneload());
         }
     }
 }
