@@ -46,7 +46,7 @@ namespace TwinTower
             
             Canvas canvas = GetComponent<Canvas>();
             if (canvas != null)
-                canvas.sortingOrder = 11;
+                canvas.sortingOrder = 31;
             NextScript();
         }
 

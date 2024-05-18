@@ -36,6 +36,7 @@ public class SoundManager : Manager<SoundManager> {
 
     public void ChangeBGM(AudioClip bgm)
     {
+        if (bgmSource.clip == bgm) return;
         bgmSource.clip = bgm;
         bgmSource.Play();
     }

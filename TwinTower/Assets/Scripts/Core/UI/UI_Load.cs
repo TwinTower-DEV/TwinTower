@@ -123,7 +123,10 @@ public class UI_Load : UI_Base {
         }
     }
 
-    private void LoadEvent(int idx) {
+    private void LoadEvent(int idx)
+    {
+        if(Time.timeScale == 0)
+            Time.timeScale = 1;
         DataManager.Instance.saveload.ChangeCurrSaveSlot(idx);
         DataManager.Instance.saveload.Load();
     }
