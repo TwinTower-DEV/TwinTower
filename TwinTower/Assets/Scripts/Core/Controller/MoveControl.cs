@@ -26,6 +26,10 @@ namespace TwinTower
         
         // movedir방향으로 이동 가능한지 체크 - 이동 가능하다면 true반환
         // layermask를 통해 다음 칸에 있는 오브젝트에 따라 확인됨.
+        public bool Move()
+        {
+            return isMove;
+        }
         public virtual bool MoveCheck(Vector3 movedir) {
             if (isMove) return false;
             if (movedir == Vector3.zero) return false;
