@@ -13,11 +13,26 @@ using UnityEngine.Tilemaps;
 /// 상자하고 플레이어 고민 해야할듯.
 /// </summary>
 public class MovingWalk : MonoBehaviour {
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        InputController.Instance.ReleaseControl();
+    }
+
     private void OnTriggerStay2D(Collider2D other) {
         MoveControl moveableObject = other.GetComponent<MoveControl>();
         if (moveableObject != null && moveableObject.MoveCheck(transform.up)) {     // 이동 가능할때
             moveableObject.DirectSetting(transform.up);  
             Debug.Log("실행 안된거임?");
         }
+        else
+        {
+            if(moveableObject != null && !moveableObject.Move())
+                InputController.Instance.GainControl();
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        InputController.Instance.GainControl();   
     }
 }
