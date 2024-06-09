@@ -35,8 +35,8 @@ namespace TwinTower
             Bind<Image>(typeof(Images));
             Bind<TextMeshProUGUI>(typeof(Texts));
 
-            _anim = Get<Image>((int)Images.Chat).gameObject.GetComponent<Animator>();
-            _anim.SetBool("Start", true);
+            //_anim = Get<Image>((int)Images.Chat).gameObject.GetComponent<Animator>();
+            //_anim.SetBool("Start", true);
             UIManager.Instance.InputHandler += KeyInput;
             if (DataManager.Instance.StageInfovalue.cutsceneflug != null)
             {
