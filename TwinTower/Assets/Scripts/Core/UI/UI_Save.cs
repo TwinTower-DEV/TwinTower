@@ -46,7 +46,7 @@ public class UI_Save : UI_Base {
         Get<Image>((int)Save.SelectSave_2).gameObject.SetActive(false);
         Get<Image>((int)Save.SelectSave_3).gameObject.SetActive(false);
         
-        currCursor = 0;
+        currCursor = 1;
         EnterCursorEvent(currCursor);
     }
 
@@ -108,8 +108,13 @@ public class UI_Save : UI_Base {
             Get<TextMeshProUGUI>(i).text = SaveLoadController.GetSaveInfo(i);
             Get<TextMeshProUGUI>(i + SLOT_COUNT).text = SaveLoadController.GetSaveInfo(i);
 
-            if (SaveLoadController.GetSaveInfo(i) == "NO SAVE DATA") {
+            if (SaveLoadController.GetSaveInfo(i) == "NO SAVE DATA" || i == 0) {
                 Get<Button>(i).gameObject.SetActive(false);
+                Color newcolor;
+                if (ColorUtility.TryParseHtmlString("#7F7F7F", out newcolor))
+                {
+                    Util.FindChild<Image>(Get<Image>(i).gameObject).color = newcolor;
+                }
             }
             else Get<Button>(i).gameObject.SetActive(true);
         }
@@ -132,6 +137,8 @@ public class UI_Save : UI_Base {
     void EnterCursorEvent(int currIdx) {
         Get<Image>(currCursor + SLOT_COUNT).gameObject.SetActive(false);  // 기존것 하이라이트 종료
         Get<Image>(currCursor).gameObject.SetActive(true);
+
+        if (currIdx == 0) currIdx++;
         
         currCursor = currIdx;
         

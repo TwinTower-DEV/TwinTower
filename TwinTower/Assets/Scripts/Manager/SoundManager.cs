@@ -10,6 +10,8 @@ public class SoundManager : Manager<SoundManager> {
     private float reducevolume = -1;
     private float[] soundvolume = new float[5]
         { 0.0f, 0.25f, 0.5f, 0.75f, 1.0f };
+
+    private float originvolume = -1.0f;
     protected override void Awake() {
         base.Awake();
 
@@ -29,9 +31,9 @@ public class SoundManager : Manager<SoundManager> {
         if(!bgmSource.isPlaying) bgmSource.Play();
     }
 
-    public void SetBGMVolume(float volume)
+    public void SetBGMVolume(int volume)
     {
-        bgmSource.volume = volume;
+        bgmSource.volume = soundvolume[volume];
     }
 
     public void ChangeBGM(AudioClip bgm)
@@ -39,6 +41,22 @@ public class SoundManager : Manager<SoundManager> {
         if (bgmSource.clip == bgm) return;
         bgmSource.clip = bgm;
         bgmSource.Play();
+    }
+
+    public void PreviewVolume(int volume)
+    {
+        if (originvolume <= -1.0f)
+            originvolume = bgmSource.volume;
+
+        bgmSource.volume = soundvolume[volume];
+    }
+
+    public void OriginChange()
+    {
+        if (!originvolume.Equals(bgmSource.volume))
+            bgmSource.volume = originvolume;
+        else
+            originvolume = -1.0f;
     }
 
     public void SetReduceVolume()

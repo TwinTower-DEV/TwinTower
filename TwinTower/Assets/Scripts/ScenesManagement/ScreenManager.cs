@@ -30,7 +30,11 @@ namespace TwinTower
                     SceneManager.LoadScene("MainScene");
                 }
                 else
+                {
                     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                    DataManager.Instance.saveload.ChangeCurrSaveSlot(0);
+                    DataManager.Instance.saveload.Save(SceneManager.GetSceneByBuildIndex(SceneManager.GetActiveScene().buildIndex + 1).name);
+                }
             }
             else
                 SceneManager.LoadScene(s);

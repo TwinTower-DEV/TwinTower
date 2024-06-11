@@ -35,8 +35,8 @@ namespace TwinTower
             Bind<Image>(typeof(Images));
             Bind<TextMeshProUGUI>(typeof(Texts));
 
-            _anim = Get<Image>((int)Images.Chat).gameObject.GetComponent<Animator>();
-            _anim.SetBool("Start", true);
+            //_anim = Get<Image>((int)Images.Chat).gameObject.GetComponent<Animator>();
+            //_anim.SetBool("Start", true);
             UIManager.Instance.InputHandler += KeyInput;
             if (DataManager.Instance.StageInfovalue.cutsceneflug != null)
             {
@@ -78,7 +78,6 @@ namespace TwinTower
             {
                 UIManager.Instance.InputHandler -= KeyInput;
                 //Time.timeScale = 1;
-                _anim.SetBool("End", true);
                 SoundManager.Instance.SetReduceVolume();
                 UIManager.Instance.CloseFieldCutSceneUI(this);
             }
@@ -86,7 +85,6 @@ namespace TwinTower
             {
                 UIManager.Instance.InputHandler -= KeyInput;
                 //Time.timeScale = 1;
-                _anim.SetBool("End", true);
                 StartCoroutine(UI_ScreenFader.FadeSceneIn());
                 SoundManager.Instance.SetReduceVolume();
                 SoundManager.Instance.ChangeBGM(BGM);
