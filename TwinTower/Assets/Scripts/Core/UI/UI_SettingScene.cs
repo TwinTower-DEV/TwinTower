@@ -132,6 +132,7 @@ namespace TwinTower
                 return;
             if (Input.GetKeyDown(KeyCode.Escape))
             {
+                SoundManager.Instance.OriginChange();
                 UIManager.Instance.InputHandler -= KeyInput;
                 UIManager.Instance.CloseNormalUI(this);
             }
@@ -297,11 +298,13 @@ namespace TwinTower
             {
                 bgmcursor = nextidx == -1 ? bgmbuttonCount[(int)soundbutton] : nextidx;
                 SelectSoundButton(0);
+                SoundManager.Instance.PreviewVolume(bgmcursor);
             }
             else
             {
                 seccursor = nextidx == -1 ? sebuttonCount[(int)soundbutton] : nextidx;
                 SelectSoundButton(1);
+                SoundManager.Instance.PreviewVolume(seccursor);
             }
 
             currentcoursor = (int)selectsound;
@@ -418,7 +421,7 @@ namespace TwinTower
 
         private void SoundApply()
         {
-            SoundManager.Instance.SetBGMVolume(soundvolume[bgmcursor]);
+            SoundManager.Instance.SetBGMVolume(bgmcursor);
             // sf 는 이번주 회의에서 물어보기
         }
 

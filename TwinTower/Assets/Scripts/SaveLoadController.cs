@@ -32,6 +32,14 @@ public class SaveLoadController {
         PlayerPrefs.SetString(currSaveSlot.ToString() + "Date", date);
     }
 
+    public void Save(string stage)
+    {
+        string date = DateTime.Now.Date.ToString("yyyy-MM-dd");
+        
+        PlayerPrefs.SetString(currSaveSlot.ToString(), stage);
+        PlayerPrefs.SetString(currSaveSlot.ToString() + "Date", date);
+    }
+
     public void Delete() {
         PlayerPrefs.SetString(currSaveSlot.ToString(), null);
         PlayerPrefs.SetString(currSaveSlot.ToString() + "Date", null);

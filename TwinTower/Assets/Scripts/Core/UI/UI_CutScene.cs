@@ -78,7 +78,6 @@ namespace TwinTower
             {
                 UIManager.Instance.InputHandler -= KeyInput;
                 //Time.timeScale = 1;
-                _anim.SetBool("End", true);
                 SoundManager.Instance.SetReduceVolume();
                 UIManager.Instance.CloseFieldCutSceneUI(this);
             }
@@ -86,7 +85,6 @@ namespace TwinTower
             {
                 UIManager.Instance.InputHandler -= KeyInput;
                 //Time.timeScale = 1;
-                _anim.SetBool("End", true);
                 StartCoroutine(UI_ScreenFader.FadeSceneIn());
                 SoundManager.Instance.SetReduceVolume();
                 SoundManager.Instance.ChangeBGM(BGM);
