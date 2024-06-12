@@ -401,17 +401,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &295417458 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 722305103165723638, guid: fcd7f72700d309643b3ea4660eecc4a4, type: 3}
-  m_PrefabInstance: {fileID: 751684165}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a07c0d6d48534c2ebf9427c77d164cbe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &295417459 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 722305103165723639, guid: fcd7f72700d309643b3ea4660eecc4a4, type: 3}
@@ -3261,11 +3250,11 @@ PrefabInstance:
     - target: {fileID: 1155582480561813445, guid: daf35fd1324be5d42bf76fe0ae4572c9, type: 3}
       propertyPath: cutSceneCheck
       value: 
-      objectReference: {fileID: 295417458}
+      objectReference: {fileID: 0}
     - target: {fileID: 1487248498110994476, guid: daf35fd1324be5d42bf76fe0ae4572c9, type: 3}
       propertyPath: cutSceneCheck
       value: 
-      objectReference: {fileID: 295417458}
+      objectReference: {fileID: 0}
     - target: {fileID: 2634441239554297346, guid: daf35fd1324be5d42bf76fe0ae4572c9, type: 3}
       propertyPath: m_RootOrder
       value: 2

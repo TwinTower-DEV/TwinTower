@@ -29,13 +29,23 @@ public class Stair : MonoBehaviour
             OnPlayer = true;
             if (stair2.getOnPlayer() && OnPlayer) {       // 계단 동시 진입 - 다음 단계 진입                     // 다른 계단에 플레이어가 위치해 있는지 확인
                 //NextLevelManager.Instance.NextLevel(stair.NextSceneString);
-                if(cutSceneCheck == null)
-                    StartCoroutine(ScreenManager.Instance.NextSceneload());
+                if (cutSceneCheck == null)
+                {
+                    StartCoroutine(NextStage());
+
+                }
                 else
                     cutSceneCheck.CutSceneStart();
                 Debug.Log("다음 단계 진입" + gameObject.name);
             }
         }
+    }
+
+    private IEnumerator NextStage()
+    {
+        yield return StartCoroutine(UI_ScreenFader.FadeScenOut());
+        UIManager.Instance.ShowNormalUI<UI_Clear>();
+        yield return StartCoroutine(UI_ScreenFader.FadeSceneIn());
     }
     private void OnTriggerExit2D(Collider2D other) {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player")) OnPlayer = false;

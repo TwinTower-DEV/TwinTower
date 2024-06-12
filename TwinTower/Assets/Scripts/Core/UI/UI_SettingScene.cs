@@ -30,7 +30,12 @@ namespace TwinTower
 
         private string[] displays = new string[5]
             { "800 X 600", "1280 X 720", "1920 X 1080", "2560 X 1440", "3840 X 2160" };
+        
+        private int[] height = new int[5]
+            { 600, 720, 1080, 1440, 2160 };
 
+        private int[] width = new int[5]
+            { 800, 1280, 1920, 2560, 3840 };
         private float[] soundvolume = new float[5]
             { 0.0f, 0.25f, 0.5f, 0.75f, 1.0f };
         private string[] langauges = new string[2] { "한국어", "영어" };
@@ -122,6 +127,11 @@ namespace TwinTower
             _actions[5] = Credit;
             _actions[6] = Apply;
 
+        }
+
+        private void Test()
+        {
+            
         }
         
         private void KeyInput()
@@ -426,6 +436,14 @@ namespace TwinTower
         }
 
         private void DisplayApply()
+        {
+            Define.Resolution resolution;
+            resolution.height = height[displaycoursor];
+            resolution.width = width[displaycoursor];
+            UIManager.Instance.Resolution = resolution;
+        }
+
+        private void DisplayModeApply()
         {
             
         }

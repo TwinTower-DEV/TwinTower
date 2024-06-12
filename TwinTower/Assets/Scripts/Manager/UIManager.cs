@@ -121,6 +121,7 @@ namespace TwinTower
             GameObject go = ResourceManager.Instance.Instantiate($"UI/{name}");
             T ui = Util.GetOrAddComponent<T>(go);
             _normalUIs.Add(ui);
+            _uistack.Push(ui);
             go.transform.SetParent(Root.transform);
 
             return ui;
@@ -131,6 +132,7 @@ namespace TwinTower
                 return;
             if (ui == null) return;
             _normalUIs.Remove(ui);
+            _uistack.Pop();
             _uiNum = _uiNum - 1;
             ResourceManager.Instance.Destroy(ui.gameObject);
         }
