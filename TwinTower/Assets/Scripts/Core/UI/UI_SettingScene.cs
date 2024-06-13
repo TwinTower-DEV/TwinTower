@@ -412,7 +412,7 @@ namespace TwinTower
 
         private void Credit()
         {
-            Debug.Log("크레딧 화면 실행");
+            UIManager.Instance.ShowNormalUI<UI_Creadit>();
         }
 
         private void Apply()

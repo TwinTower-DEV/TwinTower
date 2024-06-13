@@ -34,6 +34,8 @@ public class SoundManager : Manager<SoundManager> {
     public void SetBGMVolume(int volume)
     {
         bgmSource.volume = soundvolume[volume];
+        if (originvolume > -1.0f)
+            originvolume = soundvolume[volume];
     }
 
     public void ChangeBGM(AudioClip bgm)
@@ -53,6 +55,7 @@ public class SoundManager : Manager<SoundManager> {
 
     public void OriginChange()
     {
+        Debug.Log(originvolume + " " + bgmSource.volume);
         if (!originvolume.Equals(bgmSource.volume))
             bgmSource.volume = originvolume;
         else
