@@ -35,6 +35,10 @@ public class DispenserShoot : ActivateObject {
 
     public override void Launch() {
         isLaunch = true;
+        if (rigidbody2D == null)
+            rigidbody2D = GetComponent<Rigidbody2D>();
+        if (collider2d == null)
+            collider2d = GetComponent<Collider2D>();
         rigidbody2D.AddForce(transform.up * force * Time.deltaTime);
     }
     

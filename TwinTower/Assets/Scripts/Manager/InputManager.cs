@@ -59,8 +59,11 @@ namespace TwinTower
         }
 
         private void PlayerMove(Define.MoveDir dir) {
-            GameManager.Instance._player1.Dir = dir;
-            GameManager.Instance._player2.Dir = dir;
+            if(GameManager.Instance._player1.Dir != Define.MoveDir.Die)
+                GameManager.Instance._player1.Dir = dir;
+            
+            if(GameManager.Instance._player2.Dir != Define.MoveDir.Die)
+                GameManager.Instance._player2.Dir = dir;
         }
 
         private void Update() {

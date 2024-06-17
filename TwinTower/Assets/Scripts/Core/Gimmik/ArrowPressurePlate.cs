@@ -8,6 +8,7 @@ public class ArrowPressurePlate : PressurePlate {
     private SpriteRenderer sprite;
     private void Awake() {
         sprite = GetComponent<SpriteRenderer>();
+        activateObject.gameObject.SetActive(false);
     }
 
     protected override void OnTriggerEnter2D(Collider2D other) {
@@ -15,6 +16,7 @@ public class ArrowPressurePlate : PressurePlate {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player") ||
             other.gameObject.layer == LayerMask.NameToLayer("Box"))
         {
+            activateObject.gameObject.SetActive(true);
             ActivateObject active = activateObject.GetComponent<ActivateObject>();
             active.Launch();
             sprite.color = new Color(140f/255f, 140f/255f, 140f/255f);

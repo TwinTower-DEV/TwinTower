@@ -47,6 +47,7 @@ namespace TwinTower
                 if (collider.GetComponent<Tilemap>() != null) continue;
                 if(collider.GetComponent<MovingWalk>() != null) rotatableObject.Add(collider);
                 else if(collider.GetComponent<DispenserShoot>() != null) rotatableObject.Add(collider);
+                else if(collider.gameObject.name.Equals("ArrowDirection")) rotatableObject.Add(collider);
                 else unRotatableObject.Add(collider);
             }
             

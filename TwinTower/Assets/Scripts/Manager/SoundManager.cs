@@ -49,7 +49,7 @@ public class SoundManager : Manager<SoundManager> {
     {
         if (originvolume <= -1.0f)
             originvolume = bgmSource.volume;
-
+        Debug.Log(volume);
         bgmSource.volume = soundvolume[volume];
     }
 

@@ -33,7 +33,7 @@ namespace TwinTower
         }
         private IEnumerator end()
         {
-            yield return new WaitForSeconds(12f);
+            yield return new WaitForSeconds(14f);
             UIManager.Instance.CloseNormalUI(this);
         }
     }
