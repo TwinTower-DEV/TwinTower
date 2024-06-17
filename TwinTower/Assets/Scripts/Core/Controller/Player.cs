@@ -30,6 +30,9 @@ namespace TwinTower
                     case Define.MoveDir.Up:
                         _animator.Play("Up_Run");
                         break;
+                    case Define.MoveDir.Die:
+                        _animator.Play("Dead");
+                        break;
                     case Define.MoveDir.None:
                         if (dir == Define.MoveDir.Up)
                         {
@@ -52,7 +55,14 @@ namespace TwinTower
                 dir = value;
             }
         }
-        
+
+        public override void ReduceHealth()
+        {
+            Dir = Define.MoveDir.Die;
+            InputController.Instance.ReleaseControl();
+            StartCoroutine(ScreenManager.Instance.CurrentScreenReload());
+        }
+
         protected override void Awake()
         {
             base.Awake();

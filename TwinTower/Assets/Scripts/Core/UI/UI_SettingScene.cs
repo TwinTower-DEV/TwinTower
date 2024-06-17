@@ -9,6 +9,7 @@ namespace TwinTower
     public class UI_SettingScene : UI_Base
     {
         private const int BUTTON_COUNT = 7;
+        private const int Sound_BUTTON_COUNT = 5;
         [SerializeField] private Sprite noSelect_noClick;
         [SerializeField] private Sprite noSelect_Click;
         [SerializeField] private Sprite select_noCliCK;
@@ -39,7 +40,8 @@ namespace TwinTower
         private float[] soundvolume = new float[5]
             { 0.0f, 0.25f, 0.5f, 0.75f, 1.0f };
         private string[] langauges = new string[2] { "한국어", "영어" };
-        
+        [SerializeField] private List<string> korlanguages;
+        [SerializeField] private List<string> englanguages;
         enum Images
         {
             BGM_Button,
@@ -69,7 +71,19 @@ namespace TwinTower
             SE_Button3,
             SE_Button4,
             SE_Button5,
-            
+        }
+
+        enum Texts
+        {
+            Audio_Setting_txt,
+            Display_Setting_txt,
+            Language_Setting_txt,
+            DisplayMode_txt,
+            Display_txt,
+            Language_txt,
+            Creadit_txt,
+            Applay_txt,
+            Lgo_txt
         }
         public override void Init()
         {
@@ -115,9 +129,9 @@ namespace TwinTower
             Get<Image>((int)Images.SE_Button5).gameObject.BindEvent(() => PushSoundButton(Images.SE_Button, Images.SE_Button5), Define.UIEvent.Click);
 
             _actions[0] = (() => 
-                PushSoundButton((Images)currentcoursor, 0, (bgmcursor + 1) % BUTTON_COUNT));
+                PushSoundButton((Images)currentcoursor, 0, (bgmcursor + 1) % Sound_BUTTON_COUNT));
             _actions[1] = (() =>
-                PushSoundButton((Images)currentcoursor, 0, (seccursor + 1 + BUTTON_COUNT) % BUTTON_COUNT));
+                PushSoundButton((Images)currentcoursor, 0, (seccursor + 1 + Sound_BUTTON_COUNT) % Sound_BUTTON_COUNT));
             _actions[2] = (() =>
                 SidePushButton((Images)currentcoursor, true));
             _actions[3] = (() =>
@@ -150,9 +164,9 @@ namespace TwinTower
             if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
             {
                 if(currentcoursor == 0)
-                    PushSoundButton((Images)currentcoursor, 0, (bgmcursor - 1 + BUTTON_COUNT) % BUTTON_COUNT);
+                    PushSoundButton((Images)currentcoursor, 0, (bgmcursor - 1 + Sound_BUTTON_COUNT) % Sound_BUTTON_COUNT);
                 else if(currentcoursor == 1)
-                    PushSoundButton((Images)currentcoursor, 0, (seccursor - 1 + BUTTON_COUNT) % BUTTON_COUNT);
+                    PushSoundButton((Images)currentcoursor, 0, (seccursor - 1 + Sound_BUTTON_COUNT) % Sound_BUTTON_COUNT);
                 else if(currentcoursor == 5 || currentcoursor == 6)
                     SideEnterCoursor();
                 else
@@ -162,9 +176,9 @@ namespace TwinTower
             if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
             {
                 if(currentcoursor == 0)
-                    PushSoundButton((Images)currentcoursor, 0, (bgmcursor + 1) % BUTTON_COUNT);
+                    PushSoundButton((Images)currentcoursor, 0, (bgmcursor + 1) % Sound_BUTTON_COUNT);
                 else if(currentcoursor == 1)
-                    PushSoundButton((Images)currentcoursor, 0, (seccursor + 1) % BUTTON_COUNT);
+                    PushSoundButton((Images)currentcoursor, 0, (seccursor + 1) % Sound_BUTTON_COUNT);
                 else if(currentcoursor == 5 || currentcoursor == 6)
                     SideEnterCoursor();
                 else
