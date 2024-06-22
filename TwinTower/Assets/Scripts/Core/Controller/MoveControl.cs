@@ -36,7 +36,7 @@ namespace TwinTower
             RaycastHit2D hit = Physics2D.Raycast(transform.position + movedir * 0.4f , movedir, 0.5f, _layerMask);
             if (hit.collider == null) return true;
             if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Box")) {
-                MoveControl boxcontrol = hit.transform.gameObject.GetComponent<MoveControl>();
+                Box boxcontrol = hit.transform.gameObject.GetComponent<Box>();
                 if (boxcontrol.MoveCheck(movedir)) return true;
             }
             return false;
