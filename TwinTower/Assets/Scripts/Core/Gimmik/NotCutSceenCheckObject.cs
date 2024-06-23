@@ -9,7 +9,7 @@ namespace TwinTower
         public void Start()
         {
             StartCoroutine(UI_ScreenFader.FadeSceneIn());
-            SoundManager.Instance.ChangeBGM(bgm);
+            SoundManager.Instance.Play(bgm, Define.Sound.Bgm);
         }
     }
 }

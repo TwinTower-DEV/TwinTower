@@ -16,14 +16,15 @@ public class DoorActivate : ActivateObject {
 
     public override void Launch()
     {
+        SoundManager.Instance.Play("문여닫는소리(저작권 표시해야함)/Door_Open&Close_SFX");
         animator.Play("OpenDoor");
-        SoundManager.Instance.PlayEffect(audio);
         gameObject.layer = LayerMask.NameToLayer("Rotatable");       // default로 변환
         GetComponent<BoxCollider2D>().isTrigger = true;
     }
     
     public override void UnLaunch()
     {
+        SoundManager.Instance.Play("문여닫는소리(저작권 표시해야함)/Door_Open&Close_SFX");
         animator.Play("CloseDoor");
         gameObject.layer = LayerMask.NameToLayer("Wall");       // wall 변환
         GetComponent<BoxCollider2D>().isTrigger = true;

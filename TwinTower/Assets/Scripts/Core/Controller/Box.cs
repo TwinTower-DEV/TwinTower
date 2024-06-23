@@ -33,10 +33,20 @@ public class Box : MoveControl
         {
             StartCoroutine(Destroy());
         }
+        else
+        {
+            SoundManager.Instance.Play("steelbox_impact/arrow_hit_the_metal_SFX");
+        }
+    }
+
+    protected override void MoveSoundStart()
+    {
+        SoundManager.Instance.Play("box_slide/Box_Slide_SFX");
     }
 
     public IEnumerator Destroy()
     {
+        SoundManager.Instance.Play("wood_shatter/WoodBox_destroy_SFX");
         _animator.Play("Destroy");
         gameObject.layer = 0;
         yield return new WaitForSeconds(0.5f);

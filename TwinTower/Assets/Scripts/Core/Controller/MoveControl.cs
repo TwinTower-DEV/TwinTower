@@ -45,6 +45,7 @@ namespace TwinTower
         // 이동 하고자 하는 방향 설정과 이동 가능함을 표시
         public void DirectSetting(Vector3 movedir) {
             if (movedir == Vector3.zero) return;
+            MoveSoundStart();
             RaycastHit2D hit = Physics2D.Raycast(transform.position + movedir * 0.5f , movedir, 0.5f, _layerMask);
             if (hit.collider != null && hit.transform.gameObject.layer == LayerMask.NameToLayer("Box")) {
                 MoveControl boxcontrol = hit.transform.gameObject.GetComponent<MoveControl>();
@@ -55,6 +56,10 @@ namespace TwinTower
             Destination.transform.position = transform.position + movedir;
         }
 
+        protected virtual void MoveSoundStart()
+        {
+            
+        }
         public virtual void ReduceHealth()
         {
             //InputController.Instance.ReleaseControl();

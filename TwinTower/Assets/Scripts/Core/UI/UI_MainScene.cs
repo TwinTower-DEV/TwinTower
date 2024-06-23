@@ -16,7 +16,7 @@ namespace TwinTower
         [SerializeField] private AudioClip IngameBGM;
         public override void Init()
         {
-            SoundManager.Instance.SetBGM(MainSceneBGM, DataManager.Instance.UIGameDatavalue.bgmcoursor);
+            SoundManager.Instance.Play(MainSceneBGM, Define.Sound.Bgm);
             Bind<Image>(typeof(Images));
 
             UIManager.Instance.InputHandler -= KeyInPut;

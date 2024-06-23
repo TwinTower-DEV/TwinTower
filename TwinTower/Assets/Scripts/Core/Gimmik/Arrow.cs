@@ -29,7 +29,10 @@ public class Arrow : MonoBehaviour {
             Destroy(gameObject);
         }
         DispenserShoot shooter = other.GetComponent<DispenserShoot>();
-        if(shooter == null && other.gameObject.layer == LayerMask.NameToLayer("Wall")) Destroy(gameObject);                // 화살대는 무시
+        if(shooter == null && other.gameObject.layer == LayerMask.NameToLayer("Wall")) {
+            Destroy(gameObject);                // 화살대는 무시
+            SoundManager.Instance.Play("Arrow_Hit_Wall", Define.Sound.Effect);
+        }
         
     }
 }
