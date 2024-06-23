@@ -19,6 +19,7 @@ public class ArrowPressurePlate : PressurePlate {
             activateObject.gameObject.SetActive(true);
             ActivateObject active = activateObject.GetComponent<ActivateObject>();
             active.Launch();
+            SoundManager.Instance.Play("arrow_launch/Arrow_Launch_SFX");
             sprite.color = new Color(140f/255f, 140f/255f, 140f/255f);
         }
     }

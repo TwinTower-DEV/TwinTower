@@ -22,6 +22,12 @@ namespace TwinTower
             Enter,
             Exit
         }
+        public enum Sound
+        {
+            Bgm,
+            Effect,
+            MaxCount,
+        }
 
         public struct Language
         {

@@ -12,7 +12,6 @@ using UnityEngine;
 public class Box : MoveControl
 {
     private Animator _animator;
-    
     protected override void Awake()
     {
         base.Awake();
@@ -25,7 +24,7 @@ public class Box : MoveControl
 
         return false;
     }
-    
+
 
     // 화살 피격 시 체력 감소 및 체력 없을 시 오브젝트 자체 삭제
     public override void ReduceHealth() {
@@ -34,11 +33,22 @@ public class Box : MoveControl
         {
             StartCoroutine(Destroy());
         }
+        else
+        {
+            SoundManager.Instance.Play("steelbox_impact/arrow_hit_the_metal_SFX");
+        }
+    }
+
+    protected override void MoveSoundStart()
+    {
+        SoundManager.Instance.Play("box_slide/Box_Slide_SFX");
     }
 
     public IEnumerator Destroy()
     {
+        SoundManager.Instance.Play("wood_shatter/WoodBox_destroy_SFX");
         _animator.Play("Destroy");
+        gameObject.layer = 0;
         yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
     }

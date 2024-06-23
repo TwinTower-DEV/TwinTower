@@ -31,7 +31,7 @@ namespace TwinTower
         [SerializeField] private List<Sprite> _daliasprites;
         public override void Init()
         {
-            SoundManager.Instance.SetReduceVolume();
+            //SoundManager.Instance.SetReduceVolume();
             Bind<Image>(typeof(Images));
             Bind<TextMeshProUGUI>(typeof(Texts));
 
@@ -78,7 +78,7 @@ namespace TwinTower
             {
                 UIManager.Instance.InputHandler -= KeyInput;
                 //Time.timeScale = 1;
-                SoundManager.Instance.SetReduceVolume();
+                //SoundManager.Instance.SetReduceVolume();
                 UIManager.Instance.CloseFieldCutSceneUI(this);
             }
             else
@@ -86,8 +86,8 @@ namespace TwinTower
                 UIManager.Instance.InputHandler -= KeyInput;
                 //Time.timeScale = 1;
                 StartCoroutine(UI_ScreenFader.FadeSceneIn());
-                SoundManager.Instance.SetReduceVolume();
-                SoundManager.Instance.ChangeBGM(BGM);
+                //SoundManager.Instance.SetReduceVolume();
+                //SoundManager.Instance.ChangeBGM(BGM);
                 UIManager.Instance.CloseNormalUI(this);
             }
         }
