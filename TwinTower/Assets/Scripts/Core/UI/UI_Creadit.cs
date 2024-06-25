@@ -28,6 +28,7 @@ namespace TwinTower
 
             if (Input.GetKeyDown(KeyCode.Escape))
             {
+                UI_SoundEffect();
                 UIManager.Instance.CloseNormalUI(this);
             }
         }

@@ -11,7 +11,7 @@ public class SoundManager : Manager<SoundManager>
         Dictionary<string, AudioClip> _audioClips = new Dictionary<string, AudioClip>();
         private int bgmsoundsize = -1;
         private int sesoundsize = -1;
-        private float[] _volumeset = new float[]{ 0, 0.25f, 0.5f, 0.75f, 1.0f };
+        private float[] _volumeset = new float[]{ 0, 0.1f, 0.5f, 0.75f, 1.0f };
         //private float _masterVolume = DataManager.Instance.GameData.mastetVolume;
 
         protected override void Awake()
@@ -46,7 +46,6 @@ public class SoundManager : Manager<SoundManager>
         public void Play(string path, Define.Sound type = Define.Sound.Effect, float pitch = 1.0f)
         {
             AudioClip audioClip = GetOrAddAudioClip(path, type);
-            Debug.Log(path);
             Play(audioClip, type, pitch);
         }
 
@@ -58,10 +57,21 @@ public class SoundManager : Manager<SoundManager>
             {
                 AudioSource audioSource = _audioSources[(int)Define.Sound.Bgm];
                 if (audioSource.isPlaying)
-                    audioSource.Stop();
-                audioSource.pitch = pitch;
-                audioSource.clip = audioClip;
-                audioSource.Play();
+                {
+                    if (audioSource.clip.name != audioClip.name)
+                    {
+                        audioSource.Stop();
+                        audioSource.pitch = pitch;
+                        audioSource.clip = audioClip;
+                        audioSource.Play();
+                    }
+                }
+                else
+                {
+                    audioSource.pitch = pitch;
+                    audioSource.clip = audioClip;
+                    audioSource.Play();
+                }
             }
             else
             {
@@ -70,7 +80,6 @@ public class SoundManager : Manager<SoundManager>
                 audioSource.clip = audioClip;
                 //audioSource.volume = DataManager.Instance.GameData.effectVolume;
                 audioSource.volume = _audioSources[(int)Define.Sound.Effect].volume;
-                Debug.Log(audioSource.volume);
                 StartCoroutine(PlayBgm(audioSource));
             }
         }
@@ -105,6 +114,7 @@ public class SoundManager : Manager<SoundManager>
             }
             else
             {
+                Debug.Log(path);
                 if (_audioClips.TryGetValue(path, out audioClip) == false)
                 {
                     audioClip = ResourceManager.Instance.Load<AudioClip>(path);

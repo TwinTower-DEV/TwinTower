@@ -323,12 +323,14 @@ namespace TwinTower
                 bgmcursor = nextidx == -1 ? bgmbuttonCount[(int)soundbutton] : nextidx;
                 SelectSoundButton(0);
                 SoundManager.Instance.PreviewVolume_BGM(bgmcursor);
+                UI_SoundEffect();
             }
             else
             {
                 seccursor = nextidx == -1 ? sebuttonCount[(int)soundbutton] : nextidx;
                 SelectSoundButton(1);
                 SoundManager.Instance.PreviewVolume_SE(seccursor);
+                UI_SoundEffect();
             }
 
             currentcoursor = (int)selectsound;
@@ -336,6 +338,8 @@ namespace TwinTower
 
         private void SidePushButton(Images selectMain, bool check)
         {
+            UI_SoundEffect();
+
             if (selectMain == Images.Display_Button)
             {
                 if (check)
@@ -416,6 +420,7 @@ namespace TwinTower
 
         private void SideEnterCoursor()
         {
+            UI_SoundEffect();
             SetColor(Get<Image>(currentcoursor).gameObject, "#FFFFFF", false);
             Get<Image>(currentcoursor + BUTTON_COUNT).gameObject.SetActive(false);
 
@@ -431,6 +436,7 @@ namespace TwinTower
 
         private void Apply()
         {
+            UI_SoundEffect();
             UI_Setting_SaveCheck settingSaveCheck = UIManager.Instance.ShowNormalUI<UI_Setting_SaveCheck>();
             settingSaveCheck.saveAction += SaveData;
         }
@@ -469,6 +475,7 @@ namespace TwinTower
 
         private void ChangeCoursor(int nextidx)
         {
+            UI_SoundEffect();
             EnterCoursor(nextidx);      
         }
     }

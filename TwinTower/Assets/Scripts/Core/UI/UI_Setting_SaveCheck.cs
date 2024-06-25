@@ -37,6 +37,8 @@ namespace TwinTower
 
             _actions[0] = YesClickEvent;
             _actions[1] = NoClickEvent;
+            cursor = 0;
+            EnterCursorEvent(cursor);
         }
 
         private void KeyInput()
@@ -46,8 +48,24 @@ namespace TwinTower
             if(_uiNum != UIManager.Instance.UINum)
                 return;
 
+            if (Input.GetKeyDown(KeyCode.RightArrow)) {
+                EnterCursorEvent((cursor + 1) % Button_Count);
+                return;
+            }
+
+            if (Input.GetKeyDown(KeyCode.LeftArrow)) {
+                EnterCursorEvent((cursor - 1 + Button_Count) % Button_Count);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                _actions[cursor].Invoke();
+            }
+
+            
             if (Input.GetKeyDown(KeyCode.Escape))
             {
+                UI_SoundEffect();
                 UIManager.Instance.InputHandler -= KeyInput;
                 UIManager.Instance.CloseNormalUI(this);
             }
@@ -56,17 +74,20 @@ namespace TwinTower
         private void YesClickEvent()
         {
             saveAction.Invoke();
+            UI_SoundEffect();
             UIManager.Instance.InputHandler -= KeyInput;
             UIManager.Instance.CloseNormalUI(this);
         }
 
         private void NoClickEvent()
         {
+            UI_SoundEffect();
             UIManager.Instance.InputHandler -= KeyInput;
             UIManager.Instance.CloseNormalUI(this);
         }
         
         void EnterCursorEvent(int currIdx) {
+            UI_SoundEffect();
             Get<Image>(cursor + Button_Count).gameObject.SetActive(true);  // 기존것 하이라이트 종료
             Get<Image>(cursor).gameObject.SetActive(false);
         

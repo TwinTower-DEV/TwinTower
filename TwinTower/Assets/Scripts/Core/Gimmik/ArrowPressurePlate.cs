@@ -16,6 +16,7 @@ public class ArrowPressurePlate : PressurePlate {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player") ||
             other.gameObject.layer == LayerMask.NameToLayer("Box"))
         {
+            SoundManager.Instance.Play("Button_Click_SFX", Define.Sound.Effect);
             activateObject.gameObject.SetActive(true);
             ActivateObject active = activateObject.GetComponent<ActivateObject>();
             active.Launch();

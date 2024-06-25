@@ -98,6 +98,7 @@ public class UI_Save : UI_Base {
         
         if (Input.GetKeyDown(KeyCode.Escape)) {
            // menuUIManager.PrevPanelChange();
+           UI_SoundEffect();
            UIManager.Instance.InputHandler -= KeyInPut;
            UIManager.Instance.CloseNormalUI(this);
         }
@@ -121,6 +122,7 @@ public class UI_Save : UI_Base {
     }
 
     private void SaveEvent(int idx) {
+        UI_SoundEffect();
         DataManager.Instance.saveload.ChangeCurrSaveSlot(idx);
        // menuUIManager.saveloadController.ChangeCurrSaveSlot(idx);
        UI_SaveCheck savecheck = UIManager.Instance.ShowNormalUI<UI_SaveCheck>();
@@ -128,6 +130,7 @@ public class UI_Save : UI_Base {
     }
 
     private void DeleteEvent(int idx) {
+        UI_SoundEffect();
         DataManager.Instance.saveload.ChangeCurrSaveSlot(idx);
         //menuUIManager.saveloadController.ChangeCurrSaveSlot(idx);
         UI_SaveDeleteCheck saveDeleteCheck = UIManager.Instance.ShowNormalUI<UI_SaveDeleteCheck>();
@@ -135,6 +138,7 @@ public class UI_Save : UI_Base {
     }
 
     void EnterCursorEvent(int currIdx) {
+        UI_SoundEffect();
         Get<Image>(currCursor + SLOT_COUNT).gameObject.SetActive(false);  // 기존것 하이라이트 종료
         Get<Image>(currCursor).gameObject.SetActive(true);
 

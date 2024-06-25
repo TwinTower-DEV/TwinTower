@@ -166,7 +166,7 @@ namespace TwinTower
         {
             MoveControl moveableController = other.GetComponent<MoveControl>();
             if (moveableController != null && moveableController.getIsMove()) {
-                Debug.Log(name);
+                SoundManager.Instance.Play("Button_Click_SFX", Define.Sound.Effect);
                 Launch();
             }
         }

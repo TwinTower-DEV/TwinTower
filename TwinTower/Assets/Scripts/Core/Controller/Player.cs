@@ -32,6 +32,7 @@ namespace TwinTower
                         break;
                     case Define.MoveDir.Die:
                         _animator.Play("Dead");
+                        SoundManager.Instance.Play("character_death/Character_die_SFX(넘어졌을때 사운드)");
                         break;
                     case Define.MoveDir.None:
                         if (dir == Define.MoveDir.Up)
@@ -58,7 +59,6 @@ namespace TwinTower
 
         public override void ReduceHealth()
         {
-            SoundManager.Instance.Play("character_death/Character_die_SFX(넘어졌을때 사운드)");
             Dir = Define.MoveDir.Die;
             InputController.Instance.ReleaseControl();
             StartCoroutine(ScreenManager.Instance.CurrentScreenReload());
