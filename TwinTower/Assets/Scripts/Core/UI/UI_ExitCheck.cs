@@ -72,6 +72,7 @@ namespace TwinTower
         }
         
         void EnterCursorEvent(int currIdx) {
+            UI_SoundEffect();
             Get<Image>(cursor + Button_Count).gameObject.SetActive(true);  // 기존것 하이라이트 종료
             Get<Image>(cursor).gameObject.SetActive(false);
         
