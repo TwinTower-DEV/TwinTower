@@ -27,7 +27,7 @@ namespace TwinTower
         {
             if (go == null)
                 return null;
-
+            
             if (recursive == false)
             {
                 for (int i = 0; i < go.transform.childCount; i++)
@@ -45,8 +45,10 @@ namespace TwinTower
             {
                 foreach (T component in go.GetComponentsInChildren<T>())
                 {
-                    if (string.IsNullOrEmpty(name) || component.name == name)
+                    if (string.IsNullOrEmpty(name) || component.name.Equals(name))
+                    {
                         return component;
+                    }
                 }
             }
 

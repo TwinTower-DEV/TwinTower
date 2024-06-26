@@ -167,9 +167,9 @@ GameObject:
   - component: {fileID: 1548584616555328693}
   - component: {fileID: 1548584616555328694}
   - component: {fileID: 1548584616555328695}
-  - component: {fileID: 5506261023948667388}
+  - component: {fileID: 2725786185392990495}
   m_Layer: 5
-  m_Name: UI_Load 1
+  m_Name: UI_Load_ENG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -257,7 +257,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &5506261023948667388
+--- !u!114 &2725786185392990495
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -266,7 +266,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1548584616555328696}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 707d7f079db79454a975ab07a8f2cae7, type: 3}
+  m_Script: {fileID: 11500000, guid: 280aca001dd84582bf842ee77fb9d836, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1548584616575128149

@@ -16,7 +16,11 @@ namespace TwinTower
 
         protected override void Awake()
         {
-            UIManager.Instance.ShowNormalUI<UI_FieldScene>();
+            //UIManager.Instance.Clear();
+            if (DataManager.Instance.UIGameDatavalue.langaugecursor == 0)
+                UIManager.Instance.ShowNormalUI<UI_FieldScene>();
+            else
+                UIManager.Instance.ShowNormalUI<UI_FieldScene_ENG>();
             FindPlayer();
         }
         public void FindPlayer() {

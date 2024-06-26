@@ -6,7 +6,10 @@ namespace TwinTower
     {
         public override void Init()
         {
-            UIManager.Instance.ShowNormalUI<UI_MainScene>();
+            if (DataManager.Instance.UIGameDatavalue.langaugecursor == 0)
+                UIManager.Instance.ShowNormalUI<UI_MainScene>();
+            else
+                UIManager.Instance.ShowNormalUI<UI_MainScene_ENG>();
         }
     }
 }

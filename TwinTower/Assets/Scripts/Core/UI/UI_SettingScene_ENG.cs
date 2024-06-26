@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,7 +6,7 @@ using System;
 
 namespace TwinTower
 {
-    public class UI_SettingScene : UI_Base
+    public class UI_SettingScene_ENG : UI_Base
     {
         private const int BUTTON_COUNT = 7;
         private const int Sound_BUTTON_COUNT = 5;
@@ -27,7 +27,7 @@ namespace TwinTower
         private int langaugecoursor;
         
         private Action[] _actions = new Action[BUTTON_COUNT];
-        private string[] displayModes = new string[2] { "전체화면", "창 화면" };
+        private string[] displayModes = new string[2] { "Full Screen", "Window Screen" };
 
         private string[] displays = new string[5]
             { "800 X 600", "1280 X 720", "1920 X 1080", "2560 X 1440", "3840 X 2160" };
@@ -39,7 +39,7 @@ namespace TwinTower
             { 800, 1280, 1920, 2560, 3840 };
         private float[] soundvolume = new float[5]
             { 0.0f, 0.25f, 0.5f, 0.75f, 1.0f };
-        private string[] langauges = new string[2] { "한국어", "영어" };
+        private string[] langauges = new string[2] { "한국어", "ENGLISH" };
         [SerializeField] private List<string> korlanguages;
         [SerializeField] private List<string> englanguages;
         enum Images
@@ -437,7 +437,7 @@ namespace TwinTower
         private void Apply()
         {
             UI_SoundEffect();
-            UI_Setting_SaveCheck settingSaveCheck = UIManager.Instance.ShowNormalUI<UI_Setting_SaveCheck>();
+            UI_Setting_SaveCheck_ENG settingSaveCheck = UIManager.Instance.ShowNormalUI<UI_Setting_SaveCheck_ENG>();
             settingSaveCheck.saveAction += SaveData;
         }
 
@@ -463,7 +463,7 @@ namespace TwinTower
             resolution.width = width[displaycoursor];
             UIManager.Instance.Resolution = resolution;
         }
-
+        
         private void LanguageApply()
         {
             if(DataManager.Instance.UIGameDatavalue.langaugecursor != langaugecoursor)
@@ -485,5 +485,6 @@ namespace TwinTower
             UI_SoundEffect();
             EnterCoursor(nextidx);      
         }
+        
     }
 }

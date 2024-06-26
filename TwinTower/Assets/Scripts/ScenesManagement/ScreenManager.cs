@@ -17,8 +17,14 @@ namespace TwinTower
             GameManager.Instance.FindPlayer();
         }
 
+        public IEnumerator FadeInOut()
+        {
+            yield return StartCoroutine(UI_ScreenFader.FadeScenOut());
+            yield return StartCoroutine(UI_ScreenFader.FadeSceneIn());
+        }
         public IEnumerator NextSceneload(string s = null)
         {
+            UIManager.Instance.Clear();
             UIManager.Instance.iscutSceenCheck = false;
             yield return StartCoroutine(UI_ScreenFader.FadeScenOut());
 

@@ -1,11 +1,11 @@
-﻿using TMPro;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace TwinTower
 {
-    public class UI_FieldScene : UI_Base
+    public class UI_FieldScene_ENG : UI_Base
     {
         private int stage = 1;
         [SerializeField] private AudioClip BGM;
@@ -45,7 +45,7 @@ namespace TwinTower
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 UI_SoundEffect();
-                UIManager.Instance.ShowNormalUI<UI_Menu>();
+                UIManager.Instance.ShowNormalUI<UI_Menu_ENG>();
                 InputController.Instance.ReleaseControl();
                 Time.timeScale = 0;
             }
@@ -59,7 +59,7 @@ namespace TwinTower
 
         private void Setting()
         {
-            UIManager.Instance.ShowNormalUI<UI_SettingScene>();
+            UIManager.Instance.ShowNormalUI<UI_SettingScene_ENG>();
         }
 
     }
