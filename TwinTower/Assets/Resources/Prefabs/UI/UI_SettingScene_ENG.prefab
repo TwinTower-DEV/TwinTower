@@ -463,7 +463,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 40, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5698336973296209251
 CanvasRenderer:
@@ -493,7 +493,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uD06C\uB808\uB527"
+  m_text: Creadit
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ecd69e96c1693ec4e870adb112302404, type: 2}
   m_sharedMaterial: {fileID: 4361425350955474292, guid: ecd69e96c1693ec4e870adb112302404, type: 2}
@@ -2976,7 +2976,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 40, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6560457292380282182
 CanvasRenderer:
@@ -3006,7 +3006,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC801\uC6A9"
+  m_text: Apply
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ecd69e96c1693ec4e870adb112302404, type: 2}
   m_sharedMaterial: {fileID: 4361425350955474292, guid: ecd69e96c1693ec4e870adb112302404, type: 2}
@@ -4330,8 +4330,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 167.5, y: -69.5}
-  m_SizeDelta: {x: 250, y: 50}
+  m_AnchoredPosition: {x: 350, y: -69.5}
+  m_SizeDelta: {x: 550, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2745616448769382862
 CanvasRenderer:
@@ -4361,7 +4361,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC124\uC815"
+  m_text: SETTING
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ecd69e96c1693ec4e870adb112302404, type: 2}
   m_sharedMaterial: {fileID: 4361425350955474292, guid: ecd69e96c1693ec4e870adb112302404, type: 2}
@@ -4834,9 +4834,9 @@ GameObject:
   - component: {fileID: 3445649635017402125}
   - component: {fileID: 5038279765205802509}
   - component: {fileID: 3354433919890840789}
-  - component: {fileID: 2229528179990288338}
+  - component: {fileID: 7224939678571112922}
   m_Layer: 5
-  m_Name: UI_SettingScene 1
+  m_Name: UI_SettingScene_ENG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4925,7 +4925,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &2229528179990288338
+--- !u!114 &7224939678571112922
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4934,33 +4934,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 7435747474865417164}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e08aa22e78c40c68adffec34abf61c6, type: 3}
+  m_Script: {fileID: 11500000, guid: f7976313b3104c9787778e6b1b60cbac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   noSelect_noClick: {fileID: 21300000, guid: 7f9ea4f91b770204694500227d274ecc, type: 3}
   noSelect_Click: {fileID: 21300000, guid: bf86118aa35ba4c4e9681668faac67b5, type: 3}
   select_noCliCK: {fileID: 21300000, guid: 4224f79c40eaed04a995f88dcd685b69, type: 3}
   select_Click: {fileID: 21300000, guid: f99d468b34ac334418415c5db8f741eb, type: 3}
-  korlanguages:
-  - "\uC74C\uD5A5\uC124\uC815"
-  - "\uB514\uC2A4\uD50C\uB808\uC774"
-  - "\uC5B8\uC5B4"
-  - "\uCC3D\uBAA8\uB4DC"
-  - "\uD574\uC0C1\uB3C4"
-  - "\uC5B8\uC5B4"
-  - "\uD06C\uB808\uB527"
-  - "\uC801\uC6A9"
-  - "\uC124\uC815"
-  englanguages:
-  - AudioSetting
-  - Display
-  - Language
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  korlanguages: []
+  englanguages: []
 --- !u!1 &7765844222184759585
 GameObject:
   m_ObjectHideFlags: 0

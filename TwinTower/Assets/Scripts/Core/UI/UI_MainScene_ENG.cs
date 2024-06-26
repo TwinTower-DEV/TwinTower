@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.UI;
@@ -7,7 +7,7 @@ using Image = UnityEngine.UI.Image;
 
 namespace TwinTower
 {
-    public class UI_MainScene : UI_Base
+    public class UI_MainScene_ENG : UI_Base
     {
         const int BUTTON_COUNT = 4;
         private Action[] _actions = new Action[BUTTON_COUNT];
@@ -64,7 +64,7 @@ namespace TwinTower
         {
             if (!Input.anyKey)
                 return;
-            Debug.Log(_uiNum + " " + UIManager.Instance.UINum);
+            
             if (_uiNum != UIManager.Instance.UINum)
                 return;
             
@@ -95,19 +95,19 @@ namespace TwinTower
         void Setting()
         {
             UI_SoundEffect();
-            UIManager.Instance.ShowNormalUI<UI_SettingScene>();
+            UIManager.Instance.ShowNormalUI<UI_SettingScene_ENG>();
         }
 
         void Continue()
         {
             UI_SoundEffect();
-            UIManager.Instance.ShowNormalUI<UI_Load>();
+            UIManager.Instance.ShowNormalUI<UI_Load_ENG>();
         }
 
         void Exit()
         {
             UI_SoundEffect();
-            UIManager.Instance.ShowNormalUI<UI_ExitCheck>();
+            UIManager.Instance.ShowNormalUI<UI_ExitCheck_ENG>();
         }
 
         void EnterCoursor(int nextidx)

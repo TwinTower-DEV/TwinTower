@@ -282,9 +282,9 @@ GameObject:
   - component: {fileID: 3095695040237378138}
   - component: {fileID: 3095695040237378137}
   - component: {fileID: 3095695040237378136}
-  - component: {fileID: 7064496586540372516}
+  - component: {fileID: 97423049326229868}
   m_Layer: 5
-  m_Name: UI_FieldScene 1
+  m_Name: UI_FieldScene_ENG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -376,7 +376,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &7064496586540372516
+--- !u!114 &97423049326229868
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -385,7 +385,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3095695040237378143}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1cb659f265864aee8f88b04cfa4888c9, type: 3}
+  m_Script: {fileID: 11500000, guid: 08254c2d86e247dbb9b366e6a7d0b6c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   BGM: {fileID: 8300000, guid: 71391256e4f22f44bbd67741ffd295dd, type: 3}

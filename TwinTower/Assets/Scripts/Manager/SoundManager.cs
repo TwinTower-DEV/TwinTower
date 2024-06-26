@@ -11,7 +11,9 @@ public class SoundManager : Manager<SoundManager>
         Dictionary<string, AudioClip> _audioClips = new Dictionary<string, AudioClip>();
         private int bgmsoundsize = -1;
         private int sesoundsize = -1;
-        private float[] _volumeset = new float[]{ 0, 0.1f, 0.5f, 0.75f, 1.0f };
+        private float[] _volumeset = new float[]{ 0, 0.15f, 0.5f, 0.75f, 1.0f };
+
+        private float[] _sfvolumset = new float[] { 1.0f, 1.25f, 1.5f, 1.75f, 2.0f };
         //private float _masterVolume = DataManager.Instance.GameData.mastetVolume;
 
         protected override void Awake()
@@ -30,7 +32,7 @@ public class SoundManager : Manager<SoundManager>
                 go.transform.parent = transform;
             }
             _volumes[(int)Define.Sound.Bgm] = _volumeset[DataManager.Instance.UIGameDatavalue.bgmcoursor];
-            _volumes[(int)Define.Sound.Effect] = _volumeset[DataManager.Instance.UIGameDatavalue.secursor];
+            _volumes[(int)Define.Sound.Effect] = _sfvolumset[DataManager.Instance.UIGameDatavalue.secursor];
             _audioSources[(int)Define.Sound.Bgm].loop = true;
             RefreshSound();
         }
@@ -114,7 +116,6 @@ public class SoundManager : Manager<SoundManager>
             }
             else
             {
-                Debug.Log(path);
                 if (_audioClips.TryGetValue(path, out audioClip) == false)
                 {
                     audioClip = ResourceManager.Instance.Load<AudioClip>(path);
@@ -138,7 +139,7 @@ public class SoundManager : Manager<SoundManager>
 
         public void PreviewVolume_SE(int secursor)
         {
-            _audioSources[(int)Define.Sound.Effect].volume = _volumeset[secursor];
+            _audioSources[(int)Define.Sound.Effect].volume = _sfvolumset[secursor];
             sesoundsize = secursor;
         }
 
@@ -147,7 +148,7 @@ public class SoundManager : Manager<SoundManager>
             if (bgmsoundsize != -1)
                 _volumes[(int)Define.Sound.Bgm] = _volumeset[bgmsoundsize];
             if (sesoundsize != -1)
-                _volumes[(int)Define.Sound.Effect] = _volumeset[sesoundsize];
+                _volumes[(int)Define.Sound.Effect] = _sfvolumset[sesoundsize];
 
             bgmsoundsize = -1;
             sesoundsize = -1;
