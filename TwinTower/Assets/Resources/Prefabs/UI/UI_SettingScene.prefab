@@ -3187,8 +3187,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 150, y: 110}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 150, y: 65}
+  m_SizeDelta: {x: 100, y: 100.19}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1735777161295412208
 CanvasRenderer:
@@ -4517,7 +4517,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3330248598719916770
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4935,26 +4935,6 @@ MonoBehaviour:
   noSelect_Click: {fileID: 21300000, guid: bf86118aa35ba4c4e9681668faac67b5, type: 3}
   select_noCliCK: {fileID: 21300000, guid: 4224f79c40eaed04a995f88dcd685b69, type: 3}
   select_Click: {fileID: 21300000, guid: f99d468b34ac334418415c5db8f741eb, type: 3}
-  korlanguages:
-  - "\uC74C\uD5A5\uC124\uC815"
-  - "\uB514\uC2A4\uD50C\uB808\uC774"
-  - "\uC5B8\uC5B4"
-  - "\uCC3D\uBAA8\uB4DC"
-  - "\uD574\uC0C1\uB3C4"
-  - "\uC5B8\uC5B4"
-  - "\uD06C\uB808\uB527"
-  - "\uC801\uC6A9"
-  - "\uC124\uC815"
-  englanguages:
-  - AudioSetting
-  - Display
-  - Language
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
 --- !u!1 &7765844222184759585
 GameObject:
   m_ObjectHideFlags: 0

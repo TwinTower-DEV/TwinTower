@@ -2845,9 +2845,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5416105210768974626, guid: b2ab617c8c1818c44ba67dc76362db62, type: 3}
       propertyPath: tutorialstring
-      value: "\uBCF4\uB77C\uC0C9 \uBC84\uD2BC\uC740 \uD574\uB2F9 \uBC84\uD2BC\uC774
-        \uC704\uCE58\uD55C \uB9F5\uC774 \uC544\uB2CC, \uBC18\uB300 \uCABD \uB9F5\uC744
-        \uC2DC\uACC4 \uBC29\uD5A5\uC73C\uB85C 90\uB3C4 \uD68C\uC804\uC2DC\uD0B5\uB2C8\uB2E4."
+      value: "\uB178\uB791 \uBC84\uD2BC\uC740 \uD574\uB2F9 \uBC84\uD2BC\uC774 \uC704\uCE58\uD55C
+        \uB9F5\uC774 \uC544\uB2CC, \uBC18\uB300 \uCABD \uB9F5\uC744 \uC2DC\uACC4
+        \uBC29\uD5A5\uC73C\uB85C 90\uB3C4 \uD68C\uC804\uC2DC\uD0B5\uB2C8\uB2E4. "
+      objectReference: {fileID: 0}
+    - target: {fileID: 5416105210768974626, guid: b2ab617c8c1818c44ba67dc76362db62, type: 3}
+      propertyPath: tutorialstring_eng
+      value: The yellow button rotates the opposite map clockwise 90 degrees, not
+        the map where the button is located.
       objectReference: {fileID: 0}
     - target: {fileID: 8767819110394083812, guid: b2ab617c8c1818c44ba67dc76362db62, type: 3}
       propertyPath: m_RootOrder
@@ -2965,8 +2970,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5416105210768974626, guid: b2ab617c8c1818c44ba67dc76362db62, type: 3}
       propertyPath: tutorialstring
-      value: "\uCD08\uB85D \uBC84\uD2BC\uC740 \uD574\uB2F9 \uBC84\uD2BC\uC774 \uC704\uCE58\uD55C
-        \uB9F5\uC744 \uC2DC\uACC4 \uBC29\uD5A5\uC73C\uB85C 90\uB3C4 \uD68C\uC804\uC2DC\uD0B5\uB2C8\uB2E4."
+      value: "\uD30C\uB791 \uBC84\uD2BC\uC740 \uD574\uB2F9 \uBC84\uD2BC\uC774 \uC704\uCE58\uD55C
+        \uB9F5\uC744 \uC2DC\uACC4 \uBC29\uD5A5\uC73C\uB85C 90\uB3C4 \uD68C\uC804\uC2DC\uD0B5\uB2C8\uB2E4. "
+      objectReference: {fileID: 0}
+    - target: {fileID: 5416105210768974626, guid: b2ab617c8c1818c44ba67dc76362db62, type: 3}
+      propertyPath: tutorialstring_eng
+      value: The blue button rotates the map where the button is located 90 degrees
+        clockwise.
       objectReference: {fileID: 0}
     - target: {fileID: 8767819110394083812, guid: b2ab617c8c1818c44ba67dc76362db62, type: 3}
       propertyPath: m_RootOrder

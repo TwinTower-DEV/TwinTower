@@ -88,25 +88,25 @@ namespace TwinTower
         }
         void NewGame()
         {
+            UI_ClickSoundEffect();
             UIManager.Instance.InputHandler -= KeyInPut;
             StartCoroutine(ScreenManager.Instance.NextSceneload());
-            
         }
         void Setting()
         {
-            UI_SoundEffect();
+            UI_ClickSoundEffect();
             UIManager.Instance.ShowNormalUI<UI_SettingScene>();
         }
 
         void Continue()
         {
-            UI_SoundEffect();
+            UI_ClickSoundEffect();
             UIManager.Instance.ShowNormalUI<UI_Load>();
         }
 
         void Exit()
         {
-            UI_SoundEffect();
+            UI_ClickSoundEffect();
             UIManager.Instance.ShowNormalUI<UI_ExitCheck>();
         }
 

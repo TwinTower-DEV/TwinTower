@@ -74,14 +74,14 @@ namespace TwinTower
         private void YesClickEvent()
         {
             saveAction.Invoke();
-            UI_SoundEffect();
+            UI_ClickSoundEffect();
             UIManager.Instance.InputHandler -= KeyInput;
             UIManager.Instance.CloseNormalUI(this);
         }
 
         private void NoClickEvent()
         {
-            UI_SoundEffect();
+            UI_ClickSoundEffect();
             UIManager.Instance.InputHandler -= KeyInput;
             UIManager.Instance.CloseNormalUI(this);
         }

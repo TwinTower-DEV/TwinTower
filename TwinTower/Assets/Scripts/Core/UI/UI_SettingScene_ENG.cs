@@ -8,7 +8,7 @@ namespace TwinTower
 {
     public class UI_SettingScene_ENG : UI_Base
     {
-        private const int BUTTON_COUNT = 7;
+        private const int BUTTON_COUNT = 6;
         private const int Sound_BUTTON_COUNT = 5;
         [SerializeField] private Sprite noSelect_noClick;
         [SerializeField] private Sprite noSelect_Click;
@@ -47,14 +47,14 @@ namespace TwinTower
             BGM_Button,
             SE_Button,
             DisplayMode_Button,
-            Display_Button,
+            //Display_Button,
             Language_Button,
             Creadit,
             Apply,
             BGM_Select,
             SE_Select,
             DisplayMode_Select,
-            Display_Select,
+            //Display_Select,
             Language_Select,
             Creadit_Select,
             Apply_Select,
@@ -111,7 +111,7 @@ namespace TwinTower
             Get<Image>((int)Images.BGM_Button).gameObject.BindEvent(()=>ChangeCoursor((int)Images.BGM_Button), Define.UIEvent.Click);
             Get<Image>((int)Images.SE_Button).gameObject.BindEvent(()=>ChangeCoursor((int)Images.SE_Button), Define.UIEvent.Click);
             Get<Image>((int)Images.DisplayMode_Button).gameObject.BindEvent(()=>ChangeCoursor((int)Images.DisplayMode_Button), Define.UIEvent.Click);
-            Get<Image>((int)Images.Display_Button).gameObject.BindEvent(()=>ChangeCoursor((int)Images.Display_Button), Define.UIEvent.Click);
+            //Get<Image>((int)Images.Display_Button).gameObject.BindEvent(()=>ChangeCoursor((int)Images.Display_Button), Define.UIEvent.Click);
             Get<Image>((int)Images.Language_Button).gameObject.BindEvent(()=>ChangeCoursor((int)Images.Language_Button), Define.UIEvent.Click);
             Get<Image>((int)Images.Creadit).gameObject.BindEvent(Credit);
             Get<Image>((int)Images.Apply).gameObject.BindEvent(Apply);
@@ -136,10 +136,8 @@ namespace TwinTower
                 SidePushButton((Images)currentcoursor, true));
             _actions[3] = (() =>
                 SidePushButton((Images)currentcoursor, true));
-            _actions[4] = (() =>
-                SidePushButton((Images)currentcoursor, true));
-            _actions[5] = Credit;
-            _actions[6] = Apply;
+            _actions[4] = Credit;
+            _actions[5] = Apply;
 
         }
 
@@ -156,6 +154,7 @@ namespace TwinTower
                 return;
             if (Input.GetKeyDown(KeyCode.Escape))
             {
+                UI_ClickSoundEffect();
                 SoundManager.Instance.CancelSetting();
                 UIManager.Instance.InputHandler -= KeyInput;
                 UIManager.Instance.CloseNormalUI(this);
@@ -167,7 +166,7 @@ namespace TwinTower
                     PushSoundButton((Images)currentcoursor, 0, (bgmcursor - 1 + Sound_BUTTON_COUNT) % Sound_BUTTON_COUNT);
                 else if(currentcoursor == 1)
                     PushSoundButton((Images)currentcoursor, 0, (seccursor - 1 + Sound_BUTTON_COUNT) % Sound_BUTTON_COUNT);
-                else if(currentcoursor == 5 || currentcoursor == 6)
+                else if(currentcoursor == 4 || currentcoursor == 5)
                     SideEnterCoursor();
                 else
                     SidePushButton((Images)currentcoursor, false);
@@ -179,7 +178,7 @@ namespace TwinTower
                     PushSoundButton((Images)currentcoursor, 0, (bgmcursor + 1) % Sound_BUTTON_COUNT);
                 else if(currentcoursor == 1)
                     PushSoundButton((Images)currentcoursor, 0, (seccursor + 1) % Sound_BUTTON_COUNT);
-                else if(currentcoursor == 5 || currentcoursor == 6)
+                else if(currentcoursor == 4 || currentcoursor == 5)
                     SideEnterCoursor();
                 else
                     SidePushButton((Images)currentcoursor, true);
@@ -300,12 +299,12 @@ namespace TwinTower
             SetColor(Get<Image>(currentcoursor).gameObject, "#846E62", false);
             SelectSoundButton(0);
             NoSelectSoundButton(1);
-            Util.FindChild<Image>(Get<Image>((int)Images.Display_Button).gameObject).GetComponentInChildren<TextMeshProUGUI>().text = displays[displaycoursor];
+            //Util.FindChild<Image>(Get<Image>((int)Images.Display_Button).gameObject).GetComponentInChildren<TextMeshProUGUI>().text = displays[displaycoursor];
             Util.FindChild<Image>(Get<Image>((int)Images.DisplayMode_Button).gameObject).GetComponentInChildren<TextMeshProUGUI>().text = displayModes[displaymodecursor];
             Util.FindChild<Image>(Get<Image>((int)Images.Language_Button).gameObject).GetComponentInChildren<TextMeshProUGUI>().text = langauges[langaugecoursor];
             Get<Image>((int)Images.SE_Select).gameObject.SetActive(false);
             Get<Image>((int)Images.DisplayMode_Select).gameObject.SetActive(false);
-            Get<Image>((int)Images.Display_Select).gameObject.SetActive(false);
+            //Get<Image>((int)Images.Display_Select).gameObject.SetActive(false);
             Get<Image>((int)Images.Language_Select).gameObject.SetActive(false);
             Get<Image>((int)Images.Creadit_Select).gameObject.SetActive(false);
             Get<Image>((int)Images.Apply_Select).gameObject.SetActive(false);
@@ -340,7 +339,7 @@ namespace TwinTower
         {
             UI_SoundEffect();
 
-            if (selectMain == Images.Display_Button)
+            /*if (selectMain == Images.Display_Button)
             {
                 if (check)
                     displaycoursor = (displaycoursor + 1) % BUTTON_COUNT;
@@ -348,27 +347,25 @@ namespace TwinTower
                     displaycoursor = (displaycoursor - 1 + BUTTON_COUNT) % BUTTON_COUNT;
 
                 Util.FindChild<Image>(Get<Image>((int)selectMain).gameObject).GetComponentInChildren<TextMeshProUGUI>().text = displays[displaycoursor];
-            }
-            else
+            }*/
+           if (selectMain == Images.DisplayMode_Button)
             {
-                if (selectMain == Images.DisplayMode_Button)
-                {
-                    if (check)
-                        displaymodecursor = (displaymodecursor + 1) % 2;
-                    else
-                        displaymodecursor = (displaymodecursor - 1 + 2) % 2;
-                    Util.FindChild<Image>(Get<Image>((int)selectMain).gameObject).GetComponentInChildren<TextMeshProUGUI>().text = displayModes[displaymodecursor];
-                }
-                else if (selectMain == Images.Language_Button)
-                {
-                    if (check)
-                        langaugecoursor = (langaugecoursor + 1) % 2;
-                    else
-                        langaugecoursor = (langaugecoursor - 1 + 2) % 2;
-                    Util.FindChild<Image>(Get<Image>((int)selectMain).gameObject).GetComponentInChildren<TextMeshProUGUI>().text = langauges[langaugecoursor];
-
-                }
+                if (check)
+                    displaymodecursor = (displaymodecursor + 1) % 2;
+                else
+                    displaymodecursor = (displaymodecursor - 1 + 2) % 2;
+                Util.FindChild<Image>(Get<Image>((int)selectMain).gameObject).GetComponentInChildren<TextMeshProUGUI>().text = displayModes[displaymodecursor];
             }
+            else if (selectMain == Images.Language_Button)
+            {
+                if (check)
+                    langaugecoursor = (langaugecoursor + 1) % 2;
+                else
+                    langaugecoursor = (langaugecoursor - 1 + 2) % 2;
+                Util.FindChild<Image>(Get<Image>((int)selectMain).gameObject).GetComponentInChildren<TextMeshProUGUI>().text = langauges[langaugecoursor];
+
+            }
+            
         }
         
         private void ChangeSoundCoursor(int next)
@@ -378,15 +375,23 @@ namespace TwinTower
 
         private void EnterCoursor(int nextidx)
         {
-            if (mainCategory.ContainsKey(currentcoursor / 2))
+            if (currentcoursor == 2 || currentcoursor == 3)
             {
-                SetColor(Get<Image>(mainCategory[currentcoursor / 2]).gameObject, "#FFFFFF", true);
-                SetColor(Get<Image>(mainCategory[currentcoursor / 2]).gameObject, "#FFFFFF", false);
+                SetColor(Get<Image>(mainCategory[currentcoursor - 1]).gameObject, "#FFFFFF", true);
+                SetColor(Get<Image>(mainCategory[currentcoursor - 1]).gameObject, "#FFFFFF", false);
+            }
+            else
+            {
+                if (mainCategory.ContainsKey(currentcoursor / 2))
+                {
+                    SetColor(Get<Image>(mainCategory[currentcoursor / 2]).gameObject, "#FFFFFF", true);
+                    SetColor(Get<Image>(mainCategory[currentcoursor / 2]).gameObject, "#FFFFFF", false);
+                }
             }
 
             SetColor(Get<Image>(currentcoursor).gameObject, "#FFFFFF", false);
             Get<Image>(currentcoursor + BUTTON_COUNT).gameObject.SetActive(false);
-            if(currentcoursor != 0 && currentcoursor != 1 && currentcoursor != 5 && currentcoursor != 6)
+            if(currentcoursor != 0 && currentcoursor != 1 && currentcoursor != 4 && currentcoursor != 5)
                 SetColor(Get<Image>(currentcoursor).gameObject, "#FFFFFF", true);
 
             if (currentcoursor == 0 || currentcoursor == 1)
@@ -394,20 +399,29 @@ namespace TwinTower
                 NoSelectSoundButton(currentcoursor);
             }
 
-            if ((currentcoursor == 5 || currentcoursor == 6) && currentcoursor < nextidx)
+            if ((currentcoursor == 4 || currentcoursor == 5) && currentcoursor < nextidx)
                 currentcoursor = 0;
-            else if ((currentcoursor == 6 || currentcoursor == 7) && currentcoursor > nextidx && nextidx != 0)
-                currentcoursor = 4;
+            else if ((currentcoursor == 4 || currentcoursor == 5) && currentcoursor > nextidx && nextidx != 0)
+                currentcoursor = 3;
             else 
                 currentcoursor = nextidx;
             Get<Image>(currentcoursor + BUTTON_COUNT).gameObject.SetActive(true);
-            if (mainCategory.ContainsKey(currentcoursor / 2))
+            if (currentcoursor == 2 || currentcoursor == 3)
             {
-                SetColor(Get<Image>(mainCategory[currentcoursor / 2]).gameObject, "#846E62", true);
-                SetColor(Get<Image>(mainCategory[currentcoursor / 2]).gameObject, "#846E62", false);
+                SetColor(Get<Image>(mainCategory[currentcoursor - 1]).gameObject, "#FFFFFF", true);
+                SetColor(Get<Image>(mainCategory[currentcoursor - 1]).gameObject, "#FFFFFF", false);
             }
+            else
+            {
+                if (mainCategory.ContainsKey(currentcoursor / 2))
+                {
+                    SetColor(Get<Image>(mainCategory[currentcoursor / 2]).gameObject, "#FFFFFF", true);
+                    SetColor(Get<Image>(mainCategory[currentcoursor / 2]).gameObject, "#FFFFFF", false);
+                }
+            }
+
             SetColor(Get<Image>(currentcoursor).gameObject, "#846E62", false);
-            if (currentcoursor != 0 && currentcoursor != 1 && currentcoursor != 5 && currentcoursor != 6)
+            if (currentcoursor != 0 && currentcoursor != 1 && currentcoursor != 4 && currentcoursor != 5)
             {
                 SetColor(Get<Image>(currentcoursor).gameObject, "#846E62", true);
                 Debug.Log(currentcoursor);
@@ -424,7 +438,7 @@ namespace TwinTower
             SetColor(Get<Image>(currentcoursor).gameObject, "#FFFFFF", false);
             Get<Image>(currentcoursor + BUTTON_COUNT).gameObject.SetActive(false);
 
-            currentcoursor = currentcoursor == 5 ? 6 : 5;
+            currentcoursor = currentcoursor == 4 ? 5 : 4;
             GetImage(currentcoursor + BUTTON_COUNT).gameObject.SetActive(true);
             SetColor(Get<Image>(currentcoursor).gameObject, "#846E62", false);
         }
@@ -437,7 +451,7 @@ namespace TwinTower
         private void Apply()
         {
             UI_SoundEffect();
-            UI_Setting_SaveCheck_ENG settingSaveCheck = UIManager.Instance.ShowNormalUI<UI_Setting_SaveCheck_ENG>();
+            UI_Setting_SaveCheck settingSaveCheck = UIManager.Instance.ShowNormalUI<UI_Setting_SaveCheck>();
             settingSaveCheck.saveAction += SaveData;
         }
 
@@ -447,6 +461,7 @@ namespace TwinTower
             DataManager.Instance.UIGameDatavalue = new UIGameData(bgmcursor, seccursor, displaymodecursor,
                 displaycoursor, langaugecoursor);
             SoundApply();
+            DisplayModeApply();
             DisplayApply();
         }
 
@@ -463,7 +478,7 @@ namespace TwinTower
             resolution.width = width[displaycoursor];
             UIManager.Instance.Resolution = resolution;
         }
-        
+
         private void LanguageApply()
         {
             if(DataManager.Instance.UIGameDatavalue.langaugecursor != langaugecoursor)
@@ -472,7 +487,10 @@ namespace TwinTower
 
         private void DisplayModeApply()
         {
-            
+            if (displaymodecursor == 0)
+                Screen.fullScreen = true;
+            else
+                Screen.fullScreen = false;
         }
 
         private void ExitCoursor(int idx)

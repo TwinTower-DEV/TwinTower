@@ -13,7 +13,7 @@ public class SoundManager : Manager<SoundManager>
         private int sesoundsize = -1;
         private float[] _volumeset = new float[]{ 0, 0.15f, 0.5f, 0.75f, 1.0f };
 
-        private float[] _sfvolumset = new float[] { 1.0f, 1.25f, 1.5f, 1.75f, 2.0f };
+        private float[] _sfvolumset = new float[] { 0, 1.25f, 1.5f, 1.75f, 2.0f };
         //private float _masterVolume = DataManager.Instance.GameData.mastetVolume;
 
         protected override void Awake()
