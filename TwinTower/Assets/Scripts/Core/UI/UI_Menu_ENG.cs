@@ -98,25 +98,25 @@ public class UI_Menu_ENG : UI_Base {
 
     private void SaveEvent() {
         //menuUIManager.SwitchPanelPrevSave("SavePanel");
-        UI_SoundEffect();
+        UI_ClickSoundEffect();
         UIManager.Instance.ShowNormalUI<UI_Save_ENG>();
     }
     
     private void LoadEvent() {
         //menuUIManager.SwitchPanelPrevSave("LoadPanel");
-        UI_SoundEffect();
+        UI_ClickSoundEffect();
         UIManager.Instance.ShowNormalUI<UI_Load_ENG>();
     }
     
     private void SettingEvent()
     {
         UIManager.Instance.ShowNormalUI<UI_SettingScene_ENG>();
-        UI_SoundEffect();
+        UI_ClickSoundEffect();
         Debug.Log("Enter Setting");
     }
 
     private void MainMenuEvent() {
-        UI_SoundEffect();
+        UI_ClickSoundEffect();
         InputManager.Destroys();
         Time.timeScale = 1;
         StartCoroutine(ScreenManager.Instance.NextSceneload("MainScene"));

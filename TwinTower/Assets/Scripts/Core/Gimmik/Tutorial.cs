@@ -14,6 +14,7 @@ namespace TwinTower
     public class Tutorial : MonoBehaviour
     {
         [SerializeField] private string tutorialstring;
+        [SerializeField] private string tutorialstring_eng;
         private UI_Tutorial uiTutorial;
 
         private void Start()
@@ -28,7 +29,10 @@ namespace TwinTower
             {
                 Debug.Log(tutorialstring);
                 uiTutorial = UIManager.Instance.ShowNormalUI<UI_Tutorial>();
-                uiTutorial.SetText(tutorialstring);
+                if(DataManager.Instance.UIGameDatavalue.langaugecursor == 0)
+                    uiTutorial.SetText(tutorialstring);
+                else
+                    uiTutorial.SetText(tutorialstring_eng);
                 uiTutorial.SetPosition(gameObject.transform.position, Vector3.up * 2.3f);
                 uiTutorial.SetActives();
             }

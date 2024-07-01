@@ -40,8 +40,6 @@ namespace TwinTower
         private float[] soundvolume = new float[5]
             { 0.0f, 0.25f, 0.5f, 0.75f, 1.0f };
         private string[] langauges = new string[2] { "한국어", "영어" };
-        [SerializeField] private List<string> korlanguages;
-        [SerializeField] private List<string> englanguages;
         enum Images
         {
             BGM_Button,
@@ -156,6 +154,7 @@ namespace TwinTower
                 return;
             if (Input.GetKeyDown(KeyCode.Escape))
             {
+                UI_ClickSoundEffect();
                 SoundManager.Instance.CancelSetting();
                 UIManager.Instance.InputHandler -= KeyInput;
                 UIManager.Instance.CloseNormalUI(this);

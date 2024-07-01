@@ -85,7 +85,7 @@ public class UI_SaveCheck : UI_Base {
     }
 
     private void YesEvent() {
-        UI_SoundEffect();
+        UI_ClickSoundEffect();
         UIManager.Instance.InputHandler -= KeyInPut;
         DataManager.Instance.saveload.Save();
         PrevPanelUpdateAction.Invoke();
@@ -93,7 +93,7 @@ public class UI_SaveCheck : UI_Base {
     }
 
     private void NoEvent() {
-        UI_SoundEffect();
+        UI_ClickSoundEffect();
         UIManager.Instance.InputHandler -= KeyInPut;
         UIManager.Instance.CloseNormalUI(this);
     }

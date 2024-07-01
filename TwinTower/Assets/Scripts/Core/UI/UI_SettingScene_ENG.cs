@@ -156,6 +156,7 @@ namespace TwinTower
                 return;
             if (Input.GetKeyDown(KeyCode.Escape))
             {
+                UI_ClickSoundEffect();
                 SoundManager.Instance.CancelSetting();
                 UIManager.Instance.InputHandler -= KeyInput;
                 UIManager.Instance.CloseNormalUI(this);

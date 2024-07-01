@@ -101,7 +101,7 @@ public class UI_Load_ENG : UI_Base {
         
         if (Input.GetKeyDown(KeyCode.Escape)) {                         // ESC - 뒤로가기
             //menuUIManager.PrevPanelChange();
-            UI_SoundEffect();
+            UI_ClickSoundEffect();
             UIManager.Instance.InputHandler -= KeyInPut;
             UIManager.Instance.CloseNormalUI(this);
         }
@@ -128,7 +128,7 @@ public class UI_Load_ENG : UI_Base {
     {
         if(Time.timeScale == 0)
             Time.timeScale = 1;
-        UI_SoundEffect();
+        UI_ClickSoundEffect();
         DataManager.Instance.saveload.ChangeCurrSaveSlot(idx);
         DataManager.Instance.saveload.Load();
     }
@@ -136,7 +136,7 @@ public class UI_Load_ENG : UI_Base {
     private void DeleteEvent(int idx) {
         DataManager.Instance.saveload.ChangeCurrSaveSlot(idx);
         //menuUIManager.SwitchPanelPrevSave("SaveDeleteCheckPanel");
-        UI_SoundEffect();
+        UI_ClickSoundEffect();
         UI_SaveDeleteCheck_ENG saveDeleteCheck = UIManager.Instance.ShowNormalUI<UI_SaveDeleteCheck_ENG>();
         saveDeleteCheck.PrevPanelUpdateAction += UpdateUI;
     }

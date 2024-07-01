@@ -54,6 +54,11 @@ namespace TwinTower
 			SoundManager.Instance.Play("UI이동&클릭소리/UI_Click");
 		}
 
+		protected void UI_ClickSoundEffect()
+		{
+			SoundManager.Instance.Play("UI이동&클릭소리/UI_Click_2");
+		}
+
 		// _objects에 저장된 UI를 쉽게 불러올 수 있는 함수
 		// UI_TestSceneUI 스크립트에 사용 예제가 있다.
 		protected T Get<T>(int idx) where T : UnityEngine.Object

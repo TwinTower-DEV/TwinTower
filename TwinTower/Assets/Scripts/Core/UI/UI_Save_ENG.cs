@@ -122,7 +122,7 @@ public class UI_Save_ENG : UI_Base {
     }
 
     private void SaveEvent(int idx) {
-        UI_SoundEffect();
+        UI_ClickSoundEffect();
         DataManager.Instance.saveload.ChangeCurrSaveSlot(idx);
        // menuUIManager.saveloadController.ChangeCurrSaveSlot(idx);
        UI_SaveCheck_ENG savecheck = UIManager.Instance.ShowNormalUI<UI_SaveCheck_ENG>();
@@ -130,7 +130,7 @@ public class UI_Save_ENG : UI_Base {
     }
 
     private void DeleteEvent(int idx) {
-        UI_SoundEffect();
+        UI_ClickSoundEffect();
         DataManager.Instance.saveload.ChangeCurrSaveSlot(idx);
         //menuUIManager.saveloadController.ChangeCurrSaveSlot(idx);
         UI_SaveDeleteCheck_ENG saveDeleteCheck = UIManager.Instance.ShowNormalUI<UI_SaveDeleteCheck_ENG>();

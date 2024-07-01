@@ -44,7 +44,7 @@ namespace TwinTower
             
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                UI_SoundEffect();
+                UI_ClickSoundEffect();
                 UIManager.Instance.ShowNormalUI<UI_Menu>();
                 InputController.Instance.ReleaseControl();
                 Time.timeScale = 0;
