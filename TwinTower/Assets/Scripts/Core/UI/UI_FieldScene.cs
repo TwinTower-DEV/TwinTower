@@ -7,7 +7,6 @@ namespace TwinTower
 {
     public class UI_FieldScene : UI_Base
     {
-        private int stage = 1;
         [SerializeField] private AudioClip BGM;
         enum Images
         {

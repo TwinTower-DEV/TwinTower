@@ -456,11 +456,11 @@ namespace TwinTower
         private void SaveData()
         {
             LanguageApply();
-            DataManager.Instance.UIGameDatavalue = new UIGameData(bgmcursor, seccursor, displaymodecursor,
-                displaycoursor, langaugecoursor);
             SoundApply();
             DisplayApply();
             DisplayModeApply();
+            DataManager.Instance.UIGameDatavalue = new UIGameData(bgmcursor, seccursor, displaymodecursor,
+                displaycoursor, langaugecoursor);
         }
 
         private void SoundApply()
