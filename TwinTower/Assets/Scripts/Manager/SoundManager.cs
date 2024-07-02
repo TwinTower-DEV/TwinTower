@@ -11,7 +11,7 @@ public class SoundManager : Manager<SoundManager>
         Dictionary<string, AudioClip> _audioClips = new Dictionary<string, AudioClip>();
         private int bgmsoundsize = -1;
         private int sesoundsize = -1;
-        private float[] _volumeset = new float[]{ 0, 0.15f, 0.5f, 0.75f, 1.0f };
+        private float[] _volumeset = new float[]{ 0, 0.15f, 0.25f, 0.35f, 0.5f };
 
         private float[] _sfvolumset = new float[] { 0, 1.25f, 1.5f, 1.75f, 2.0f };
         //private float _masterVolume = DataManager.Instance.GameData.mastetVolume;
