@@ -76,7 +76,6 @@ namespace TwinTower
             CanvasGroup canvasGroup = Instance.FaderCanvasGroup;
             canvasGroup.gameObject.SetActive(true);
             yield return Instance.StartCoroutine(Instance.Fade(1f, canvasGroup, true));
-            Debug.Log("Fade Out ");
         }
 
         public static bool FadeCheck()

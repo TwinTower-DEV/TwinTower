@@ -451,7 +451,7 @@ namespace TwinTower
         private void Apply()
         {
             UI_SoundEffect();
-            UI_Setting_SaveCheck settingSaveCheck = UIManager.Instance.ShowNormalUI<UI_Setting_SaveCheck>();
+            UI_Setting_SaveCheck_ENG settingSaveCheck = UIManager.Instance.ShowNormalUI<UI_Setting_SaveCheck_ENG>();
             settingSaveCheck.saveAction += SaveData;
         }
 

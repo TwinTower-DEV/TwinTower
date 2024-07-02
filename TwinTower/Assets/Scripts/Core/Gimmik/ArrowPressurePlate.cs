@@ -8,7 +8,7 @@ public class ArrowPressurePlate : PressurePlate {
     private SpriteRenderer sprite;
     private void Awake() {
         sprite = GetComponent<SpriteRenderer>();
-        activateObject.gameObject.SetActive(false);
+        activateObject.gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
     }
 
     protected override void OnTriggerEnter2D(Collider2D other) {
@@ -17,7 +17,7 @@ public class ArrowPressurePlate : PressurePlate {
             other.gameObject.layer == LayerMask.NameToLayer("Box"))
         {
             SoundManager.Instance.Play("Button_Click_SFX", Define.Sound.Effect);
-            activateObject.gameObject.SetActive(true);
+            activateObject.gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
             ActivateObject active = activateObject.GetComponent<ActivateObject>();
             active.Launch();
             SoundManager.Instance.Play("arrow_launch/Arrow_Launch_SFX");
