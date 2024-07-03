@@ -8,7 +8,6 @@ using UnityEngine;
 /// 발판을 밟을 경우 문을 회전시킴과 동시에 플레이어가 통과 가능하도록 변경해준다.
 /// </summary>
 public class DoorActivate : ActivateObject {
-    [SerializeField] private AudioClip audio;
     private Animator animator;
     public void Awake() {
         animator = GetComponent<Animator>();

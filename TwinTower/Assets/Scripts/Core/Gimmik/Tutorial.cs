@@ -43,7 +43,6 @@ namespace TwinTower
             if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
                 uiTutorial.Close();
-                Debug.Log("튜토리얼 없애기");
             }
         }
     }

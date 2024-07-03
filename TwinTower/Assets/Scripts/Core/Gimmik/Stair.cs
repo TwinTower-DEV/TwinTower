@@ -31,6 +31,7 @@ public class Stair : MonoBehaviour
                 //NextLevelManager.Instance.NextLevel(stair.NextSceneString);
                 if (cutSceneCheck == null)
                 {
+                    GameManager.Instance.isClearCheck = true;
                     StartCoroutine(NextStage());
 
                 }

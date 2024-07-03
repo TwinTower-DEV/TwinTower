@@ -458,11 +458,11 @@ namespace TwinTower
         private void SaveData()
         {
             LanguageApply();
+            SoundApply();
+            DisplayApply();
+            DisplayModeApply();
             DataManager.Instance.UIGameDatavalue = new UIGameData(bgmcursor, seccursor, displaymodecursor,
                 displaycoursor, langaugecoursor);
-            SoundApply();
-            DisplayModeApply();
-            DisplayApply();
         }
 
         private void SoundApply()
@@ -503,6 +503,5 @@ namespace TwinTower
             UI_SoundEffect();
             EnterCoursor(nextidx);      
         }
-        
     }
 }

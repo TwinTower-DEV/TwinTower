@@ -16,7 +16,8 @@ namespace TwinTower
 
         enum Texts
         {
-            FloorText
+            FloorText,
+            CountText
         }
         
         public override void Init()
@@ -61,5 +62,9 @@ namespace TwinTower
             UIManager.Instance.ShowNormalUI<UI_SettingScene>();
         }
 
+        public void CountUpdate(int count)
+        {
+            Get<TextMeshProUGUI>((int)Texts.CountText).text = "\n\n" + count.ToString();
+        }
     }
 }

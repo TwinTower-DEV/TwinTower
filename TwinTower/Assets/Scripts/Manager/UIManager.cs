@@ -9,12 +9,12 @@ namespace TwinTower
     public class UIManager : Manager<UIManager>
     {
         // sortingOrder을 관리하기 위한 변수
-        int _order = 10;
         // Normal UI들을 관리하는 HashSet
         HashSet<UI_Base> _normalUIs = new HashSet<UI_Base>();
         private Stack<UI_Base> _uistack = new Stack<UI_Base>();
         private Stack<string> _uienterstack = new Stack<string>();
         private int _uiNum = 0;
+        public bool isClearUICheck = false;
         Define.Resolution _resolution = new Define.Resolution() { width = 1080, height = 1920 };
         bool _isWindowMode;
 
@@ -43,6 +43,7 @@ namespace TwinTower
 
         public void Update()
         {
+
             Brodcast();
         }
 

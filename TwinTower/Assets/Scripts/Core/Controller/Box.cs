@@ -12,6 +12,7 @@ using UnityEngine;
 public class Box : MoveControl
 {
     private Animator _animator;
+    private ActivateObject activateObject;
     protected override void Awake()
     {
         base.Awake();
@@ -24,6 +25,11 @@ public class Box : MoveControl
 
         return false;
     }
+
+    public void SetActivateObj(ActivateObject activateObject)
+    {
+        this.activateObject = activateObject;
+    } 
 
 
     // 화살 피격 시 체력 감소 및 체력 없을 시 오브젝트 자체 삭제
@@ -49,6 +55,8 @@ public class Box : MoveControl
         SoundManager.Instance.Play("wood_shatter/WoodBox_destroy_SFX");
         _animator.Play("Destroy");
         gameObject.layer = 0;
+        if (activateObject != null)
+            activateObject.UnLaunch();
         yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
     }

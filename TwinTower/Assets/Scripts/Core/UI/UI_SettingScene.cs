@@ -39,7 +39,7 @@ namespace TwinTower
             { 800, 1280, 1920, 2560, 3840 };
         private float[] soundvolume = new float[5]
             { 0.0f, 0.25f, 0.5f, 0.75f, 1.0f };
-        private string[] langauges = new string[2] { "한국어", "영어" };
+        private string[] langauges = new string[2] { "한국어", "ENGLISH" };
         enum Images
         {
             BGM_Button,
