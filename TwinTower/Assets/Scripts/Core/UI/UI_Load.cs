@@ -101,6 +101,7 @@ public class UI_Load : UI_Base {
         
         if (Input.GetKeyDown(KeyCode.Escape)) {                         // ESC - 뒤로가기
             //menuUIManager.PrevPanelChange();
+            UI_ClickSoundEffect();
             UIManager.Instance.InputHandler -= KeyInPut;
             UIManager.Instance.CloseNormalUI(this);
         }
@@ -127,6 +128,7 @@ public class UI_Load : UI_Base {
     {
         if(Time.timeScale == 0)
             Time.timeScale = 1;
+        UI_ClickSoundEffect();
         DataManager.Instance.saveload.ChangeCurrSaveSlot(idx);
         DataManager.Instance.saveload.Load();
     }
@@ -134,6 +136,7 @@ public class UI_Load : UI_Base {
     private void DeleteEvent(int idx) {
         DataManager.Instance.saveload.ChangeCurrSaveSlot(idx);
         //menuUIManager.SwitchPanelPrevSave("SaveDeleteCheckPanel");
+        UI_ClickSoundEffect();
         UI_SaveDeleteCheck saveDeleteCheck = UIManager.Instance.ShowNormalUI<UI_SaveDeleteCheck>();
         saveDeleteCheck.PrevPanelUpdateAction += UpdateUI;
     }
@@ -144,6 +147,7 @@ public class UI_Load : UI_Base {
         if (SaveLoadController.GetSaveInfo(currIdx) == "NO SAVE DATA")
             return;
         
+        UI_SoundEffect();
         Get<Image>(currCursor + SLOT_COUNT).gameObject.SetActive(false);  // 기존것 하이라이트 종료
         Get<Image>(currCursor).gameObject.SetActive(true);
         

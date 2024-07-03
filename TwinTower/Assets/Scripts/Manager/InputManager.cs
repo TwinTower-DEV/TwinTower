@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace TwinTower
 {
@@ -10,7 +11,8 @@ namespace TwinTower
     /// </summary>
     public class InputManager : Manager<InputManager> {
         public Vector3 moveDir = Vector3.zero;
-        private bool isESC;
+        [SerializeField]private int count;
+        private int[] stagecount = new[] { 19, 39, 24, 30, 30, 17, 12, 38, 22, 30, 29, 9, 17, 29 };
 
         public bool islockMove = false;
         private bool MoveFlag = false;
@@ -18,12 +20,15 @@ namespace TwinTower
         private void GroundedHorizontalMovement() {
             if (GameManager.Instance._player1.getIsMove() || GameManager.Instance._player2.getIsMove()) return;
 
+            
             if (InputController.Instance.LeftMove.Down) {
+                Debug.Log("실헝먼ㅇㅁ");
                 moveDir = Vector3.left;
                 PlayerMove(Define.MoveDir.Left);
             }
             else if (InputController.Instance.RightMove.Down) {
                 moveDir = Vector3.right;
+                Debug.Log("실헝먼ㅇㅁ");
                 PlayerMove(Define.MoveDir.Right);
             }
             else if (InputController.Instance.UpMove.Down) {
@@ -35,8 +40,7 @@ namespace TwinTower
                 PlayerMove(Define.MoveDir.Down);
             }
             else if (InputController.Instance.ResetButton.Down) {
-                InputController.Instance.ReleaseControl();
-                StartCoroutine(ScreenManager.Instance.CurrentScreenReload());
+                GameManager.Instance.Restart();
             }
             else {
                 moveDir = Vector3.zero;
@@ -45,9 +49,18 @@ namespace TwinTower
             }
 
             if (GameManager.Instance._player1.MoveCheck(moveDir) && GameManager.Instance._player2.MoveCheck(moveDir)) {
-                GameManager.Instance._player1.DirectSetting(moveDir);
-                GameManager.Instance._player2.DirectSetting(moveDir);
+                
+                
+                GameManager.Instance._player1.DirectSetting(moveDir, false);
+                GameManager.Instance._player2.DirectSetting(moveDir, false);
 
+                count--;
+                GameManager.Instance.UI_UpdateCount(count);
+                if (count <= 0)
+                {
+                    InputController.Instance.ReleaseControl();
+                    StartCoroutine(OverCount());
+                }
                 MoveFlag = true;
             }
 
@@ -58,33 +71,36 @@ namespace TwinTower
             MoveFlag = false;
         }
 
+        IEnumerator OverCount()
+        {
+            yield return new WaitForSeconds(1.5f);
+
+            if (!GameManager.Instance.isClearCheck)
+            {
+                GameManager.Instance.Restart();
+            }
+        }
         private void PlayerMove(Define.MoveDir dir) {
-            GameManager.Instance._player1.Dir = dir;
-            GameManager.Instance._player2.Dir = dir;
+            if(GameManager.Instance._player1.Dir != Define.MoveDir.Die)
+                GameManager.Instance._player1.Dir = dir;
+            
+            if(GameManager.Instance._player2.Dir != Define.MoveDir.Die)
+                GameManager.Instance._player2.Dir = dir;
         }
 
         private void Update() {
             if (!islockMove) GroundedHorizontalMovement();
         }
 
-        
-        public void UnPause() {
-            /*if (Time.timeScale > 0)
-                return;
-                */
-            
-            StartCoroutine(UnPauseCoroutine());
+        public void UpDateCount()
+        {
+            count = stagecount[SceneManager.GetActiveScene().buildIndex - 1];
         }
 
-        private IEnumerator UnPauseCoroutine() {
-                Time.timeScale = 1;
-                //UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync("UIMenus");
-                InputController.Instance.GainControl();
-                yield return new WaitForFixedUpdate();
-                yield return new WaitForEndOfFrame();
-                isESC = false;
-            }
-
+        public int GetCount()
+        {
+            return count;
+        }
         IEnumerator BlockMotion(Vector3 movedir) {
             Collider2D collider2dP1 = GameManager.Instance._player1.GetComponent<Collider2D>();
             Collider2D collider2dP2 = GameManager.Instance._player2.GetComponent<Collider2D>();

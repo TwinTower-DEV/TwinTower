@@ -30,6 +30,10 @@ namespace TwinTower
                     case Define.MoveDir.Up:
                         _animator.Play("Up_Run");
                         break;
+                    case Define.MoveDir.Die:
+                        _animator.Play("Dead");
+                        SoundManager.Instance.Play("character_death/Character_die_SFX(넘어졌을때 사운드)");
+                        break;
                     case Define.MoveDir.None:
                         if (dir == Define.MoveDir.Up)
                         {
@@ -52,7 +56,17 @@ namespace TwinTower
                 dir = value;
             }
         }
-        
+
+        public override void ReduceHealth()
+        {
+            GameManager.Instance.Restart();
+        }
+
+        protected override void MoveSoundStart()
+        {
+            SoundManager.Instance.Play("character_walk/Character_Walk_SFX");
+        }
+
         protected override void Awake()
         {
             base.Awake();

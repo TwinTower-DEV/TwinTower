@@ -56,7 +56,7 @@ namespace TwinTower
             canvasGroup.alpha = finalAlpha;
             canvasGroup.blocksRaycasts = false;
 
-            if (!FadeCheck)
+            if (!FadeCheck && !UIManager.Instance.isClearUICheck)
             {
                 InputController.Instance.GainControl();
                 UIManager.Instance.FadeCheck = false;
@@ -67,6 +67,7 @@ namespace TwinTower
         {
             CanvasGroup canvasGroup;
             canvasGroup = Instance.FaderCanvasGroup;
+            Debug.Log(" TLFGODA");
             yield return Instance.StartCoroutine(Instance.Fade(0f, canvasGroup, false));
         }
         // FadeOut 코드
@@ -76,7 +77,6 @@ namespace TwinTower
             CanvasGroup canvasGroup = Instance.FaderCanvasGroup;
             canvasGroup.gameObject.SetActive(true);
             yield return Instance.StartCoroutine(Instance.Fade(1f, canvasGroup, true));
-            Debug.Log("Fade Out ");
         }
 
         public static bool FadeCheck()

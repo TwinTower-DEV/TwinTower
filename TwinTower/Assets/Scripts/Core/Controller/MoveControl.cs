@@ -26,31 +26,41 @@ namespace TwinTower
         
         // movedir방향으로 이동 가능한지 체크 - 이동 가능하다면 true반환
         // layermask를 통해 다음 칸에 있는 오브젝트에 따라 확인됨.
+        public bool Move()
+        {
+            return isMove;
+        }
         public virtual bool MoveCheck(Vector3 movedir) {
             if (isMove) return false;
             if (movedir == Vector3.zero) return false;
             RaycastHit2D hit = Physics2D.Raycast(transform.position + movedir * 0.4f , movedir, 0.5f, _layerMask);
             if (hit.collider == null) return true;
             if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Box")) {
-                MoveControl boxcontrol = hit.transform.gameObject.GetComponent<MoveControl>();
+                Box boxcontrol = hit.transform.gameObject.GetComponent<Box>();
                 if (boxcontrol.MoveCheck(movedir)) return true;
             }
             return false;
         }
         
         // 이동 하고자 하는 방향 설정과 이동 가능함을 표시
-        public void DirectSetting(Vector3 movedir) {
+        public void DirectSetting(Vector3 movedir, bool movingwalkCheck) {
             if (movedir == Vector3.zero) return;
+            if(!movingwalkCheck)
+                MoveSoundStart();
             RaycastHit2D hit = Physics2D.Raycast(transform.position + movedir * 0.5f , movedir, 0.5f, _layerMask);
             if (hit.collider != null && hit.transform.gameObject.layer == LayerMask.NameToLayer("Box")) {
                 MoveControl boxcontrol = hit.transform.gameObject.GetComponent<MoveControl>();
-                boxcontrol.DirectSetting(movedir);
+                boxcontrol.DirectSetting(movedir, movingwalkCheck);
             }
             isMove = true;
             if(Destination.transform.parent != null) Destination.transform.SetParent(null);
             Destination.transform.position = transform.position + movedir;
         }
 
+        protected virtual void MoveSoundStart()
+        {
+            
+        }
         public virtual void ReduceHealth()
         {
             //InputController.Instance.ReleaseControl();

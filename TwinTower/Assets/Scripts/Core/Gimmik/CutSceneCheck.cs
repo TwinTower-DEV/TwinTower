@@ -15,7 +15,7 @@ namespace TwinTower
             {
                 if (DataManager.Instance.StageInfovalue.cutsceneflug != null && !UIManager.Instance.iscutSceenCheck)
                 {
-                    SoundManager.Instance.ChangeBGM(audioClip);
+                    SoundManager.Instance.Play(audioClip, Define.Sound.Bgm);
                     
                     UIManager.Instance.iscutSceenCheck = true;
                     DataManager.Instance.Scripstvalue = DataManager.Instance.ReadText(FileName);

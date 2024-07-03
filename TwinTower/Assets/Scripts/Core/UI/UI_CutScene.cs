@@ -31,12 +31,12 @@ namespace TwinTower
         [SerializeField] private List<Sprite> _daliasprites;
         public override void Init()
         {
-            SoundManager.Instance.SetReduceVolume();
+            //SoundManager.Instance.SetReduceVolume();
             Bind<Image>(typeof(Images));
             Bind<TextMeshProUGUI>(typeof(Texts));
 
-            _anim = Get<Image>((int)Images.Chat).gameObject.GetComponent<Animator>();
-            _anim.SetBool("Start", true);
+            //_anim = Get<Image>((int)Images.Chat).gameObject.GetComponent<Animator>();
+            //_anim.SetBool("Start", true);
             UIManager.Instance.InputHandler += KeyInput;
             if (DataManager.Instance.StageInfovalue.cutsceneflug != null)
             {
@@ -78,18 +78,16 @@ namespace TwinTower
             {
                 UIManager.Instance.InputHandler -= KeyInput;
                 //Time.timeScale = 1;
-                _anim.SetBool("End", true);
-                SoundManager.Instance.SetReduceVolume();
+                //SoundManager.Instance.SetReduceVolume();
                 UIManager.Instance.CloseFieldCutSceneUI(this);
             }
             else
             {
                 UIManager.Instance.InputHandler -= KeyInput;
                 //Time.timeScale = 1;
-                _anim.SetBool("End", true);
                 StartCoroutine(UI_ScreenFader.FadeSceneIn());
-                SoundManager.Instance.SetReduceVolume();
-                SoundManager.Instance.ChangeBGM(BGM);
+                //SoundManager.Instance.SetReduceVolume();
+                //SoundManager.Instance.ChangeBGM(BGM);
                 UIManager.Instance.CloseNormalUI(this);
             }
         }

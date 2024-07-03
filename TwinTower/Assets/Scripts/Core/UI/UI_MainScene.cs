@@ -16,7 +16,7 @@ namespace TwinTower
         [SerializeField] private AudioClip IngameBGM;
         public override void Init()
         {
-            SoundManager.Instance.SetBGM(MainSceneBGM, DataManager.Instance.UIGameDatavalue.bgmcoursor);
+            SoundManager.Instance.Play(MainSceneBGM, Define.Sound.Bgm);
             Bind<Image>(typeof(Images));
 
             UIManager.Instance.InputHandler -= KeyInPut;
@@ -64,13 +64,16 @@ namespace TwinTower
         {
             if (!Input.anyKey)
                 return;
-            
             if (_uiNum != UIManager.Instance.UINum)
                 return;
+            if (UIManager.Instance.FadeCheck)
+                return;
+
             
             if (Input.GetKeyDown(KeyCode.Return))
             {
                 _actions[currcoursor].Invoke();
+                
                 return;
             }
 
@@ -87,22 +90,25 @@ namespace TwinTower
         }
         void NewGame()
         {
+            UI_ClickSoundEffect();
             UIManager.Instance.InputHandler -= KeyInPut;
             StartCoroutine(ScreenManager.Instance.NextSceneload());
-            
         }
         void Setting()
         {
+            UI_ClickSoundEffect();
             UIManager.Instance.ShowNormalUI<UI_SettingScene>();
         }
 
         void Continue()
         {
+            UI_ClickSoundEffect();
             UIManager.Instance.ShowNormalUI<UI_Load>();
         }
 
         void Exit()
         {
+            UI_ClickSoundEffect();
             UIManager.Instance.ShowNormalUI<UI_ExitCheck>();
         }
 
@@ -120,6 +126,7 @@ namespace TwinTower
         void ChangeCursor(int nextidx)
         {
             ExitCursor(currcoursor);
+            UI_SoundEffect();
             EnterCoursor(nextidx);
         }
 

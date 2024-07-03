@@ -11,6 +11,7 @@ namespace TwinTower
             Down,
             Left,
             Right,
+            Die,
             None
         }
         public enum UIEvent
@@ -20,6 +21,18 @@ namespace TwinTower
             EndDrag,
             Enter,
             Exit
+        }
+        public enum Sound
+        {
+            Bgm,
+            Effect,
+            MaxCount,
+        }
+
+        public struct Language
+        {
+            public string kor;
+            public string eng;
         }
         public struct Resolution
         {

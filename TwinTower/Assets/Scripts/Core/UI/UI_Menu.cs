@@ -89,6 +89,7 @@ public class UI_Menu : UI_Base {
         {
             UIManager.Instance.InputHandler -= KeyInPut;
             Time.timeScale = 1;
+            UI_SoundEffect();
             InputController.Instance.GainControl();
             UIManager.Instance.CloseNormalUI(this);
             //menuUIManager.PrevPanelChange();
@@ -97,22 +98,25 @@ public class UI_Menu : UI_Base {
 
     private void SaveEvent() {
         //menuUIManager.SwitchPanelPrevSave("SavePanel");
+        UI_ClickSoundEffect();
         UIManager.Instance.ShowNormalUI<UI_Save>();
     }
     
     private void LoadEvent() {
         //menuUIManager.SwitchPanelPrevSave("LoadPanel");
+        UI_ClickSoundEffect();
         UIManager.Instance.ShowNormalUI<UI_Load>();
     }
     
     private void SettingEvent()
     {
         UIManager.Instance.ShowNormalUI<UI_SettingScene>();
+        UI_ClickSoundEffect();
         Debug.Log("Enter Setting");
     }
 
     private void MainMenuEvent() {
-        Debug.Log("Enter MainMenu");
+        UI_ClickSoundEffect();
         InputManager.Destroys();
         Time.timeScale = 1;
         StartCoroutine(ScreenManager.Instance.NextSceneload("MainScene"));
@@ -120,6 +124,7 @@ public class UI_Menu : UI_Base {
     }
 
     void EnterCursorEvent(int currIdx) {
+        UI_SoundEffect();
         Get<Image>(currCursor + BUTTON_COUNT).gameObject.SetActive(false);  // 기존것 하이라이트 종료
         Get<Image>(currCursor).gameObject.SetActive(true);
         

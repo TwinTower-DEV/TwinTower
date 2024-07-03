@@ -7,7 +7,6 @@ namespace TwinTower
 {
     public class UI_FieldScene : UI_Base
     {
-        private int stage = 1;
         [SerializeField] private AudioClip BGM;
         enum Images
         {
@@ -17,12 +16,12 @@ namespace TwinTower
 
         enum Texts
         {
-            FloorText
+            FloorText,
+            CountText
         }
         
         public override void Init()
         {
-
             Bind<Image>(typeof(Images));
             Bind<TextMeshProUGUI>(typeof(Texts));
             
@@ -45,6 +44,7 @@ namespace TwinTower
             
             if (Input.GetKeyDown(KeyCode.Escape))
             {
+                UI_ClickSoundEffect();
                 UIManager.Instance.ShowNormalUI<UI_Menu>();
                 InputController.Instance.ReleaseControl();
                 Time.timeScale = 0;
@@ -62,5 +62,9 @@ namespace TwinTower
             UIManager.Instance.ShowNormalUI<UI_SettingScene>();
         }
 
+        public void CountUpdate(int count)
+        {
+            Get<TextMeshProUGUI>((int)Texts.CountText).text = "\n\n" + count.ToString();
+        }
     }
 }

@@ -8,8 +8,8 @@ namespace TwinTower
     public class UI_ExitCheck : UI_Base
     {
         private int cursor;
-        private const int Button_Count = 2;
-        private Action[] _actions = new Action[Button_Count];
+        private const int BUTTON_COUNT = 2;
+        private Action[] _actions = new Action[BUTTON_COUNT];
 
         enum Check
         {
@@ -48,6 +48,20 @@ namespace TwinTower
             if(_uiNum != UIManager.Instance.UINum)
                 return;
 
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                _actions[cursor].Invoke();
+            }
+            
+            if (Input.GetKeyDown(KeyCode.RightArrow)) {
+                EnterCursorEvent((cursor + 1) % BUTTON_COUNT);
+            }
+
+            if (Input.GetKeyDown(KeyCode.LeftArrow)) {
+                EnterCursorEvent((cursor - 1 + BUTTON_COUNT) % BUTTON_COUNT);
+            }
+
+            
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 UIManager.Instance.InputHandler -= KeyInput;
@@ -72,13 +86,14 @@ namespace TwinTower
         }
         
         void EnterCursorEvent(int currIdx) {
-            Get<Image>(cursor + Button_Count).gameObject.SetActive(true);  // 기존것 하이라이트 종료
+            UI_SoundEffect();
+            Get<Image>(cursor + BUTTON_COUNT).gameObject.SetActive(true);  // 기존것 하이라이트 종료
             Get<Image>(cursor).gameObject.SetActive(false);
         
             cursor = currIdx;
         
             Get<Image>(cursor).gameObject.SetActive(true);         // 선택된것 하이라이트
-            Get<Image>(cursor + Button_Count).gameObject.SetActive(false);
+            Get<Image>(cursor + BUTTON_COUNT).gameObject.SetActive(false);
         }   
     }
 }
