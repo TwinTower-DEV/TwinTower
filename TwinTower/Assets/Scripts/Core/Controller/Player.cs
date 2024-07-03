@@ -59,9 +59,7 @@ namespace TwinTower
 
         public override void ReduceHealth()
         {
-            Dir = Define.MoveDir.Die;
-            InputController.Instance.ReleaseControl();
-            StartCoroutine(ScreenManager.Instance.CurrentScreenReload());
+            GameManager.Instance.Restart();
         }
 
         protected override void MoveSoundStart()

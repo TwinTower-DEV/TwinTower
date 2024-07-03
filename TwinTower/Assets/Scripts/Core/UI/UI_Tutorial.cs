@@ -39,18 +39,12 @@ namespace TwinTower
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 UI_ClickSoundEffect();
-                if (DataManager.Instance.UIGameDatavalue.langaugecursor == 0)
-                    UIManager.Instance.ShowNormalUI<UI_Menu>();
-                else
-                    UIManager.Instance.ShowNormalUI<UI_Menu_ENG>();
-                InputController.Instance.ReleaseControl();
-                Time.timeScale = 0;
+                Close();
             }
         }
 
         public void SetText(string text)
         {
-            Debug.Log(text);
             Get<TextMeshProUGUI>((int)Texts.Context).gameObject.GetComponent<TextMeshProUGUI>().text = text;
         }
 

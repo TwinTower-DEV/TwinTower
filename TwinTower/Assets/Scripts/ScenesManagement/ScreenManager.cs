@@ -30,7 +30,7 @@ namespace TwinTower
 
             if (s == null)
             {
-                if (SceneManager.GetActiveScene().buildIndex + 1 >= 11)
+                if (SceneManager.GetActiveScene().buildIndex + 1 >= 15)
                 {
                     InputManager.Destroys();
                     SceneManager.LoadScene("MainScene");
@@ -44,9 +44,13 @@ namespace TwinTower
             }
             else
                 SceneManager.LoadScene(s);
-            
-            if(s == "MainScene" || SceneManager.GetActiveScene().buildIndex + 1 >= 10)
+
+            if (s == "MainScene" || SceneManager.GetActiveScene().buildIndex + 1 >= 15)
+            {
+                Debug.Log("asdasdw");
                 yield return StartCoroutine(UI_ScreenFader.FadeSceneIn());
+                
+            }
             //GameManager.Instance.FindPlayer();
         }
     }

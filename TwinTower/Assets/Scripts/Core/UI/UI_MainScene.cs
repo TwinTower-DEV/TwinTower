@@ -64,9 +64,11 @@ namespace TwinTower
         {
             if (!Input.anyKey)
                 return;
-            Debug.Log(_uiNum + " " + UIManager.Instance.UINum);
             if (_uiNum != UIManager.Instance.UINum)
                 return;
+            if (UIManager.Instance.FadeCheck)
+                return;
+
             
             if (Input.GetKeyDown(KeyCode.Return))
             {

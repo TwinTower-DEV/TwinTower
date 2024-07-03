@@ -50,14 +50,14 @@ namespace TwinTower
                 else if(collider.gameObject.name.Equals("ArrowDirection")) rotatableObject.Add(collider);
                 else unRotatableObject.Add(collider);
             }
-            
-            StartCoroutine(RotateStart());
+            RotateManager.Instance.PushQueue(RotateStart());
         }
 
         // 회전
         IEnumerator RotateStart() {
+            distDegree = rotateTileMap.transform.rotation.eulerAngles.z - 90;
             InputController.Instance.ReleaseControl();                  // 키 입력 막기
-
+            GameManager.Instance.isRotateCheck = true;
             // 여기는 Wall 희미하게 변화해주는곳
             while (wallRenderer.color.a > 0) {
                 Color color = wallRenderer.color;
@@ -113,6 +113,7 @@ namespace TwinTower
 
             isDegree45 = false;
             InputController.Instance.GainControl();             // 키 입력 풀기
+            GameManager.Instance.isRotateCheck = false;
         }
 
         // 45도가 되었을때 회전되면 안되는 오브젝트들은 원래의 회전률로 돌리기

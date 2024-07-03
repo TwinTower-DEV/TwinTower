@@ -22,6 +22,10 @@ namespace TwinTower
             {
                 ActivateObject active = activateObject.GetComponent<ActivateObject>();
                 active.Launch();
+                if (other.gameObject.layer == LayerMask.NameToLayer("Box"))
+                {
+                    other.GetComponent<Box>().SetActivateObj(active);
+                }
                 SoundManager.Instance.Play("Button_Click_SFX", Define.Sound.Effect);
             }
         }
@@ -34,6 +38,11 @@ namespace TwinTower
             {
                 ActivateObject active = activateObject.GetComponent<ActivateObject>();
                 active.UnLaunch();
+                
+                if (other.gameObject.layer == LayerMask.NameToLayer("Box"))
+                {
+                    other.GetComponent<Box>().SetActivateObj(null);
+                }
             }
         }
     }

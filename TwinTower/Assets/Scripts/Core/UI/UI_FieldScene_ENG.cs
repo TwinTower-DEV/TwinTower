@@ -7,7 +7,6 @@ namespace TwinTower
 {
     public class UI_FieldScene_ENG : UI_Base
     {
-        private int stage = 1;
         [SerializeField] private AudioClip BGM;
         enum Images
         {
@@ -17,7 +16,9 @@ namespace TwinTower
 
         enum Texts
         {
-            FloorText
+            FloorText,
+            CountText
+            
         }
         
         public override void Init()
@@ -60,6 +61,11 @@ namespace TwinTower
         private void Setting()
         {
             UIManager.Instance.ShowNormalUI<UI_SettingScene_ENG>();
+        }
+        
+        public void CountUpdate(int count)
+        {
+            Get<TextMeshProUGUI>((int)Texts.CountText).text = "\n\n" + count.ToString();
         }
 
     }

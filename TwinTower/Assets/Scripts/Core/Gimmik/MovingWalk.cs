@@ -21,18 +21,31 @@ public class MovingWalk : MonoBehaviour {
     private void OnTriggerStay2D(Collider2D other) {
         MoveControl moveableObject = other.GetComponent<MoveControl>();
         if (moveableObject != null && moveableObject.MoveCheck(transform.up)) {     // 이동 가능할때
-            moveableObject.DirectSetting(transform.up);  
+            moveableObject.DirectSetting(transform.up, true);  
             Debug.Log("실행 안된거임?");
         }
         else
         {
-            if(moveableObject != null && !moveableObject.Move())
+            if(moveableObject != null && !moveableObject.Move() && InputManager.Instance.GetCount() > 0)
                 InputController.Instance.GainControl();
         }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        InputController.Instance.GainControl();   
+        MoveControl moveableObject = other.GetComponent<MoveControl>();
+        if(moveableObject != null)
+            StartCoroutine(IsMoveCheck(moveableObject));
+    }
+
+    IEnumerator IsMoveCheck(MoveControl moveableObject)
+    {
+        yield return new WaitForSeconds(0.5f);
+        Debug.Log(moveableObject.name);
+        if (!moveableObject.Move())
+        {
+            if(InputManager.Instance.GetCount() > 0 && !GameManager.Instance.isRotateCheck)
+                InputController.Instance.GainControl();
+        }
     }
 }
