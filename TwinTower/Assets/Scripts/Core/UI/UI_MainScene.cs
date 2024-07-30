@@ -13,13 +13,11 @@ namespace TwinTower
         private Action[] _actions = new Action[BUTTON_COUNT];
         private int currcoursor;
         [SerializeField] private AudioClip MainSceneBGM;
-        [SerializeField] private AudioClip IngameBGM;
         public override void Init()
         {
             SoundManager.Instance.Play(MainSceneBGM, Define.Sound.Bgm);
             Bind<Image>(typeof(Images));
 
-            UIManager.Instance.InputHandler -= KeyInPut;
             UIManager.Instance.InputHandler += KeyInPut;
             
             Get<Image>((int)Images.SelectNewGame).gameObject.BindEvent(NewGame, Define.UIEvent.Click);
