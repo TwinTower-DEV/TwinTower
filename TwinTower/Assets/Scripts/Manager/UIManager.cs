@@ -188,12 +188,6 @@ namespace TwinTower
                     _uistack.Push(ui);
 
                 }
-                else
-                {
-                    UI_MainScene_ENG ui = Util.GetOrAddComponent<UI_MainScene_ENG>(go);
-                    _normalUIs.Add(ui);
-                    _uistack.Push(ui);
-                }
             }
             else if (name.Contains("UI_FieldScene") == true)
             {
