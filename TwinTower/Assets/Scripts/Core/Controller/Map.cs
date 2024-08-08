@@ -11,7 +11,7 @@ namespace TwinTower
         public MapType type;
 
         public Tilemap objectMap;
-        private TileBase[,] map;
+        private EXTile[,] map;
 
         private void Start() 
         {
@@ -23,7 +23,7 @@ namespace TwinTower
             BoundsInt bounds = objectMap.cellBounds;
             TileBase[] allTiles = objectMap.GetTilesBlock(bounds);
 
-            map = new TileBase[bounds.size.x, bounds.size.y];
+            map = new EXTile[bounds.size.x, bounds.size.y];
 
             for (int x = 0; x < bounds.size.x; x++)
             {
@@ -33,7 +33,7 @@ namespace TwinTower
 
                     if (tile != null)
                     {
-                        map[x, y] = tile;
+                        map[x, y] = tile as EXTile;
                     }
                 }
             }
