@@ -62,6 +62,14 @@ namespace TwinTower
         protected override void Awake()
         {
             base.Awake();
+            List<Tiles.Map> list = new List<Tiles.Map>();
+            if (MapManager.Instance.mapInfo.TryGetValue(1, out list) != null)
+            {
+            }
+            foreach (Tiles.Map VARIABLE in list)
+            {
+                Debug.Log(VARIABLE.x + " " + VARIABLE.y + " " + VARIABLE.ActiveNumber);
+            }
             InitDataSetting();
         }
 

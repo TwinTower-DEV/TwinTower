@@ -19,6 +19,7 @@ namespace TwinTower
         public bool isRotateCheck = false;
         protected override void Awake()
         {
+            Debug.Log(MapManager.Instance.mapInfo.Values);
             //UIManager.Instance.Clear();
             if (DataManager.Instance.UIGameDatavalue.langaugecursor == 0)
             {
