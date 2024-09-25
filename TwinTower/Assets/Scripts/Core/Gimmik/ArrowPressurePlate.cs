@@ -16,11 +16,11 @@ public class ArrowPressurePlate : PressurePlate {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player") ||
             other.gameObject.layer == LayerMask.NameToLayer("Box"))
         {
-            SoundManager.Instance.Play("Button_Click_SFX", Define.Sound.Effect);
+            ManagerSet.Sound.Play("Button_Click_SFX", Define.Sound.Effect);
             activateObject.gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
             ActivateObject active = activateObject.GetComponent<ActivateObject>();
             active.Launch();
-            SoundManager.Instance.Play("arrow_launch/Arrow_Launch_SFX");
+            ManagerSet.Sound.Play("arrow_launch/Arrow_Launch_SFX");
             sprite.color = new Color(140f/255f, 140f/255f, 140f/255f);
         }
     }

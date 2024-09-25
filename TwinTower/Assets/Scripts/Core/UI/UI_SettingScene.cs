@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
+
 namespace TwinTower
 {
     public class UI_SettingScene : UI_Base
@@ -87,14 +88,14 @@ namespace TwinTower
         {
             Bind<Image>(typeof(Images));
 
-            UIManager.Instance.InputHandler -= KeyInput;
-            UIManager.Instance.InputHandler += KeyInput;
-            bgmcursor = DataManager.Instance.UIGameDatavalue.bgmcoursor;
-            seccursor = DataManager.Instance.UIGameDatavalue.secursor;
+            ManagerSet.UI.InputHandler -= KeyInput;
+            ManagerSet.UI.InputHandler += KeyInput;
+            bgmcursor = ManagerSet.Data.UIGameDatavalue.bgmcoursor;
+            seccursor = ManagerSet.Data.UIGameDatavalue.secursor;
             currentcoursor = 0;
-            displaymodecursor = DataManager.Instance.UIGameDatavalue.displaymodecursor;
-            displaycoursor = DataManager.Instance.UIGameDatavalue.displaycursor;
-            langaugecoursor = DataManager.Instance.UIGameDatavalue.langaugecursor;
+            displaymodecursor = ManagerSet.Data.UIGameDatavalue.displaymodecursor;
+            displaycoursor = ManagerSet.Data.UIGameDatavalue.displaycursor;
+            langaugecoursor = ManagerSet.Data.UIGameDatavalue.langaugecursor;
             
             EventBind();
             InitBgmButtonCount();
@@ -148,14 +149,14 @@ namespace TwinTower
         {
             if (!Input.anyKey) return;
             
-            if (_uiNum != UIManager.Instance.UINum)
+            if (_uiNum != ManagerSet.UI.UINum)
                 return;
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 UI_ClickSoundEffect();
-                SoundManager.Instance.CancelSetting();
-                UIManager.Instance.InputHandler -= KeyInput;
-                UIManager.Instance.CloseNormalUI(this);
+                ManagerSet.Sound.CancelSetting();
+                ManagerSet.UI.InputHandler -= KeyInput;
+                ManagerSet.UI.CloseNormalUI(this);
             }
             
             if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
@@ -319,14 +320,14 @@ namespace TwinTower
             {
                 bgmcursor = nextidx == -1 ? bgmbuttonCount[(int)soundbutton] : nextidx;
                 SelectSoundButton(0);
-                SoundManager.Instance.PreviewVolume_BGM(bgmcursor);
+                ManagerSet.Sound.PreviewVolume_BGM(bgmcursor);
                 UI_SoundEffect();
             }
             else
             {
                 seccursor = nextidx == -1 ? sebuttonCount[(int)soundbutton] : nextidx;
                 SelectSoundButton(1);
-                SoundManager.Instance.PreviewVolume_SE(seccursor);
+                ManagerSet.Sound.PreviewVolume_SE(seccursor);
                 UI_SoundEffect();
             }
 
@@ -443,13 +444,13 @@ namespace TwinTower
 
         private void Credit()
         {
-            UIManager.Instance.ShowNormalUI<UI_Creadit>();
+            ManagerSet.UI.ShowNormalUI<UI_Creadit>();
         }
 
         private void Apply()
         {
             UI_SoundEffect();
-            UI_Setting_SaveCheck settingSaveCheck = UIManager.Instance.ShowNormalUI<UI_Setting_SaveCheck>();
+            UI_Setting_SaveCheck settingSaveCheck = ManagerSet.UI.ShowNormalUI<UI_Setting_SaveCheck>();
             settingSaveCheck.saveAction += SaveData;
         }
 
@@ -459,13 +460,13 @@ namespace TwinTower
             SoundApply();
             DisplayApply();
             DisplayModeApply();
-            DataManager.Instance.UIGameDatavalue = new UIGameData(bgmcursor, seccursor, displaymodecursor,
+            ManagerSet.Data.UIGameDatavalue = new UIGameData(bgmcursor, seccursor, displaymodecursor,
                 displaycoursor, langaugecoursor);
         }
 
         private void SoundApply()
         {
-            SoundManager.Instance.ApplySoundVolume();
+            ManagerSet.Sound.ApplySoundVolume();
             // sf 는 이번주 회의에서 물어보기
         }
 
@@ -474,13 +475,13 @@ namespace TwinTower
             Define.Resolution resolution;
             resolution.height = height[displaycoursor];
             resolution.width = width[displaycoursor];
-            UIManager.Instance.Resolution = resolution;
+            ManagerSet.UI.Resolution = resolution;
         }
 
         private void LanguageApply()
         {
-            if(DataManager.Instance.UIGameDatavalue.langaugecursor != langaugecoursor)
-                UIManager.Instance.ChangingLanguage(langaugecoursor);
+            if(ManagerSet.Data.UIGameDatavalue.langaugecursor != langaugecoursor)
+                ManagerSet.UI.ChangingLanguage(langaugecoursor);
         }
 
         private void DisplayModeApply()

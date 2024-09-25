@@ -44,7 +44,7 @@ public class MovingWalk : MonoBehaviour {
         Debug.Log(moveableObject.name);
         if (!moveableObject.Move())
         {
-            if(InputManager.Instance.GetCount() > 0 && !GameManager.Instance.isRotateCheck)
+            if(InputManager.Instance.GetCount() > 0 && !ManagerSet.Gamemanager.isRotateCheck)
                 InputController.Instance.GainControl();
         }
     }

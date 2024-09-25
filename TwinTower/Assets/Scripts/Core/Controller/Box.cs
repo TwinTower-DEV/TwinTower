@@ -41,18 +41,18 @@ public class Box : MoveControl
         }
         else
         {
-            SoundManager.Instance.Play("steelbox_impact/arrow_hit_the_metal_SFX");
+            ManagerSet.Sound.Play("steelbox_impact/arrow_hit_the_metal_SFX");
         }
     }
 
     protected override void MoveSoundStart()
     {
-        SoundManager.Instance.Play("box_slide/Box_Slide_SFX");
+        ManagerSet.Sound.Play("box_slide/Box_Slide_SFX");
     }
 
     public IEnumerator Destroy()
     {
-        SoundManager.Instance.Play("wood_shatter/WoodBox_destroy_SFX");
+        ManagerSet.Sound.Play("wood_shatter/WoodBox_destroy_SFX");
         _animator.Play("Destroy");
         gameObject.layer = 0;
         if (activateObject != null)

@@ -17,7 +17,7 @@ namespace TwinTower
 
     public class MapManager : Manager<MapManager>
     {
-        public Dictionary<int, List<Tiles.Map>> mapInfo = new Dictionary<int, List<Tiles.Map>>();
+        /*public Dictionary<int, List<Tiles.Map>> mapInfo = new Dictionary<int, List<Tiles.Map>>();
 
         protected override void Awake()
         {
@@ -28,6 +28,6 @@ namespace TwinTower
         {
             TextAsset textAsset = ResourceManager.Instance.Load<TextAsset>($"Data/{path}");
             return JsonUtility.FromJson<Loader>(textAsset.text);
-        }
+        }*/
     }
 }

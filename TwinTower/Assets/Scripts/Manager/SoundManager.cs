@@ -4,7 +4,7 @@ using System.Linq;
 using TwinTower;
 using UnityEngine;
 
-public class SoundManager : Manager<SoundManager>
+public class SoundManager
     {
         AudioSource[] _audioSources = new AudioSource[(int)Define.Sound.MaxCount];
         float[] _volumes = new float[(int)Define.Sound.MaxCount];
@@ -16,25 +16,28 @@ public class SoundManager : Manager<SoundManager>
         private float[] _sfvolumset = new float[] { 0, 1.25f, 1.5f, 1.75f, 2.0f };
         //private float _masterVolume = DataManager.Instance.GameData.mastetVolume;
 
-        protected override void Awake()
-        {
-            base.Awake();
-            Init();
-        }
 
         public void Init()
         {
-            string[] soundNames = System.Enum.GetNames(typeof(Define.Sound));
-            for (int i = 0; i < soundNames.Length - 1; i++)
+            GameObject root = GameObject.Find("@Sound");
+            if (root == null)
             {
-                GameObject go = new GameObject { name = soundNames[i] };
-                _audioSources[i] = go.AddComponent<AudioSource>();
-                go.transform.parent = transform;
+                root = new GameObject { name = "@Sound" };
+                
+                string[] soundNames = System.Enum.GetNames(typeof(Define.Sound));
+                for (int i = 0; i < soundNames.Length - 1; i++)
+                {
+                    GameObject go = new GameObject { name = soundNames[i] };
+                    _audioSources[i] = go.AddComponent<AudioSource>();
+                    go.transform.parent = root.transform;
+                }
+                _volumes[(int)Define.Sound.Bgm] = _volumeset[ManagerSet.Data.UIGameDatavalue.bgmcoursor];
+                _volumes[(int)Define.Sound.Effect] = _sfvolumset[ManagerSet.Data.UIGameDatavalue.secursor];
+                _audioSources[(int)Define.Sound.Bgm].loop = true;
+                RefreshSound();    
             }
-            _volumes[(int)Define.Sound.Bgm] = _volumeset[DataManager.Instance.UIGameDatavalue.bgmcoursor];
-            _volumes[(int)Define.Sound.Effect] = _sfvolumset[DataManager.Instance.UIGameDatavalue.secursor];
-            _audioSources[(int)Define.Sound.Bgm].loop = true;
-            RefreshSound();
+
+            
         }
         public void Clear()
         {
@@ -77,20 +80,13 @@ public class SoundManager : Manager<SoundManager>
             }
             else
             {
-                AudioSource audioSource = ResourceManager.Instance.Instantiate("SFX/SoundEffect")
+                AudioSource audioSource = ManagerSet.Resource.Instantiate("SFX/SoundEffect")
                     .GetComponent<AudioSource>();
                 audioSource.clip = audioClip;
                 //audioSource.volume = DataManager.Instance.GameData.effectVolume;
                 audioSource.volume = _audioSources[(int)Define.Sound.Effect].volume;
-                StartCoroutine(PlayBgm(audioSource));
+                audioSource.PlayOneShot(audioClip);
             }
-        }
-        private IEnumerator PlayBgm(AudioSource audioSource)
-        {
-            audioSource.Play();
-            yield return new WaitForSeconds(audioSource.clip.length);
-            if (audioSource != null)
-                Destroy(audioSource.gameObject);
         }
         public void StopBGM()
         {
@@ -112,13 +108,13 @@ public class SoundManager : Manager<SoundManager>
             AudioClip audioClip = null;
             if (type == Define.Sound.Bgm)
             {
-                audioClip = ResourceManager.Instance.Load<AudioClip>(path);
+                audioClip = ManagerSet.Resource.Load<AudioClip>(path);
             }
             else
             {
                 if (_audioClips.TryGetValue(path, out audioClip) == false)
                 {
-                    audioClip = ResourceManager.Instance.Load<AudioClip>(path);
+                    audioClip = ManagerSet.Resource.Load<AudioClip>(path);
                     _audioClips.Add(path, audioClip);
                 }
             }

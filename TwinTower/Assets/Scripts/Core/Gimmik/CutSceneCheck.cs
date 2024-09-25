@@ -13,29 +13,29 @@ namespace TwinTower
         {
             if (startCheck)
             {
-                if (DataManager.Instance.StageInfovalue.cutsceneflug != null && !UIManager.Instance.iscutSceenCheck)
+                if (ManagerSet.Data.StageInfovalue.cutsceneflug != null && !ManagerSet.UI.iscutSceenCheck)
                 {
-                    SoundManager.Instance.Play(audioClip, Define.Sound.Bgm);
+                    ManagerSet.Sound.Play(audioClip, Define.Sound.Bgm);
                     
-                    UIManager.Instance.iscutSceenCheck = true;
-                    DataManager.Instance.Scripstvalue = DataManager.Instance.ReadText(FileName);
+                    ManagerSet.UI.iscutSceenCheck = true;
+                    ManagerSet.Data.Scripstvalue = ManagerSet.Data.ReadText(FileName);
                     //Time.timeScale = 0;
                     //InputController.Instance.ReleaseControl();
-                    UIManager.Instance.ShowNormalUI<UI_CutScene>();
+                    ManagerSet.UI.ShowNormalUI<UI_CutScene>();
                 }
             }
         }
 
         public void CutSceneStart()
         {
-            if (DataManager.Instance.StageInfovalue.cutsceneflug != null && !UIManager.Instance.iscutSceenCheck)
+            if (ManagerSet.Data.StageInfovalue.cutsceneflug != null && !ManagerSet.UI.iscutSceenCheck)
             {
-                UIManager.Instance.iscutSceenCheck = true;
-                DataManager.Instance.Scripstvalue = DataManager.Instance.ReadText(FileName);
+                ManagerSet.UI.iscutSceenCheck = true;
+                ManagerSet.Data.Scripstvalue = ManagerSet.Data.ReadText(FileName);
                 //Time.timeScale = 0;
                 //InputController.Instance.ReleaseControl();
                 InputController.Instance.ReleaseControl();
-                UIManager.Instance.ShowNormalUI<UI_CutScene>();
+                ManagerSet.UI.ShowNormalUI<UI_CutScene>();
             }
         }
     }

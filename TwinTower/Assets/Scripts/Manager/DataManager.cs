@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace TwinTower
 {
-    public class DataManager : Manager<DataManager>
+    public class DataManager
     {
         
 
@@ -59,24 +59,17 @@ namespace TwinTower
                 _saveloadcontroller = value;
             }
         }
-        protected override void Awake()
+        public void Init()
         {
-            base.Awake();
-            List<Tiles.Map> list = new List<Tiles.Map>();
-            if (MapManager.Instance.mapInfo.TryGetValue(1, out list) != null)
-            {
-            }
-            foreach (Tiles.Map VARIABLE in list)
-            {
-                Debug.Log(VARIABLE.x + " " + VARIABLE.y + " " + VARIABLE.ActiveNumber);
-            }
+            
             InitDataSetting();
         }
 
         private void InitDataSetting()
         {
             _uiGameData = new UIGameData(2, 2, 0, 2, 0);
-            _stageInfo = new StageInfo(0, "testtxt");            _saveloadcontroller = new SaveLoadController();
+            _stageInfo = new StageInfo(0, "testtxt");         
+            _saveloadcontroller = new SaveLoadController();
             LoadData(_uiGameData);
             LoadData(_stageInfo);
         }

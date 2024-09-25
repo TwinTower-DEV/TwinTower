@@ -21,9 +21,9 @@ public class UI_SaveCheck : UI_Base {
         Bind<TextMeshProUGUI>(typeof(Save));            // Text바인드
         
         Get<TextMeshProUGUI>((int)Save.SaveInfo).text =
-            SaveLoadController.GetSaveInfo(DataManager.Instance.saveload.GetCurrSaveSlot());
+            SaveLoadController.GetSaveInfo(ManagerSet.Data.saveload.GetCurrSaveSlot());
         
-        UIManager.Instance.InputHandler += KeyInPut;
+        ManagerSet.UI.InputHandler += KeyInPut;
         
         Get<Image>((int)Check.SelectYes).gameObject.BindEvent(YesEvent, Define.UIEvent.Click);
         Get<Image>((int)Check.SelectNo).gameObject.BindEvent(NoEvent, Define.UIEvent.Click);
@@ -59,7 +59,7 @@ public class UI_SaveCheck : UI_Base {
     {
         if (!Input.anyKey)
             return;
-        if (_uiNum != UIManager.Instance.UINum)
+        if (_uiNum != ManagerSet.UI.UINum)
             return;
         if (Input.GetKeyDown(KeyCode.Return)) {
             GameObject go = Get<Image>(currCursor).gameObject;
@@ -79,23 +79,23 @@ public class UI_SaveCheck : UI_Base {
         
         if (Input.GetKeyDown(KeyCode.Escape)) {
             UI_SoundEffect();
-            UIManager.Instance.InputHandler -= KeyInPut;
-            UIManager.Instance.CloseNormalUI(this);
+            ManagerSet.UI.InputHandler -= KeyInPut;
+            ManagerSet.UI.CloseNormalUI(this);
         }
     }
 
     private void YesEvent() {
         UI_ClickSoundEffect();
-        UIManager.Instance.InputHandler -= KeyInPut;
-        DataManager.Instance.saveload.Save();
+        ManagerSet.UI.InputHandler -= KeyInPut;
+        ManagerSet.Data.saveload.Save();
         PrevPanelUpdateAction.Invoke();
-        UIManager.Instance.CloseNormalUI(this);
+        ManagerSet.UI.CloseNormalUI(this);
     }
 
     private void NoEvent() {
         UI_ClickSoundEffect();
-        UIManager.Instance.InputHandler -= KeyInPut;
-        UIManager.Instance.CloseNormalUI(this);
+        ManagerSet.UI.InputHandler -= KeyInPut;
+        ManagerSet.UI.CloseNormalUI(this);
     }
 
     void EnterCursorEvent(int currIdx) {

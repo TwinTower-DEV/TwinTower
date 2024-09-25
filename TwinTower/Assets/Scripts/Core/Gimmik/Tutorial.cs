@@ -28,8 +28,8 @@ namespace TwinTower
             if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
                 Debug.Log(tutorialstring);
-                uiTutorial = UIManager.Instance.ShowNormalUI<UI_Tutorial>();
-                if(DataManager.Instance.UIGameDatavalue.langaugecursor == 0)
+                uiTutorial = ManagerSet.UI.ShowNormalUI<UI_Tutorial>();
+                if(ManagerSet.Data.UIGameDatavalue.langaugecursor == 0)
                     uiTutorial.SetText(tutorialstring);
                 else
                     uiTutorial.SetText(tutorialstring_eng);

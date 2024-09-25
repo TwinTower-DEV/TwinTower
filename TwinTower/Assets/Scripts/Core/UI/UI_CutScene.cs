@@ -37,11 +37,11 @@ namespace TwinTower
 
             //_anim = Get<Image>((int)Images.Chat).gameObject.GetComponent<Animator>();
             //_anim.SetBool("Start", true);
-            UIManager.Instance.InputHandler += KeyInput;
-            if (DataManager.Instance.StageInfovalue.cutsceneflug != null)
+            ManagerSet.UI.InputHandler += KeyInput;
+            if (ManagerSet.Data.StageInfovalue.cutsceneflug != null)
             {
                 script_idx = 0;
-                scripts = DataManager.Instance.Scripstvalue;
+                scripts = ManagerSet.Data.Scripstvalue;
             }
             
             Canvas canvas = GetComponent<Canvas>();
@@ -55,7 +55,7 @@ namespace TwinTower
             if (!Input.anyKey)
                 return;
 
-            if (_uiNum != UIManager.Instance.UINum)
+            if (_uiNum != ManagerSet.UI.UINum)
                 return;
 
             if (Input.GetKeyDown(KeyCode.Space))
@@ -73,22 +73,22 @@ namespace TwinTower
 
         private void EndEvent()
         {
-            UIManager.Instance.iscutSceenCheck = false;
+            ManagerSet.UI.iscutSceenCheck = false;
             if (!UI_ScreenFader.FadeCheck())
             {
-                UIManager.Instance.InputHandler -= KeyInput;
+                ManagerSet.UI.InputHandler -= KeyInput;
                 //Time.timeScale = 1;
                 //SoundManager.Instance.SetReduceVolume();
-                UIManager.Instance.CloseFieldCutSceneUI(this);
+                ManagerSet.UI.CloseFieldCutSceneUI(this);
             }
             else
             {
-                UIManager.Instance.InputHandler -= KeyInput;
+                ManagerSet.UI.InputHandler -= KeyInput;
                 //Time.timeScale = 1;
                 StartCoroutine(UI_ScreenFader.FadeSceneIn());
                 //SoundManager.Instance.SetReduceVolume();
                 //SoundManager.Instance.ChangeBGM(BGM);
-                UIManager.Instance.CloseNormalUI(this);
+                ManagerSet.UI.CloseNormalUI(this);
             }
         }
 

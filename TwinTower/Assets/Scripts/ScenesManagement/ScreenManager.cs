@@ -14,7 +14,7 @@ namespace TwinTower
             yield return StartCoroutine(UI_ScreenFader.FadeScenOut());
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             yield return StartCoroutine(UI_ScreenFader.FadeSceneIn());
-            GameManager.Instance.FindPlayer();
+            ManagerSet.Gamemanager.FindPlayer();
         }
 
         public IEnumerator FadeInOut()
@@ -24,8 +24,8 @@ namespace TwinTower
         }
         public IEnumerator NextSceneload(string s = null)
         {
-            UIManager.Instance.Clear();
-            UIManager.Instance.iscutSceenCheck = false;
+            ManagerSet.UI.Clear();
+            ManagerSet.UI.iscutSceenCheck = false;
             yield return StartCoroutine(UI_ScreenFader.FadeScenOut());
 
             if (s == null)
@@ -38,8 +38,8 @@ namespace TwinTower
                 else
                 {
                     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-                    DataManager.Instance.saveload.ChangeCurrSaveSlot(0);
-                    DataManager.Instance.saveload.Save(SceneManager.GetSceneByBuildIndex(SceneManager.GetActiveScene().buildIndex + 1).name);
+                    ManagerSet.Data.saveload.ChangeCurrSaveSlot(0);
+                    ManagerSet.Data.saveload.Save(SceneManager.GetSceneByBuildIndex(SceneManager.GetActiveScene().buildIndex + 1).name);
                 }
             }
             else
