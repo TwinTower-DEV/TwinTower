@@ -70,6 +70,8 @@ namespace TwinTower
         protected override void Awake()
         {
             base.Awake();
+            
+            ManagerSet.Gamemanager.Player(this);
             InputManager.Create();
             _animator = GetComponent<Animator>();
             dir = Define.MoveDir.Down;

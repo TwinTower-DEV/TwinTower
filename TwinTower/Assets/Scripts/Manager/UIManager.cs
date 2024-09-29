@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 
 namespace TwinTower
 {
@@ -20,13 +22,24 @@ namespace TwinTower
 
         int _deviceWidth = Screen.width;
         int _deviceHeight = Screen.height;
-        
-        public Action InputHandler;
+        private Action Handler;
+        public Action InputHandler
+        {
+            get
+            {
+                return Handler;
+            }
+            set
+            {
+                Handler = value;
+                UIInputController.Instance.SetHandler(Handler);
+            }
+        }
         public bool iscutSceenCheck = false;
         public bool FadeCheck = false;
         public void Init()
         {
-            
+            InitLanguage(ManagerSet.Data.UIGameDatavalue.langaugecursor);
         }
 
         public int UINum
@@ -104,6 +117,7 @@ namespace TwinTower
         
         public GameObject Root
         {
+            
             get
             {
                 GameObject root = GameObject.Find("@UI_Root");
@@ -158,16 +172,48 @@ namespace TwinTower
             UI_Base _ui = _uistack.Peek();
             CloseNormalUI(_ui);
 
-            /*LocaleIdentifier localeCode = new LocaleIdentifier(languageIdentifier);
+            string languageIdentifier;
+            if (islenguage == 0)
+            {
+                languageIdentifier = "ko-KR";
+            }
+            else
+            {
+                languageIdentifier = "en-US";
+            }
+
+            LocaleIdentifier localeCode = new LocaleIdentifier(languageIdentifier);
             for(int i = 0; i < LocalizationSettings.AvailableLocales.Locales.Count; i++) {
                 Locale aLocale = LocalizationSettings.AvailableLocales.Locales[i];
                 LocaleIdentifier anIdentifier = aLocale.Identifier;
                 if(anIdentifier == localeCode) {
                     LocalizationSettings.SelectedLocale = aLocale;
                 }
-            }*/
+            }
         }
 
+        public void InitLanguage(int language)
+        {
+            string languageIdentifier;
+            if (language == 0)
+            {
+                languageIdentifier = "ko-KR";
+            }
+            else
+            {
+                languageIdentifier = "en-US";
+            }
+
+            LocaleIdentifier localeCode = new LocaleIdentifier(languageIdentifier);
+            for(int i = 0; i < LocalizationSettings.AvailableLocales.Locales.Count; i++) {
+                Locale aLocale = LocalizationSettings.AvailableLocales.Locales[i];
+                LocaleIdentifier anIdentifier = aLocale.Identifier;
+                if(anIdentifier == localeCode) {
+                    LocalizationSettings.SelectedLocale = aLocale;
+                }
+            }
+        }
+        
         public void CloseFieldCutSceneUI(UI_Base ui)
         {
             if (_normalUIs.Count == 0)

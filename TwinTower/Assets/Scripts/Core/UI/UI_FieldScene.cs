@@ -7,7 +7,6 @@ namespace TwinTower
 {
     public class UI_FieldScene : UI_Base
     {
-        [SerializeField] private AudioClip BGM;
         enum Images
         {
             RestartButton,
@@ -22,6 +21,10 @@ namespace TwinTower
         
         public override void Init()
         {
+            ManagerSet.Gamemanager.CurrentScnen(this);
+            
+            InputManager.Instance.UpDateCount();
+            
             Bind<Image>(typeof(Images));
             Bind<TextMeshProUGUI>(typeof(Texts));
             

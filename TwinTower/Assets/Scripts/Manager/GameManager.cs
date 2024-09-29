@@ -17,19 +17,24 @@ namespace TwinTower
         public bool isClearCheck = false;
         public bool isRotateCheck = false;
         
+        
         public void Init()
         {
             //UIManager.Instance.Clear();
-            _FieldScene = ManagerSet.UI.ShowNormalUI<UI_FieldScene>();
-            FindPlayer();
+            //_FieldScene = ManagerSet.UI.ShowNormalUI<UI_FieldScene>();
+            //FindPlayer();
             isClearCheck = false;
             
-            InputManager.Instance.UpDateCount();
+            //InputManager.Instance.UpDateCount();
             
-            _FieldScene.CountUpdate(InputManager.Instance.GetCount());
+            //_FieldScene.CountUpdate(InputManager.Instance.GetCount());
 
         }
 
+        public void CurrentScnen(UI_FieldScene _scene)
+        {
+            _FieldScene = _scene;
+        }
 
         public void UI_UpdateCount(int count)
         {
@@ -40,7 +45,7 @@ namespace TwinTower
             _player1.Dir = Define.MoveDir.Die;
             _player2.Dir = Define.MoveDir.Die;
             InputController.Instance.ReleaseControl();
-            //StartCoroutine(ScreenManager.Instance.CurrentScreenReload());
+            ScreenManager.Instance.Reload();
         }
         public void FindPlayer() {
             if (GameObject.Find("Dalia").GetComponent<Player>() != null)
@@ -51,6 +56,18 @@ namespace TwinTower
 
             if(GameObject.Find("Irise").GetComponent<Player>() != null)
                 _player2 = GameObject.Find("Irise").GetComponent<Player>();
+        }
+
+        public void Player(Player _player)
+        {
+            if (_player.gameObject.name == "Dalia")
+            {
+                _player1 = _player;
+            }
+            else
+            {
+                _player2 = _player;
+            }
         }
     }
 }
