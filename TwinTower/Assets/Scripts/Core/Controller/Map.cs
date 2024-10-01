@@ -6,35 +6,82 @@ using UnityEngine.Tilemaps;
 
 namespace TwinTower
 {
+    public enum MapType
+    {
+        None = -1,
+        Left,
+        Right
+    }
+
     public class Map : MonoBehaviour
     {
-        public Tilemap objectMap;
-        private EXTile[,] map;
+        public MapType type;
+
+        public Tilemap walls;
+        public List<GimmikBase> gimmiks;
+        private GimmikBase[,] map;
 
         private void Start() 
         {
-            GetTiles();
+            GetWalls();
+            GetGimmiks();
+            //ShowGimmik();
         }
 
-        private void GetTiles()
+        private void GetWalls()
         {
-            BoundsInt bounds = objectMap.cellBounds;
-            TileBase[] allTiles = objectMap.GetTilesBlock(bounds);
+            BoundsInt bounds = walls.cellBounds;
+            TileBase[] allTiles = walls.GetTilesBlock(bounds);
 
-            map = new EXTile[bounds.size.x, bounds.size.y];
+            map = new GimmikBase[bounds.size.x, bounds.size.y];
 
             for (int x = 0; x < bounds.size.x; x++)
             {
                 for (int y = 0; y < bounds.size.y; y++)
                 {
-                    TileBase tile = allTiles[x + y * bounds.size.x];
-
-                    if (tile != null)
+                    if (allTiles[x + y * bounds.size.x] != null)
                     {
-                        map[x, y] = tile as EXTile;
+                        map[x, y] = new GimmikWall();
                     }
                 }
             }
+        }
+
+        private void GetGimmiks()
+        {
+            gimmiks.ForEach(gimmik => map[gimmik.x, gimmik.y] = gimmik);
+        }
+
+        private void ShowGimmik()
+        {
+            for (int x = 0; x < map.GetLength(0); x++)
+            {
+                for (int y = 0; y < map.GetLength(1); y++)
+                {
+                    Debug.Log($"({x},{y}): {map[x,y]}");
+                }
+            }
+        }
+
+        public bool CanMove(int x, int y)
+        {
+            // map에는 바깥 벽은 포함되지 않으므로, -1 or map보다 큰 값이면 무조건 움직이지 못해야 함. - 손창하
+            if (x < 0 || x > map.GetLength(0) - 1)
+            {
+                return false;
+            }
+            
+            if (y < 0 || y > map.GetLength(0) - 1)
+            {
+                return false;
+            }
+
+            return map[x, y]?.IsWalkable ?? true;
+        }
+
+        public GimmikBase GetGimmik(int x, int y)
+        {
+            return map[x, y];
         }
     }
 }

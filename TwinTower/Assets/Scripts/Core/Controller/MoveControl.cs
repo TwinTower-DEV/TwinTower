@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Numerics;
-using Unity.VisualScripting;
+﻿using System.Collections;
 using UnityEngine;
-using Debug = UnityEngine.Debug;
-//using Debug = System.Diagnostics.Debug;
-using Vector3 = UnityEngine.Vector3;
+using DG.Tweening;
+using Cysharp.Threading.Tasks;
 
 /// <summary>
 /// 이동 가능한 모든 오브젝트들이 상속 받는 클래스.
@@ -17,105 +11,79 @@ namespace TwinTower
 {
     public class MoveControl : MonoBehaviour
     {
-        [SerializeField] public int _moveSpeed;
-        [SerializeField] protected int Health;
-        
-        [SerializeField] protected LayerMask _layerMask;
-        public bool isMove = false;
-        [SerializeField] private GameObject Destination;
-        
-        // movedir방향으로 이동 가능한지 체크 - 이동 가능하다면 true반환
-        // layermask를 통해 다음 칸에 있는 오브젝트에 따라 확인됨.
-        public bool Move()
+        public Map map;
+        public int x;
+        public int y;
+
+        public async UniTask OnReciveMove(Define.MoveDir dir) 
         {
-            return isMove;
-        }
-        public virtual bool MoveCheck(Vector3 movedir) {
-            if (isMove) return false;
-            if (movedir == Vector3.zero) return false;
-            RaycastHit2D hit = Physics2D.Raycast(transform.position + movedir * 0.4f , movedir, 0.5f, _layerMask);
-            if (hit.collider == null) return true;
-            if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Box")) {
-                Box boxcontrol = hit.transform.gameObject.GetComponent<Box>();
-                if (boxcontrol.MoveCheck(movedir)) return true;
+            int movedX = x;
+            int movedY = y;
+            switch (dir)
+            {
+                case Define.MoveDir.Up:
+                    movedY += 1;
+                    break;
+                case Define.MoveDir.Down:
+                    movedY -= 1;
+                    break;
+                case Define.MoveDir.Right:
+                    movedX += 1;
+                    break;
+                case Define.MoveDir.Left:
+                    movedX -= 1;
+                    break;
+                default:
+                    Debug.LogError($"적절하지 않은 Move값: {dir}");
+                    return;
             }
-            return false;
-        }
-        
-        // 이동 하고자 하는 방향 설정과 이동 가능함을 표시
-        public void DirectSetting(Vector3 movedir, bool movingwalkCheck) {
-            if (movedir == Vector3.zero) return;
-            if(!movingwalkCheck)
-                MoveSoundStart();
-            RaycastHit2D hit = Physics2D.Raycast(transform.position + movedir * 0.5f , movedir, 0.5f, _layerMask);
-            if (hit.collider != null && hit.transform.gameObject.layer == LayerMask.NameToLayer("Box")) {
-                MoveControl boxcontrol = hit.transform.gameObject.GetComponent<MoveControl>();
-                boxcontrol.DirectSetting(movedir, movingwalkCheck);
+
+            OnBeforeMove(dir);
+
+            if (map.CanMove(movedX, movedY))
+            {
+                await Move(movedX, movedY);
             }
-            isMove = true;
-            if(Destination.transform.parent != null) Destination.transform.SetParent(null);
-            Destination.transform.position = transform.position + movedir;
+            else
+            {
+                await BlockMotion(movedX, movedY);
+            }
+
+            OnAfterMove();
+        }
+
+        protected virtual void OnBeforeMove(Define.MoveDir dir)
+        {
+
+        }
+
+        protected async virtual UniTask Move(int x, int y)
+        {
+            this.x = x;
+            this.y = y;
         }
 
         protected virtual void MoveSoundStart()
         {
             
         }
-        public virtual void ReduceHealth()
-        {
-            //InputController.Instance.ReleaseControl();
-            StartCoroutine(ScreenManager.Instance.CurrentScreenReload());
-        }
-        
-        
-        // 그 이동할 셀로 자연스럽게 이동하게 구현
-        /*IEnumerator UpdateIsMoveing(Vector3 movedir)
-        {
-            isMove = true;
-            Debug.Log("몇번들어옴?" + name);
-            Vector3 destPos = transform.position + movedir;
-            while (isMove) {
-                Vector3 leftLength = destPos - transform.position;
-                float dist = leftLength.magnitude;
-                Debug.Log(destPos + " " + transform.position + " " + leftLength + " " + dist + " " + (dist < _moveSpeed * Time.deltaTime) + " " + movedir + " " + name);
-                if (dist < _moveSpeed * Time.deltaTime)
-                {
-                    Debug.Log("여기는?");
-                    transform.position = TileFindManager.Instance.gettileCentorLocation(destPos);
-                    isMove = false;
-                }
-                else
-                {
-                    transform.position += movedir * _moveSpeed * Time.deltaTime;
-                    isMove = true;
-                }
-                yield return new WaitForFixedUpdate();
-            }
-        }*/
 
-        // 현재 이동 중인지 확인을 위함
-        public bool getIsMove() {
-            return isMove;
-        }
-        
-        // 오브젝트의 현재 tilemap기준 Cell 위치 확인을 위함.
-        protected virtual void Awake() {
-            transform.position = TileFindManager.Instance.gettileCentorLocation(transform.position);
+        protected virtual void ReduceHealth()
+        {
+
         }
 
-        private void Update() {
-            if(isMove) {
-                Vector3 leftLength = Destination.transform.position - transform.position;
-                float dist = leftLength.magnitude;
-                if (dist < _moveSpeed * Time.deltaTime) {
-                    transform.position = TileFindManager.Instance.gettileCentorLocation(Destination.transform.position);
-                    isMove = false;
-                }
-                else {
-                    transform.position += leftLength.normalized * _moveSpeed * Time.deltaTime;
-                    isMove = true;
-                }
-            }
+        protected async virtual UniTask BlockMotion(int x, int y) 
+        {
+            Debug.LogError($"{x} {y}");
+            Vector2 currentPos = new Vector2(transform.position.x, transform.position.y);
+            
+            await transform.DOMove(new Vector2(currentPos.x + x, currentPos.y + y), 0.05f).SetLoops(2, LoopType.Yoyo).ToUniTask();
+        }
+
+        protected virtual void OnAfterMove()
+        {
+
         }
     }
 }

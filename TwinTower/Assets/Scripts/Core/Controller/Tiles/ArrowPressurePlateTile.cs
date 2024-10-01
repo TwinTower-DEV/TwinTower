@@ -1,15 +1,7 @@
 namespace TwinTower.Tiles
 {
-    public class ArrowPressurePlateTile: TileBaseChild
+    public class ArrowPressurePlateTile: GimmikBase
     {
-        protected override void Activate()
-        {
-            
-        }
 
-        protected override void UnActivate()
-        {
-            
-        }
     }
 }
