@@ -26,7 +26,7 @@ namespace TwinTower
                 {
                     other.GetComponent<Box>().SetActivateObj(active);
                 }
-                SoundManager.Instance.Play("Button_Click_SFX", Define.Sound.Effect);
+                ManagerSet.Sound.Play("Button_Click_SFX", Define.Sound.Effect);
             }
         }
 

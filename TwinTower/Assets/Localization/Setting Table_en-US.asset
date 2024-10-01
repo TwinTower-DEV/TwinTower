@@ -40,6 +40,24 @@ MonoBehaviour:
       SETTING'
     m_Metadata:
       m_Items: []
+  - m_Id: 21822873706749952
+    m_Localized: 'WINDOW
+
+      MODE'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21822985552060416
+    m_Localized: LANGUAGE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21823264582328320
+    m_Localized: CREADIT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21823335247962112
+    m_Localized: APPLY
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

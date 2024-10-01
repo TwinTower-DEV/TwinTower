@@ -45,7 +45,7 @@ namespace TwinTower
         protected IEnumerator Fade(float finalAlpha, CanvasGroup canvasGroup, bool FadeCheck)
         {
             canvasGroup.blocksRaycasts = true;
-            UIManager.Instance.FadeCheck = true;
+            ManagerSet.UI.FadeCheck = true;
             float fadeSpeed = Mathf.Abs(canvasGroup.alpha - finalAlpha) / fadeDuration;
             while (!Mathf.Approximately(canvasGroup.alpha, finalAlpha))
             {
@@ -56,10 +56,10 @@ namespace TwinTower
             canvasGroup.alpha = finalAlpha;
             canvasGroup.blocksRaycasts = false;
 
-            if (!FadeCheck && !UIManager.Instance.isClearUICheck)
+            if (!FadeCheck && !ManagerSet.UI.isClearUICheck)
             {
                 InputController.Instance.GainControl();
-                UIManager.Instance.FadeCheck = false;
+                ManagerSet.UI.FadeCheck = false;
             }
         }
         // FadeIn 코드

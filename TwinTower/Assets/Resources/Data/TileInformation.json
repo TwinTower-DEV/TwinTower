@@ -1,0 +1,32 @@
+{
+  "_mapInfolist": [
+    {
+      "x" : "0",
+      "y" : "0",
+      "ActiveNumber" : "0",
+      "spareX" : "-1",
+      "spareY" : "-1"
+    },
+    {
+      "x" : "0",
+      "y" : "1",
+      "ActiveNumber" : "0",
+      "spareX" : "-1",
+      "spareY" : "-1"
+    },
+    {
+      "x" : "0",
+      "y" : "2",
+      "ActiveNumber" : "0",
+      "spareX" : "-1",
+      "spareY" : "-1"
+    },
+    {
+      "x" : "0",
+      "y" : "3",
+      "ActiveNumber" : "0",
+      "spareX" : "-1",
+      "spareY" : "-1"
+    }
+  ]
+}

@@ -15,10 +15,10 @@ namespace TwinTower
         [SerializeField] private AudioClip MainSceneBGM;
         public override void Init()
         {
-            SoundManager.Instance.Play(MainSceneBGM, Define.Sound.Bgm);
+            ManagerSet.Sound.Play(MainSceneBGM, Define.Sound.Bgm);
             Bind<Image>(typeof(Images));
 
-            UIManager.Instance.InputHandler += KeyInPut;
+            ManagerSet.UI.InputHandler += KeyInPut;
             
             Get<Image>((int)Images.SelectNewGame).gameObject.BindEvent(NewGame, Define.UIEvent.Click);
             Get<Image>((int)Images.SelectNewGame).gameObject.SetActive(false);
@@ -62,9 +62,9 @@ namespace TwinTower
         {
             if (!Input.anyKey)
                 return;
-            if (_uiNum != UIManager.Instance.UINum)
+            if (_uiNum != ManagerSet.UI.UINum)
                 return;
-            if (UIManager.Instance.FadeCheck)
+            if (ManagerSet.UI.FadeCheck)
                 return;
 
             
@@ -89,25 +89,25 @@ namespace TwinTower
         void NewGame()
         {
             UI_ClickSoundEffect();
-            UIManager.Instance.InputHandler -= KeyInPut;
+            ManagerSet.UI.InputHandler -= KeyInPut;
             StartCoroutine(ScreenManager.Instance.NextSceneload());
         }
         void Setting()
         {
             UI_ClickSoundEffect();
-            UIManager.Instance.ShowNormalUI<UI_SettingScene>();
+            ManagerSet.UI.ShowNormalUI<UI_SettingScene>();
         }
 
         void Continue()
         {
             UI_ClickSoundEffect();
-            UIManager.Instance.ShowNormalUI<UI_Load>();
+            ManagerSet.UI.ShowNormalUI<UI_Load>();
         }
 
         void Exit()
         {
             UI_ClickSoundEffect();
-            UIManager.Instance.ShowNormalUI<UI_ExitCheck>();
+            ManagerSet.UI.ShowNormalUI<UI_ExitCheck>();
         }
 
         void EnterCoursor(int nextidx)

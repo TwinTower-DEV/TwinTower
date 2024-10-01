@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: Rest Table Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: Rest Table
+  m_TableCollectionNameGuidString: 42804d71d2c3b574e87a4f83e7e465f2
+  m_Entries:
+  - m_Id: 100177076224
+    m_Key: ExitMessege
+    m_Metadata:
+      m_Items: []
+  - m_Id: 354733580288
+    m_Key: UILOAD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 480109715456
+    m_Key: UISAVE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 536653127680
+    m_Key: SaveDeleteMessege
+    m_Metadata:
+      m_Items: []
+  - m_Id: 898105663488
+    m_Key: SaveMessege
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1199621595136
+    m_Key: DataOverwrite
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1455025348608
+    m_Key: YES
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1503700246528
+    m_Key: NO
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 543058148120854531
+  references:
+    version: 2
+    RefIds:
+    - rid: 543058148120854531
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1727195608005

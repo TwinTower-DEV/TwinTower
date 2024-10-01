@@ -17,18 +17,21 @@ namespace TwinTower
         public bool islockMove = false;
         private bool MoveFlag = false;
 
+        public void Init()
+        {
+            
+        }
+        
         private void GroundedHorizontalMovement() {
-            if (GameManager.Instance._player1.getIsMove() || GameManager.Instance._player2.getIsMove()) return;
+            if (ManagerSet.Gamemanager._player1.getIsMove() || ManagerSet.Gamemanager._player2.getIsMove()) return;
 
             
             if (InputController.Instance.LeftMove.Down) {
-                Debug.Log("실헝먼ㅇㅁ");
                 moveDir = Vector3.left;
                 PlayerMove(Define.MoveDir.Left);
             }
             else if (InputController.Instance.RightMove.Down) {
                 moveDir = Vector3.right;
-                Debug.Log("실헝먼ㅇㅁ");
                 PlayerMove(Define.MoveDir.Right);
             }
             else if (InputController.Instance.UpMove.Down) {
@@ -40,7 +43,7 @@ namespace TwinTower
                 PlayerMove(Define.MoveDir.Down);
             }
             else if (InputController.Instance.ResetButton.Down) {
-                GameManager.Instance.Restart();
+                ManagerSet.Gamemanager.Restart();
             }
             else {
                 moveDir = Vector3.zero;
@@ -48,14 +51,14 @@ namespace TwinTower
                 return;
             }
 
-            if (GameManager.Instance._player1.MoveCheck(moveDir) && GameManager.Instance._player2.MoveCheck(moveDir)) {
+            if (ManagerSet.Gamemanager._player1.MoveCheck(moveDir) && ManagerSet.Gamemanager._player2.MoveCheck(moveDir)) {
                 
                 
-                GameManager.Instance._player1.DirectSetting(moveDir, false);
-                GameManager.Instance._player2.DirectSetting(moveDir, false);
+                ManagerSet.Gamemanager._player1.DirectSetting(moveDir, false);
+                ManagerSet.Gamemanager._player2.DirectSetting(moveDir, false);
 
                 count--;
-                GameManager.Instance.UI_UpdateCount(count);
+                ManagerSet.Gamemanager.UI_UpdateCount(count);
                 if (count <= 0)
                 {
                     InputController.Instance.ReleaseControl();
@@ -75,17 +78,17 @@ namespace TwinTower
         {
             yield return new WaitForSeconds(1.5f);
 
-            if (!GameManager.Instance.isClearCheck)
+            if (!ManagerSet.Gamemanager.isClearCheck)
             {
-                GameManager.Instance.Restart();
+                ManagerSet.Gamemanager.Restart();
             }
         }
         private void PlayerMove(Define.MoveDir dir) {
-            if(GameManager.Instance._player1.Dir != Define.MoveDir.Die)
-                GameManager.Instance._player1.Dir = dir;
+            if(ManagerSet.Gamemanager._player1.Dir != Define.MoveDir.Die)
+                ManagerSet.Gamemanager._player1.Dir = dir;
             
-            if(GameManager.Instance._player2.Dir != Define.MoveDir.Die)
-                GameManager.Instance._player2.Dir = dir;
+            if(ManagerSet.Gamemanager._player2.Dir != Define.MoveDir.Die)
+                ManagerSet.Gamemanager._player2.Dir = dir;
         }
 
         private void Update() {
@@ -102,15 +105,15 @@ namespace TwinTower
             return count;
         }
         IEnumerator BlockMotion(Vector3 movedir) {
-            Collider2D collider2dP1 = GameManager.Instance._player1.GetComponent<Collider2D>();
-            Collider2D collider2dP2 = GameManager.Instance._player2.GetComponent<Collider2D>();
+            Collider2D collider2dP1 = ManagerSet.Gamemanager._player1.GetComponent<Collider2D>();
+            Collider2D collider2dP2 = ManagerSet.Gamemanager._player2.GetComponent<Collider2D>();
             collider2dP1.enabled = false;
             collider2dP2.enabled = false;
             
             InputController.Instance.ReleaseControl();
 
-            Transform transformP1 = GameManager.Instance._player1.GetComponent<Transform>();
-            Transform transformP2 = GameManager.Instance._player2.GetComponent<Transform>();
+            Transform transformP1 = ManagerSet.Gamemanager._player1.GetComponent<Transform>();
+            Transform transformP2 = ManagerSet.Gamemanager._player2.GetComponent<Transform>();
             
             Vector3 originalPos = transformP1.position;
             Vector3 originalPosP2 = transformP2.position;
@@ -118,7 +121,7 @@ namespace TwinTower
             Vector3 leftLength = destPos - transformP1.position;
             float dist = leftLength.magnitude;
 
-            float moveSpeed = GameManager.Instance._player1._moveSpeed;
+            float moveSpeed = ManagerSet.Gamemanager._player1._moveSpeed;
             
             while (dist >= moveSpeed * Time.deltaTime) {
                 transformP1.position += movedir * moveSpeed * Time.deltaTime;

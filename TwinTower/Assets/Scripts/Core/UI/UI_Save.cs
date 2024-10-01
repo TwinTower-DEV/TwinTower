@@ -20,7 +20,7 @@ public class UI_Save : UI_Base {
         Bind<Button>(typeof(DeleteButton));                    // 삭제 버튼 바인드    
         Bind<TextMeshProUGUI>(typeof(SaveText));               // 슬롯 text정보 바인드(단계, 날짜)        
         UpdateUI();
-        UIManager.Instance.InputHandler += KeyInPut;
+        ManagerSet.UI.InputHandler += KeyInPut;
         
         // 슬롯 마우스 엔터, 클릭 이벤트 BindEvent
         Get<Image>((int)Save.UnSelectSave_1).gameObject.BindEvent(()=>SaveEvent((int)Save.UnSelectSave_1), Define.UIEvent.Click);
@@ -78,7 +78,7 @@ public class UI_Save : UI_Base {
     {
         if (!Input.anyKey)
             return;
-        if (_uiNum != UIManager.Instance.UINum)
+        if (_uiNum != ManagerSet.UI.UINum)
             return;
         if (Input.GetKeyDown(KeyCode.Return)) {
             GameObject go = Get<Image>(currCursor).gameObject;
@@ -99,8 +99,8 @@ public class UI_Save : UI_Base {
         if (Input.GetKeyDown(KeyCode.Escape)) {
            // menuUIManager.PrevPanelChange();
            UI_SoundEffect();
-           UIManager.Instance.InputHandler -= KeyInPut;
-           UIManager.Instance.CloseNormalUI(this);
+           ManagerSet.UI.InputHandler -= KeyInPut;
+           ManagerSet.UI.CloseNormalUI(this);
         }
     }
 
@@ -123,17 +123,17 @@ public class UI_Save : UI_Base {
 
     private void SaveEvent(int idx) {
         UI_ClickSoundEffect();
-        DataManager.Instance.saveload.ChangeCurrSaveSlot(idx);
+        ManagerSet.Data.saveload.ChangeCurrSaveSlot(idx);
        // menuUIManager.saveloadController.ChangeCurrSaveSlot(idx);
-       UI_SaveCheck savecheck = UIManager.Instance.ShowNormalUI<UI_SaveCheck>();
+       UI_SaveCheck savecheck = ManagerSet.UI.ShowNormalUI<UI_SaveCheck>();
        savecheck.PrevPanelUpdateAction += UpdateUI;
     }
 
     private void DeleteEvent(int idx) {
         UI_ClickSoundEffect();
-        DataManager.Instance.saveload.ChangeCurrSaveSlot(idx);
+        ManagerSet.Data.saveload.ChangeCurrSaveSlot(idx);
         //menuUIManager.saveloadController.ChangeCurrSaveSlot(idx);
-        UI_SaveDeleteCheck saveDeleteCheck = UIManager.Instance.ShowNormalUI<UI_SaveDeleteCheck>();
+        UI_SaveDeleteCheck saveDeleteCheck = ManagerSet.UI.ShowNormalUI<UI_SaveDeleteCheck>();
         saveDeleteCheck.PrevPanelUpdateAction += UpdateUI;
     }
 

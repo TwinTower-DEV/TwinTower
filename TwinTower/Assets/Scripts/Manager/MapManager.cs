@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using NUnit.Framework;
+using TwinTower.Tiles;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -15,6 +17,17 @@ namespace TwinTower
 
     public class MapManager : Manager<MapManager>
     {
-        
+        /*public Dictionary<int, List<Tiles.Map>> mapInfo = new Dictionary<int, List<Tiles.Map>>();
+
+        protected override void Awake()
+        {
+            mapInfo = LoadJson<MapInfo, int, List<Tiles.Map>>("TileInformation").MakeDic();
+        }
+
+        Loader LoadJson<Loader, Key, Value>(string path) where Loader : ILoad<Key, Value>
+        {
+            TextAsset textAsset = ResourceManager.Instance.Load<TextAsset>($"Data/{path}");
+            return JsonUtility.FromJson<Loader>(textAsset.text);
+        }*/
     }
 }

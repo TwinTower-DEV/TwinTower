@@ -31,7 +31,7 @@ public class Stair : MonoBehaviour
                 //NextLevelManager.Instance.NextLevel(stair.NextSceneString);
                 if (cutSceneCheck == null)
                 {
-                    GameManager.Instance.isClearCheck = true;
+                    ManagerSet.Gamemanager.isClearCheck = true;
                     StartCoroutine(NextStage());
 
                 }
@@ -45,7 +45,7 @@ public class Stair : MonoBehaviour
     private IEnumerator NextStage()
     {
         yield return StartCoroutine(UI_ScreenFader.FadeScenOut());
-        UIManager.Instance.ShowNormalUI<UI_Clear>();
+        ManagerSet.UI.ShowNormalUI<UI_Clear>();
         yield return StartCoroutine(UI_ScreenFader.FadeSceneIn());
     }
     private void OnTriggerExit2D(Collider2D other) {
