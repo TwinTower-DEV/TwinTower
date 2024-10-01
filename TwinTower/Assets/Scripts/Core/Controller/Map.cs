@@ -8,8 +8,6 @@ namespace TwinTower
 {
     public class Map : MonoBehaviour
     {
-        public MapType type;
-
         public Tilemap objectMap;
         private EXTile[,] map;
 

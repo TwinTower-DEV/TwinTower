@@ -150,24 +150,24 @@ public class NormalNode : ObjectNode {
 public class ArrowTrapNode : ObjectNode {
     public ArrowTrapNode(GameObject _object) : base(_object) { }
     
-    public override void CheckError() {
-        base.CheckError();
-        DispenserShoot[] dispenserShoot = Object.GetComponentsInChildren<DispenserShoot>();
-        PressurePlate[] pressurePlate = Object.GetComponentsInChildren<PressurePlate>();
+    // public override void CheckError() {
+    //     base.CheckError();
+    //     DispenserShoot[] dispenserShoot = Object.GetComponentsInChildren<DispenserShoot>();
+    //     EXTilePressurePlate[] pressurePlate = Object.GetComponentsInChildren<EXTilePressurePlate>();
         
-        if(dispenserShoot.Length != 1) Print("발사대가 1개가 아닙니다.");
-        if(pressurePlate.Length != 1) Print("발판이 1개가 아닙니다.");
+    //     if(dispenserShoot.Length != 1) Print("발사대가 1개가 아닙니다.");
+    //     if(pressurePlate.Length != 1) Print("발판이 1개가 아닙니다.");
         
-        if(pressurePlate.Length == 0) Print("발사대가 없습니다.");
-        else if(dispenserShoot.Length == 0) Print("발판이 없습니다.");
-        else {
-            if (pressurePlate[0].activateObject != dispenserShoot[0].gameObject) {
-                Print("발사대와 발판이 이상한 것으로 연결되어 있습니다.");
-            }
-        }
+    //     if(pressurePlate.Length == 0) Print("발사대가 없습니다.");
+    //     else if(dispenserShoot.Length == 0) Print("발판이 없습니다.");
+    //     else {
+    //         if (pressurePlate[0].activateObject != dispenserShoot[0].gameObject) {
+    //             Print("발사대와 발판이 이상한 것으로 연결되어 있습니다.");
+    //         }
+    //     }
         
-        if(childsObects.Count != 2) Print("이상한 것이 들어가 있습니다.");
-    }
+    //     if(childsObects.Count != 2) Print("이상한 것이 들어가 있습니다.");
+    // }
 }
 
 // 발사대가 가지게 될 노드
@@ -179,8 +179,8 @@ public class DispenserNode : NormalNode {
         base.CheckError();
         CheckLocation();
         
-        DispenserShoot dispenserShoot = Object.GetComponent<DispenserShoot>();
-        if(dispenserShoot == null) Print("DispenserShoot 컴포넌트가 들어가 있지 않음 -> 개발자 호출 바람");
+        //DispenserShoot dispenserShoot = Object.GetComponent<DispenserShoot>();
+        //if(dispenserShoot == null) Print("DispenserShoot 컴포넌트가 들어가 있지 않음 -> 개발자 호출 바람");
         /*else {
             /*if(dispenserShoot.arrowPrefab == null) Print("arrow prefab이 적용되어 있지 않음");#1#
             /*if(dispenserShoot.directInfos.Length != 4) Print("방향 별 Sprite가 적용되어 있지 않음");
@@ -202,24 +202,24 @@ public class DispenserNode : NormalNode {
 // 문과 발판이 올바르게 연결되어 있는지 체크해준다.
 public class DoorTrapNode : ObjectNode {
     public DoorTrapNode(GameObject _object) : base(_object) { }
-    public override void CheckError() {
-        base.CheckError();
-        DoorActivate[] doorActivate = Object.GetComponentsInChildren<DoorActivate>();
-        PressurePlate[] pressurePlate = Object.GetComponentsInChildren<PressurePlate>();
+    // public override void CheckError() {
+    //     base.CheckError();
+    //     Door[] doorActivate = Object.GetComponentsInChildren<Door>();
+    //     EXTilePressurePlate[] pressurePlate = Object.GetComponentsInChildren<EXTilePressurePlate>();
             
-        if(doorActivate.Length != 1) Print("문이 1개가 아닙니다.");
-        if(pressurePlate.Length != 1) Print("발판이 1개가 아닙니다.");
+    //     if(doorActivate.Length != 1) Print("문이 1개가 아닙니다.");
+    //     if(pressurePlate.Length != 1) Print("발판이 1개가 아닙니다.");
             
-        if(pressurePlate.Length == 0) Print("문이 없습니다.");
-        else if(doorActivate.Length == 0) Print("발판이 없습니다.");
-        else {
-            if (pressurePlate[0].activateObject != doorActivate[0].gameObject) {
-                Print("문이 발판이 이상한 것으로 연결되어 있습니다.");
-            }
-        }
+    //     if(pressurePlate.Length == 0) Print("문이 없습니다.");
+    //     else if(doorActivate.Length == 0) Print("발판이 없습니다.");
+    //     else {
+    //         if (pressurePlate[0].activateObject != doorActivate[0].gameObject) {
+    //             Print("문이 발판이 이상한 것으로 연결되어 있습니다.");
+    //         }
+    //     }
             
-        if(childsObects.Count != 2) Print("이상한 것이 들어가 있습니다.");
-    }
+    //     if(childsObects.Count != 2) Print("이상한 것이 들어가 있습니다.");
+    // }
 }
 
 // OppRotatePlate의 에러 사항 체크

@@ -9,26 +9,20 @@ namespace TwinTower
     /// InputManager 클래스입니다 사용자의 입력을 관리합니다.
     /// 클리어 시간 측정하는거면 Time.timeScale써야 함
     /// </summary>
-    public class InputManager : Manager<InputManager> {
+    public class InputManager : MonoBehaviour
+    {
         public Vector3 moveDir = Vector3.zero;
         [SerializeField]private int count;
         private int[] stagecount = new[] { 19, 39, 24, 30, 30, 17, 12, 38, 22, 30, 29, 9, 17, 29 };
 
-        public bool islockMove = false;
-        private bool MoveFlag = false;
-
-        private void GroundedHorizontalMovement() {
-            if (GameManager.Instance._player1.getIsMove() || GameManager.Instance._player2.getIsMove()) return;
-
-            
+        private void GroundedHorizontalMovement() 
+        {
             if (InputController.Instance.LeftMove.Down) {
-                Debug.Log("실헝먼ㅇㅁ");
                 moveDir = Vector3.left;
                 PlayerMove(Define.MoveDir.Left);
             }
             else if (InputController.Instance.RightMove.Down) {
                 moveDir = Vector3.right;
-                Debug.Log("실헝먼ㅇㅁ");
                 PlayerMove(Define.MoveDir.Right);
             }
             else if (InputController.Instance.UpMove.Down) {
@@ -48,12 +42,8 @@ namespace TwinTower
                 return;
             }
 
-            if (GameManager.Instance._player1.MoveCheck(moveDir) && GameManager.Instance._player2.MoveCheck(moveDir)) {
-                
-                
-                GameManager.Instance._player1.DirectSetting(moveDir, false);
-                GameManager.Instance._player2.DirectSetting(moveDir, false);
-
+            if (GameManager.Instance._player1.MoveCheck(moveDir) && GameManager.Instance._player2.MoveCheck(moveDir)) 
+            {
                 count--;
                 GameManager.Instance.UI_UpdateCount(count);
                 if (count <= 0)
@@ -63,12 +53,6 @@ namespace TwinTower
                 }
                 MoveFlag = true;
             }
-
-            if (moveDir != Vector3.zero && MoveFlag == false) {         //  막혔을 경우
-                StartCoroutine(BlockMotion(moveDir));
-            }
-
-            MoveFlag = false;
         }
 
         IEnumerator OverCount()
@@ -80,6 +64,7 @@ namespace TwinTower
                 GameManager.Instance.Restart();
             }
         }
+        
         private void PlayerMove(Define.MoveDir dir) {
             if(GameManager.Instance._player1.Dir != Define.MoveDir.Die)
                 GameManager.Instance._player1.Dir = dir;
@@ -89,18 +74,9 @@ namespace TwinTower
         }
 
         private void Update() {
-            if (!islockMove) GroundedHorizontalMovement();
+            GroundedHorizontalMovement();
         }
 
-        public void UpDateCount()
-        {
-            count = stagecount[SceneManager.GetActiveScene().buildIndex - 1];
-        }
-
-        public int GetCount()
-        {
-            return count;
-        }
         IEnumerator BlockMotion(Vector3 movedir) {
             Collider2D collider2dP1 = GameManager.Instance._player1.GetComponent<Collider2D>();
             Collider2D collider2dP2 = GameManager.Instance._player2.GetComponent<Collider2D>();
@@ -150,6 +126,5 @@ namespace TwinTower
             
             InputController.Instance.GainControl();
         }
-        }
-    
+    }
 }
