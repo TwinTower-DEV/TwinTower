@@ -11,5 +11,10 @@ namespace TwinTower
         {
 
         }
+
+        public virtual void LinkTile<T>(T linkedObject)
+        {
+
+        }
     }
 }
