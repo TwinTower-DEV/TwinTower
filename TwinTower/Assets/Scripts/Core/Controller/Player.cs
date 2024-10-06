@@ -26,7 +26,7 @@ namespace TwinTower
             dir = Define.MoveDir.Down;
         }
 
-        protected override void OnBeforeMove(Define.MoveDir dir)
+        protected override void OnBeforeReciveMove(Define.MoveDir dir)
         {
             switch (dir)
             {

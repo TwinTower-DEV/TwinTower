@@ -15,26 +15,35 @@ namespace TwinTower
         public int x;
         public int y;
 
-        public async UniTask OnReciveMove(Define.MoveDir dir, bool isMove) 
+        public async UniTask OnReciveMove(Define.MoveDir dir, bool canMove) 
         {
             (int movedX, int movedY) = ConvertDirToPos(dir);
-            OnBeforeMove(dir);
-
-            if (isMove == true)
+            OnBeforeReciveMove(dir);
+            
+            if (canMove == true)
             {
+                OnBeforeMove();
                 await Move(movedX, movedY);
+                OnAfterMove();
             }
             else
             {
                 await BlockMotion(movedX, movedY);
             }
-
-            OnAfterMove();
         }
 
-        protected virtual void OnBeforeMove(Define.MoveDir dir)
+        // Move, BlockMotion 모두에서 실행되어야 하는 메서드는 아래에 override
+        protected virtual void OnBeforeReciveMove(Define.MoveDir dir)
         {
 
+        }
+
+#region Move
+
+        protected virtual void OnBeforeMove()
+        {
+            map.GetGimmik(x, y)?.DeActive();
+            Debug.LogError($"DeActive: {x}, {y}: {map.GetGimmik(x, y)?.GetType()}");
         }
 
         protected async virtual UniTask Move(int x, int y)
@@ -46,25 +55,18 @@ namespace TwinTower
             await transform.DOLocalMove(target, 0.1f).ToUniTask();
         }
 
-        protected virtual void MoveSoundStart()
+        protected virtual void OnAfterMove()
         {
-            
+            map.GetGimmik(x, y)?.Active();
+            Debug.LogError($"Active: {x}, {y}: {map.GetGimmik(x, y)?.GetType()}");
         }
 
-        protected virtual void ReduceHealth()
-        {
-
-        }
+#endregion
 
         protected async virtual UniTask BlockMotion(int x, int y) 
         {
             Vector2 target = map.GetTilePosition(x, y);
             await transform.DOLocalMove(new Vector2(target.x, target.y), 0.05f).SetLoops(2, LoopType.Yoyo).ToUniTask();
-        }
-
-        protected virtual void OnAfterMove()
-        {
-
         }
 
         private (int, int) ConvertDirToPos(Define.MoveDir dir)
@@ -97,6 +99,16 @@ namespace TwinTower
         {
             (int nextX, int nextY) = ConvertDirToPos(dir);
             return map.CanMove(nextX, nextY);
+        }
+
+        protected virtual void MoveSoundStart()
+        {
+            
+        }
+
+        protected virtual void ReduceHealth()
+        {
+
         }
     }
 }

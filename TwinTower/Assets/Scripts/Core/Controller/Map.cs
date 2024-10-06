@@ -23,7 +23,7 @@ namespace TwinTower
         {
             GetWalls();
             GetGimmiks();
-            //ShowGimmik();
+            ShowGimmik();
         }
 
         private void GetWalls()
@@ -56,7 +56,7 @@ namespace TwinTower
             {
                 for (int y = 0; y < map.GetLength(1); y++)
                 {
-                    Debug.Log($"({x},{y}): {map[x,y]}");
+                    Debug.Log($"({x},{y}): {map[x,y]?.GetType()}");
                 }
             }
         }

@@ -13,10 +13,15 @@ namespace TwinTower
 {
     public class GimmikTutorial : GimmikBase
     {
-        
+        public GameObject tutorialPanel;
         public override void Active()
         {
+            tutorialPanel.SetActive(true);
+        }
 
+        public override void DeActive()
+        {
+            tutorialPanel.SetActive(false);
         }
     }
 }
