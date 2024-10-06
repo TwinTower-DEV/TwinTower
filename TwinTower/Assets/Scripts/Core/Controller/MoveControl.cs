@@ -61,6 +61,9 @@ namespace TwinTower
         {
             this.x = x;
             this.y = y;
+            Vector2 target = map.GetTilePosition(x, y);
+
+            await transform.DOLocalMove(target, 0.1f).ToUniTask();
         }
 
         protected virtual void MoveSoundStart()
@@ -75,10 +78,8 @@ namespace TwinTower
 
         protected async virtual UniTask BlockMotion(int x, int y) 
         {
-            Debug.LogError($"{x} {y}");
-            Vector2 currentPos = new Vector2(transform.position.x, transform.position.y);
-            
-            await transform.DOMove(new Vector2(currentPos.x + x, currentPos.y + y), 0.05f).SetLoops(2, LoopType.Yoyo).ToUniTask();
+            Vector2 target = map.GetTilePosition(x, y);
+            await transform.DOLocalMove(new Vector2(target.x, target.y), 0.05f).SetLoops(2, LoopType.Yoyo).ToUniTask();
         }
 
         protected virtual void OnAfterMove()

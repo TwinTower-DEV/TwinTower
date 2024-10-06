@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 
 namespace TwinTower
@@ -16,7 +15,6 @@ namespace TwinTower
     public class Map : MonoBehaviour
     {
         public MapType type;
-
         public Tilemap walls;
         public List<GimmikBase> gimmiks;
         private GimmikBase[,] map;
@@ -82,6 +80,16 @@ namespace TwinTower
         public GimmikBase GetGimmik(int x, int y)
         {
             return map[x, y];
+        }
+
+        public Vector2 GetTilePosition(int x, int y)
+        {
+            Vector3 cellSize = walls.cellSize; // Wall이나 Floor나 Cell Size는 같으므로 wall로 해도 문제 없음
+            Vector3 origin = walls.origin;
+
+            Vector2 target = new Vector2(origin.x + x + cellSize.x / 2, origin.y + y + cellSize.y / 2);
+
+            return target;
         }
     }
 }
