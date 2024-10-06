@@ -15,32 +15,12 @@ namespace TwinTower
         public int x;
         public int y;
 
-        public async UniTask OnReciveMove(Define.MoveDir dir) 
+        public async UniTask OnReciveMove(Define.MoveDir dir, bool isMove) 
         {
-            int movedX = x;
-            int movedY = y;
-            switch (dir)
-            {
-                case Define.MoveDir.Up:
-                    movedY += 1;
-                    break;
-                case Define.MoveDir.Down:
-                    movedY -= 1;
-                    break;
-                case Define.MoveDir.Right:
-                    movedX += 1;
-                    break;
-                case Define.MoveDir.Left:
-                    movedX -= 1;
-                    break;
-                default:
-                    Debug.LogError($"적절하지 않은 Move값: {dir}");
-                    return;
-            }
-
+            (int movedX, int movedY) = ConvertDirToPos(dir);
             OnBeforeMove(dir);
 
-            if (map.CanMove(movedX, movedY))
+            if (isMove == true)
             {
                 await Move(movedX, movedY);
             }
@@ -85,6 +65,38 @@ namespace TwinTower
         protected virtual void OnAfterMove()
         {
 
+        }
+
+        private (int, int) ConvertDirToPos(Define.MoveDir dir)
+        {
+            int movedX = x;
+            int movedY = y;
+            switch (dir)
+            {
+                case Define.MoveDir.Up:
+                    movedY += 1;
+                    break;
+                case Define.MoveDir.Down:
+                    movedY -= 1;
+                    break;
+                case Define.MoveDir.Right:
+                    movedX += 1;
+                    break;
+                case Define.MoveDir.Left:
+                    movedX -= 1;
+                    break;
+                default:
+                    Debug.LogError($"적절하지 않은 Move값: {dir}");
+                    break;
+            }
+
+            return (movedX, movedY);
+        }
+
+        public bool CanMoveTile(Define.MoveDir dir)
+        {
+            (int nextX, int nextY) = ConvertDirToPos(dir);
+            return map.CanMove(nextX, nextY);
         }
     }
 }
