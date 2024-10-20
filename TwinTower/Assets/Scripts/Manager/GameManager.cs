@@ -13,6 +13,8 @@ namespace TwinTower
     {
         public Player _player1;
         public Player _player2;
+        public Map leftMap;
+        public Map rightMap;
         public UI_FieldScene _FieldScene;
         public bool isClearCheck = false;
         public bool isRotateCheck = false;
@@ -67,6 +69,18 @@ namespace TwinTower
             else
             {
                 _player2 = _player;
+            }
+        }
+
+        public Map GetMap(MapType type)
+        {
+            if (type == MapType.Left)
+            {
+                return leftMap;
+            }
+            else
+            {
+                return rightMap;
             }
         }
     }

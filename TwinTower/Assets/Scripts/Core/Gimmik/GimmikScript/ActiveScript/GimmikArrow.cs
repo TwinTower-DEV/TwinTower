@@ -8,13 +8,14 @@ using UnityEngine;
 /// 이곳을 통해 화살이 발사된다.
 /// </summary>
 /// 
-public class ActivateObjectDispenserShoot : GimmikBase {
+public class GimmikArrow : GimmikBase {
+    public Define.MoveDir dir;
     public override void Active() {
         ShootArrow();
     }
 
     private void ShootArrow()
     {
-        // 화살 발사 작업 필요
+        Map map = ManagerSet.Gamemanager.GetMap(type);
     }
 }

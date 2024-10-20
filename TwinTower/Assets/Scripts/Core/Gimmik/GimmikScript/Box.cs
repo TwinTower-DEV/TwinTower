@@ -11,13 +11,14 @@ using UnityEngine;
 /// </summary>
 public class Box : MoveControl
 {
-    // private Animator _animator;
-    // private ActivateObject activateObject;
-    // protected override void Awake()
-    // {
-    //     base.Awake();
-    //     _animator = GetComponent<Animator>();
-    // }
+    private Animator _animator;
+    protected void Awake()
+    {
+        _animator = GetComponent<Animator>();
+    }
+
+    
+
     // public override bool MoveCheck(Vector3 movedir) {
     //     if (isMove) return false;
     //     RaycastHit2D hit = Physics2D.Raycast(transform.position + movedir * 0.4f , movedir, 0.5f, _layerMask);

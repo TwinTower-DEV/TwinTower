@@ -23,6 +23,7 @@ namespace TwinTower
             if (canMove == true)
             {
                 OnBeforeMove();
+                MoveMovedObject(dir, movedX, movedY);
                 await Move(movedX, movedY);
                 OnAfterMove();
             }
@@ -98,7 +99,33 @@ namespace TwinTower
         public bool CanMoveTile(Define.MoveDir dir)
         {
             (int nextX, int nextY) = ConvertDirToPos(dir);
+            
+            while (map.GetMovedObject(nextX, nextY) != null)
+            {
+                Debug.Log($"{nextX}, {nextY}에 장애물이 있습니다.");
+                switch (dir)
+                {
+                    case Define.MoveDir.Up:
+                        nextY += 1;
+                        break;
+                    case Define.MoveDir.Down:
+                        nextY -= 1;
+                        break;
+                    case Define.MoveDir.Right:
+                        nextX += 1;
+                        break;
+                    case Define.MoveDir.Left:
+                        nextX -= 1;
+                        break;
+                }
+            }
+
             return map.CanMove(nextX, nextY);
+        }
+
+        private void MoveMovedObject(Define.MoveDir dir, int moveX, int moveY)
+        {
+            map.GetMovedObject(moveX, moveY)?.OnReciveMove(dir, true);
         }
 
         protected virtual void MoveSoundStart()

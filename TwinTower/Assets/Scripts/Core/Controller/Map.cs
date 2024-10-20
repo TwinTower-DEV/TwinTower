@@ -17,6 +17,7 @@ namespace TwinTower
         public MapType type;
         public Tilemap walls;
         public List<GimmikBase> gimmiks;
+        public List<MoveControl> movedObjects;
         private GimmikBase[,] map;
 
         private void Start() 
@@ -80,6 +81,11 @@ namespace TwinTower
         public GimmikBase GetGimmik(int x, int y)
         {
             return map[x, y];
+        }
+
+        public MoveControl GetMovedObject(int x, int y)
+        {
+            return movedObjects.Find(obj => obj.x == x && obj.y == y);
         }
 
         public Vector2 GetTilePosition(int x, int y)
