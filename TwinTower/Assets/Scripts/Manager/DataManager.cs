@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace TwinTower
 {
-    public class DataManager : Manager<DataManager>
+    public class DataManager
     {
         
 
@@ -59,16 +59,17 @@ namespace TwinTower
                 _saveloadcontroller = value;
             }
         }
-        protected override void Awake()
+        public void Init()
         {
-            base.Awake();
+            
             InitDataSetting();
         }
 
         private void InitDataSetting()
         {
             _uiGameData = new UIGameData(2, 2, 0, 2, 0);
-            _stageInfo = new StageInfo(0, "testtxt");            _saveloadcontroller = new SaveLoadController();
+            _stageInfo = new StageInfo(0, "testtxt");         
+            _saveloadcontroller = new SaveLoadController();
             LoadData(_uiGameData);
             LoadData(_stageInfo);
         }

@@ -22,7 +22,7 @@ public class UI_Load : UI_Base {
         Bind<Button>(typeof(DeleteButton));                         // 삭제 버튼 바인드
         Bind<TextMeshProUGUI>(typeof(LoadText));                    // 슬롯 text정보 바인드(단계, 날짜)
 
-        UIManager.Instance.InputHandler += KeyInPut;
+        ManagerSet.UI.InputHandler += KeyInPut;
         UpdateUI();
         // 슬롯 마우스 엔터, 클릭 이벤트 BindEvent
         Get<Image>((int)Load.UnSelectLoad_1).gameObject.BindEvent(()=>LoadEvent((int)Load.UnSelectLoad_1), Define.UIEvent.Click);
@@ -81,7 +81,7 @@ public class UI_Load : UI_Base {
     {
         if (!Input.anyKey)
             return;
-        if (_uiNum != UIManager.Instance.UINum)
+        if (_uiNum != ManagerSet.UI.UINum)
             return;
         if (Input.GetKeyDown(KeyCode.Return)) {                         // 엔터 - 현재 선택된 슬롯 클릭 이벤트 발동
             GameObject go = Get<Image>(currCursor).gameObject;
@@ -102,8 +102,8 @@ public class UI_Load : UI_Base {
         if (Input.GetKeyDown(KeyCode.Escape)) {                         // ESC - 뒤로가기
             //menuUIManager.PrevPanelChange();
             UI_ClickSoundEffect();
-            UIManager.Instance.InputHandler -= KeyInPut;
-            UIManager.Instance.CloseNormalUI(this);
+            ManagerSet.UI.InputHandler -= KeyInPut;
+            ManagerSet.UI.CloseNormalUI(this);
         }
     }
     
@@ -129,15 +129,15 @@ public class UI_Load : UI_Base {
         if(Time.timeScale == 0)
             Time.timeScale = 1;
         UI_ClickSoundEffect();
-        DataManager.Instance.saveload.ChangeCurrSaveSlot(idx);
-        DataManager.Instance.saveload.Load();
+        ManagerSet.Data.saveload.ChangeCurrSaveSlot(idx);
+        ManagerSet.Data.saveload.Load();
     }
 
     private void DeleteEvent(int idx) {
-        DataManager.Instance.saveload.ChangeCurrSaveSlot(idx);
+        ManagerSet.Data.saveload.ChangeCurrSaveSlot(idx);
         //menuUIManager.SwitchPanelPrevSave("SaveDeleteCheckPanel");
         UI_ClickSoundEffect();
-        UI_SaveDeleteCheck saveDeleteCheck = UIManager.Instance.ShowNormalUI<UI_SaveDeleteCheck>();
+        UI_SaveDeleteCheck saveDeleteCheck = ManagerSet.UI.ShowNormalUI<UI_SaveDeleteCheck>();
         saveDeleteCheck.PrevPanelUpdateAction += UpdateUI;
     }
 

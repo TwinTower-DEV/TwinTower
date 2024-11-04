@@ -19,7 +19,7 @@ namespace TwinTower
         {
             Bind<Image>(typeof(Images));
             Bind<TextMeshProUGUI>(typeof(Texts));
-            UIManager.Instance.InputHandler += KeyInput;
+            ManagerSet.UI.InputHandler += KeyInput;
             Get<Image>((int)Images.Button).gameObject.SetActive(false);
             Canvas canvas = Util.GetOrAddComponent<Canvas>(gameObject);
             canvas.sortingOrder = 8;
@@ -31,9 +31,9 @@ namespace TwinTower
         {
             if (!Input.anyKey)
                 return;
-            if (_uiNum != UIManager.Instance.UINum)
+            if (_uiNum != ManagerSet.UI.UINum)
                 return;
-            if (UIManager.Instance.FadeCheck)
+            if (ManagerSet.UI.FadeCheck)
                 return;
             
             if (Input.GetKeyDown(KeyCode.Escape))
@@ -60,8 +60,8 @@ namespace TwinTower
 
         public void Close()
         {
-            UIManager.Instance.InputHandler -= KeyInput;
-            UIManager.Instance.CloseNormalUI(this);
+            ManagerSet.UI.InputHandler -= KeyInput;
+            ManagerSet.UI.CloseNormalUI(this);
         }
     }
 }

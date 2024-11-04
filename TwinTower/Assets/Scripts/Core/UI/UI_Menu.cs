@@ -23,8 +23,8 @@ public class UI_Menu : UI_Base {
         //menuUIManager = transform.parent.GetComponent<MenuUIManager>();
         
         Bind<Image>(typeof(Menu));                  // 각 버튼 Bind
-        UIManager.Instance.InputHandler -= KeyInPut;
-        UIManager.Instance.InputHandler += KeyInPut;
+        ManagerSet.UI.InputHandler -= KeyInPut;
+        ManagerSet.UI.InputHandler += KeyInPut;
         // 클릭 이벤트
         Get<Image>((int)Menu.UnSelectSave).gameObject.BindEvent(SaveEvent, Define.UIEvent.Click);
         Get<Image>((int)Menu.UnSelectLoad).gameObject.BindEvent(LoadEvent, Define.UIEvent.Click);
@@ -67,7 +67,7 @@ public class UI_Menu : UI_Base {
     {
         if (!Input.anyKey)
             return;
-        if (_uiNum != UIManager.Instance.UINum)
+        if (_uiNum != ManagerSet.UI.UINum)
             return;
         if (Input.GetKeyDown(KeyCode.Return)) {
             GameObject go = Get<Image>(currCursor).gameObject;
@@ -87,11 +87,11 @@ public class UI_Menu : UI_Base {
         
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            UIManager.Instance.InputHandler -= KeyInPut;
+            ManagerSet.UI.InputHandler -= KeyInPut;
             Time.timeScale = 1;
             UI_SoundEffect();
             InputController.Instance.GainControl();
-            UIManager.Instance.CloseNormalUI(this);
+            ManagerSet.UI.CloseNormalUI(this);
             //menuUIManager.PrevPanelChange();
         }
     }
@@ -99,18 +99,18 @@ public class UI_Menu : UI_Base {
     private void SaveEvent() {
         //menuUIManager.SwitchPanelPrevSave("SavePanel");
         UI_ClickSoundEffect();
-        UIManager.Instance.ShowNormalUI<UI_Save>();
+        ManagerSet.UI.ShowNormalUI<UI_Save>();
     }
     
     private void LoadEvent() {
         //menuUIManager.SwitchPanelPrevSave("LoadPanel");
         UI_ClickSoundEffect();
-        UIManager.Instance.ShowNormalUI<UI_Load>();
+        ManagerSet.UI.ShowNormalUI<UI_Load>();
     }
     
     private void SettingEvent()
     {
-        UIManager.Instance.ShowNormalUI<UI_SettingScene>();
+        ManagerSet.UI.ShowNormalUI<UI_SettingScene>();
         UI_ClickSoundEffect();
         Debug.Log("Enter Setting");
     }

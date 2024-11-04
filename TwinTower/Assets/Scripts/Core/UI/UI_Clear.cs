@@ -17,7 +17,7 @@ namespace TwinTower
         private Animator animator;
         public override void Init()
         {
-            UIManager.Instance.isClearUICheck = true;
+            ManagerSet.UI.isClearUICheck = true;
             Bind<TextMeshProUGUI>(typeof(Texts));
             Get<TextMeshProUGUI>((int)Texts.Clear).gameObject.SetActive(false);
             if(SceneManager.GetActiveScene().buildIndex < 10 && SceneManager.GetActiveScene().buildIndex + 1 < 10)
@@ -64,7 +64,7 @@ namespace TwinTower
             yield return new WaitForSeconds(0.5f);
             animator.SetBool("IsStart", true);
             yield return new WaitForSeconds(1.5f);
-            UIManager.Instance.isClearUICheck = false;
+            ManagerSet.UI.isClearUICheck = false;
             StartCoroutine(ScreenManager.Instance.NextSceneload());
         }
     }

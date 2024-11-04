@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Rest Table_en-US
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en-US
+  m_SharedData: {fileID: 11400000, guid: 42804d71d2c3b574e87a4f83e7e465f2, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 100177076224
+    m_Localized: QUIT GAME?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 354733580288
+    m_Localized: LOAD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 480109715456
+    m_Localized: SAVE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 536653127680
+    m_Localized: 'DELETE
+
+      SAVE DATA?'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 898105663488
+    m_Localized: 'SAVE
+
+      SETTING?'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1199621595136
+    m_Localized: 'OVERWRITE
+
+      SAVE DATA?'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1455025348608
+    m_Localized: YES
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1503700246528
+    m_Localized: NO
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,63 +11,56 @@ namespace TwinTower
     /// 클리어 시간 측정하는거면 Time.timeScale써야 함
     /// </summary>
     public class InputManager : Manager<InputManager> {
-        public Vector3 moveDir = Vector3.zero;
         [SerializeField]private int count;
         private int[] stagecount = new[] { 19, 39, 24, 30, 30, 17, 12, 38, 22, 30, 29, 9, 17, 29 };
 
         public bool islockMove = false;
         private bool MoveFlag = false;
 
-        private void GroundedHorizontalMovement() {
-            if (GameManager.Instance._player1.getIsMove() || GameManager.Instance._player2.getIsMove()) return;
-
+        public void Init()
+        {
             
+        }
+        
+        private void GroundedHorizontalMovement() {
+           
             if (InputController.Instance.LeftMove.Down) {
-                Debug.Log("실헝먼ㅇㅁ");
-                moveDir = Vector3.left;
-                PlayerMove(Define.MoveDir.Left);
+                Move(Define.MoveDir.Left);
             }
             else if (InputController.Instance.RightMove.Down) {
-                moveDir = Vector3.right;
-                Debug.Log("실헝먼ㅇㅁ");
-                PlayerMove(Define.MoveDir.Right);
+                Move(Define.MoveDir.Right);
             }
             else if (InputController.Instance.UpMove.Down) {
-                moveDir = Vector3.up;
-                PlayerMove(Define.MoveDir.Up);
+                Move(Define.MoveDir.Up);
             }
             else if (InputController.Instance.DownMove.Down) {
-                moveDir = Vector3.down;
-                PlayerMove(Define.MoveDir.Down);
+                Move(Define.MoveDir.Down);
             }
             else if (InputController.Instance.ResetButton.Down) {
-                GameManager.Instance.Restart();
+                ManagerSet.Gamemanager.Restart();
             }
             else {
-                moveDir = Vector3.zero;
-                PlayerMove(Define.MoveDir.None);
                 return;
             }
 
-            if (GameManager.Instance._player1.MoveCheck(moveDir) && GameManager.Instance._player2.MoveCheck(moveDir)) {
+            // if (ManagerSet.Gamemanager._player1.MoveCheck(moveDir) && ManagerSet.Gamemanager._player2.MoveCheck(moveDir)) {
                 
                 
-                GameManager.Instance._player1.DirectSetting(moveDir, false);
-                GameManager.Instance._player2.DirectSetting(moveDir, false);
+            //     ManagerSet.Gamemanager._player1.DirectSetting(moveDir, false);
+            //     ManagerSet.Gamemanager._player2.DirectSetting(moveDir, false);
 
-                count--;
-                GameManager.Instance.UI_UpdateCount(count);
-                if (count <= 0)
-                {
-                    InputController.Instance.ReleaseControl();
-                    StartCoroutine(OverCount());
-                }
-                MoveFlag = true;
-            }
+            //     count--;
+            //     ManagerSet.Gamemanager.UI_UpdateCount(count);
+            //     if (count <= 0)
+            //     {
+            //         InputController.Instance.ReleaseControl();
+            //         StartCoroutine(OverCount());
+            //     }
+            // }
 
-            if (moveDir != Vector3.zero && MoveFlag == false) {         //  막혔을 경우
-                StartCoroutine(BlockMotion(moveDir));
-            }
+            // if (moveDir != Vector3.zero && MoveFlag == false) {         //  막혔을 경우
+            //     StartCoroutine(BlockMotion(moveDir));
+            // }
 
             MoveFlag = false;
         }
@@ -75,17 +69,22 @@ namespace TwinTower
         {
             yield return new WaitForSeconds(1.5f);
 
-            if (!GameManager.Instance.isClearCheck)
+            if (!ManagerSet.Gamemanager.isClearCheck)
             {
-                GameManager.Instance.Restart();
+                ManagerSet.Gamemanager.Restart();
             }
         }
-        private void PlayerMove(Define.MoveDir dir) {
-            if(GameManager.Instance._player1.Dir != Define.MoveDir.Die)
-                GameManager.Instance._player1.Dir = dir;
-            
-            if(GameManager.Instance._player2.Dir != Define.MoveDir.Die)
-                GameManager.Instance._player2.Dir = dir;
+        
+        private async void Move(Define.MoveDir dir) 
+        {
+            islockMove = true;
+            bool canMove = ManagerSet.Gamemanager._player1.CanMoveTile(dir) && ManagerSet.Gamemanager._player2.CanMoveTile(dir);
+
+            await UniTask.WhenAll(
+                ManagerSet.Gamemanager._player1.OnReciveMove(dir, canMove),
+                ManagerSet.Gamemanager._player2.OnReciveMove(dir, canMove)
+            );
+            islockMove = false;
         }
 
         private void Update() {
@@ -101,55 +100,7 @@ namespace TwinTower
         {
             return count;
         }
-        IEnumerator BlockMotion(Vector3 movedir) {
-            Collider2D collider2dP1 = GameManager.Instance._player1.GetComponent<Collider2D>();
-            Collider2D collider2dP2 = GameManager.Instance._player2.GetComponent<Collider2D>();
-            collider2dP1.enabled = false;
-            collider2dP2.enabled = false;
-            
-            InputController.Instance.ReleaseControl();
-
-            Transform transformP1 = GameManager.Instance._player1.GetComponent<Transform>();
-            Transform transformP2 = GameManager.Instance._player2.GetComponent<Transform>();
-            
-            Vector3 originalPos = transformP1.position;
-            Vector3 originalPosP2 = transformP2.position;
-            Vector3 destPos = transformP1.position + movedir * 0.5f;
-            Vector3 leftLength = destPos - transformP1.position;
-            float dist = leftLength.magnitude;
-
-            float moveSpeed = GameManager.Instance._player1._moveSpeed;
-            
-            while (dist >= moveSpeed * Time.deltaTime) {
-                transformP1.position += movedir * moveSpeed * Time.deltaTime;
-                transformP2.position += movedir * moveSpeed * Time.deltaTime;
-                leftLength = destPos - transformP1.position;
-                dist = leftLength.magnitude;
-
-                yield return new WaitForFixedUpdate();
-            }
-
-            destPos = originalPos;
-            leftLength = destPos - transformP1.position;
-            dist = leftLength.magnitude;
-            
-            while (dist >= moveSpeed * Time.deltaTime) {
-                transformP1.position += (-1f * movedir) * moveSpeed * Time.deltaTime;
-                transformP2.position += (-1f * movedir) * moveSpeed * Time.deltaTime;
-                leftLength = destPos - transformP1.position;
-                dist = leftLength.magnitude;
-                
-                yield return new WaitForFixedUpdate();
-            }
-            
-            transformP1.position = TileFindManager.Instance.gettileCentorLocation(destPos);
-            transformP2.position = TileFindManager.Instance.gettileCentorLocation(originalPosP2);
-            
-            collider2dP1.enabled = true;
-            collider2dP2.enabled = true;
-            
-            InputController.Instance.GainControl();
-        }
+        
         }
     
 }

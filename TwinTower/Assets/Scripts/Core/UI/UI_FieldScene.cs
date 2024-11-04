@@ -7,7 +7,6 @@ namespace TwinTower
 {
     public class UI_FieldScene : UI_Base
     {
-        [SerializeField] private AudioClip BGM;
         enum Images
         {
             RestartButton,
@@ -22,6 +21,10 @@ namespace TwinTower
         
         public override void Init()
         {
+            ManagerSet.Gamemanager.CurrentScnen(this);
+            
+            InputManager.Instance.UpDateCount();
+            
             Bind<Image>(typeof(Images));
             Bind<TextMeshProUGUI>(typeof(Texts));
             
@@ -29,23 +32,23 @@ namespace TwinTower
             Get<Image>((int)Images.BackButton).gameObject.BindEvent(Setting, Define.UIEvent.Click);
             Get<TextMeshProUGUI>((int)Texts.FloorText).gameObject.GetComponent<TextMeshProUGUI>().text = "Floor " + SceneManager.GetActiveScene().buildIndex.ToString();
 
-            UIManager.Instance.InputHandler -= KeyInPut;
-            UIManager.Instance.InputHandler += KeyInPut;
+            ManagerSet.UI.InputHandler -= KeyInPut;
+            ManagerSet.UI.InputHandler += KeyInPut;
         }
         
         private void KeyInPut()
         {
             if (!Input.anyKey)
                 return;
-            if (_uiNum != UIManager.Instance.UINum)
+            if (_uiNum != ManagerSet.UI.UINum)
                 return;
-            if (UIManager.Instance.FadeCheck)
+            if (ManagerSet.UI.FadeCheck)
                 return;
             
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 UI_ClickSoundEffect();
-                UIManager.Instance.ShowNormalUI<UI_Menu>();
+                ManagerSet.UI.ShowNormalUI<UI_Menu>();
                 InputController.Instance.ReleaseControl();
                 Time.timeScale = 0;
             }
@@ -59,7 +62,7 @@ namespace TwinTower
 
         private void Setting()
         {
-            UIManager.Instance.ShowNormalUI<UI_SettingScene>();
+            ManagerSet.UI.ShowNormalUI<UI_SettingScene>();
         }
 
         public void CountUpdate(int count)

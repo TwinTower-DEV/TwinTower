@@ -2,7 +2,7 @@
 
 namespace TwinTower
 {
-    public class ResourceManager : Manager<ResourceManager>
+    public class ResourceManager
     {
         public T Load<T>(string path) where T : Object
         {

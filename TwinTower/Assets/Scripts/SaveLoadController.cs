@@ -21,7 +21,7 @@ public class SaveLoadController {
     
     public void Load() {
         if (PlayerPrefs.GetString(currSaveSlot.ToString()) == "") return;
-        UIManager.Instance.Load(PlayerPrefs.GetString(currSaveSlot.ToString()));
+        ManagerSet.UI.Load(PlayerPrefs.GetString(currSaveSlot.ToString()));
     }
 
     public void Save() {

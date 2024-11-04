@@ -3,10 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 
 namespace TwinTower
 {
-    public class UIManager : Manager<UIManager>
+    public class UIManager
     {
         // sortingOrder을 관리하기 위한 변수
         // Normal UI들을 관리하는 HashSet
@@ -20,13 +22,24 @@ namespace TwinTower
 
         int _deviceWidth = Screen.width;
         int _deviceHeight = Screen.height;
-        
-        public Action InputHandler;
+        private Action Handler;
+        public Action InputHandler
+        {
+            get
+            {
+                return Handler;
+            }
+            set
+            {
+                Handler = value;
+                UIInputController.Instance.SetHandler(Handler);
+            }
+        }
         public bool iscutSceenCheck = false;
         public bool FadeCheck = false;
-        protected override void Awake()
+        public void Init()
         {
-            base.Awake();
+            InitLanguage(ManagerSet.Data.UIGameDatavalue.langaugecursor);
         }
 
         public int UINum
@@ -104,6 +117,7 @@ namespace TwinTower
         
         public GameObject Root
         {
+            
             get
             {
                 GameObject root = GameObject.Find("@UI_Root");
@@ -120,7 +134,7 @@ namespace TwinTower
 
             _uiNum = _uiNum + 1;
 
-            GameObject go = ResourceManager.Instance.Instantiate($"UI/{name}");
+            GameObject go = ManagerSet.Resource.Instantiate($"UI/{name}");
             T ui = Util.GetOrAddComponent<T>(go);
             _normalUIs.Add(ui);
             _uistack.Push(ui);
@@ -139,7 +153,7 @@ namespace TwinTower
             _normalUIs.Remove(ui);
             _uistack.Pop();
             _uiNum = _uiNum - 1;
-            ResourceManager.Instance.Destroy(ui.gameObject);
+            ManagerSet.Resource.Destroy(ui.gameObject);
         }
 
         public void Clear()
@@ -155,68 +169,51 @@ namespace TwinTower
         public void ChangingLanguage(int islenguage)
         {
             Debug.Log("Language Change");
-            ScreenManager.Instance.FadeInOut();
-            while (_uistack.Count > 0)
-            {
-                UI_Base _ui = _uistack.Peek();
-                _uienterstack.Push(_ui.name);
-                CloseNormalUI(_ui);
-            }
+            UI_Base _ui = _uistack.Peek();
+            CloseNormalUI(_ui);
 
-            InputHandler = null;
-
-            string name = _uienterstack.Peek();
-            _uienterstack.Clear();
+            string languageIdentifier;
             if (islenguage == 0)
             {
-                name = name.Substring(0, name.Length - 4);
+                languageIdentifier = "ko-KR";
             }
             else
             {
-                name = name + "_ENG";
+                languageIdentifier = "en-US";
             }
-            
-            _uiNum = _uiNum + 1;
-            GameObject go = ResourceManager.Instance.Instantiate($"UI/{name}");
 
-            if (name.Contains("UI_MainScene") == true)
-            {
-                if (islenguage == 0)
-                {
-                    UI_MainScene ui = Util.GetOrAddComponent<UI_MainScene>(go);
-                    _normalUIs.Add(ui);
-                    _uistack.Push(ui);
-
-                }
-                else
-                {
-                    UI_MainScene_ENG ui = Util.GetOrAddComponent<UI_MainScene_ENG>(go);
-                    _normalUIs.Add(ui);
-                    _uistack.Push(ui);
+            LocaleIdentifier localeCode = new LocaleIdentifier(languageIdentifier);
+            for(int i = 0; i < LocalizationSettings.AvailableLocales.Locales.Count; i++) {
+                Locale aLocale = LocalizationSettings.AvailableLocales.Locales[i];
+                LocaleIdentifier anIdentifier = aLocale.Identifier;
+                if(anIdentifier == localeCode) {
+                    LocalizationSettings.SelectedLocale = aLocale;
                 }
             }
-            else if (name.Contains("UI_FieldScene") == true)
-            {
-                Time.timeScale = 1.0f;
-                InputController.Instance.GainControl();
-                if (islenguage == 0)
-                {
-                    UI_FieldScene ui = Util.GetOrAddComponent<UI_FieldScene>(go);
-                    _normalUIs.Add(ui);
-                    _uistack.Push(ui);
-
-                }
-                else
-                {
-                    UI_FieldScene_ENG ui = Util.GetOrAddComponent<UI_FieldScene_ENG>(go);
-                    _normalUIs.Add(ui);
-                    _uistack.Push(ui);
-                }
-            }
-            go.transform.SetParent(Root.transform);
-
         }
 
+        public void InitLanguage(int language)
+        {
+            string languageIdentifier;
+            if (language == 0)
+            {
+                languageIdentifier = "ko-KR";
+            }
+            else
+            {
+                languageIdentifier = "en-US";
+            }
+
+            LocaleIdentifier localeCode = new LocaleIdentifier(languageIdentifier);
+            for(int i = 0; i < LocalizationSettings.AvailableLocales.Locales.Count; i++) {
+                Locale aLocale = LocalizationSettings.AvailableLocales.Locales[i];
+                LocaleIdentifier anIdentifier = aLocale.Identifier;
+                if(anIdentifier == localeCode) {
+                    LocalizationSettings.SelectedLocale = aLocale;
+                }
+            }
+        }
+        
         public void CloseFieldCutSceneUI(UI_Base ui)
         {
             if (_normalUIs.Count == 0)
@@ -224,13 +221,13 @@ namespace TwinTower
             if (ui == null) return;
             _normalUIs.Remove(ui);
             _uiNum = _uiNum - 1;
-            ResourceManager.Instance.Destroy(ui.gameObject);
-            StartCoroutine(ScreenManager.Instance.NextSceneload());
+            ManagerSet.Resource.Destroy(ui.gameObject);
+            //StartCoroutine(ScreenManager.Instance.NextSceneload());
         }
 
         public void Load(string loadscene)
         {
-            StartCoroutine(ScreenManager.Instance.NextSceneload(loadscene));
+            //StartCoroutine(ScreenManager.Instance.NextSceneload(loadscene));
             //InputManager.Instance.UnPause();
         }
     }
