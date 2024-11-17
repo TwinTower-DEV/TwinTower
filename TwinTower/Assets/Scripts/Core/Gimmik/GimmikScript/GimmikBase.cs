@@ -13,17 +13,33 @@ namespace TwinTower
 
         protected Map map;
 
-        // wall, door 등 이동불가능한 Gimmik인 경우 override하여 false로 설정해야 함. - 손창하
-        public virtual bool IsWalkable { get; set; } = true;
+        public bool isWalkable = true;
+        public bool isActivateByPlayer = true;
         
         private void Awake() 
         {
             map = GetComponentInParent<Map>();
         }
+
+        public void OnActive()
+        {
+            if (isActivateByPlayer == true)
+            {
+                Active();
+            }
+        }
         
         public virtual void Active()
         {
             LinkTile();
+        }
+
+        public void OnDeactive()
+        {
+            if (isActivateByPlayer == true)
+            {
+                DeActive();
+            }
         }
 
         public virtual void DeActive()

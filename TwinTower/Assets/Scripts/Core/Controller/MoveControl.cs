@@ -43,7 +43,7 @@ namespace TwinTower
 
         protected virtual void OnBeforeMove()
         {
-            map.GetGimmik(x, y)?.DeActive();
+            map.GetGimmik(x, y)?.OnDeactive();
             Debug.LogError($"DeActive: {x}, {y}: {map.GetGimmik(x, y)?.GetType()}");
         }
 
@@ -58,7 +58,7 @@ namespace TwinTower
 
         protected virtual void OnAfterMove()
         {
-            map.GetGimmik(x, y)?.Active();
+            map.GetGimmik(x, y)?.OnActive();
             Debug.LogError($"Active: {x}, {y}: {map.GetGimmik(x, y)?.GetType()}");
         }
 

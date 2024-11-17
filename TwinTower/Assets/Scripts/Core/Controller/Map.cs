@@ -16,7 +16,7 @@ namespace TwinTower
     {
         public MapType type;
         public Tilemap walls;
-        public List<GimmikBase> gimmiks;
+        private GimmikBase[] gimmiks;
         public List<MoveControl> movedObjects;
         private GimmikBase[,] map;
 
@@ -48,7 +48,16 @@ namespace TwinTower
 
         private void GetGimmiks()
         {
-            gimmiks.ForEach(gimmik => map[gimmik.x, gimmik.y] = gimmik);
+            gimmiks = GetComponentsInChildren<GimmikBase>();
+            //gimmiks.ForEach(gimmik => map[gimmik.x, gimmik.y] = gimmik);
+
+            foreach(GimmikBase gimmik in gimmiks)
+            {
+                if (IsInMap(gimmik.x, gimmik.y) == true)
+                {
+                    map[gimmik.x, gimmik.y] = gimmik;
+                }
+            }
         }
 
         private void ShowGimmik()
@@ -75,7 +84,7 @@ namespace TwinTower
                 return false;
             }
 
-            return map[x, y]?.IsWalkable ?? true;
+            return map[x, y]?.isWalkable ?? true;
         }
 
         public GimmikBase GetGimmik(int x, int y)
