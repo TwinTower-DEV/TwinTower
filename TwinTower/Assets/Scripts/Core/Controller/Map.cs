@@ -97,5 +97,47 @@ namespace TwinTower
 
             return target;
         }
+
+        // 해당 좌표로부터 해당하는 방향의 좌표 반환
+        public (int, int) GetCoordinates(Define.MoveDir dir, int x, int y)
+        {
+            int movedX = x;
+            int movedY = y;
+            switch (dir)
+            {
+                case Define.MoveDir.Up:
+                    movedY += 1;
+                    break;
+                case Define.MoveDir.Down:
+                    movedY -= 1;
+                    break;
+                case Define.MoveDir.Right:
+                    movedX += 1;
+                    break;
+                case Define.MoveDir.Left:
+                    movedX -= 1;
+                    break;
+                default:
+                    Debug.LogError($"적절하지 않은 Move값: {dir}");
+                    break;
+            }
+
+            return (movedX, movedY);
+        }
+
+        public bool IsInMap(int x, int y)
+        {
+            if (x < 0 || x > map.GetLength(0) - 1)
+            {
+                return false;
+            }
+            
+            if (y < 0 || y > map.GetLength(0) - 1)
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 }

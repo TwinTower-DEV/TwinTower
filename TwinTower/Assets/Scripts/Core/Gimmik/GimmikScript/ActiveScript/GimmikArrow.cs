@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using TwinTower;
 using UnityEngine;
 
@@ -14,8 +16,26 @@ public class GimmikArrow : GimmikBase {
         ShootArrow();
     }
 
-    private void ShootArrow()
+    private async void ShootArrow()
     {
-        Map map = ManagerSet.Gamemanager.GetMap(type);
+        (int nextX, int nextY) = map.GetCoordinates(dir, x, y);
+
+        while (map.IsInMap(nextX, nextY) == true)
+        {
+            Vector2 target = map.GetTilePosition(nextX, nextY);
+
+            await transform.DOLocalMove(target, 0.1f).ToUniTask();
+
+            MoveControl nextMovedObject = map.GetMovedObject(nextX, nextY);
+
+            if (nextMovedObject != null)
+            {
+                nextMovedObject.GetDamage(1);
+                transform.gameObject.SetActive(false);
+                break;
+            }
+            
+            (nextX, nextY) = map.GetCoordinates(dir, nextX, nextY);
+        }
     }
 }

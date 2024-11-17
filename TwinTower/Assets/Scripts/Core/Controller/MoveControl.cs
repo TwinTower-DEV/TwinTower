@@ -70,6 +70,7 @@ namespace TwinTower
             await transform.DOLocalMove(new Vector2(target.x, target.y), 0.05f).SetLoops(2, LoopType.Yoyo).ToUniTask();
         }
 
+        // Map 클래스 함수랑 동일함. 추후 수정 필요
         private (int, int) ConvertDirToPos(Define.MoveDir dir)
         {
             int movedX = x;
@@ -136,6 +137,11 @@ namespace TwinTower
         protected virtual void ReduceHealth()
         {
 
+        }
+
+        public void GetDamage(int damage)
+        {
+            Debug.LogError($"{damage}");
         }
     }
 }
