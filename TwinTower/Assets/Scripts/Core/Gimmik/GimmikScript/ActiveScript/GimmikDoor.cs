@@ -13,14 +13,14 @@ public class GimmikDoor : GimmikBase {
         animator = GetComponent<Animator>();
     }
 
-    public override void Active()
+    public override void Active(MoveControl subject = null)
     {
         isWalkable = true;
         ManagerSet.Sound.Play("문여닫는소리(저작권 표시해야함)/Door_Open&Close_SFX");
         animator.Play("OpenDoor");
     }
     
-    public override void DeActive()
+    public override void DeActive(MoveControl subject = null)
     {
         isWalkable = false;
         ManagerSet.Sound.Play("문여닫는소리(저작권 표시해야함)/Door_Open&Close_SFX");

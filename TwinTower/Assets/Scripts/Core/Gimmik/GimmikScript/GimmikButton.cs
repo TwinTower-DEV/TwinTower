@@ -10,7 +10,7 @@ namespace TwinTower{
         public bool isLaunchOnce;
         bool isLaunch = false;
 
-        public override void Active() 
+        public override void Active(MoveControl subject = null) 
         {
             if (!isLaunch)
             {
@@ -22,7 +22,7 @@ namespace TwinTower{
             }
         }
 
-        public override void DeActive() 
+        public override void DeActive(MoveControl subject = null) 
         {
             linkedObject.DeActive();
         }

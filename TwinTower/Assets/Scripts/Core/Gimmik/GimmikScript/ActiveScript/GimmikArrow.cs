@@ -12,7 +12,7 @@ using UnityEngine;
 /// 
 public class GimmikArrow : GimmikBase {
     public Define.MoveDir dir;
-    public override void Active() {
+    public override void Active(MoveControl subject = null) {
         ShootArrow();
     }
 

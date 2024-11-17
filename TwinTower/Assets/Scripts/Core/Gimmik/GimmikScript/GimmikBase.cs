@@ -21,28 +21,28 @@ namespace TwinTower
             map = GetComponentInParent<Map>();
         }
 
-        public void OnActive()
+        public void OnActive(MoveControl subject)
         {
             if (isActivateByPlayer == true)
             {
-                Active();
+                Active(subject);
             }
         }
         
-        public virtual void Active()
+        public virtual void Active(MoveControl subject = null)
         {
             LinkTile();
         }
 
-        public void OnDeactive()
+        public void OnDeactive(MoveControl subject)
         {
             if (isActivateByPlayer == true)
             {
-                DeActive();
+                DeActive(subject);
             }
         }
 
-        public virtual void DeActive()
+        public virtual void DeActive(MoveControl subject = null)
         {
 
         }
