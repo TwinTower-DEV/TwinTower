@@ -79,7 +79,6 @@ namespace TwinTower
         {
             islockMove = true;
             bool canMove = ManagerSet.Gamemanager._player1.CanMoveTile(dir) && ManagerSet.Gamemanager._player2.CanMoveTile(dir);
-            Debug.LogError($"{canMove}");
             await UniTask.WhenAll(
                 ManagerSet.Gamemanager._player1.OnReciveMove(dir, canMove),
                 ManagerSet.Gamemanager._player2.OnReciveMove(dir, canMove)
