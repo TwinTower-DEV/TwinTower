@@ -25,7 +25,7 @@ namespace TwinTower
                 OnBeforeMove();
                 MoveMovedObject(dir, movedX, movedY);
                 await Move(movedX, movedY);
-                OnAfterMove();
+                await OnAfterMove();
             }
             else
             {
@@ -43,7 +43,12 @@ namespace TwinTower
 
         protected virtual void OnBeforeMove()
         {
-            map.GetGimmik(x, y)?.OnDeactive(this);
+            GimmikBase gimmik = map.GetGimmik(x, y);
+            
+            if (gimmik != null)
+            {
+                gimmik.OnDeactive(this);
+            }
             Debug.LogError($"DeActive: {x}, {y}: {map.GetGimmik(x, y)?.GetType()}");
         }
 
@@ -56,9 +61,14 @@ namespace TwinTower
             await transform.DOLocalMove(target, 0.1f).ToUniTask();
         }
 
-        protected virtual void OnAfterMove()
+        protected async virtual UniTask OnAfterMove()
         {
-            map.GetGimmik(x, y)?.OnActive(this);
+            GimmikBase gimmik = map.GetGimmik(x, y);
+            
+            if (gimmik != null)
+            {
+                await gimmik.OnActive(this);
+            }
             Debug.LogError($"Active: {x}, {y}: {map.GetGimmik(x, y)?.GetType()}");
         }
 

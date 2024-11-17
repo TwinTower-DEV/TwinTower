@@ -1,4 +1,5 @@
 ﻿using System;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace TwinTower
@@ -21,15 +22,15 @@ namespace TwinTower
             map = GetComponentInParent<Map>();
         }
 
-        public void OnActive(MoveControl subject)
+        public async UniTask OnActive(MoveControl subject)
         {
             if (isActivateByPlayer == true)
             {
-                Active(subject);
+                await Active(subject);
             }
         }
         
-        public virtual void Active(MoveControl subject = null)
+        public async virtual UniTask Active(MoveControl subject = null)
         {
             LinkTile();
         }

@@ -12,11 +12,11 @@ using UnityEngine;
 /// 
 public class GimmikArrow : GimmikBase {
     public Define.MoveDir dir;
-    public override void Active(MoveControl subject = null) {
-        ShootArrow();
+    public override async UniTask Active(MoveControl subject = null) {
+        await ShootArrow();
     }
 
-    private async void ShootArrow()
+    private async UniTask ShootArrow()
     {
         (int nextX, int nextY) = map.GetCoordinates(dir, x, y);
 

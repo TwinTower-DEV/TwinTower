@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 /// <summary>
@@ -14,7 +15,7 @@ namespace TwinTower
     public class GimmikTutorial : GimmikBase
     {
         public GameObject tutorialPanel;
-        public override void Active(MoveControl subject = null)
+        public async override UniTask Active(MoveControl subject = null)
         {
             tutorialPanel.SetActive(true);
         }

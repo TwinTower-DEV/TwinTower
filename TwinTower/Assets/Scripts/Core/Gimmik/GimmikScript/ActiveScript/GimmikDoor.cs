@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using TwinTower;
 using UnityEngine;
 
@@ -13,11 +14,12 @@ public class GimmikDoor : GimmikBase {
         animator = GetComponent<Animator>();
     }
 
-    public override void Active(MoveControl subject = null)
+    public async override UniTask Active(MoveControl subject = null)
     {
         isWalkable = true;
         ManagerSet.Sound.Play("문여닫는소리(저작권 표시해야함)/Door_Open&Close_SFX");
         animator.Play("OpenDoor");
+        await UniTask.WaitForSeconds(0.5f);
     }
     
     public override void DeActive(MoveControl subject = null)

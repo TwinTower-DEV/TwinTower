@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using TwinTower;
 using UnityEngine;
 
@@ -10,7 +11,7 @@ namespace TwinTower{
         public bool isLaunchOnce;
         bool isLaunch = false;
 
-        public override void Active(MoveControl subject = null) 
+        public async override UniTask Active(MoveControl subject = null) 
         {
             if (!isLaunch)
             {
@@ -18,7 +19,7 @@ namespace TwinTower{
                 {
                     isLaunch = true;
                 }
-                linkedObject.Active();
+                await linkedObject.Active();
             }
         }
 
