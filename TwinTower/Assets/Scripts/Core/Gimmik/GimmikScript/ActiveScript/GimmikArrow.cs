@@ -20,6 +20,7 @@ public class GimmikArrow : GimmikBase {
     {
         (int nextX, int nextY) = map.GetCoordinates(dir, x, y);
 
+        Debug.LogError($"{nextX} {nextY} {map.IsInMap(nextX, nextY) == true}");
         while (map.IsInMap(nextX, nextY) == true)
         {
             Vector2 target = map.GetTilePosition(nextX, nextY);

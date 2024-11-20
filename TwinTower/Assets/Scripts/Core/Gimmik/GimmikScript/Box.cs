@@ -17,7 +17,7 @@ public class Box : MoveControl
         _animator = GetComponent<Animator>();
     }
 
-    
+
 
     // public override bool MoveCheck(Vector3 movedir) {
     //     if (isMove) return false;
@@ -61,4 +61,11 @@ public class Box : MoveControl
     //     yield return new WaitForSeconds(0.5f);
     //     Destroy(gameObject);
     // }
+
+    public override void Death()
+    {
+        OnBeforeMove();
+        map.movedObjects.Remove(map.movedObjects.Find(obj => obj == this));
+        Destroy(this);
+    }
 }

@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -19,6 +21,8 @@ namespace TwinTower
         private GimmikBase[] gimmiks;
         public List<MoveControl> movedObjects;
         private GimmikBase[,] map;
+        public Transform rotateParent;
+        private Define.MoveDir currentRotation = Define.MoveDir.Up;
 
         private void Start() 
         {
@@ -112,16 +116,18 @@ namespace TwinTower
         {
             int movedX = x;
             int movedY = y;
+
+            dir = GetCurrentDir(dir);
             switch (dir)
             {
                 case Define.MoveDir.Up:
                     movedY += 1;
                     break;
-                case Define.MoveDir.Down:
-                    movedY -= 1;
-                    break;
                 case Define.MoveDir.Right:
                     movedX += 1;
+                    break;
+                case Define.MoveDir.Down:
+                    movedY -= 1;
                     break;
                 case Define.MoveDir.Left:
                     movedX -= 1;
@@ -147,6 +153,17 @@ namespace TwinTower
             }
 
             return true;
+        }
+
+        public async UniTask Rotate()
+        {
+            await rotateParent.DORotate(new Vector3(0, 0, 90), 1);
+            currentRotation += 1;
+        }
+
+        public Define.MoveDir GetCurrentDir(Define.MoveDir dir)
+        {
+            return (Define.MoveDir)(((int)dir + (int)currentRotation) % 4);
         }
     }
 }

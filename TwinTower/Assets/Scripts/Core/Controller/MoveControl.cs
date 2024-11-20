@@ -2,6 +2,7 @@
 using UnityEngine;
 using DG.Tweening;
 using Cysharp.Threading.Tasks;
+using Unity.VisualScripting;
 
 /// <summary>
 /// 이동 가능한 모든 오브젝트들이 상속 받는 클래스.
@@ -14,10 +15,11 @@ namespace TwinTower
         public Map map;
         public int x;
         public int y;
+        public int hp;
 
         public async UniTask OnReciveMove(Define.MoveDir dir, bool canMove) 
         {
-            (int movedX, int movedY) = ConvertDirToPos(dir);
+            (int movedX, int movedY) = map.GetCoordinates(dir, x, y);
             OnBeforeReciveMove(dir);
             
             if (canMove == true)
@@ -49,7 +51,6 @@ namespace TwinTower
             {
                 gimmik.OnDeactive(this);
             }
-            Debug.LogError($"DeActive: {x}, {y}: {map.GetGimmik(x, y)?.GetType()}");
         }
 
         protected async virtual UniTask Move(int x, int y)
@@ -69,7 +70,6 @@ namespace TwinTower
             {
                 await gimmik.OnActive(this);
             }
-            Debug.LogError($"Active: {x}, {y}: {map.GetGimmik(x, y)?.GetType()}");
         }
 
 #endregion
@@ -80,55 +80,14 @@ namespace TwinTower
             await transform.DOLocalMove(new Vector2(target.x, target.y), 0.05f).SetLoops(2, LoopType.Yoyo).ToUniTask();
         }
 
-        // Map 클래스 함수랑 동일함. 추후 수정 필요
-        private (int, int) ConvertDirToPos(Define.MoveDir dir)
-        {
-            int movedX = x;
-            int movedY = y;
-            switch (dir)
-            {
-                case Define.MoveDir.Up:
-                    movedY += 1;
-                    break;
-                case Define.MoveDir.Down:
-                    movedY -= 1;
-                    break;
-                case Define.MoveDir.Right:
-                    movedX += 1;
-                    break;
-                case Define.MoveDir.Left:
-                    movedX -= 1;
-                    break;
-                default:
-                    Debug.LogError($"적절하지 않은 Move값: {dir}");
-                    break;
-            }
-
-            return (movedX, movedY);
-        }
-
         public bool CanMoveTile(Define.MoveDir dir)
         {
-            (int nextX, int nextY) = ConvertDirToPos(dir);
+            (int nextX, int nextY) = map.GetCoordinates(dir, x, y);
             
             while (map.GetMovedObject(nextX, nextY) != null)
             {
                 Debug.Log($"{nextX}, {nextY}에 장애물이 있습니다.");
-                switch (dir)
-                {
-                    case Define.MoveDir.Up:
-                        nextY += 1;
-                        break;
-                    case Define.MoveDir.Down:
-                        nextY -= 1;
-                        break;
-                    case Define.MoveDir.Right:
-                        nextX += 1;
-                        break;
-                    case Define.MoveDir.Left:
-                        nextX -= 1;
-                        break;
-                }
+                (nextX, nextY) = map.GetCoordinates(dir, nextX, nextY);
             }
 
             return map.CanMove(nextX, nextY);
@@ -151,7 +110,17 @@ namespace TwinTower
 
         public void GetDamage(int damage)
         {
-            Debug.LogError($"{damage}");
+            hp -= damage;
+
+            if (hp <= 0)
+            {
+                Death();
+            }
+        }
+
+        public virtual void Death()
+        {
+            
         }
     }
 }

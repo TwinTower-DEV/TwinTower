@@ -26,6 +26,7 @@ namespace TwinTower
         {
             if (isActivateByPlayer == true)
             {
+                        Debug.LogError($"Active: {x}, {y}: {map.GetGimmik(x, y)?.GetType()}");
                 await Active(subject);
             }
         }

@@ -8,9 +8,9 @@ namespace TwinTower
         public enum MoveDir
         {
             Up,
+            Right,
             Down,
             Left,
-            Right,
             Die,
             None
         }

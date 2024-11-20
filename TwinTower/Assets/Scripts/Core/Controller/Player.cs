@@ -28,6 +28,7 @@ namespace TwinTower
 
         protected override void OnBeforeReciveMove(Define.MoveDir dir)
         {
+            dir = map.GetCurrentDir(dir);
             switch (dir)
             {
                 case Define.MoveDir.Down:
@@ -75,6 +76,12 @@ namespace TwinTower
         protected override void MoveSoundStart()
         {
             ManagerSet.Sound.Play("character_walk/Character_Walk_SFX");
-        }        
+        }
+
+        public override void Death()
+        {
+            _animator.Play("Dead");
+            ManagerSet.Sound.Play("character_death/Character_die_SFX(넘어졌을때 사운드)");
+        }
     }
 }

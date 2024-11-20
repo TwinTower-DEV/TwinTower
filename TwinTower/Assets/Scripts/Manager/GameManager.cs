@@ -44,8 +44,6 @@ namespace TwinTower
         }
         public void Restart()
         {
-            _player1.Dir = Define.MoveDir.Die;
-            _player2.Dir = Define.MoveDir.Die;
             InputController.Instance.ReleaseControl();
             ScreenManager.Instance.Reload();
         }
