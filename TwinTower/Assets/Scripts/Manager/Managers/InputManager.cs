@@ -17,7 +17,7 @@ namespace TwinTower
         public bool islockMove = false;
         private bool MoveFlag = false;
 
-        public void Init()
+        public override void Init()
         {
             
         }

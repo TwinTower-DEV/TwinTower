@@ -7,6 +7,17 @@ namespace TwinTower
     /// </summary>
     public abstract class Manager<T> : Singleton<T> where T : Manager<T>
     {
-        protected Manager(){}
+        protected Manager() {}
+
+        protected override void Awake() 
+        {
+            base.Awake();
+            Init();
+        }
+
+        public virtual void Init()
+        {
+
+        }
     }
 }

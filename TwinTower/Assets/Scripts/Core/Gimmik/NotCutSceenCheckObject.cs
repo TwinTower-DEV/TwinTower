@@ -1,4 +1,5 @@
 using System;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace TwinTower
@@ -9,7 +10,7 @@ namespace TwinTower
         public void Awake()
         {
             Debug.Log("싫행");
-            StartCoroutine(UI_ScreenFader.FadeSceneIn());
+            UI_ScreenFader.Instance.FadeSceneIn().Forget();
             SoundManager.Instance.Play(bgm, Define.Sound.Bgm);
         }
     }

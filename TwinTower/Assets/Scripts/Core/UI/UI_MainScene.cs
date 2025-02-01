@@ -4,6 +4,7 @@ using UnityEngine.UIElements;
 using UnityEngine.UI;
 using Button = UnityEngine.UI.Button;
 using Image = UnityEngine.UI.Image;
+using Cysharp.Threading.Tasks;
 
 namespace TwinTower
 {
@@ -90,7 +91,7 @@ namespace TwinTower
         {
             UI_ClickSoundEffect();
             UIManager.Instance.InputHandler -= KeyInPut;
-            StartCoroutine(ScreenManager.Instance.NextSceneload());
+            ScreenManager.Instance.NextSceneload().Forget();
         }
         void Setting()
         {

@@ -17,7 +17,7 @@ public class SoundManager : Manager<SoundManager>
         //private float _masterVolume = DataManager.Instance.GameData.mastetVolume;
 
 
-        public void Init()
+        public override void Init()
         {
             GameObject root = GameObject.Find("@Sound");
             if (root == null)

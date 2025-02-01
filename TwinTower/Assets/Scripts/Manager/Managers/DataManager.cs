@@ -59,7 +59,7 @@ namespace TwinTower
                 _saveloadcontroller = value;
             }
         }
-        public void Init()
+        public override void Init()
         {
             
             InitDataSetting();

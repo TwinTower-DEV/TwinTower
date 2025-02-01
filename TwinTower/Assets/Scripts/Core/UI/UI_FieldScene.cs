@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using Cysharp.Threading.Tasks;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -57,7 +58,7 @@ namespace TwinTower
         private void Restart()
         {
             InputController.Instance.ReleaseControl();
-            StartCoroutine(ScreenManager.Instance.CurrentScreenReload());
+            ScreenManager.Instance.CurrentScreenReload().Forget();
         }
 
         private void Setting()

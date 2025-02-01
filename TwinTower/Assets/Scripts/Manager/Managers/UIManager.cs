@@ -37,7 +37,7 @@ namespace TwinTower
         }
         public bool iscutSceenCheck = false;
         public bool FadeCheck = false;
-        public void Init()
+        public override void Init()
         {
             InitLanguage(DataManager.Instance.UIGameDatavalue.langaugecursor);
         }

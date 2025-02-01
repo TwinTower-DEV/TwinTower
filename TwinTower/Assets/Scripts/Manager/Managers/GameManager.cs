@@ -23,7 +23,7 @@ namespace TwinTower
         private bool isStairActiveTwice = false;
         
         
-        public void Init()
+        public override void Init()
         {
             isClearCheck = false;
         }
@@ -41,7 +41,7 @@ namespace TwinTower
         public void Restart()
         {
             InputController.Instance.ReleaseControl();
-            ScreenManager.Instance.Reload();
+            ScreenManager.Instance.Reload().Forget();
         }
 
         public void FindPlayer() {
@@ -81,7 +81,6 @@ namespace TwinTower
 
         public async UniTask ActiveStair()
         {
-            Debug.LogError($"Active: {isStairActiveTwice}");
             if (rightMap != null)
             {
                 if (isStairActiveTwice == false)
@@ -101,7 +100,7 @@ namespace TwinTower
 
         private async UniTask NextStage()
         {
-            await ScreenManager.Instance.NextSceneload().ToUniTask();
+            await ScreenManager.Instance.NextSceneload();
         }
     }
 }

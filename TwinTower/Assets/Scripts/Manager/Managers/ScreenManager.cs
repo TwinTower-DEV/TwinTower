@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,34 +11,34 @@ namespace TwinTower
     public class ScreenManager : Manager<ScreenManager>
     {
         private UI_ScreenFader fader;
-        public void Init()
+        public override void Init()
         {
             fader = ResourceManager.Instance.Instantiate($"UI/FadeScean").GetComponent<UI_ScreenFader>();
         }
 
-        public IEnumerator CurrentScreenReload()
+        public async UniTask CurrentScreenReload()
         {
-            yield return StartCoroutine(UI_ScreenFader.FadeScenOut());
+            await UI_ScreenFader.Instance.FadeSceneOut();
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            yield return StartCoroutine(UI_ScreenFader.FadeSceneIn());
+            await UI_ScreenFader.Instance.FadeSceneIn();
             GameManager.Instance.FindPlayer();
         }
 
-        public void Reload()
+        public async UniTask Reload()
         {
-            StartCoroutine(CurrentScreenReload());
+            await CurrentScreenReload();
         }
 
-        public IEnumerator FadeInOut()
+        public async UniTask FadeInOut()
         {
-            yield return StartCoroutine(UI_ScreenFader.FadeScenOut());
-            yield return StartCoroutine(UI_ScreenFader.FadeSceneIn());
+            await UI_ScreenFader.Instance.FadeSceneOut();
+            await UI_ScreenFader.Instance.FadeSceneIn();
         }
-        public IEnumerator NextSceneload(string s = null)
+        public async UniTask NextSceneload(string s = null)
         {
             UIManager.Instance.Clear();
             UIManager.Instance.iscutSceenCheck = false;
-            yield return StartCoroutine(UI_ScreenFader.FadeScenOut());
+            await UI_ScreenFader.Instance.FadeSceneOut();
 
             if (s == null)
             {
@@ -56,12 +57,7 @@ namespace TwinTower
             else
                 SceneManager.LoadScene(s);
 
-            if (s == "MainScene" || SceneManager.GetActiveScene().buildIndex + 1 >= 15)
-            {
-                Debug.Log("asdasdw");
-                yield return StartCoroutine(UI_ScreenFader.FadeSceneIn());
-                
-            }
+            await UI_ScreenFader.Instance.FadeSceneIn();
             //GameManager.Instance.FindPlayer();
         }
     }

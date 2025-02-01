@@ -1,4 +1,6 @@
 using System.Collections;
+using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using UnityEngine;
 /// <summary>
 /// Fade IN,OUT을 구현한 코드입니다.
@@ -41,45 +43,30 @@ namespace TwinTower
             Instance.FaderCanvasGroup.alpha = 0f;
             DontDestroyOnLoad(gameObject);
         }
-        // 서서히 작동되게 하는 코드
-        protected IEnumerator Fade(float finalAlpha, CanvasGroup canvasGroup, bool FadeCheck)
-        {
-            canvasGroup.blocksRaycasts = true;
-            UIManager.Instance.FadeCheck = true;
-            float fadeSpeed = Mathf.Abs(canvasGroup.alpha - finalAlpha) / fadeDuration;
-            while (!Mathf.Approximately(canvasGroup.alpha, finalAlpha))
-            {
-                canvasGroup.alpha = Mathf.MoveTowards(canvasGroup.alpha, finalAlpha,
-                    fadeSpeed * Time.deltaTime);
-                yield return null;
-            }
-            canvasGroup.alpha = finalAlpha;
-            canvasGroup.blocksRaycasts = false;
 
-            if (!FadeCheck && !UIManager.Instance.isClearUICheck)
-            {
-                InputController.Instance.GainControl();
-                UIManager.Instance.FadeCheck = false;
-            }
-        }
         // FadeIn 코드
-        public static IEnumerator FadeSceneIn ()
+        public async UniTask FadeSceneIn()
         {
             CanvasGroup canvasGroup;
             canvasGroup = Instance.FaderCanvasGroup;
-            Debug.Log(" TLFGODA");
-            yield return Instance.StartCoroutine(Instance.Fade(0f, canvasGroup, false));
-        }
-        // FadeOut 코드
-        public static IEnumerator FadeScenOut()
-        {
-            InputController.Instance.ReleaseControl();
-            CanvasGroup canvasGroup = Instance.FaderCanvasGroup;
-            canvasGroup.gameObject.SetActive(true);
-            yield return Instance.StartCoroutine(Instance.Fade(1f, canvasGroup, true));
+            await canvasGroup.DOFade(0f, fadeDuration).ToUniTask();
+
+            InputController.Instance.GainControl();
+            UIManager.Instance.FadeCheck = false;
         }
 
-        public static bool FadeCheck()
+        // FadeOut 코드
+        public async UniTask FadeSceneOut()
+        {
+            InputController.Instance.ReleaseControl();
+            UIManager.Instance.FadeCheck = true;
+
+            CanvasGroup canvasGroup = Instance.FaderCanvasGroup;
+            canvasGroup.gameObject.SetActive(true);
+            await canvasGroup.DOFade(1f, fadeDuration).ToUniTask();
+        }
+
+        public bool FadeCheck()
         {
             CanvasGroup canvasGroup;
             canvasGroup = Instance.FaderCanvasGroup;

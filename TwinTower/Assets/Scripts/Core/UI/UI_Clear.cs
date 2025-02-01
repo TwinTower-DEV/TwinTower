@@ -1,4 +1,5 @@
 using System.Collections;
+using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -57,7 +58,7 @@ namespace TwinTower
         private IEnumerator End()
         {
             yield return new WaitForSeconds(3.0f);
-            StartCoroutine(ScreenManager.Instance.NextSceneload());
+            ScreenManager.Instance.NextSceneload().Forget();
         }
         private IEnumerator Animation()
         {
@@ -65,7 +66,7 @@ namespace TwinTower
             animator.SetBool("IsStart", true);
             yield return new WaitForSeconds(1.5f);
             UIManager.Instance.isClearUICheck = false;
-            StartCoroutine(ScreenManager.Instance.NextSceneload());
+            ScreenManager.Instance.NextSceneload().Forget();
         }
     }
 }

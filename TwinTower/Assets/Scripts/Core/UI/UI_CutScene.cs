@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -74,7 +75,7 @@ namespace TwinTower
         private void EndEvent()
         {
             UIManager.Instance.iscutSceenCheck = false;
-            if (!UI_ScreenFader.FadeCheck())
+            if (!UI_ScreenFader.Instance.FadeCheck())
             {
                 UIManager.Instance.InputHandler -= KeyInput;
                 //Time.timeScale = 1;
@@ -85,7 +86,7 @@ namespace TwinTower
             {
                 UIManager.Instance.InputHandler -= KeyInput;
                 //Time.timeScale = 1;
-                StartCoroutine(UI_ScreenFader.FadeSceneIn());
+                UI_ScreenFader.Instance.FadeSceneIn().Forget();
                 //SoundManager.Instance.SetReduceVolume();
                 //SoundManager.Instance.ChangeBGM(BGM);
                 UIManager.Instance.CloseNormalUI(this);
