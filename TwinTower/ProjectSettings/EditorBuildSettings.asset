@@ -17,16 +17,16 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/FixStage/New Stage/Stage 3.unity
     guid: 9416f44afd8600a49b992bf3576ddeaa
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/FixStage/New Stage/Stage 4.unity
     guid: 506c657aabf1858498a9023bcf6f9ac3
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/FixStage/New Stage/Stage 5.unity
     guid: 3de20b7db39c8da4dbcb9d5b1f00eea7
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/FixStage/New Stage/Stage 6.unity
     guid: 053b4b53e8075184bb3800f936206b2a
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/FixStage/New Stage/Stage 7.unity
     guid: 237747b237e92994e99f874b38bd3e0d
   - enabled: 1

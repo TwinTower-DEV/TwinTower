@@ -85,10 +85,14 @@ namespace TwinTower
         {
             (int nextX, int nextY) = map.GetCoordinates(dir, x, y);
             
-            while (map.GetMovedObject(nextX, nextY) != null)
+            if (map.GetMovedObject(nextX, nextY) != null)
             {
-                Debug.Log($"{nextX}, {nextY}에 장애물이 있습니다.");
                 (nextX, nextY) = map.GetCoordinates(dir, nextX, nextY);
+                if (map.GetMovedObject(nextX, nextY) != null)
+                {
+                    // box가 2개 이상인 경우는 움직일 수 없음.
+                    return false;
+                }
             }
 
             return map.CanMove(nextX, nextY);
