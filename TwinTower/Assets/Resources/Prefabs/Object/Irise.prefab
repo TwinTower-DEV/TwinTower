@@ -121,4 +121,6 @@ MonoBehaviour:
   map: {fileID: 0}
   x: 0
   y: 0
+  hp: 0
+  type: 1
   dir: 0

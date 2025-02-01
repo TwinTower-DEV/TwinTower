@@ -45,8 +45,8 @@ namespace TwinTower
         [Flags]
         public enum MoveControlType
         {
-            Player = 1,
-            Box = 2,
+            Player = 1 << 0,
+            Box = 1 << 1,
         }
     }
 }

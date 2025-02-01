@@ -18,6 +18,10 @@ public class GimmikMovingWalk : GimmikBase
 
     public async UniTask Moving(MoveControl subject)
     {
-        await subject.OnReciveMove(dir, true);
+        (int nextX, int nextY) = map.GetCoordinates(dir, x, y);
+        if (map.CanMove(nextX, nextY) == true && map.GetMovedObject(nextX, nextY) == null)
+        {
+            await subject.OnReciveMove(dir, true);
+        }
     }
 }
