@@ -20,7 +20,6 @@ public class GimmikArrow : GimmikBase {
     {
         (int nextX, int nextY) = map.GetCoordinates(dir, x, y);
 
-        Debug.LogError($"{nextX} {nextY} {map.IsInMap(nextX, nextY) == true}");
         while (map.IsInMap(nextX, nextY) == true)
         {
             Vector2 target = map.GetTilePosition(nextX, nextY);
@@ -31,8 +30,8 @@ public class GimmikArrow : GimmikBase {
 
             if (nextMovedObject != null)
             {
-                nextMovedObject.GetDamage(1);
                 transform.gameObject.SetActive(false);
+                await nextMovedObject.GetDamage(1);
                 break;
             }
             

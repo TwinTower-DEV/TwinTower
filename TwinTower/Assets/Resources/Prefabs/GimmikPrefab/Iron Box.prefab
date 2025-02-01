@@ -101,3 +101,4 @@ MonoBehaviour:
   x: 2
   y: 1
   hp: 1
+  type: -1

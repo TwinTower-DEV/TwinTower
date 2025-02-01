@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using Cysharp.Threading.Tasks;
 using TwinTower;
 using UnityEngine;
 
@@ -62,7 +63,7 @@ public class Box : MoveControl
     //     Destroy(gameObject);
     // }
 
-    public override void Death()
+    public override async UniTask Death()
     {
         OnBeforeMove();
         map.movedObjects.Remove(map.movedObjects.Find(obj => obj == this));

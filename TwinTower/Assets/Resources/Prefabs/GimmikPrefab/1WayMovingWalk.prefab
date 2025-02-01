@@ -208,5 +208,5 @@ MonoBehaviour:
   y: 1
   linkedObject: {fileID: 0}
   isWalkable: 1
-  isActivateByPlayer: 1
+  activeType: -1
   dir: 0

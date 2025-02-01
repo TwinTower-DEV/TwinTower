@@ -101,4 +101,6 @@ MonoBehaviour:
   x: 5
   y: 2
   linkedObject: {fileID: 0}
+  isWalkable: 1
+  activeType: -1
   isLaunchOnce: 1

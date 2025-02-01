@@ -15,30 +15,29 @@ namespace TwinTower
         protected Map map;
 
         public bool isWalkable = true;
-        public bool isActivateByPlayer = true;
+        public Define.MoveControlType activeType;
         
         private void Awake() 
         {
             map = GetComponentInParent<Map>();
         }
 
-        public async UniTask OnActive(MoveControl subject)
+        public async UniTask OnActive(MoveControl subject, Define.MoveControlType moveControlType)
         {
-            if (isActivateByPlayer == true)
+            if (IsMoveControlActiveType(moveControlType) == true)
             {
-                        Debug.LogError($"Active: {x}, {y}: {map.GetGimmik(x, y)?.GetType()}");
                 await Active(subject);
             }
         }
         
         public async virtual UniTask Active(MoveControl subject = null)
         {
-            LinkTile();
+
         }
 
-        public void OnDeactive(MoveControl subject)
+        public void OnDeactive(MoveControl subject, Define.MoveControlType moveControlType)
         {
-            if (isActivateByPlayer == true)
+            if (IsMoveControlActiveType(moveControlType) == true)
             {
                 DeActive(subject);
             }
@@ -49,9 +48,9 @@ namespace TwinTower
 
         }
 
-        public virtual void LinkTile()
+        public bool IsMoveControlActiveType(Define.MoveControlType moveControlType)
         {
-            linkedObject?.Active();
+            return activeType.HasFlag(moveControlType);
         }
     }
 }

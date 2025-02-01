@@ -1,3 +1,5 @@
+using System;
+
 namespace TwinTower
 {
     /// <summary>
@@ -38,6 +40,13 @@ namespace TwinTower
         {
             public int width;
             public int height;
+        }
+
+        [Flags]
+        public enum MoveControlType
+        {
+            Player = 1,
+            Box = 2,
         }
     }
 }

@@ -103,7 +103,7 @@ MonoBehaviour:
   y: 5
   linkedObject: {fileID: 0}
   isWalkable: 0
-  isActivateByPlayer: 0
+  activeType: -1
 --- !u!95 &580277465519416134
 Animator:
   serializedVersion: 4

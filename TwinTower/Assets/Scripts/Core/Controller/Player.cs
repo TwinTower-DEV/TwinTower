@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace TwinTower
@@ -78,10 +79,13 @@ namespace TwinTower
             SoundManager.Instance.Play("character_walk/Character_Walk_SFX");
         }
 
-        public override void Death()
+        public override async UniTask Death()
         {
+            InputController.Instance.ReleaseControl();
             _animator.Play("Dead");
             SoundManager.Instance.Play("character_death/Character_die_SFX(넘어졌을때 사운드)");
+            await UniTask.Delay(1000);
+            GameManager.Instance.Restart();
         }
     }
 }

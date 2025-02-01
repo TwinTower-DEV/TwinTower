@@ -16,6 +16,7 @@ namespace TwinTower
         public int x;
         public int y;
         public int hp;
+        public Define.MoveControlType type;
 
         public async UniTask OnReciveMove(Define.MoveDir dir, bool canMove) 
         {
@@ -25,7 +26,7 @@ namespace TwinTower
             if (canMove == true)
             {
                 OnBeforeMove();
-                MoveMovedObject(dir, movedX, movedY);
+                await MoveMovedObject(dir, movedX, movedY);
                 await Move(movedX, movedY);
                 await OnAfterMove();
             }
@@ -49,7 +50,7 @@ namespace TwinTower
             
             if (gimmik != null)
             {
-                gimmik.OnDeactive(this);
+                gimmik.OnDeactive(this, type);
             }
         }
 
@@ -68,7 +69,7 @@ namespace TwinTower
             
             if (gimmik != null)
             {
-                await gimmik.OnActive(this);
+                await gimmik.OnActive(this, type);
             }
         }
 
@@ -93,9 +94,13 @@ namespace TwinTower
             return map.CanMove(nextX, nextY);
         }
 
-        private void MoveMovedObject(Define.MoveDir dir, int moveX, int moveY)
+        private async UniTask MoveMovedObject(Define.MoveDir dir, int moveX, int moveY)
         {
-            map.GetMovedObject(moveX, moveY)?.OnReciveMove(dir, true);
+            MoveControl movedObject = map.GetMovedObject(moveX, moveY);
+            if (movedObject != null)
+            {
+                await movedObject.OnReciveMove(dir, true);
+            }
         }
 
         protected virtual void MoveSoundStart()
@@ -108,17 +113,17 @@ namespace TwinTower
 
         }
 
-        public void GetDamage(int damage)
+        public async UniTask GetDamage(int damage)
         {
             hp -= damage;
 
             if (hp <= 0)
             {
-                Death();
+                await Death();
             }
         }
 
-        public virtual void Death()
+        public virtual async UniTask Death()
         {
             
         }
