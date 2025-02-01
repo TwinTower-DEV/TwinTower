@@ -17,7 +17,7 @@ namespace TwinTower
         private Animator animator;
         public override void Init()
         {
-            ManagerSet.UI.isClearUICheck = true;
+            UIManager.Instance.isClearUICheck = true;
             Bind<TextMeshProUGUI>(typeof(Texts));
             Get<TextMeshProUGUI>((int)Texts.Clear).gameObject.SetActive(false);
             if(SceneManager.GetActiveScene().buildIndex < 10 && SceneManager.GetActiveScene().buildIndex + 1 < 10)
@@ -57,15 +57,15 @@ namespace TwinTower
         private IEnumerator End()
         {
             yield return new WaitForSeconds(3.0f);
-            StartCoroutine(ManagerSet.Screen.NextSceneload());
+            StartCoroutine(ScreenManager.Instance.NextSceneload());
         }
         private IEnumerator Animation()
         {
             yield return new WaitForSeconds(0.5f);
             animator.SetBool("IsStart", true);
             yield return new WaitForSeconds(1.5f);
-            ManagerSet.UI.isClearUICheck = false;
-            StartCoroutine(ManagerSet.Screen.NextSceneload());
+            UIManager.Instance.isClearUICheck = false;
+            StartCoroutine(ScreenManager.Instance.NextSceneload());
         }
     }
 }

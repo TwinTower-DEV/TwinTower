@@ -11,8 +11,8 @@ namespace TwinTower
         private Animator _animator;
         public override void Init()
         {
-            ManagerSet.UI.InputHandler -= KeyInput;
-            ManagerSet.UI.InputHandler += KeyInput;
+            UIManager.Instance.InputHandler -= KeyInput;
+            UIManager.Instance.InputHandler += KeyInput;
 
             StartCoroutine(end());
         }
@@ -21,21 +21,21 @@ namespace TwinTower
         {
             if (!Input.anyKey)
                 return;
-            if (_uiNum != ManagerSet.UI.UINum)
+            if (_uiNum != UIManager.Instance.UINum)
                 return;
-            if (ManagerSet.UI.FadeCheck)
+            if (UIManager.Instance.FadeCheck)
                 return;
 
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 UI_SoundEffect();
-                ManagerSet.UI.CloseNormalUI(this);
+                UIManager.Instance.CloseNormalUI(this);
             }
         }
         private IEnumerator end()
         {
             yield return new WaitForSeconds(14f);
-            ManagerSet.UI.CloseNormalUI(this);
+            UIManager.Instance.CloseNormalUI(this);
         }
     }
 }

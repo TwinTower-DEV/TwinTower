@@ -20,7 +20,7 @@ namespace TwinTower
 
 		protected virtual void Awake()
 		{
-			_uiNum = ManagerSet.UI.UINum;
+			_uiNum = UIManager.Instance.UINum;
 			Canvas canvas = GetComponent<Canvas>();
 			if (canvas != null)
 				canvas.sortingOrder = _uiNum;
@@ -51,12 +51,12 @@ namespace TwinTower
 
 		protected void UI_SoundEffect()
 		{
-			ManagerSet.Sound.Play("UI이동&클릭소리/UI_Click");
+			SoundManager.Instance.Play("UI이동&클릭소리/UI_Click");
 		}
 
 		protected void UI_ClickSoundEffect()
 		{
-			ManagerSet.Sound.Play("UI이동&클릭소리/UI_Click_2");
+			SoundManager.Instance.Play("UI이동&클릭소리/UI_Click_2");
 		}
 
 		// _objects에 저장된 UI를 쉽게 불러올 수 있는 함수

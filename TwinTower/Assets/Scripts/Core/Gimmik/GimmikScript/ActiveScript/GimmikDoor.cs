@@ -17,7 +17,7 @@ public class GimmikDoor : GimmikBase {
     public async override UniTask Active(MoveControl subject = null)
     {
         isWalkable = true;
-        ManagerSet.Sound.Play("문여닫는소리(저작권 표시해야함)/Door_Open&Close_SFX");
+        SoundManager.Instance.Play("문여닫는소리(저작권 표시해야함)/Door_Open&Close_SFX");
         animator.Play("OpenDoor");
         await UniTask.WaitForSeconds(0.5f);
     }
@@ -25,7 +25,7 @@ public class GimmikDoor : GimmikBase {
     public override void DeActive(MoveControl subject = null)
     {
         isWalkable = false;
-        ManagerSet.Sound.Play("문여닫는소리(저작권 표시해야함)/Door_Open&Close_SFX");
+        SoundManager.Instance.Play("문여닫는소리(저작권 표시해야함)/Door_Open&Close_SFX");
         animator.Play("CloseDoor");
     }
 }

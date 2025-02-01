@@ -8,7 +8,7 @@ using UnityEngine.Localization.Settings;
 
 namespace TwinTower
 {
-    public class UIManager
+    public class UIManager : Manager<UIManager>
     {
         // sortingOrder을 관리하기 위한 변수
         // Normal UI들을 관리하는 HashSet
@@ -39,7 +39,7 @@ namespace TwinTower
         public bool FadeCheck = false;
         public void Init()
         {
-            InitLanguage(ManagerSet.Data.UIGameDatavalue.langaugecursor);
+            InitLanguage(DataManager.Instance.UIGameDatavalue.langaugecursor);
         }
 
         public int UINum
@@ -134,7 +134,7 @@ namespace TwinTower
 
             _uiNum = _uiNum + 1;
 
-            GameObject go = ManagerSet.Resource.Instantiate($"UI/{name}");
+            GameObject go = ResourceManager.Instance.Instantiate($"UI/{name}");
             T ui = Util.GetOrAddComponent<T>(go);
             _normalUIs.Add(ui);
             _uistack.Push(ui);
@@ -153,7 +153,7 @@ namespace TwinTower
             _normalUIs.Remove(ui);
             _uistack.Pop();
             _uiNum = _uiNum - 1;
-            ManagerSet.Resource.Destroy(ui.gameObject);
+            ResourceManager.Instance.Destroy(ui.gameObject);
         }
 
         public void Clear()
@@ -221,7 +221,7 @@ namespace TwinTower
             if (ui == null) return;
             _normalUIs.Remove(ui);
             _uiNum = _uiNum - 1;
-            ManagerSet.Resource.Destroy(ui.gameObject);
+            ResourceManager.Instance.Destroy(ui.gameObject);
             //StartCoroutine(ScreenManager.Instance.NextSceneload());
         }
 

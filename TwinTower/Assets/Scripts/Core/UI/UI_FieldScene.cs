@@ -21,7 +21,7 @@ namespace TwinTower
         
         public override void Init()
         {
-            ManagerSet.Gamemanager.CurrentScnen(this);
+            GameManager.Instance.CurrentScnen(this);
             
             InputManager.Instance.UpDateCount();
             
@@ -32,23 +32,23 @@ namespace TwinTower
             Get<Image>((int)Images.BackButton).gameObject.BindEvent(Setting, Define.UIEvent.Click);
             Get<TextMeshProUGUI>((int)Texts.FloorText).gameObject.GetComponent<TextMeshProUGUI>().text = "Floor " + SceneManager.GetActiveScene().buildIndex.ToString();
 
-            ManagerSet.UI.InputHandler -= KeyInPut;
-            ManagerSet.UI.InputHandler += KeyInPut;
+            UIManager.Instance.InputHandler -= KeyInPut;
+            UIManager.Instance.InputHandler += KeyInPut;
         }
         
         private void KeyInPut()
         {
             if (!Input.anyKey)
                 return;
-            if (_uiNum != ManagerSet.UI.UINum)
+            if (_uiNum != UIManager.Instance.UINum)
                 return;
-            if (ManagerSet.UI.FadeCheck)
+            if (UIManager.Instance.FadeCheck)
                 return;
             
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 UI_ClickSoundEffect();
-                ManagerSet.UI.ShowNormalUI<UI_Menu>();
+                UIManager.Instance.ShowNormalUI<UI_Menu>();
                 InputController.Instance.ReleaseControl();
                 Time.timeScale = 0;
             }
@@ -57,12 +57,12 @@ namespace TwinTower
         private void Restart()
         {
             InputController.Instance.ReleaseControl();
-            StartCoroutine(ManagerSet.Screen.CurrentScreenReload());
+            StartCoroutine(ScreenManager.Instance.CurrentScreenReload());
         }
 
         private void Setting()
         {
-            ManagerSet.UI.ShowNormalUI<UI_SettingScene>();
+            UIManager.Instance.ShowNormalUI<UI_SettingScene>();
         }
 
         public void CountUpdate(int count)

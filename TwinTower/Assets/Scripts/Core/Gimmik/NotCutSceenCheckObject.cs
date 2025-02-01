@@ -10,7 +10,7 @@ namespace TwinTower
         {
             Debug.Log("싫행");
             StartCoroutine(UI_ScreenFader.FadeSceneIn());
-            ManagerSet.Sound.Play(bgm, Define.Sound.Bgm);
+            SoundManager.Instance.Play(bgm, Define.Sound.Bgm);
         }
     }
 }

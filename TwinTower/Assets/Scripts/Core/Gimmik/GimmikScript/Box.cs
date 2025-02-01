@@ -42,18 +42,18 @@ public class Box : MoveControl
     //     }
     //     else
     //     {
-    //         ManagerSet.Sound.Play("steelbox_impact/arrow_hit_the_metal_SFX");
+    //         SoundManager.Instance.Play("steelbox_impact/arrow_hit_the_metal_SFX");
     //     }
     // }
 
     // protected override void MoveSoundStart()
     // {
-    //     ManagerSet.Sound.Play("box_slide/Box_Slide_SFX");
+    //     SoundManager.Instance.Play("box_slide/Box_Slide_SFX");
     // }
 
     // public IEnumerator Destroy()
     // {
-    //     ManagerSet.Sound.Play("wood_shatter/WoodBox_destroy_SFX");
+    //     SoundManager.Instance.Play("wood_shatter/WoodBox_destroy_SFX");
     //     _animator.Play("Destroy");
     //     gameObject.layer = 0;
     //     if (activateObject != null)

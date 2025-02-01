@@ -41,7 +41,7 @@ namespace TwinTower
         public void Restart()
         {
             InputController.Instance.ReleaseControl();
-            ManagerSet.Screen.Reload();
+            ScreenManager.Instance.Reload();
         }
 
         public void FindPlayer() {
@@ -101,7 +101,7 @@ namespace TwinTower
 
         private async UniTask NextStage()
         {
-            await ManagerSet.Screen.NextSceneload().ToUniTask();
+            await ScreenManager.Instance.NextSceneload().ToUniTask();
         }
     }
 }

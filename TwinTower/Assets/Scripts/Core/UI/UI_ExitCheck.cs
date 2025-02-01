@@ -23,8 +23,8 @@ namespace TwinTower
         {
             Bind<Image>(typeof(Check));
 
-            ManagerSet.UI.InputHandler -= KeyInput;
-            ManagerSet.UI.InputHandler += KeyInput;
+            UIManager.Instance.InputHandler -= KeyInput;
+            UIManager.Instance.InputHandler += KeyInput;
             
             Get<Image>((int)Check.SelectYes).gameObject.BindEvent(YesClickEvent, Define.UIEvent.Click);
             Get<Image>((int)Check.SelectYes).gameObject.SetActive(false);
@@ -45,7 +45,7 @@ namespace TwinTower
         {
             if (!Input.anyKey)
                 return;
-            if(_uiNum != ManagerSet.UI.UINum)
+            if(_uiNum != UIManager.Instance.UINum)
                 return;
 
             if (Input.GetKeyDown(KeyCode.Return))
@@ -64,8 +64,8 @@ namespace TwinTower
             
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                ManagerSet.UI.InputHandler -= KeyInput;
-                ManagerSet.UI.CloseNormalUI(this);
+                UIManager.Instance.InputHandler -= KeyInput;
+                UIManager.Instance.CloseNormalUI(this);
             }
         }
 
@@ -81,8 +81,8 @@ namespace TwinTower
 
         private void NoClickEvent()
         {
-            ManagerSet.UI.InputHandler -= KeyInput;
-            ManagerSet.UI.CloseNormalUI(this);
+            UIManager.Instance.InputHandler -= KeyInput;
+            UIManager.Instance.CloseNormalUI(this);
         }
         
         void EnterCursorEvent(int currIdx) {

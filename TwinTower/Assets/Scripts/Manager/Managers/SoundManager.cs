@@ -4,7 +4,7 @@ using System.Linq;
 using TwinTower;
 using UnityEngine;
 
-public class SoundManager
+public class SoundManager : Manager<SoundManager>
     {
         AudioSource[] _audioSources = new AudioSource[(int)Define.Sound.MaxCount];
         float[] _volumes = new float[(int)Define.Sound.MaxCount];
@@ -109,13 +109,13 @@ public class SoundManager
             AudioClip audioClip = null;
             if (type == Define.Sound.Bgm)
             {
-                audioClip = ManagerSet.Resource.Load<AudioClip>(path);
+                audioClip = ResourceManager.Instance.Load<AudioClip>(path);
             }
             else
             {
                 if (_audioClips.TryGetValue(path, out audioClip) == false)
                 {
-                    audioClip = ManagerSet.Resource.Load<AudioClip>(path);
+                    audioClip = ResourceManager.Instance.Load<AudioClip>(path);
                     _audioClips.Add(path, audioClip);
                 }
             }

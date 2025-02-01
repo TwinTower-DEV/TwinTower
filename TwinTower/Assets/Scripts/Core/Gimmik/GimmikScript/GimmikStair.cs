@@ -17,12 +17,12 @@ namespace TwinTower{
 
         public async override UniTask Active(MoveControl subject = null) 
         {
-            await ManagerSet.Gamemanager.ActiveStair();
+            await GameManager.Instance.ActiveStair();
         }
 
         public override void DeActive(MoveControl subject = null) 
         {
-            ManagerSet.Gamemanager.DeacitveStair();
+            GameManager.Instance.DeacitveStair();
         }
     }
 

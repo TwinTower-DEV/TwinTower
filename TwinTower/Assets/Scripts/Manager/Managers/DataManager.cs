@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace TwinTower
 {
-    public class DataManager
+    public class DataManager : Manager<DataManager>
     {
         
 

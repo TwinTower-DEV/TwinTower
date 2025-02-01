@@ -37,20 +37,20 @@ namespace TwinTower
                 Move(Define.MoveDir.Down);
             }
             else if (InputController.Instance.ResetButton.Down) {
-                ManagerSet.Gamemanager.Restart();
+                GameManager.Instance.Restart();
             }
             else {
                 return;
             }
 
-            // if (ManagerSet.Gamemanager._player1.MoveCheck(moveDir) && ManagerSet.Gamemanager._player2.MoveCheck(moveDir)) {
+            // if (GameManager.Instance._player1.MoveCheck(moveDir) && GameManager.Instance._player2.MoveCheck(moveDir)) {
                 
                 
-            //     ManagerSet.Gamemanager._player1.DirectSetting(moveDir, false);
-            //     ManagerSet.Gamemanager._player2.DirectSetting(moveDir, false);
+            //     GameManager.Instance._player1.DirectSetting(moveDir, false);
+            //     GameManager.Instance._player2.DirectSetting(moveDir, false);
 
             //     count--;
-            //     ManagerSet.Gamemanager.UI_UpdateCount(count);
+            //     GameManager.Instance.UI_UpdateCount(count);
             //     if (count <= 0)
             //     {
             //         InputController.Instance.ReleaseControl();
@@ -69,19 +69,19 @@ namespace TwinTower
         {
             yield return new WaitForSeconds(1.5f);
 
-            if (!ManagerSet.Gamemanager.isClearCheck)
+            if (!GameManager.Instance.isClearCheck)
             {
-                ManagerSet.Gamemanager.Restart();
+                GameManager.Instance.Restart();
             }
         }
         
         private async void Move(Define.MoveDir dir) 
         {
             islockMove = true;
-            bool canMove = ManagerSet.Gamemanager._player1.CanMoveTile(dir) && ManagerSet.Gamemanager._player2.CanMoveTile(dir);
+            bool canMove = GameManager.Instance._player1.CanMoveTile(dir) && GameManager.Instance._player2.CanMoveTile(dir);
             await UniTask.WhenAll(
-                ManagerSet.Gamemanager._player1.OnReciveMove(dir, canMove),
-                ManagerSet.Gamemanager._player2.OnReciveMove(dir, canMove)
+                GameManager.Instance._player1.OnReciveMove(dir, canMove),
+                GameManager.Instance._player2.OnReciveMove(dir, canMove)
             );
             islockMove = false;
         }
