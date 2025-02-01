@@ -90,7 +90,7 @@ namespace TwinTower
         {
             UI_ClickSoundEffect();
             ManagerSet.UI.InputHandler -= KeyInPut;
-            StartCoroutine(ScreenManager.Instance.NextSceneload());
+            StartCoroutine(ManagerSet.Screen.NextSceneload());
         }
         void Setting()
         {

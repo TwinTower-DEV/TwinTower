@@ -9,23 +9,77 @@ EditorBuildSettings:
     path: Assets/Scenes/UI/MainScene.unity
     guid: daff58406855210488945345b95bbfb0
   - enabled: 1
-    path: Assets/Scenes/FixStage/Old Stage/Stage2.unity
-    guid: 9d26d30075e8d0b41aeb3eb586efd115
+    path: Assets/Scenes/FixStage/New Stage/Stage 1.unity
+    guid: 65d08798443b49545968913f685748cc
   - enabled: 1
-    path: Assets/Scenes/FixStage/Old Stage/Stage3.unity
-    guid: f616282453258f44c9de48a3a9e083e7
+    path: Assets/Scenes/FixStage/New Stage/Stage 2.unity
+    guid: 6d3862a3363da6f479da902bb6916694
   - enabled: 1
-    path: Assets/Scenes/FixStage/Old Stage/Stage4.unity
-    guid: 802c8c1543db4cc4f8cccc52bc629ebd
+    path: Assets/Scenes/FixStage/New Stage/Stage 3.unity
+    guid: 9416f44afd8600a49b992bf3576ddeaa
   - enabled: 1
-    path: Assets/Scenes/FixStage/Old Stage/Stage5.unity
-    guid: 68b9ae672d81f7247b65705e7f06a4c5
+    path: Assets/Scenes/FixStage/New Stage/Stage 4.unity
+    guid: 506c657aabf1858498a9023bcf6f9ac3
   - enabled: 1
-    path: Assets/Scenes/FixStage/Old Stage/Stage 8.unity
-    guid: 4d5d3a04b9146464fbf46086a4c4e937
+    path: Assets/Scenes/FixStage/New Stage/Stage 5.unity
+    guid: 3de20b7db39c8da4dbcb9d5b1f00eea7
   - enabled: 1
-    path: Assets/Scenes/FixStage/Old Stage/Stage10.unity
-    guid: f1163f5724620ef47a3700bc665f002b
+    path: Assets/Scenes/FixStage/New Stage/Stage 6.unity
+    guid: 053b4b53e8075184bb3800f936206b2a
+  - enabled: 1
+    path: Assets/Scenes/FixStage/New Stage/Stage 7.unity
+    guid: 237747b237e92994e99f874b38bd3e0d
+  - enabled: 1
+    path: Assets/Scenes/FixStage/New Stage/Stage 8.unity
+    guid: 9178cadedc1224e4db693a6f2b62a4a3
+  - enabled: 1
+    path: Assets/Scenes/FixStage/New Stage/Stage 9.unity
+    guid: a1686bd3cbf549a4db1acfef036856cb
+  - enabled: 1
+    path: Assets/Scenes/FixStage/New Stage/Stage 10.unity
+    guid: 6bb1d5490c796c64a88bca6ce6e847e9
+  - enabled: 1
+    path: Assets/Scenes/FixStage/New Stage/Stage 11.unity
+    guid: 197a83a161f1bee4e8e77bef3780fded
+  - enabled: 1
+    path: Assets/Scenes/FixStage/New Stage/Stage 12.unity
+    guid: b6e0f8d8dbe43bf4da8ee5f2977fc266
+  - enabled: 1
+    path: Assets/Scenes/FixStage/New Stage/Stage 13.unity
+    guid: 94df1871b090e0e4fb0c1be3726614bc
+  - enabled: 1
+    path: Assets/Scenes/FixStage/New Stage/Stage 14.unity
+    guid: 905f6a386674ddf4f97b840e7bc5a0f0
+  - enabled: 1
+    path: Assets/Scenes/FixStage/New Stage/Stage 15.unity
+    guid: e834f2e1bb0e4d44fa712a6217312907
+  - enabled: 1
+    path: Assets/Scenes/FixStage/New Stage/Stage 16.unity
+    guid: 0538a2b218db9764ba019728ecb2253f
+  - enabled: 1
+    path: Assets/Scenes/FixStage/New Stage/Stage 17.unity
+    guid: bd794fce6ba2a2943b2cf86b4cda6983
+  - enabled: 1
+    path: Assets/Scenes/FixStage/New Stage/Stage 18.unity
+    guid: 9ace564cb6e7d604e9f2242af9409023
+  - enabled: 1
+    path: Assets/Scenes/FixStage/New Stage/Stage 19.unity
+    guid: 68b41543585ac984d888758d5f40de4c
+  - enabled: 1
+    path: Assets/Scenes/FixStage/New Stage/Stage 20.unity
+    guid: 0d03357b229e93349885c6c81c6b5f33
+  - enabled: 1
+    path: Assets/Scenes/FixStage/New Stage/Stage 21.unity
+    guid: ffb8c9befb7b7c14388f3d79d1ccc1c7
+  - enabled: 1
+    path: Assets/Scenes/FixStage/New Stage/Stage 22.unity
+    guid: 8fecb0477729c4f4e9daa8881a36f64e
+  - enabled: 1
+    path: Assets/Scenes/FixStage/New Stage/Stage 23.unity
+    guid: e5621ce57d0f7c8409025a6ba7f2344a
+  - enabled: 1
+    path: Assets/Scenes/FixStage/New Stage/Stage 24.unity
+    guid: d36909b850a9f3949b86b4d9bc43c048
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: f0cadadef8bf4e342b99773103cf86ab, type: 2}
     com.unity.localization.settings: {fileID: 11400000, guid: 1a4bed1731608cb44bc083b7a393e6d6, type: 2}

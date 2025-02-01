@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,7 +10,7 @@ namespace TwinTower
     /// GameManager 클래스입니다. 게임의 전반적인 진행을 관리합니다.
     /// 이거 OnLoad에 안되게 할거면 Player 직접 배치로 해도 괜찮을듯?
     /// </summary>
-    public class GameManager
+    public class GameManager : Manager<GameManager>
     {
         public Player _player1;
         public Player _player2;
@@ -18,19 +19,13 @@ namespace TwinTower
         public UI_FieldScene _FieldScene;
         public bool isClearCheck = false;
         public bool isRotateCheck = false;
+
+        private bool isStairActiveTwice = false;
         
         
         public void Init()
         {
-            //UIManager.Instance.Clear();
-            //_FieldScene = ManagerSet.UI.ShowNormalUI<UI_FieldScene>();
-            //FindPlayer();
             isClearCheck = false;
-            
-            //InputManager.Instance.UpDateCount();
-            
-            //_FieldScene.CountUpdate(InputManager.Instance.GetCount());
-
         }
 
         public void CurrentScnen(UI_FieldScene _scene)
@@ -42,11 +37,13 @@ namespace TwinTower
         {
             _FieldScene.CountUpdate(count);
         }
+
         public void Restart()
         {
             InputController.Instance.ReleaseControl();
-            ScreenManager.Instance.Reload();
+            ManagerSet.Screen.Reload();
         }
+
         public void FindPlayer() {
             if (GameObject.Find("Dalia").GetComponent<Player>() != null)
             {
@@ -80,6 +77,31 @@ namespace TwinTower
             {
                 return rightMap;
             }
+        }
+
+        public async UniTask ActiveStair()
+        {
+            Debug.LogError($"Active: {isStairActiveTwice}");
+            if (rightMap != null)
+            {
+                if (isStairActiveTwice == false)
+                {
+                    isStairActiveTwice = true;
+                    return;
+                }
+            }
+            
+            await NextStage();
+        }
+
+        public void DeacitveStair()
+        {
+            isStairActiveTwice = false;
+        }
+
+        private async UniTask NextStage()
+        {
+            await ManagerSet.Screen.NextSceneload().ToUniTask();
         }
     }
 }

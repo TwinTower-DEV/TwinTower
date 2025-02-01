@@ -12,12 +12,14 @@ namespace TwinTower
         private ResourceManager _resource = new ResourceManager();
         private SoundManager _sound = new SoundManager();
         private UIManager _ui = new UIManager();
+        private ScreenManager _screen = new ScreenManager();
         
         public static DataManager Data { get { return Instance._data; } }
         public static ResourceManager Resource { get { return Instance._resource; } }
         public static SoundManager Sound { get { return Instance._sound; } }
         public static UIManager UI { get { return Instance._ui; } }
         public static GameManager Gamemanager { get { return Instance._game; } }
+        public static ScreenManager Screen { get { return Instance._screen; } }
         static void Init()
         {
             if (s_instance == null)
@@ -35,6 +37,7 @@ namespace TwinTower
                 s_instance._sound.Init();
                 s_instance._ui.Init();
                 s_instance._game.Init();
+                s_instance._screen.Init();
                 //s_instance._gameManage.Init();
             }		
         }

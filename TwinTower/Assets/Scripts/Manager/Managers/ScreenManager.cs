@@ -9,6 +9,12 @@ namespace TwinTower
     /// </summary>
     public class ScreenManager : Manager<ScreenManager>
     {
+        private UI_ScreenFader fader;
+        public void Init()
+        {
+            fader = ManagerSet.Resource.Instantiate($"UI/FadeScean").GetComponent<UI_ScreenFader>();
+        }
+
         public IEnumerator CurrentScreenReload()
         {
             yield return StartCoroutine(UI_ScreenFader.FadeScenOut());

@@ -153,7 +153,6 @@ Transform:
   m_Children:
   - {fileID: 5510262224363451294}
   - {fileID: 5214353049371629207}
-  - {fileID: 2987025631392490774}
   - {fileID: 281310461}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -179,7 +178,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 722305103165723639, guid: fcd7f72700d309643b3ea4660eecc4a4, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 722305103165723639, guid: fcd7f72700d309643b3ea4660eecc4a4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5251,72 +5250,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1001 &2987025631392490773
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 279402665}
-    m_Modifications:
-    - target: {fileID: 2987025631255623580, guid: 6bece8e5fc1954f41bdc8743e99546b4, type: 3}
-      propertyPath: FaderCanvasGroup
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2987025631255623581, guid: 6bece8e5fc1954f41bdc8743e99546b4, type: 3}
-      propertyPath: m_Name
-      value: FadeScene
-      objectReference: {fileID: 0}
-    - target: {fileID: 2987025631255623583, guid: 6bece8e5fc1954f41bdc8743e99546b4, type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2987025631255623583, guid: 6bece8e5fc1954f41bdc8743e99546b4, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2987025631255623583, guid: 6bece8e5fc1954f41bdc8743e99546b4, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2987025631255623583, guid: 6bece8e5fc1954f41bdc8743e99546b4, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2987025631255623583, guid: 6bece8e5fc1954f41bdc8743e99546b4, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2987025631255623583, guid: 6bece8e5fc1954f41bdc8743e99546b4, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2987025631255623583, guid: 6bece8e5fc1954f41bdc8743e99546b4, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2987025631255623583, guid: 6bece8e5fc1954f41bdc8743e99546b4, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2987025631255623583, guid: 6bece8e5fc1954f41bdc8743e99546b4, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2987025631255623583, guid: 6bece8e5fc1954f41bdc8743e99546b4, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2987025631255623583, guid: 6bece8e5fc1954f41bdc8743e99546b4, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 6bece8e5fc1954f41bdc8743e99546b4, type: 3}
---- !u!4 &2987025631392490774 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2987025631255623583, guid: 6bece8e5fc1954f41bdc8743e99546b4, type: 3}
-  m_PrefabInstance: {fileID: 2987025631392490773}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3305569460663204900
 Transform:
   m_ObjectHideFlags: 0

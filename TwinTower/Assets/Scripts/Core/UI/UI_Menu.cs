@@ -119,7 +119,7 @@ public class UI_Menu : UI_Base {
         UI_ClickSoundEffect();
         InputManager.Destroys();
         Time.timeScale = 1;
-        StartCoroutine(ScreenManager.Instance.NextSceneload("MainScene"));
+        StartCoroutine(ManagerSet.Screen.NextSceneload("MainScene"));
         //UIManager.Instance.CloseNormalUI(this);
     }
 

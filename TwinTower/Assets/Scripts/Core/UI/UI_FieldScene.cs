@@ -57,7 +57,7 @@ namespace TwinTower
         private void Restart()
         {
             InputController.Instance.ReleaseControl();
-            StartCoroutine(ScreenManager.Instance.CurrentScreenReload());
+            StartCoroutine(ManagerSet.Screen.CurrentScreenReload());
         }
 
         private void Setting()
