@@ -24,6 +24,8 @@ namespace TwinTower
         public Transform rotateParent;
         private Define.MoveDir currentRotation = Define.MoveDir.Up;
 
+        private List<GimmikInvisibleWall> invisibleWalls = new List<GimmikInvisibleWall>();
+
         private void Start() 
         {
             GetWalls();
@@ -60,6 +62,11 @@ namespace TwinTower
                 if (IsInMap(gimmik.x, gimmik.y) == true)
                 {
                     map[gimmik.x, gimmik.y] = gimmik;
+                }
+
+                if (gimmik.GetType() == typeof(GimmikInvisibleWall))
+                {
+                    invisibleWalls.Add(gimmik as GimmikInvisibleWall);
                 }
             }
         }
@@ -188,6 +195,11 @@ namespace TwinTower
         private void RotateMovedObjects()
         {
             movedObjects.ForEach(obj => obj.Rotate());
+        }
+
+        public void ShowInvisibleWalls(int x, int y)
+        {
+            invisibleWalls.ForEach(wall => wall.SetInvisible(x, y));
         }
     }
 }

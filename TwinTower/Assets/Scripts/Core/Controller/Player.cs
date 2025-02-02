@@ -47,6 +47,12 @@ namespace TwinTower
             }
         }
 
+        protected async override UniTask OnAfterMove()
+        {
+            map.ShowInvisibleWalls(x, y);
+            await base.OnAfterMove();
+        }
+
         // public override void ReduceHealth()
         // {
         //     GameManager.Instance.Restart();
