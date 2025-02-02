@@ -29,7 +29,7 @@ namespace TwinTower
 
         protected override void OnBeforeReciveMove(Define.MoveDir dir)
         {
-            dir = map.GetCurrentDir(dir);
+            dir = map.GetOriginDir(dir);
             switch (dir)
             {
                 case Define.MoveDir.Down:
@@ -43,28 +43,6 @@ namespace TwinTower
                     break;
                 case Define.MoveDir.Up:
                     _animator.Play("Up_Run");
-                    break;
-                // case Define.MoveDir.Die:
-                //     _animator.Play("Dead");
-                //     SoundManager.Instance.Play("character_death/Character_die_SFX(넘어졌을때 사운드)");
-                //     break;
-                case Define.MoveDir.None:
-                    // if (dir == Define.MoveDir.Up)
-                    // {
-                    //     _animator.Play("Up_Idle");
-                    // }
-                    // else if (dir == Define.MoveDir.Left)
-                    // {
-                    //     _animator.Play("Left_Idle");
-                    // }
-                    // else if (dir == Define.MoveDir.Right)
-                    // {
-                    //     _animator.Play("Right_Idle");
-                    // }
-                    // else
-                    // {
-                    //     _animator.Play("Down_Idle");
-                    // }
                     break;
             }
         }

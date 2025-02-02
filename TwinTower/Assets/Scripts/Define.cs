@@ -13,8 +13,6 @@ namespace TwinTower
             Right,
             Down,
             Left,
-            Die,
-            None
         }
         public enum UIEvent
         {

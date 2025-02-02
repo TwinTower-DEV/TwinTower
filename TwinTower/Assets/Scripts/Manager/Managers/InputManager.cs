@@ -78,10 +78,13 @@ namespace TwinTower
         private async void Move(Define.MoveDir dir) 
         {
             islockMove = true;
-            bool canMove = GameManager.Instance._player1.CanMoveTile(dir) && GameManager.Instance._player2.CanMoveTile(dir);
+            Define.MoveDir player1Dir = GameManager.Instance._player1.map.GetCurrentDir(dir);
+            Define.MoveDir player2Dir = GameManager.Instance._player2.map.GetCurrentDir(dir);
+            
+            bool canMove = GameManager.Instance._player1.CanMoveTile(player1Dir) && GameManager.Instance._player2.CanMoveTile(player2Dir);
             await UniTask.WhenAll(
-                GameManager.Instance._player1.OnReciveMove(dir, canMove),
-                GameManager.Instance._player2.OnReciveMove(dir, canMove)
+                GameManager.Instance._player1.OnReciveMove(player1Dir, canMove),
+                GameManager.Instance._player2.OnReciveMove(player2Dir, canMove)
             );
             islockMove = false;
         }

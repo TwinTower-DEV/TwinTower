@@ -131,5 +131,11 @@ namespace TwinTower
         {
             
         }
+
+        public void Rotate()
+        {
+            // 부모가 회전하고 있기 때문에 자식은 자기 자신의 원래 회전값으로 돌아가도록 회전해야함.
+            transform.DORotate(new Vector3(0, 0, transform.rotation.z), 1);
+        }
     }
 }

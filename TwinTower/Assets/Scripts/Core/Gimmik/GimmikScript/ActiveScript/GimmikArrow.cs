@@ -40,4 +40,10 @@ public class GimmikArrow : GimmikBase {
 
         transform.gameObject.SetActive(false);
     }
+
+    // Arrow는 회전하지 않음.
+    public override void Rotate()
+    {
+
+    }
 }

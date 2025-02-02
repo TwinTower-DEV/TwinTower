@@ -117,7 +117,6 @@ namespace TwinTower
             int movedX = x;
             int movedY = y;
 
-            dir = GetCurrentDir(dir);
             switch (dir)
             {
                 case Define.MoveDir.Up:
@@ -157,13 +156,38 @@ namespace TwinTower
 
         public async UniTask Rotate()
         {
-            await rotateParent.DORotate(new Vector3(0, 0, 90), 1);
+            RotateTiles();
+            RotateMovedObjects();
             currentRotation += 1;
+            await rotateParent.DORotate(new Vector3(0, 0, -90 * ((int)currentRotation % 4)), 1);
         }
 
         public Define.MoveDir GetCurrentDir(Define.MoveDir dir)
         {
-            return (Define.MoveDir)(((int)dir + (int)currentRotation) % 4);
+            int result = ((dir - currentRotation) % 4 + 4) % 4;
+            return (Define.MoveDir)result;
+        }
+
+        public Define.MoveDir GetOriginDir(Define.MoveDir dir)
+        {
+            int result = (((int)dir + (int)currentRotation) % 4 + 4) % 4;
+            return (Define.MoveDir)result;
+        }
+
+        private void RotateTiles()
+        {
+            for (int x = 0; x < map.GetLength(0); x++)
+            {
+                for (int y = 0; y < map.GetLength(1); y++)
+                {
+                    map[x,y]?.Rotate();
+                }
+            }
+        }
+
+        private void RotateMovedObjects()
+        {
+            movedObjects.ForEach(obj => obj.Rotate());
         }
     }
 }
